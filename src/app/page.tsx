@@ -6,24 +6,55 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10">
         <a href="#home" className="logo">
-          <Image src={"/images/logo.png"} alt="" width={75} height={75} />
+
+            <Image src="/images/logo-white.png" alt="" width={75} height={75} className="dark:hidden"/>
+            <Image src="/images/logo.png" alt="" width={75} height={75} className="hidden dark:block"/>
+
         </a>
 
         <nav className="navbar">
-          <a href="#home" className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2">Inicio</a>
-          <a href="#objetivo" className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2">Objetivo</a>
+          <a
+            href="#home"
+            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
+          >
+            Inicio
+          </a>
+          <a
+            href="#objetivo"
+            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
+          >
+            Objetivo
+          </a>
 
-          <a href="#tutor-view" className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2">Tutor</a>
+          <a
+            href="#tutor-view"
+            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
+          >
+            Tutor
+          </a>
 
-          <a href="#student-view" className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2">Estudiante</a>
+          <a
+            href="#student-view"
+            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
+          >
+            Estudiante
+          </a>
 
-          <a href="#asignaturas" className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2">Asignaturas</a>
-          <a href="#tutores" className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2">Tutores</a>
+          <a
+            href="#asignaturas"
+            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
+          >
+            Asignaturas
+          </a>
+          <a
+            href="#tutores"
+            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
+          >
+            Tutores
+          </a>
         </nav>
-        <div>      <ModeToggle></ModeToggle>
- </div>
+        <ModeToggle></ModeToggle>
       </header>
-      
 
       <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
         <Image
