@@ -1,29 +1,30 @@
 import Image from "next/image";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { CourseCard } from "@/components/course-card";
 
 export default function Inicio() {
   const asignaturas = [
-    "Inteligencia Artificial Avanzada",
-    "Computación Cuántica",
-    "Sistemas Distribuidos",
-    "Seguridad Informática Avanzada",
-    "Procesamiento de Lenguaje Natural",
-    "Visión por Computadora",
-    "Redes Neuronales Profundas",
-    "Algoritmos Avanzados",
-    "Robótica Autónoma",
-    "Computación Gráfica Avanzada",
-    "Bioinformática",
-    "Computación Paralela y Concurrente",
-    "Teoría de Juegos y Computación",
-    "Criptografía Moderna",
-    "Arquitecturas de Computadoras Avanzadas",
-    "Diseño de Compiladores Avanzado",
-    "Métodos Formales en la Ingeniería de Software",
-    "Big Data y Procesamiento de Datos a Escala",
-    "Internet de las Cosas (IoT) Avanzado",
-    "Computación en la Nube Escalable y Eficiente",
+    { course: "Inteligencia Artificial Avanzada", school: "mate" },
+    { course: "Computación Cuántica", school: "mate" },
+    { course: "Sistemas Distribuidos", school: "mate" },
+    { course: "Seguridad Informática Avanzada", school: "mate" },
+    { course: "Procesamiento de Lenguaje Natural", school: "mate" },
+    { course: "Visión por Computadora", school: "mate" },
+    { course: "Redes Neuronales Profundas", school: "mate" },
+    { course: "Algoritmos Avanzados", school: "mate" },
+    { course: "Robótica Autónoma", school: "mate" },
+    { course: "Computación Gráfica Avanzada", school: "mate" },
+    { course: "Bioinformática", school: "mate" },
+    { course: "Computación Paralela y Concurrente", school: "mate" },
+    { course: "Teoría de Juegos y Computación", school: "mate" },
+    { course: "Criptografía Moderna", school: "mate" },
+    { course: "Arquitecturas de Computadoras Avanzadas", school: "mate" },
+    { course: "Diseño de Compiladores Avanzado", school: "mate" },
+    { course: "Métodos Formales en la Ingeniería de Software", school: "mate" },
+    { course: "Big Data y Procesamiento de Datos a Escala", school: "mate" },
+    { course: "Internet de las Cosas (IoT) Avanzado", school: "mate" },
+    { course: "Computación en la Nube Escalable y Eficiente", school: "mate" }
   ];
 
   return (
@@ -89,23 +90,7 @@ export default function Inicio() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6">
         {asignaturas.map((asignatura) => (
-          <div
-            className="p-8 text-center border flex flex-col items-center rounded-lg justify-between"
-            key={asignatura}
-          >
-            <div className="flex flex-col items-center pb-6 h-full">
-              <Image
-                src="/images/mate.png"
-                alt="Asignatura1"
-                width={100}
-                height={100}
-              />
-              <h3 className="my-4 scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
-                {asignatura}
-              </h3>
-            </div>
-            <Button>Solicitar tutoría </Button>
-          </div>
+          <CourseCard course={asignatura.course} school={asignatura.school} key={asignatura.course} />
         ))}
       </div>
     </main>
