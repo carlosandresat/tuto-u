@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ModeToggle } from "@/components/mode-toggle";
+import { ExampleCard } from "@/components/example-card";
 
 export default function Home() {
   return (
@@ -15,59 +16,49 @@ export default function Home() {
         <nav className="navbar">
           <a
             href="#home"
-            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
-          >
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
             Inicio
           </a>
           <a
             href="#objetivo"
-            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
-          >
-            Objetivo
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+            Cómo funciona
           </a>
+          
 
           <a
             href="#tutor-view"
-            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
-          >
-            Tutor
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+            Precios
+          </a>
+
+          <a
+            href="#objetivo"
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+            Nuestro Equipo
           </a>
 
           <a
             href="#student-view"
-            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
-          >
-            Estudiante
-          </a>
-
-          <a
-            href="#asignaturas"
-            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
-          >
-            Asignaturas
-          </a>
-          <a
-            href="#tutores"
-            className="mx-4 hover:border-b hover:border-solid hover:border-white hover:pb-2"
-          >
-            Tutores
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+            Preguntas frecuentes
           </a>
         </nav>
         <ModeToggle></ModeToggle>
       </header>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1] mt-28 lg:mt-40">
+      <h1 className="scroll-m-20 text-6xl font-extrabold tracking-tight lg:text-8xl">
+        Próximamente...
+      </h1>
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left mt-12">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
