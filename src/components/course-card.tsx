@@ -20,7 +20,7 @@ export function CourseCard({course, school}:{course:string, school:string}) {
                 {course}
               </h3>
             </div>
-            <Button>Solicitar tutoría </Button>
+            <Button className="w-full md:w-auto">Solicitar tutoría </Button>
           </div>
   )
 }
