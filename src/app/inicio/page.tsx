@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/course-card";
+import { TutorCard } from "@/components/tutor-card";
 
 export default function Inicio() {
   const asignaturas = [
@@ -24,7 +25,46 @@ export default function Inicio() {
     { course: "Métodos Formales en la Ingeniería de Software", school: "mate" },
     { course: "Big Data y Procesamiento de Datos a Escala", school: "mate" },
     { course: "Internet de las Cosas (IoT) Avanzado", school: "mate" },
-    { course: "Computación en la Nube Escalable y Eficiente", school: "mate" }
+    { course: "Computación en la Nube Escalable y Eficiente", school: "mate" },
+  ];
+
+  const tutores = [
+    {
+      tutor: "Carlos Andrés Arévalo Torres",
+      rating: 9.7,
+      pic_url: "/photos/carlos.arevalo.jpg",
+      nreviews: 78,
+    },
+    {
+      tutor: "Carlos Arévalo2",
+      rating: 9.7,
+      pic_url: "/photos/carlos.arevalo.jpg",
+      nreviews: 45,
+    },
+    {
+      tutor: "Carlos Arévalo3",
+      rating: 9.7,
+      pic_url: "/photos/carlos.arevalo.jpg",
+      nreviews: 19,
+    },
+    {
+      tutor: "Carlos Arévalo4",
+      rating: 9.7,
+      pic_url: "/photos/carlos.arevalo.jpg",
+      nreviews: 42,
+    },
+    {
+      tutor: "Carlos Arévalo5",
+      rating: 9.7,
+      pic_url: "/photos/carlos.arevalo.jpg",
+      nreviews: 29,
+    },
+    {
+      tutor: "Carlos Arévalo6",
+      rating: 9.7,
+      pic_url: "/photos/carlos.arevalo.jpg",
+      nreviews: 45,
+    },
   ];
 
   return (
@@ -90,7 +130,26 @@ export default function Inicio() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6">
         {asignaturas.map((asignatura) => (
-          <CourseCard course={asignatura.course} school={asignatura.school} key={asignatura.course} />
+          <CourseCard
+            course={asignatura.course}
+            school={asignatura.school}
+            key={asignatura.course}
+          />
+        ))}
+      </div>
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
+        Top Tutores
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6">
+        {tutores.map((tutor) => (
+          <TutorCard
+            tutor={tutor.tutor}
+            rating={tutor.rating}
+            pic_url={tutor.pic_url}
+            nreviews={tutor.nreviews}
+            key={tutor.tutor}
+          />
         ))}
       </div>
     </main>
