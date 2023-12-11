@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { StudentView } from "@/components/student-view";
 import { CourseCard } from "@/components/course-card";
 import { TutorCard } from "@/components/tutor-card";
 import Link from "next/link";
@@ -125,6 +126,13 @@ export default function Inicio() {
         </nav>
         <ModeToggle></ModeToggle>
       </header>
+
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
+        Tus Tutorías
+      </h2>
+
+      <StudentView></StudentView>
+
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
         Asignaturas
       </h2>
