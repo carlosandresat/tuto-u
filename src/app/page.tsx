@@ -27,12 +27,12 @@ export default function Home() {
           </a>
 
           <nav className="navbar hidden lg:block">
-            <a
-              href="#home"
+            <Link
+              href="/"
               className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
             >
               Inicio
-            </a>
+            </Link>
             <a
               href="#objetivo"
               className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"

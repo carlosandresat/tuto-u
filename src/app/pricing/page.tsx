@@ -1,11 +1,70 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Pricing() {
   return (
     <>
+            <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10 border-b border-border">
+          <Link href="/" className="logo">
+            <Image
+              src="/images/logo-white.png"
+              alt=""
+              width={75}
+              height={75}
+              className="dark:hidden"
+            />
+            <Image
+              src="/images/logo.png"
+              alt=""
+              width={75}
+              height={75}
+              className="hidden dark:block"
+            />
+          </Link>
+
+              <nav className="navbar hidden lg:block">
+            <Link
+              href="/"
+              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+              Inicio
+            </Link>
+            <a
+              href="#objetivo"
+              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+              Cómo funciona
+            </a>
+
+            <Link
+              href="/pricing"
+              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+              Precios
+            </Link>
+
+            <a
+              href="#objetivo"
+              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+              Nuestro Equipo
+            </a>
+
+            <a
+              href="#student-view"
+              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+            >
+              Preguntas frecuentes
+            </a>
+          </nav>
+          <ModeToggle></ModeToggle>
+        </header>
+
       <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-32 max-w-screen-xl">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-32 md:mt-6 max-w-screen-xl">
           Precios
         </h2>
 
