@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ModeToggle } from "@/components/mode-toggle";
-import { ExampleCard } from "@/components/example-card";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -28,12 +30,12 @@ export default function Home() {
           </a>
           
 
-          <a
-            href="#tutor-view"
+          <Link
+            href="/pricing"
             className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
             >
             Precios
-          </a>
+          </Link>
 
           <a
             href="#objetivo"
@@ -57,6 +59,10 @@ export default function Home() {
         Próximamente...
       </h1>
       </div>
+
+      <Link href="/inicio">
+      <Button className="mt-12" variant="default">Entra a la pagina en desarrollo <ArrowRight className="ml-2"/></Button>
+      </Link>
 
       <div className="grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left mt-12">
         <a

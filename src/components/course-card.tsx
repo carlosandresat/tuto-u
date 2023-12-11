@@ -2,6 +2,7 @@ import * as React from "react"
  
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import Link from "next/link"
  
 export function CourseCard({course, school}:{course:string, school:string}) {
   return (
@@ -20,7 +21,9 @@ export function CourseCard({course, school}:{course:string, school:string}) {
                 {course}
               </h3>
             </div>
+            <Link href="/request">
             <Button className="w-full md:w-auto">Solicitar tutoría </Button>
+            </Link>
           </div>
   )
 }

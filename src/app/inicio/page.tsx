@@ -3,6 +3,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/course-card";
 import { TutorCard } from "@/components/tutor-card";
+import Link from "next/link";
 
 export default function Inicio() {
   const asignaturas = [
@@ -70,7 +71,7 @@ export default function Inicio() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8">
       <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10">
-        <a href="#home" className="logo">
+        <Link href="/" className="logo">
           <Image
             src="/images/logo-white.png"
             alt=""
@@ -85,7 +86,7 @@ export default function Inicio() {
             height={75}
             className="hidden dark:block"
           />
-        </a>
+        </Link>
 
         <nav className="navbar">
           <a
