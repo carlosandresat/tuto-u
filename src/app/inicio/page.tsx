@@ -89,13 +89,13 @@ export default function Inicio() {
           />
         </Link>
 
-        <nav className="navbar">
-          <a
-            href="#home"
+        <nav className="navbar hidden lg:block">
+          <Link
+            href="/inicio"
             className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
           >
             Inicio
-          </a>
+          </Link>
           <a
             href="#objetivo"
             className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
