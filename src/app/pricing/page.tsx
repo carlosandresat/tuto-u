@@ -7,61 +7,61 @@ import { ModeToggle } from "@/components/mode-toggle";
 export default function Pricing() {
   return (
     <>
-            <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10 border-b border-border">
-          <Link href="/" className="logo">
-            <Image
-              src="/images/logo-white.png"
-              alt=""
-              width={75}
-              height={75}
-              className="dark:hidden"
-            />
-            <Image
-              src="/images/logo.png"
-              alt=""
-              width={75}
-              height={75}
-              className="hidden dark:block"
-            />
+      <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10 border-b border-border">
+        <Link href="/" className="logo">
+          <Image
+            src="/images/logo-white.png"
+            alt=""
+            width={75}
+            height={75}
+            className="dark:hidden"
+          />
+          <Image
+            src="/images/logo.png"
+            alt=""
+            width={75}
+            height={75}
+            className="hidden dark:block"
+          />
+        </Link>
+
+        <nav className="navbar hidden lg:block">
+          <Link
+            href="/"
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+          >
+            Inicio
+          </Link>
+          <a
+            href="#objetivo"
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+          >
+            Cómo funciona
+          </a>
+
+          <Link
+            href="/pricing"
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+          >
+            Precios
           </Link>
 
-              <nav className="navbar hidden lg:block">
-            <Link
-              href="/"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Inicio
-            </Link>
-            <a
-              href="#objetivo"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Cómo funciona
-            </a>
+          <a
+            href="#objetivo"
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+          >
+            Nuestro Equipo
+          </a>
 
-            <Link
-              href="/pricing"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Precios
-            </Link>
-
-            <a
-              href="#objetivo"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Nuestro Equipo
-            </a>
-
-            <a
-              href="#student-view"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Preguntas frecuentes
-            </a>
-          </nav>
-          <ModeToggle></ModeToggle>
-        </header>
+          <a
+            href="#student-view"
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+          >
+            Preguntas frecuentes
+          </a>
+        </nav>
+        <ModeToggle></ModeToggle>
+      </header>
 
       <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-32 md:mt-6 max-w-screen-xl">
@@ -72,30 +72,39 @@ export default function Pricing() {
           <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
             <div className="flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
               <div>
-                <h3 className="text-2xl font-bold text-center">Mensual</h3>
+                <h3 className="text-2xl font-bold text-center">Gratis</h3>
                 <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                  <span className="text-4xl font-bold">$6</span>/ month
+                  <span className="text-4xl font-bold">$0</span>/ mes
                 </div>
                 <ul className="mt-4 space-y-2">
+                <li className="flex items-center">
+                    <div className="w-full font-bold">Como estudiante:</div>
+                  </li>
+
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
-                    <div className="w-full">Cobrar por tutorías</div>
+                    <div className="w-full">
+                      Solicitar tutorías personalizadas ilimitadas
+                    </div>
                   </li>
 
                   <li className="flex items-center ">
                     <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Hasta 10 solicitudes de tutoría pagadas por mes
-                    </div>
+                    <div className="w-full">Unirse a tutorías grupales</div>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="w-full font-bold">Como tutor:</div>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
-                    <div className="w-full">Basic Video Templates</div>
+                    <div className="w-full">
+                      Ofrecer tutorías gratuitas
+                    </div>
                   </li>
                 </ul>
               </div>
               <div className="mt-6">
-                <Button className="w-full">Get Started</Button>
+                <Button className="w-full">Regístrate</Button>
               </div>
             </div>
             <div className="relative flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-purple-500">
@@ -103,66 +112,95 @@ export default function Pricing() {
                 Popular
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-center">Trimestral</h3>
+                <h3 className="text-2xl font-bold text-center">Premium</h3>
                 <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                  <span className="text-4xl font-bold">$5</span>/ month
+                  <span className="text-4xl font-bold">$5</span>/ mes
                 </div>
                 <ul className="mt-4 space-y-2">
-                  <li className="flex items-center">
-                    <CheckIcon className="text-white text-2xs bg-green-500 rounded-full mr-2 p-1" />
-                    Cobrar por tutorías
+                <li className="flex items-center">
+                    <div className="w-full font-bold">Como estudiante:</div>
                   </li>
+
                   <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Hasta 30 solicitudes de tutoría pagadas por mes
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Solicitar tutorías personalizadas ilimitadas
+                    </div>
                   </li>
+
+                  <li className="flex items-center ">
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">Unirse a tutorías grupales</div>
+                  </li>
+
+                  <li className="flex items-center ">
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">Gráficos de tus estadísticas en la aplicación</div>
+                  </li>
+
                   <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Premium Video Templates
+                    <div className="w-full font-bold">Como tutor:</div>
                   </li>
+
                   <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Collaboration Tools
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Ofrecer tutorías con precio a tu elección
+                    </div>
                   </li>
+
+                  <li className="flex items-center">
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Organizar tutorías grupales
+                    </div>
+                  </li>
+
                 </ul>
               </div>
               <div className="mt-6">
                 <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500">
-                  Get Started
+                  Regístrate
                 </Button>
               </div>
             </div>
             <div className="flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
               <div>
-                <h3 className="text-2xl font-bold text-center">Semestral</h3>
+                <h3 className="text-2xl font-bold text-center">Institucional</h3>
                 <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                  <span className="text-4xl font-bold">$4.5</span>/ month
+                  <span className="text-4xl font-bold">Pago</span>/ año
                 </div>
                 <ul className="mt-4 space-y-2">
+                <li className="flex items-center">
+                    <div className="w-full font-bold">
+                      Cuenta administrador con las siguientes funcionalidades:
+                    </div>
+                  </li>
+
                   <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Cobrar por tutorías
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Visualizar y descargar estadísticas de uso de la aplicación
+                    </div>
                   </li>
                   <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Hasta 60 solicitudes de tutoría pagadas por mes
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Organizar los cursos por escuelas, facultades o departamentos y añadir logos para cada uno
+                    </div>
                   </li>
+
                   <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Custom Video Templates
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Crear logros personalizados y otorgarlos a cualquier usuario de la institución
+                    </div>
                   </li>
-                  <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Advanced Collaboration Tools
-                  </li>
-                  <li className="flex items-center">
-                    <CheckIcon className="text-white text-xs bg-green-500 rounded-full mr-2 p-1" />
-                    Dedicated Support
-                  </li>
+
                 </ul>
               </div>
               <div className="mt-6">
-                <Button className="w-full">Get Started</Button>
+                <Button className="w-full">Contáctanos</Button>
               </div>
             </div>
           </div>
