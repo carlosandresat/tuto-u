@@ -8,7 +8,7 @@ const inter = Chakra_Petch({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
   title: "Tuto-U",
-  description: "Web application of Tuto-U in development",
+  description: "Tuto-U, a cutting-edge platform fostering collaborative learning and academic growth. Experience interactive, peer-supported education.",
 };
 
 export default function RootLayout({
