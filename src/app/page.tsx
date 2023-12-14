@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Menu } from "lucide-react";
+import { StartNavbar } from "@/components/start-navbar";
 
 
 export default function Home() {
@@ -25,107 +26,8 @@ export default function Home() {
 
   return (
     <>
+      <StartNavbar />
       <main className="flex min-h-screen flex-col items-center">
-        <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10 border-b border-border">
-          <div className="lg:hidden">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline"><Menu /></Button>
-          </SheetTrigger>
-          <SheetContent side="left">
-            <div className="flex flex-col items-center justify-center py-4 gap-8 mt-6">
-              <Link
-                href="/"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Inicio
-              </Link>
-              <a
-                href="#objetivo"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Cómo funciona
-              </a>
-
-              <Link
-                href="/pricing"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Precios
-              </Link>
-
-              <a
-                href="#objetivo"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Nuestro Equipo
-              </a>
-
-              <a
-                href="#student-view"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Preguntas frecuentes
-              </a>
-            </div>
-          </SheetContent>
-        </Sheet>
-        </div>
-          <a href="/" className="logo">
-            <Image
-              src="/images/logo-white.png"
-              alt="logo-white"
-              width={75}
-              height={75}
-              className="dark:hidden"
-            />
-            <Image
-              src="/images/logo.png"
-              alt="logo-dark"
-              width={75}
-              height={75}
-              className="hidden dark:block"
-            />
-          </a>
-
-          <nav className="navbar hidden lg:block">
-            <Link
-              href="/"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Inicio
-            </Link>
-            <a
-              href="#objetivo"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Cómo funciona
-            </a>
-
-            <Link
-              href="/pricing"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Precios
-            </Link>
-
-            <a
-              href="#objetivo"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Nuestro Equipo
-            </a>
-
-            <a
-              href="#student-view"
-              className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-            >
-              Preguntas frecuentes
-            </a>
-          </nav>
-          <ModeToggle></ModeToggle>
-
-        </header>
 
         <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1] pt-32 mt-20 lg:mt-40 mx-6 flex-col">
           <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl">
