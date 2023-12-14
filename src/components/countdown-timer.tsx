@@ -57,19 +57,19 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetTime }) =>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
           <div>
             <p className="text-5xl">{timeRemaining.days}</p>
-            <p className="text-muted-foreground">Days</p>
+            <p className="text-muted-foreground">Días</p>
           </div>
           <div>
             <p className="text-5xl">{timeRemaining.hours}</p>
-            <p className="text-muted-foreground">Hours</p>
+            <p className="text-muted-foreground">Horas</p>
           </div>
           <div>
             <p className="text-5xl">{timeRemaining.minutes} </p>
-            <p className="text-muted-foreground">Minutes</p>
+            <p className="text-muted-foreground">Minutos</p>
           </div>
           <div>
             <p className="text-5xl">{timeRemaining.seconds}</p>
-            <p className="text-muted-foreground">Seconds</p>
+            <p className="text-muted-foreground">Segundos</p>
           </div>
        </div>
     </div>

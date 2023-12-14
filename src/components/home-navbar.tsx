@@ -59,18 +59,10 @@ export function HomeNavbar(){
 
         <Link href="/" className="logo">
           <Image
-            src="/images/logo-white.png"
-            alt=""
-            width={75}
-            height={75}
-            className="dark:hidden"
-          />
-          <Image
             src="/images/logo.png"
             alt=""
             width={75}
             height={75}
-            className="hidden dark:block"
           />
         </Link>
 
