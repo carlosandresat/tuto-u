@@ -3,8 +3,12 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { CountdownTimer } from "@/components/countdown-timer";
 
 export default function Home() {
+
+  const onCampusDate = new Date("2024-02-24 00:00:00").getTime();
+
   return (
     <>
       <main className="flex min-h-screen flex-col items-center">
@@ -87,6 +91,25 @@ export default function Home() {
                   same subjects. This unique approach fosters a community of
                   learners who support and learn from each other.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 mt-2">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
+                  Cuenta Regresiva
+                </h2>
+                <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400">
+                  Hult Prize 2024 OnCampus Finals
+                </p>
+                <CountdownTimer targetTime={onCampusDate} />
+                <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
+                  24 de Febrero de 2024
+                </p>
+
               </div>
             </div>
           </div>
