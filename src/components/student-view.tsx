@@ -11,7 +11,7 @@ export function StudentView() {
           <div className="flex items-center space-x-2">
             <Avatar>
               <AvatarImage src="/photos/carlos.arevalo.jpg" />
-              <AvatarFallback>JS</AvatarFallback>
+              <AvatarFallback>CA</AvatarFallback>
             </Avatar>
             <CardTitle>Carlos Arévalo</CardTitle>
           </div>
@@ -47,7 +47,7 @@ export function StudentView() {
         </CardContent>
         <CardFooter className="flex justify-between items-center">
           <Badge className=" bg-yellow-500">Status: Pendiente</Badge>
-          <Button variant="destructive">Cancelar</Button>
+          <Button>Cancelar</Button>
         </CardFooter>
       </Card>
       <Card>
@@ -69,7 +69,7 @@ export function StudentView() {
         </CardContent>
         <CardFooter className="flex justify-between items-center gap-x-2">
           <Badge className=" bg-blue-500">Status: Cambios propuestos</Badge>
-          <Button variant="default">Revisar</Button>
+          <Button>Revisar</Button>
         </CardFooter>
       </Card>
       <Card>
@@ -112,7 +112,7 @@ export function StudentView() {
         </CardContent>
         <CardFooter className="flex justify-between items-center gap-x-2">
           <Badge className=" bg-green-500">Status: Aceptada</Badge>
-          <Button variant="destructive">Cancelar</Button>
+          <Button>Cancelar</Button>
         </CardFooter>
       </Card>
 
