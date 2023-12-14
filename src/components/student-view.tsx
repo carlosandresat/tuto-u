@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export function StudentView() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
       <Card>
         <CardHeader>
           <div className="flex items-center space-x-2">
