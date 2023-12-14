@@ -5,6 +5,7 @@ import { StudentView } from "@/components/student-view";
 import { CourseCard } from "@/components/course-card";
 import { TutorCard } from "@/components/tutor-card";
 import Link from "next/link";
+import { HomeNavbar } from "@/components/home-navbar";
 
 export default function Inicio() {
   const asignaturas = [
@@ -71,61 +72,7 @@ export default function Inicio() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8">
-      <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10">
-        <Link href="/" className="logo">
-          <Image
-            src="/images/logo-white.png"
-            alt=""
-            width={75}
-            height={75}
-            className="dark:hidden"
-          />
-          <Image
-            src="/images/logo.png"
-            alt=""
-            width={75}
-            height={75}
-            className="hidden dark:block"
-          />
-        </Link>
-
-        <nav className="navbar hidden lg:block">
-          <Link
-            href="/inicio"
-            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-          >
-            Inicio
-          </Link>
-          <a
-            href="#objetivo"
-            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-          >
-            Perfil
-          </a>
-
-          <a
-            href="#tutor-view"
-            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-          >
-            Historial
-          </a>
-
-          <a
-            href="#objetivo"
-            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-          >
-            Tutores
-          </a>
-
-          <a
-            href="#student-view"
-            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-          >
-            Estudiantes
-          </a>
-        </nav>
-        <ModeToggle></ModeToggle>
-      </header>
+      <HomeNavbar></HomeNavbar>
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
         Tus Tutorías
