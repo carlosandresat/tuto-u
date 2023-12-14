@@ -65,6 +65,22 @@
     --ring: 0 0% 83.1%;
   }
 }
+
+html::-webkit-scrollbar{
+  width: .8rem;
+}
+
+html::-webkit-scrollbar-track{
+  background: hsl(var(--background));  
+  border: 1px solid hsl(var(--border));
+}
+
+html::-webkit-scrollbar-thumb{
+  background: hsl(var(--primary));
+  border-radius: 5rem;
+}
+
+
  
 @layer base {
   * {
