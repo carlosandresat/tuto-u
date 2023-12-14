@@ -1,13 +1,8 @@
-import Image from "next/image";
-import { ModeToggle } from "@/components/mode-toggle";
-import { Button } from "@/components/ui/button";
 import { StudentView } from "@/components/student-view";
 import { CourseCard } from "@/components/course-card";
 import { TutorCard } from "@/components/tutor-card";
-import Link from "next/link";
-import { HomeNavbar } from "@/components/home-navbar";
 
-export default function Inicio() {
+export default function Home() {
   const asignaturas = [
     { course: "Inteligencia Artificial Avanzada", school: "mate" },
     { course: "Computación Cuántica", school: "mate" },
@@ -72,9 +67,7 @@ export default function Inicio() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-8">
-      <HomeNavbar></HomeNavbar>
-
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 pt-32">
         Tus Tutorías
       </h2>
 

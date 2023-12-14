@@ -24,7 +24,7 @@ export function StartNavbar() {
                 Inicio
               </Link>
               <a
-                href="#objetivo"
+                href="/how"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Cómo funciona
@@ -38,14 +38,14 @@ export function StartNavbar() {
               </Link>
 
               <a
-                href="#objetivo"
+                href="/ourteam"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Nuestro Equipo
               </a>
 
               <a
-                href="#student-view"
+                href="/faq"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Preguntas frecuentes
@@ -71,7 +71,7 @@ export function StartNavbar() {
           Inicio
         </Link>
         <a
-          href="#objetivo"
+          href="/how"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Cómo funciona
@@ -85,14 +85,14 @@ export function StartNavbar() {
         </Link>
 
         <a
-          href="#objetivo"
+          href="/ourteam"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Nuestro Equipo
         </a>
 
         <a
-          href="#student-view"
+          href="/faq"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Preguntas frecuentes

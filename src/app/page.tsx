@@ -21,7 +21,7 @@ export default function Home() {
           
         </div>
         
-<Link href="/inicio" className="mt-8 md:mt-16 md:mb-32">
+<Link href="/home" className="mt-8 md:mt-16 md:mb-32">
             <Button variant="default">
               Explora la página en desarrollo <ArrowRight className="ml-2" />
             </Button>

@@ -19,7 +19,7 @@ export default function Component() {
     <>
       <section className="md:min-h-screen w-full p-6 md:p-12 items-center justify-center flex">
         {/* Button Back */}
-        <Link href="/inicio" className="fixed top-0 left-0 p-6">
+        <Link href="/home" className="fixed top-0 left-0 p-6">
           <Button variant="link">
             <ArrowLeft className="mr-2"/> Regresar
           </Button>
