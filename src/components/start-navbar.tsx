@@ -7,7 +7,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 export function StartNavbar() {
   return (
-    <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10 border-b border-border">
+    <header className="flex items-center justify-between p-6 fixed top-0 w-full  bg-background z-10 border-b border-border">
       <div className="lg:hidden">
         <Sheet>
           <SheetTrigger asChild>

@@ -12,10 +12,10 @@ export default function Home() {
   return (
     <>
       <StartNavbar />
-      <main className="flex min-h-screen flex-col items-center">
+      <main className="flex min-h-screen flex-col items-center w-full">
 
         <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[380px] md:before:w-[580px] before:-translate-x-1 before:-translate-y-1/4 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-40 after:dark:from-sky-900 after:dark:via-[#1a01ff] after:dark:opacity-30 before:lg:h-[360px] z-[-2] pt-32 mt-20 lg:mt-40 mx-6 flex-col">
-          <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl z-0">
+          <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl z-0 text-center">
             Tuto-U: Próximamente...
           </h1>
           
