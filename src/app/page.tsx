@@ -7,7 +7,7 @@ import { StartNavbar } from "@/components/start-navbar";
 
 export default function Home() {
 
-  const onCampusDate = new Date("2024-02-24 00:00:00").getTime();
+  const onCampusDate = new Date("2024-02-24T05:00:00").getTime();
 
   return (
     <>
