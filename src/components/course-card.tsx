@@ -21,8 +21,8 @@ export function CourseCard({course, school}:{course:string, school:string}) {
                 {course}
               </h3>
             </div>
-            <Link href="/request">
-            <Button className="w-full md:w-auto">Solicitar tutoría </Button>
+            <Link href="/request" className="w-full md:w-auto">
+            <Button className="w-full md:w-auto">Solicitar tutoría</Button>
             </Link>
           </div>
   )
