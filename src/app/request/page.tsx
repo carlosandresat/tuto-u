@@ -11,6 +11,18 @@ import {
 import { ArrowLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -65,15 +77,17 @@ const FormSchema = z.object({
   duration: z.string({
     required_error: "Tienes que escoger una duración.",
   }),
-  topic: z.string({
-    required_error: "Tienes que ingresar un tema.",
-  }).min(5, "Minimo 5 caracteres").max(100, "Maximo 100 caracteres"),
+  topic: z
+    .string({
+      required_error: "Tienes que ingresar un tema.",
+    })
+    .min(5, "Minimo 5 caracteres")
+    .max(100, "Maximo 100 caracteres"),
   place: z.string().optional(),
   isOnline: z.boolean(),
 });
 
 export default function Component() {
-
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -84,9 +98,9 @@ export default function Component() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log({
-      title: "You submitted the following values:",
-      description: {...data, course: parseInt(data.course), isOnline: data.isOnline ? "Online" : "Presencial", tutor: parseInt(data.tutor), duration: parseInt(data.duration)},
+    toast({
+      title: "Felicidades",
+      description: "Gracias por probar nuestro formulario!",
     });
   }
 
@@ -129,12 +143,8 @@ export default function Component() {
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="1">Cálculo 1</SelectItem>
-                              <SelectItem value="2">
-                                Cálculo 2
-                              </SelectItem>
-                              <SelectItem value="3">
-                                Física
-                              </SelectItem>
+                              <SelectItem value="2">Cálculo 2</SelectItem>
+                              <SelectItem value="3">Física</SelectItem>
                             </SelectContent>
                           </Select>
                         </FormControl>
@@ -312,13 +322,12 @@ export default function Component() {
                             ></Checkbox>
                           </FormControl>
                           <div className="space-y-1 leading-none">
-                <FormLabel>
-                  Online
-                </FormLabel>
-                <FormDescription>
-                  Si seleccionas esta opción, el tutor te enviará un enlace de Zoom para la tutoría.
-                </FormDescription>
-              </div>
+                            <FormLabel>Online</FormLabel>
+                            <FormDescription>
+                              Si seleccionas esta opción, el tutor te enviará un
+                              enlace de Zoom para la tutoría.
+                            </FormDescription>
+                          </div>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -346,7 +355,10 @@ export default function Component() {
                     name="place"
                     render={({ field }) => (
                       <FormItem
-                        className={cn("flex flex-col", form.watch("isOnline") && "invisible")}
+                        className={cn(
+                          "flex flex-col",
+                          form.watch("isOnline") && "invisible"
+                        )}
                       >
                         <FormLabel>Lugar</FormLabel>
                         <FormControl>
@@ -399,12 +411,34 @@ export default function Component() {
                 </p>
               </div>
             </CardContent>
-            <CardFooter>
-              <Link href="#" className="flex justify-center w-full">
-                <Button variant="secondary" className="w-full md:w-auto">
-                  Ver perfil
-                </Button>
-              </Link>
+            <CardFooter className="justify-center">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="w-full md:w-auto">Ver Logros</Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Logros</DialogTitle>
+                      <DialogDescription>
+                        Logros obtenidos por este usuario.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex items-center space-x-2 justify-center py-4">
+                    <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
+        Próximamente...
+      </h2>
+
+                    </div>
+                    <DialogFooter className="sm:justify-start">
+                      <DialogClose asChild>
+                        <Button type="button" variant="secondary">
+                          Cerrar
+                        </Button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
             </CardFooter>
           </Card>
         </div>

@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 import { Chakra_Petch } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from "@/components/ui/toaster"
+
 import "./globals.css";
 
 const inter = Chakra_Petch({ subsets: ["latin"], weight: "500" });
@@ -55,6 +57,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
           <Analytics />
         </ThemeProvider>
       </body>
