@@ -22,6 +22,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -50,26 +51,42 @@ import { useState } from "react";
 
 const FormSchema = z.object({
   dob: z.date({
-    required_error: "A date of birth is required.",
+    required_error: "Tienes que escoger una fecha.",
   }),
-  course: z.string(),
+  course: z.string({
+    required_error: "Tienes que escoger un curso.",
+  }),
+  time: z.string({
+    required_error: "Tienes que escoger una hora.",
+  }),
+  tutor: z.string({
+    required_error: "Tienes que escoger un tutor.",
+  }),
+  duration: z.string({
+    required_error: "Tienes que escoger una duración.",
+  }),
+  topic: z.string({
+    required_error: "Tienes que ingresar un tema.",
+  }).min(5, "Minimo 5 caracteres").max(100, "Maximo 100 caracteres"),
+  place: z.string().optional(),
+  isOnline: z.boolean(),
 });
 
 export default function Component() {
-  const [isOnline, setIsOnline] = useState(false);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      //course: "2",
+      place: "",
+      isOnline: false,
+    },
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log({
       title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+      description: {...data, course: parseInt(data.course), isOnline: data.isOnline ? "Online" : "Presencial", tutor: parseInt(data.tutor), duration: parseInt(data.duration)},
     });
   }
 
@@ -111,11 +128,11 @@ export default function Component() {
                               <SelectValue placeholder="Selecciona tu curso" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="Tu ñaña">Cálculo 1</SelectItem>
-                              <SelectItem value="Curso de Razonamiento">
+                              <SelectItem value="1">Cálculo 1</SelectItem>
+                              <SelectItem value="2">
                                 Cálculo 2
                               </SelectItem>
-                              <SelectItem value="Curso para carreras especializadas">
+                              <SelectItem value="3">
                                 Física
                               </SelectItem>
                             </SelectContent>
@@ -127,124 +144,233 @@ export default function Component() {
                   />
                   <FormField
                     control={form.control}
-                    name="dob"
+                    name="tutor"
                     render={({ field }) => (
                       <FormItem className="flex flex-col">
-                        <FormLabel>Fecha</FormLabel>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <FormControl>
-                              <Button
-                                variant={"outline"}
-                                className={cn(
-                                  "w-full md:w-[240px] pl-3 text-left font-normal",
-                                  !field.value && "text-muted-foreground"
-                                )}
-                              >
-                                {field.value ? (
-                                  format(field.value, "dd/MM/y")
-                                ) : (
-                                  <span>Escoge una fecha</span>
-                                )}
-                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                              </Button>
-                            </FormControl>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto p-0" align="start">
-                            <Calendar
-                              mode="single"
-                              selected={field.value}
-                              onSelect={field.onChange}
-                              disabled={(date) => {
-                                const yesterday = new Date();
-                                yesterday.setDate(yesterday.getDate() - 1);
-                                return date < yesterday;
-                              }}
-                              initialFocus
-                            />
-                          </PopoverContent>
-                        </Popover>
+                        <FormLabel>Tutor</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Selecciona un tutor" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="1">
+                                Tutor 1{" "}
+                                <Badge className="ml-2 bg-yellow-400 z-10">
+                                  Premium
+                                </Badge>
+                              </SelectItem>
+
+                              <SelectItem value="2">
+                                Tutor 2{" "}
+                                <Badge className="ml-2 bg-yellow-400 z-10">
+                                  Premium
+                                </Badge>
+                              </SelectItem>
+                              <SelectItem value="3">Tutor 3</SelectItem>
+                              <SelectItem value="4">Tutor 4</SelectItem>
+                              <SelectItem value="5">Tutor 5</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
+
+                  <div className="flex gap-6 flex-col md:flex-row">
+                    <FormField
+                      control={form.control}
+                      name="dob"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col w-full">
+                          <FormLabel>Fecha</FormLabel>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <FormControl>
+                                <Button
+                                  variant={"outline"}
+                                  className={cn(
+                                    "w-full pl-3 text-left font-normal",
+                                    !field.value && "text-muted-foreground"
+                                  )}
+                                >
+                                  {field.value ? (
+                                    format(field.value, "dd/MM/y")
+                                  ) : (
+                                    <span>Escoge una fecha</span>
+                                  )}
+                                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                </Button>
+                              </FormControl>
+                            </PopoverTrigger>
+                            <PopoverContent
+                              className="w-auto p-0"
+                              align="start"
+                            >
+                              <Calendar
+                                mode="single"
+                                selected={field.value}
+                                onSelect={field.onChange}
+                                disabled={(date) => {
+                                  const yesterday = new Date();
+                                  yesterday.setDate(yesterday.getDate() - 1);
+                                  return date < yesterday;
+                                }}
+                                initialFocus
+                              />
+                            </PopoverContent>
+                          </Popover>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="time"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col w-full">
+                          <FormLabel>Hora</FormLabel>
+                          <FormControl>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecciona una hora" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="07:00">07:00</SelectItem>
+                                <SelectItem value="08:00">08:00</SelectItem>
+                                <SelectItem value="09:00">09:00</SelectItem>
+                                <SelectItem value="10:00">10:00</SelectItem>
+                                <SelectItem value="11:00">11:00</SelectItem>
+                                <SelectItem value="12:00">12:00</SelectItem>
+                                <SelectItem value="13:00">13:00</SelectItem>
+                                <SelectItem value="14:00">14:00</SelectItem>
+                                <SelectItem value="15:00">15:00</SelectItem>
+                                <SelectItem value="16:00">16:00</SelectItem>
+                                <SelectItem value="17:00">17:00</SelectItem>
+                                <SelectItem value="18:00">18:00</SelectItem>
+                                <SelectItem value="19:00">19:00</SelectItem>
+                                <SelectItem value="20:00">20:00</SelectItem>
+                                <SelectItem value="21:00">21:00</SelectItem>
+                                <SelectItem value="22:00">22:00</SelectItem>
+                                <SelectItem value="23:00">23:00</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="flex gap-6 flex-col items-center md:flex-row">
+                    <FormField
+                      control={form.control}
+                      name="duration"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col w-full">
+                          <FormLabel>Duración</FormLabel>
+                          <FormControl>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Selecciona una duración" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="60">1 hora</SelectItem>
+                                <SelectItem value="90">
+                                  1 hora y media
+                                </SelectItem>
+                                <SelectItem value="120">2 horas</SelectItem>
+                                <SelectItem value="150">
+                                  2 horas y media
+                                </SelectItem>
+                                <SelectItem value="180">3 horas</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="isOnline"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 w-full">
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value}
+                              onCheckedChange={field.onChange}
+                            ></Checkbox>
+                          </FormControl>
+                          <div className="space-y-1 leading-none">
+                <FormLabel>
+                  Online
+                </FormLabel>
+                <FormDescription>
+                  Si seleccionas esta opción, el tutor te enviará un enlace de Zoom para la tutoría.
+                </FormDescription>
+              </div>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name="topic"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Tema</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            placeholder="Detalla tu tema de interés"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="place"
+                    render={({ field }) => (
+                      <FormItem
+                        className={cn("flex flex-col", form.watch("isOnline") && "invisible")}
+                      >
+                        <FormLabel>Lugar</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            {...field}
+                            placeholder="Segundo piso de la biblioteca, sala de estudios 3, departamento G-201, etc."
+                            disabled={form.watch("isOnline")}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          Si no tienes un lugar específico, puedes dejar este
+                          campo en blanco y el tutor responderá con una
+                          sugerencia.
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button className="w-full md:w-max" type="submit">
+                    Solicitar tutoría
+                  </Button>
                 </form>
               </Form>
-              <div className="space-y-2">
-                <Label htmlFor="time">Hora</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona una hora" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="07:00">07:00</SelectItem>
-                    <SelectItem value="08:00">08:00</SelectItem>
-                    <SelectItem value="09:00">09:00</SelectItem>
-                    <SelectItem value="10:00">10:00</SelectItem>
-                    <SelectItem value="11:00">11:00</SelectItem>
-                    <SelectItem value="12:00">12:00</SelectItem>
-                    <SelectItem value="13:00">13:00</SelectItem>
-                    <SelectItem value="14:00">14:00</SelectItem>
-                    <SelectItem value="15:00">15:00</SelectItem>
-                    <SelectItem value="16:00">16:00</SelectItem>
-                    <SelectItem value="17:00">17:00</SelectItem>
-                    <SelectItem value="18:00">18:00</SelectItem>
-                    <SelectItem value="19:00">19:00</SelectItem>
-                    <SelectItem value="20:00">20:00</SelectItem>
-                    <SelectItem value="21:00">21:00</SelectItem>
-                    <SelectItem value="22:00">22:00</SelectItem>
-                    <SelectItem value="23:00">23:00</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="duration">Duración</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona una duración" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="30">30 minutos</SelectItem>
-                    <SelectItem value="60">60 minutos</SelectItem>
-                    <SelectItem value="90">90 minutos</SelectItem>
-                    <SelectItem value="120">120 minutos</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="items-top flex space-x-2 py-4">
-                <Checkbox
-                  id="online"
-                  checked={isOnline}
-                  onCheckedChange={() => setIsOnline(!isOnline)}
-                />
-                <div className="grid gap-1.5 leading-none">
-                  <label
-                    htmlFor="online"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    Online
-                  </label>
-                  <p className="text-sm text-muted-foreground">
-                    Si seleccionas esta opción el tutor te enviará un enlace
-                    para la sesión.
-                  </p>
-                </div>
-              </div>{" "}
-              <div className={cn("space-y-2 block", isOnline && "hidden")}>
-                <Label htmlFor="place">Lugar</Label>
-                <Input id="place" placeholder="Biblioteca, aula, salón" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="topic">Tema</Label>
-                <Input
-                  id="topic"
-                  placeholder="Ingresa el tema para la sesión"
-                />
-              </div>
             </CardContent>
-            <CardFooter>
-              <Button className="w-full md:w-max">Solicitar tutoría</Button>
-            </CardFooter>
           </Card>
           <Card className="w-full md:w-1/3">
             <CardHeader>
