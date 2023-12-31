@@ -1,6 +1,7 @@
 import { StudentView } from "@/components/student-view";
 import { CourseCard } from "@/components/course-card";
 import { TutorCard } from "@/components/tutor-card";
+import { TutorsCarousel } from "@/components/tutors-carousel";
 
 export default function Home() {
   const asignaturas = [
@@ -89,18 +90,7 @@ export default function Home() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
         Top Tutores
       </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-2xl mt-6">
-        {tutores.map((tutor) => (
-          <TutorCard
-            tutor={tutor.tutor}
-            rating={tutor.rating}
-            pic_url={tutor.pic_url}
-            nreviews={tutor.nreviews}
-            key={tutor.tutor}
-          />
-        ))}
-      </div>
+        <TutorsCarousel></TutorsCarousel>
     </main>
   );
 }
