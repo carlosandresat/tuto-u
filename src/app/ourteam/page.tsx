@@ -13,12 +13,12 @@ export default function OurTeam() {
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
           Nuestro Equipo
         </h2>
-        <p className="scroll-m-20 text-lg text-muted-foreground mt-4 max-w-screen-md">
+        <p className="scroll-m-20 text-lg text-muted-foreground mt-4 max-w-screen-md px-8 text-center">
           Conoce a los miembros de nuestra Start-Up
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-screen-xl p-8 w-full">
           <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex items-center gap-4 p-4">
+            <CardContent className="flex flex-col md:flex-row items-center gap-4 p-4">
               <Avatar className="w-48 h-48">
                 <AvatarImage
                   alt="Team member 1"
@@ -49,7 +49,7 @@ export default function OurTeam() {
             </CardContent>
           </Card>
           <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex items-center gap-4 p-4">
+          <CardContent className="flex flex-col md:flex-row items-center gap-4 p-4">
               <Avatar className="w-48 h-48">
                 <AvatarImage
                   alt="Team member 2"
@@ -80,7 +80,7 @@ export default function OurTeam() {
             </CardContent>
           </Card>
           <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex items-center gap-4 p-4">
+          <CardContent className="flex flex-col md:flex-row items-center gap-4 p-4">
               <Avatar className="w-48 h-48">
                 <AvatarImage
                   alt="Team member 3"
@@ -108,7 +108,7 @@ export default function OurTeam() {
             </CardContent>
           </Card>
           <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex items-center gap-4 p-4">
+          <CardContent className="flex flex-col md:flex-row items-center gap-4 p-4">
               <Avatar className="w-48 h-48">
                 <AvatarImage
                   alt="Team member 4"
