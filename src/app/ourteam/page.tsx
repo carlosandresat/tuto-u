@@ -144,7 +144,7 @@ export default function OurTeam() {
   );
 }
 
-function LinkedinIcon(props) {
+function LinkedinIcon(props:any) {
   return (
     <svg
       {...props}
@@ -165,7 +165,7 @@ function LinkedinIcon(props) {
   );
 }
 
-function TwitterIcon(props) {
+function TwitterIcon(props:any) {
   return (
     <svg
       {...props}
