@@ -19,19 +19,26 @@ export default function Pricing() {
           <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
             <div className="flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
               <div>
-                <h3 className="text-2xl font-bold text-center">Gratis</h3>
+                <h3 className="text-2xl font-bold text-center">Basic</h3>
                 <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
                   <span className="text-4xl font-bold">$0</span>/ mes
                 </div>
                 <ul className="mt-4 space-y-2">
-                <li className="flex items-center">
+                  <li className="flex items-center">
                     <div className="w-full font-bold">Como estudiante:</div>
                   </li>
 
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
                     <div className="w-full">
-                      Solicitar tutorías personalizadas ilimitadas
+                      Solicitar tutorías gratuitas
+                    </div>
+                  </li>
+
+                  <li className="flex items-center">
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Solicitar tutorías pagadas ilimitadas
                     </div>
                   </li>
 
@@ -44,9 +51,7 @@ export default function Pricing() {
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Ofrecer tutorías gratuitas
-                    </div>
+                    <div className="w-full">Ofrecer tutorías gratuitas</div>
                   </li>
                 </ul>
               </div>
@@ -61,32 +66,45 @@ export default function Pricing() {
               <div>
                 <h3 className="text-2xl font-bold text-center">Premium</h3>
                 <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                  <span className="text-4xl font-bold">$5</span>/ mes
+                  <span className="text-4xl font-bold">$?</span>/ mes
                 </div>
                 <ul className="mt-4 space-y-2">
-                <li className="flex items-center">
+                <li className="flex items-center ">
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">Gráficos de tus estadísticas en la aplicación</div>
+                  </li>
+
+                  <li className="flex items-center">
                     <div className="w-full font-bold">Como estudiante:</div>
                   </li>
 
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
                     <div className="w-full">
-                      Solicitar tutorías personalizadas ilimitadas
+                      Solicitar tutorías gratuitas ilimitadas
+                    </div>
+                  </li>
+
+                  <li className="flex items-center">
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">
+                      Solicitar tutorías pagadas ilimitadas
                     </div>
                   </li>
 
                   <li className="flex items-center ">
                     <CheckCircle className="mr-2" />
-                    <div className="w-full">Unirse a tutorías grupales</div>
-                  </li>
-
-                  <li className="flex items-center ">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">Gráficos de tus estadísticas en la aplicación</div>
+                    <div className="w-full">Unirse a tutorías grupales
+                    </div>
                   </li>
 
                   <li className="flex items-center">
                     <div className="w-full font-bold">Como tutor:</div>
+                  </li>
+
+                  <li className="flex items-center">
+                    <CheckCircle className="mr-2" />
+                    <div className="w-full">Ofrecer tutorías gratuitas</div>
                   </li>
 
                   <li className="flex items-center">
@@ -98,11 +116,8 @@ export default function Pricing() {
 
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Organizar tutorías grupales
-                    </div>
+                    <div className="w-full">Organizar tutorías grupales</div>
                   </li>
-
                 </ul>
               </div>
               <div className="mt-6">
@@ -113,12 +128,14 @@ export default function Pricing() {
             </div>
             <div className="flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
               <div>
-                <h3 className="text-2xl font-bold text-center">Institucional</h3>
+                <h3 className="text-2xl font-bold text-center">
+                  Institucional
+                </h3>
                 <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
                   <span className="text-4xl font-bold">Pago</span>/ año
                 </div>
                 <ul className="mt-4 space-y-2">
-                <li className="flex items-center">
+                  <li className="flex items-center">
                     <div className="w-full font-bold">
                       Cuenta administrador con las siguientes funcionalidades:
                     </div>
@@ -127,23 +144,25 @@ export default function Pricing() {
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
                     <div className="w-full">
-                      Visualizar y descargar estadísticas de uso de la aplicación
+                      Visualizar y descargar estadísticas de uso de la
+                      aplicación
                     </div>
                   </li>
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
                     <div className="w-full">
-                      Organizar los cursos por escuelas, facultades o departamentos y añadir logos para cada uno
+                      Organizar los cursos por escuelas, facultades o
+                      departamentos y añadir logos para cada uno
                     </div>
                   </li>
 
                   <li className="flex items-center">
                     <CheckCircle className="mr-2" />
                     <div className="w-full">
-                      Crear logros personalizados y otorgarlos a cualquier usuario de la institución
+                      Crear logros personalizados y otorgarlos a cualquier
+                      usuario de la institución
                     </div>
                   </li>
-
                 </ul>
               </div>
               <div className="mt-6">
