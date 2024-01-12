@@ -23,12 +23,12 @@ export function StartNavbar() {
               >
                 Inicio
               </Link>
-              <a
+              <Link
                 href="/how"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Cómo funciona
-              </a>
+              </Link>
 
               <Link
                 href="/pricing"
@@ -37,31 +37,31 @@ export function StartNavbar() {
                 Precios
               </Link>
 
-              <a
+              <Link
                 href="/ourteam"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Nuestro Equipo
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/faq"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Preguntas frecuentes
-              </a>
+              </Link>
             </div>
           </SheetContent>
         </Sheet>
       </div>
-      <a href="/" className="logo">
+      <Link href="/" className="logo">
         <Image
           src="/images/logo.png"
           alt="logo-dark"
           width={75}
           height={75}
         />
-      </a>
+      </Link>
 
       <nav className="navbar hidden lg:block">
         <Link
@@ -70,12 +70,12 @@ export function StartNavbar() {
         >
           Inicio
         </Link>
-        <a
+        <Link
           href="/how"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Cómo funciona
-        </a>
+        </Link>
 
         <Link
           href="/pricing"
@@ -84,19 +84,19 @@ export function StartNavbar() {
           Precios
         </Link>
 
-        <a
+        <Link
           href="/ourteam"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Nuestro Equipo
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/faq"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Preguntas frecuentes
-        </a>
+        </Link>
       </nav>
       <ModeToggle></ModeToggle>
     </header>
