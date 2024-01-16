@@ -7,11 +7,11 @@ import React from "react"
 
 export default function SocialNetwork() {
   return (
-    <section className="w-full py-1 md:py-10 md:-translate-y-[80%] -translate-y-[50%]">
+    <section className="w-full">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <h2 className="text-1xl tracking-tighter sm:text-2xl md:text-3xl border-b-2">Más información en:</h2>
+            <h2 className="text-3xl tracking-tighter border-b-2">Más información en:</h2>
           </div>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
             <Link className="text-2xl" href="#">
