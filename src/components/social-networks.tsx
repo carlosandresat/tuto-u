@@ -8,7 +8,7 @@ import React from "react"
 export default function SocialNetwork() {
   return (
     <section className="w-full">
-      <div className="container px-4 md:px-6">
+      <div className="container m-auto px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
             <h2 className="text-3xl tracking-tighter border-b-2">Más información en:</h2>
