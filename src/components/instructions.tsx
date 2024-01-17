@@ -8,7 +8,7 @@ import Image from "next/image"
 
 const students_instructions = [
     {
-        img:'/capt-screen.png',
+        img:'/instructions/capt-screen.png',
         inst:[
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
@@ -16,7 +16,7 @@ const students_instructions = [
         ]
     },
     {
-        img:'/capt-screen.png',
+        img:'/instructions/capt-screen.png',
         inst:[
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
@@ -24,7 +24,7 @@ const students_instructions = [
         ]
     },
     {
-        img:'/capt-screen.png',
+        img:'/instructions/capt-screen.png',
         inst:[
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
@@ -35,7 +35,7 @@ const students_instructions = [
 
 const tutors_instructions = [
     {
-        img:'/capt-screen.png',
+        img:'/instructions/capt-screen.png',
         inst:[
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
@@ -43,7 +43,7 @@ const tutors_instructions = [
         ]
     },
     {
-        img:'/capt-screen.png',
+        img:'/instructions/capt-screen.png',
         inst:[
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
@@ -51,7 +51,7 @@ const tutors_instructions = [
         ]
     },
     {
-        img:'/capt-screen.png',
+        img:'/instructions/capt-screen.png',
         inst:[
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
             'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus laudantium error magni, rem ab quibusdam hic maiores atque beatae consectetur asperiores deserunt optio id quas minus, eveniet molestias. Illo, minus.',
