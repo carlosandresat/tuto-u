@@ -2,7 +2,7 @@
  * v0 by Vercel.
  * @see https://v0.dev/t/uDCQnoD00vT
  */
-import { CardTitle, CardDescription, CardContent, Card } from "@/components/ui/card"
+import { CardTitle, CardContent, Card } from "@/components/ui/card"
 import Image from "next/image"
 
 
@@ -64,7 +64,7 @@ function List({inst}:{inst:string[]}){
     return(
         inst.map((e,i)=>{
             return(
-                <div className="flex flex-row gap-2" key={i}>
+                <div className="flex flex-row gap-2 text-sm" key={i}>
                     <h2 className="font-bold text-black dark:text-white">{i+1}.</h2>
                     <p className="text-gray-500 dark:text-gray-400">{e}</p>
                 </div>
@@ -90,9 +90,7 @@ function CardInstruction({img,inst}:{img:string,inst:string[]}){
             </div>
             <CardContent className="w-full p-6">
               <CardTitle className="text-lg font-bold">Card Title</CardTitle>
-              <CardDescription className="text-sm">
-                <List inst={inst}/>
-              </CardDescription>
+              <List inst={inst}/>
             </CardContent>
         </Card>
     )
