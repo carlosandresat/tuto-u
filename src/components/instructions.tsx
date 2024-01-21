@@ -1,7 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/uDCQnoD00vT
- */
 import { CardTitle, CardContent, Card } from "@/components/ui/card"
 import Image from "next/image"
 

@@ -1,7 +1,3 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/zqJoZ5eDree
- */
 import Link from "next/link"
 import React from "react"
 
