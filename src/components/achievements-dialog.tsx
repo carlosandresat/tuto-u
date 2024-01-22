@@ -16,6 +16,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import Link from "next/link";
 
 export function AchievementsDialog() {
   return (
@@ -347,7 +348,10 @@ export function AchievementsDialog() {
           </HoverCard>
         </div>
 
-        <DialogFooter className="sm:justify-start">
+        <DialogFooter className="sm:justify-end flex flex-col">
+            <Link href="#" className="w-full">
+                <Button className="w-full">Ver Perfil</Button>
+            </Link>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Cerrar
