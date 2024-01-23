@@ -5,26 +5,20 @@ import { TutorsCarousel } from "@/components/tutors-carousel";
 
 export default function Home() {
   const asignaturas = [
-    { course: "Inteligencia Artificial Avanzada", school: "mate" },
-    { course: "Computación Cuántica", school: "mate" },
-    { course: "Sistemas Distribuidos", school: "mate" },
-    { course: "Seguridad Informática Avanzada", school: "mate" },
-    { course: "Procesamiento de Lenguaje Natural", school: "mate" },
-    { course: "Visión por Computadora", school: "mate" },
-    { course: "Redes Neuronales Profundas", school: "mate" },
-    { course: "Algoritmos Avanzados", school: "mate" },
-    { course: "Robótica Autónoma", school: "mate" },
-    { course: "Computación Gráfica Avanzada", school: "mate" },
-    { course: "Bioinformática", school: "mate" },
-    { course: "Computación Paralela y Concurrente", school: "mate" },
-    { course: "Teoría de Juegos y Computación", school: "mate" },
-    { course: "Criptografía Moderna", school: "mate" },
-    { course: "Arquitecturas de Computadoras Avanzadas", school: "mate" },
-    { course: "Diseño de Compiladores Avanzado", school: "mate" },
-    { course: "Métodos Formales en la Ingeniería de Software", school: "mate" },
-    { course: "Big Data y Procesamiento de Datos a Escala", school: "mate" },
-    { course: "Internet de las Cosas (IoT) Avanzado", school: "mate" },
-    { course: "Computación en la Nube Escalable y Eficiente", school: "mate" },
+    { course: "Cálculo 1", school: "mate" },
+    { course: "Cálculo 2", school: "mate" },
+    { course: "Algebra Lineal", school: "mate" },
+    { course: "Química 1", school: "quim" },
+    { course: "Química 2", school: "quim" },
+    { course: "Física 1", school: "fis" },
+    { course: "Física 2", school: "fis" },
+    { course: "Biología 1", school: "bio" },
+    { course: "Biología 2", school: "bio" },
+    { course: "Ciencias de la Tierra", school: "geo" },
+    { course: "Probabilidad y Estadística", school: "mate" },
+    { course: "Ecuaciones Diferenciales", school: "mate" },
+    { course: "Métodos Numéricos", school: "mate" },
+    { course: "Inglés", school: "lan" },
   ];
 
   const tutores = [
@@ -78,7 +72,7 @@ export default function Home() {
         Asignaturas
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6 w-full">
         {asignaturas.map((asignatura) => (
           <CourseCard
             course={asignatura.course}
