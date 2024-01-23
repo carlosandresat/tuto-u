@@ -7,9 +7,9 @@ export default function FAQ() {
     <>
       <StartNavbar />
       <section className="w-full px-8 translate-y-1/4 md:translate-y-1/2  flex items-center flex-col">
-        <div className="flex flex-col md:flex-row md:justify-between w-full pb-8 md:pb-10">
+        <div className="max-w-screen-2xl flex flex-col md:flex-row md:justify-between w-full pb-8 md:pb-10">
           <div className="sm:w-full md:w-2/5 md:border-r-2 md:mr-4 md:py-12 mb-7 md:mb-0 md:pr-2">
-          <h2 className="md:text-5xl text-3xl text-center w-1/2 md:w-full md:border-b-0 border-b-2 m-auto pb-1 md:pb-0">Pregunta<br />frecuentes</h2>
+          <h2 className="md:text-5xl text-3xl text-center w-1/2 md:w-full md:border-b-0 border-b-2 m-auto pb-1 md:pb-0">Preguntas<br />frecuentes</h2>
           </div>
           <div className="w-full md:w-3/4 md:px-8">
             <Accordion type="single" collapsible>
