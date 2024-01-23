@@ -1,21 +1,40 @@
 import { StartNavbar } from "@/components/start-navbar";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import SocialNetwork from "@/components/social-networks";
 
 export default function FAQ() {
   return (
     <>
       <StartNavbar />
-
-      <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-32 md:mt-6 max-w-screen-xl">
-          Preguntas Frecuentes
-        </h2>
-
-        <div className="flex mt-8">
-        <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl">
-            Próximamente...
-          </h1>
-
+      <section className="w-full px-8 translate-y-1/4 md:translate-y-1/2  flex items-center flex-col">
+        <div className="max-w-screen-2xl flex flex-col md:flex-row md:justify-between w-full pb-8 md:pb-10">
+          <div className="sm:w-full md:w-2/5 md:border-r-2 md:mr-4 md:py-12 mb-7 md:mb-0 md:pr-2">
+          <h2 className="md:text-5xl text-3xl text-center w-1/2 md:w-full md:border-b-0 border-b-2 m-auto pb-1 md:pb-0">Preguntas<br />frecuentes</h2>
+          </div>
+          <div className="w-full md:w-3/4 md:px-8">
+            <Accordion type="single" collapsible>
+              <AccordionItem value="item-1">
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>
+                  Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>
+                  Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                <AccordionContent>
+                  Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
         </div>
+      <SocialNetwork/>
       </section>
     </>
   );

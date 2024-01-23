@@ -1,8 +1,30 @@
 import * as React from "react";
-import { Car, Star, StarHalf } from "lucide-react";
+import { Star, StarHalf } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { AchievementsDialog } from "@/components/achievements-dialog";
 import Image from "next/image";
+
+function DrawStar({raiting}:{raiting:number}){
+  const int = (raiting|0);
+  const numStar = int/2;
+  const isOdd = int%2!==0?true:false;
+  return(
+    <>
+    {
+      [...Array(numStar|0)].map((_,i)=>{
+        return(
+          <Star key={i} className="h-6 w-6 fill-yellow-200"></Star>
+        )
+      })
+    }
+    {
+      isOdd&&
+      <StarHalf className="h-6 w-6 fill-yellow-200"></StarHalf>
+    }
+    </>
+  )
+}
 
 export function TutorCard({
   tutor,
@@ -32,18 +54,14 @@ export function TutorCard({
           {tutor}
         </h3>
         <div className="flex w-full justify-center">
-          <Star className="h-6 w-6 fill-yellow-200"></Star>
-          <Star className="h-6 w-6 fill-yellow-200"></Star>
-          <Star className="h-6 w-6 fill-yellow-200"></Star>
-          <Star className="h-6 w-6 fill-yellow-200"></Star>
-          <StarHalf className="h-6 w-6 fill-yellow-200"></StarHalf>
+          <DrawStar raiting={rating}/>
         </div>
 
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
           {rating} <span className="text-muted-foreground pl-2">({nreviews} reviews)</span>
         </h3>
       </div>
-      <Button className="w-full md:w-auto">Ver perfil</Button>
+      <AchievementsDialog/>
     </div>
   );
 }

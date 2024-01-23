@@ -23,6 +23,7 @@ export default function OurTeam() {
                 <AvatarImage
                   alt="Team member 1"
                   src="/photos/carlos.arevalo.jpg"
+                  className="object-cover"
                 />
                 <AvatarFallback>CA</AvatarFallback>
               </Avatar>
@@ -53,7 +54,8 @@ export default function OurTeam() {
               <Avatar className="w-48 h-48">
                 <AvatarImage
                   alt="Team member 2"
-                  src="/placeholder-avatar.jpg"
+                  src="/photos/samantha.quintanchala.jpg"
+                  className="object-cover"
                 />
                 <AvatarFallback>SQ</AvatarFallback>
               </Avatar>
@@ -84,7 +86,8 @@ export default function OurTeam() {
               <Avatar className="w-48 h-48">
                 <AvatarImage
                   alt="Team member 3"
-                  src="/placeholder-avatar.jpg"
+                  src="/photos/angie.remache.jpg"
+                  className="object-cover"
                 />
                 <AvatarFallback>AR</AvatarFallback>
               </Avatar>
@@ -112,7 +115,8 @@ export default function OurTeam() {
               <Avatar className="w-48 h-48">
                 <AvatarImage
                   alt="Team member 4"
-                  src="/placeholder-avatar.jpg"
+                  src="/photos/ariel.pincay.jpg"
+                  className="object-cover"
                 />
                 <AvatarFallback>AP</AvatarFallback>
               </Avatar>

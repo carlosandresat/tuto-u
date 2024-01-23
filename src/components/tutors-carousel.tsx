@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -18,7 +17,7 @@ export function TutorsCarousel() {
     },
     {
       tutor: "Carlos Arévalo2",
-      rating: 9.7,
+      rating: 4.3,
       pic_url: "/photos/carlos.arevalo.jpg",
       nreviews: 45,
     },

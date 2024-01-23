@@ -23,12 +23,12 @@ export function StartNavbar() {
               >
                 Inicio
               </Link>
-              <a
+              <Link
                 href="/how"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Cómo funciona
-              </a>
+              </Link>
 
               <Link
                 href="/pricing"
@@ -37,31 +37,31 @@ export function StartNavbar() {
                 Precios
               </Link>
 
-              <a
+              <Link
                 href="/ourteam"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Nuestro Equipo
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/faq"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
                 Preguntas frecuentes
-              </a>
+              </Link>
             </div>
           </SheetContent>
         </Sheet>
       </div>
-      <a href="/" className="logo">
-        <Image
-          src="/images/logo.png"
-          alt="logo-dark"
-          width={75}
-          height={75}
-        />
-      </a>
+      <Link href="/" className="flex items-center gap-6">
+        <Image src="/images/logo.png" alt="logo" width={60} height={60} className="w-12 lg:w-16"/>
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 hidden lg:block">
+      Tuto-U
+    </h2>
+
+      </Link>
+
 
       <nav className="navbar hidden lg:block">
         <Link
@@ -70,12 +70,12 @@ export function StartNavbar() {
         >
           Inicio
         </Link>
-        <a
+        <Link
           href="/how"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Cómo funciona
-        </a>
+        </Link>
 
         <Link
           href="/pricing"
@@ -84,19 +84,19 @@ export function StartNavbar() {
           Precios
         </Link>
 
-        <a
+        <Link
           href="/ourteam"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Nuestro Equipo
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/faq"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Preguntas frecuentes
-        </a>
+        </Link>
       </nav>
       <ModeToggle></ModeToggle>
     </header>
