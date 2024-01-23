@@ -10,167 +10,129 @@ export default function Pricing() {
     <>
       <StartNavbar />
 
-      <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-32 md:mt-6 max-w-screen-xl">
+      <section className="w-full py-12 flex items-center justify-center flex-col pt-44">
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
           Precios
         </h2>
-
         <div className="container px-4 md:px-6">
-          <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
-            <div className="flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
-              <div>
-                <h3 className="text-2xl font-bold text-center">Basic</h3>
-                <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                  <span className="text-4xl font-bold">$0</span>/ mes
-                </div>
-                <ul className="mt-4 space-y-2">
-                  <li className="flex items-center">
-                    <div className="w-full font-bold">Como estudiante:</div>
-                  </li>
 
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Solicitar tutorías gratuitas
-                    </div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Solicitar tutorías pagadas ilimitadas
-                    </div>
-                  </li>
-
-                  <li className="flex items-center ">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">Unirse a tutorías grupales</div>
-                  </li>
-                  <li className="flex items-center">
-                    <div className="w-full font-bold">Como tutor:</div>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">Ofrecer tutorías gratuitas</div>
-                  </li>
-                </ul>
-              </div>
-              <div className="mt-6">
-                <Button className="w-full">Regístrate</Button>
-              </div>
-            </div>
-            <div className="relative flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-purple-500">
-              <div className="px-3 py-1 text-sm text-white bg-gradient-to-r from-pink-500 to-purple-500 rounded-full inline-block absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                Popular
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-center">Premium</h3>
-                <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                  <span className="text-4xl font-bold">$?</span>/ mes
-                </div>
-                <ul className="mt-4 space-y-2">
-                <li className="flex items-center ">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">Gráficos de tus estadísticas en la aplicación</div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <div className="w-full font-bold">Como estudiante:</div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Solicitar tutorías gratuitas ilimitadas
-                    </div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Solicitar tutorías pagadas ilimitadas
-                    </div>
-                  </li>
-
-                  <li className="flex items-center ">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">Unirse a tutorías grupales
-                    </div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <div className="w-full font-bold">Como tutor:</div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">Ofrecer tutorías gratuitas</div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Ofrecer tutorías con precio a tu elección
-                    </div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">Organizar tutorías grupales</div>
-                  </li>
-                </ul>
-              </div>
-              <div className="mt-6">
-                <Button className="w-full bg-gradient-to-r from-pink-500 to-purple-500">
-                  Regístrate
-                </Button>
-              </div>
-            </div>
-            <div className="flex flex-col p-6 shadow-lg rounded-lg dark:bg-zinc-850 justify-between border border-gray-300">
-              <div>
-                <h3 className="text-2xl font-bold text-center">
-                  Institucional
-                </h3>
-                <div className="mt-4 text-center text-zinc-600 dark:text-zinc-400">
-                  <span className="text-4xl font-bold">Pago</span>/ año
-                </div>
-                <ul className="mt-4 space-y-2">
-                  <li className="flex items-center">
-                    <div className="w-full font-bold">
-                      Cuenta administrador con las siguientes funcionalidades:
-                    </div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Visualizar y descargar estadísticas de uso de la
-                      aplicación
-                    </div>
-                  </li>
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Organizar los cursos por escuelas, facultades o
-                      departamentos y añadir logos para cada uno
-                    </div>
-                  </li>
-
-                  <li className="flex items-center">
-                    <CheckCircle className="mr-2" />
-                    <div className="w-full">
-                      Crear logros personalizados y otorgarlos a cualquier
-                      usuario de la institución
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="mt-6">
-                <Button className="w-full">Contáctanos</Button>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
+          <div className="border p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-4">Starter</h3>
+            <p className="text-4xl font-bold mb-1">$60.00</p>
+            <p className="text-sm mb-6">per year</p>
+            <h4 className="text-md font-semibold mb-4">Features</h4>
+            <ul className="mb-6">
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                50 users{"\n                  "}
+              </li>
+            </ul>
+            <h4 className="text-md font-semibold mb-4">All plan features</h4>
+            <ul>
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                Create own personalised courses{"\n                  "}
+              </li>
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                Set up unlimited courses and activities{"\n                  "}
+              </li>
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                Create own custom certificates{"\n                  "}
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="text-green-500 mr-2" />
+                Access web conferencing and session recordings with up to 100
+                concurrent users{"\n                  "}
+              </li>
+            </ul>
+          </div>
+          <div className="border p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-4">Mini</h3>
+            <p className="text-4xl font-bold mb-1">$105.00</p>
+            <p className="text-sm mb-6">per year</p>
+            <h4 className="text-md font-semibold mb-4">Features</h4>
+            <ul className="mb-6">
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                100 users{"\n                  "}
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="text-green-500 mr-2" />
+                Includes All plan features{"\n                  "}
+              </li>
+            </ul>
+          </div>
+          <div className="border p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-4">Small</h3>
+            <p className="text-4xl font-bold mb-1">$190.00</p>
+            <p className="text-sm mb-6">per year</p>
+            <h4 className="text-md font-semibold mb-4">Features</h4>
+            <ul className="mb-6">
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                200 users{"\n                  "}
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="text-green-500 mr-2" />
+                Includes All plan features{"\n                  "}
+              </li>
+            </ul>
+          </div>
+          <div className="border p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-4">Medium</h3>
+            <p className="text-4xl font-bold mb-1">$445.00</p>
+            <p className="text-sm mb-6">per year</p>
+            <h4 className="text-md font-semibold mb-4">Features</h4>
+            <ul className="mb-6">
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                500 users{"\n                  "}
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="text-green-500 mr-2" />
+                Includes All plan features{"\n                  "}
+              </li>
+            </ul>
+          </div>
+          <div className="border p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-4">Large</h3>
+            <p className="text-4xl font-bold mb-1">$890.00</p>
+            <p className="text-sm mb-6">per year</p>
+            <h4 className="text-md font-semibold mb-4">Features</h4>
+            <ul className="mb-6">
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                1000 users{"\n                  "}
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="text-green-500 mr-2" />
+                Includes All plan features{"\n                  "}
+              </li>
+            </ul>
+          </div>
+          <div className="border p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-4">Enterprise</h3>
+            <p className="text-4xl font-bold mb-1">Custom</p>
+            <p className="text-sm mb-6">per year</p>
+            <h4 className="text-md font-semibold mb-4">Features</h4>
+            <ul className="mb-6">
+              <li className="flex items-center mb-2">
+                <CheckIcon className="text-green-500 mr-2" />
+                Scale up to millions of users{"\n                  "}
+              </li>
+              <li className="flex items-center">
+                <CheckIcon className="text-green-500 mr-2" />
+                Includes All plan features{"\n                  "}
+              </li>
+            </ul>
           </div>
         </div>
+      </div>
+
+        
       </section>
     </>
   );
