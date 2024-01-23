@@ -61,7 +61,7 @@ export function HomeNavbar() {
       </div>
 
       <Link href="/" className="flex items-center gap-6">
-        <Image src="/images/logo.png" alt="" width={60} height={60} className="w-12 lg:w-16"/>
+        <Image src="/images/logo.png" alt="logo" width={60} height={60} className="w-12 lg:w-16"/>
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 hidden lg:block">
       Tuto-U
     </h2>
