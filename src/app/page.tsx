@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CountdownTimer } from "@/components/countdown-timer";
 import { StartNavbar } from "@/components/start-navbar";
+import { ModeToggle } from "@/components/mode-toggle";
 
 
 export default function Home() {
@@ -14,7 +15,7 @@ export default function Home() {
       <StartNavbar />
       <main className="flex min-h-screen flex-col items-center w-full">
 
-        <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[380px] md:before:w-[580px] before:-translate-x-1 before:-translate-y-1/4 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-40 after:dark:from-sky-900 after:dark:via-[#1a01ff] after:dark:opacity-30 before:lg:h-[360px] z-[-2] pt-32 mt-20 lg:mt-40 mx-6 flex-col">
+        <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[380px] md:before:w-[580px] before:-translate-x-1 before:-translate-y-1/4 before:rounded-full before:bg-gradient-radial  before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic  after:blur-2xl after:content-[''] before:bg-gradient-to-br before:from-transparent before:to-blue-700 before:opacity-40  after:via-[#1a01ff] after:opacity-30 before:lg:h-[360px] z-[-2] pt-32 mt-20 lg:mt-40 mx-6 flex-col">
           <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl z-0 text-center">
             Tuto-U: Próximamente...
           </h1>
@@ -61,12 +62,12 @@ export default function Home() {
         </section>
         {/*Section with an animated countdown for release*/}
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          © Tuto-U. All rights reserved. Developed by{" "}
+      <footer className="flex flex-col gap-2 md:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+        <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+          © Tuto-U. Todos los derechos reservados. Desarrollado por{" "}
           <span className="font-bold text-foreground">Tuto-U Team</span>.
         </p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+        <nav className="md:ml-auto flex gap-4 md:gap-6 mr-6">
           <Link className="text-xs hover:underline underline-offset-4" href="#">
             Términos y condiciones
           </Link>
@@ -74,6 +75,8 @@ export default function Home() {
             Privacidad
           </Link>
         </nav>
+        <ModeToggle></ModeToggle>
+
       </footer>
     </>
   );
