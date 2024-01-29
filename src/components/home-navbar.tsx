@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Menu } from "lucide-react";
+import { Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -103,7 +103,9 @@ export function HomeNavbar() {
           Estudiantes
         </Link>
       </nav>
-      <ModeToggle></ModeToggle>
+      <div>
+        <Link href="/"><Button> <LogOut /> </Button></Link>
+      </div>
     </header>
   );
 }

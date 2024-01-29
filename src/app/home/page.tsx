@@ -2,6 +2,8 @@ import { StudentView } from "@/components/student-view";
 import { CourseCard } from "@/components/course-card";
 import { TutorCard } from "@/components/tutor-card";
 import { TutorsCarousel } from "@/components/tutors-carousel";
+import Link from "next/link";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
   const asignaturas = [
@@ -61,6 +63,7 @@ export default function Home() {
   ];
 
   return (
+    <>
     <main className="flex min-h-screen flex-col items-center justify-between p-8">
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 pt-32">
         Tus Tutorías
@@ -86,5 +89,22 @@ export default function Home() {
       </h2>
         <TutorsCarousel></TutorsCarousel>
     </main>
+    <footer className="flex flex-col gap-2 md:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+    <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+      © Tuto-U. Todos los derechos reservados. Desarrollado por{" "}
+      <span className="font-bold text-foreground">Tuto-U Team</span>.
+    </p>
+    <nav className="md:ml-auto flex gap-4 md:gap-6 mr-6">
+      <Link className="text-xs hover:underline underline-offset-4" href="#">
+        Términos y condiciones
+      </Link>
+      <Link className="text-xs hover:underline underline-offset-4" href="#">
+        Privacidad
+      </Link>
+    </nav>
+    <ModeToggle></ModeToggle>
+
+  </footer>
+  </>
   );
 }
