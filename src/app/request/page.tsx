@@ -59,6 +59,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { AchievementsDialog } from "@/components/achievements-dialog";
 import { useState } from "react";
 
 const FormSchema = z.object({
@@ -430,7 +431,7 @@ export default function Component() {
             <CardFooter className="justify-center">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="outline" className="w-full md:w-auto">Ver Logros</Button>
+                    <AchievementsDialog></AchievementsDialog>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-md">
                     <DialogHeader>
