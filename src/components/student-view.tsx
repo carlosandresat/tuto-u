@@ -60,7 +60,7 @@ export function StudentView() {
             <p>1.5 horas</p>
           </div>
           <div className="flex space-x-2">
-            <Banknote /> <p>$5.0</p>
+            <Banknote /> <p>$5.00</p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center space-x-2">
@@ -154,7 +154,7 @@ export function StudentView() {
             <p>2 horas</p>
           </div>
           <div className="flex space-x-2">
-            <Banknote /> <p>$5.0</p>
+            <Banknote /> <p>$5.00</p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
@@ -246,7 +246,7 @@ export function StudentView() {
             <p>2 horas</p>
           </div>
           <div className="flex space-x-2">
-            <Banknote /> <p>$7.0</p>
+            <Banknote /> <p>$7.00</p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center"></CardFooter>
