@@ -62,7 +62,7 @@ import {
 import { useState } from "react";
 
 const FormSchema = z.object({
-  dob: z.date({
+  date: z.date({
     required_error: "Tienes que escoger una fecha.",
   }),
   course: z.string({
@@ -98,10 +98,26 @@ export default function Component() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
+    const datetime = new Date(data.date);
+    datetime.setHours(parseInt(data.time.split(":")[0]));
+    datetime.setMinutes(parseInt(data.time.split(":")[1]));
+    console.log(datetime.toISOString());
+    const formattedData = {
+      date: datetime.toISOString(),
+      course: parseInt(data.course),
+      tutor: parseInt(data.tutor),
+      duration: parseInt(data.duration),
+      topic: data.topic,
+      ...(data.isOnline ? {place: "Online"} : {place: data.place} ),
+      isOnline: data.isOnline,
+    }
     toast({
       title: "Felicidades",
-      description: "Gracias por probar nuestro formulario!",
+      description: <><p>¡Gracias por probar nuestro formulario!</p><pre className="mt-2 w-[340px] rounded-md bg-secondary p-4">
+      <code>{JSON.stringify({...formattedData, date: datetime.toLocaleString()}, null, 2)}</code>
+    </pre></>,
     });
+    
   }
 
   return (
@@ -194,7 +210,7 @@ export default function Component() {
                   <div className="flex gap-6 flex-col md:flex-row">
                     <FormField
                       control={form.control}
-                      name="dob"
+                      name="date"
                       render={({ field }) => (
                         <FormItem className="flex flex-col w-full">
                           <FormLabel>Fecha</FormLabel>
