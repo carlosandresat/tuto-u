@@ -22,7 +22,7 @@ import Image from "next/image";
 export function StudentView() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
-      <Card>
+      <Card style={{ backgroundImage: 'url(/card-backgrounds/forest.gif)', backgroundSize: 'cover'}}>
         <CardHeader>
           <Badge className=" bg-green-500 w-fit mb-2">Aceptada</Badge>
 
@@ -34,11 +34,11 @@ export function StudentView() {
               />
               <AvatarFallback>CA</AvatarFallback>
             </Avatar>
-            <CardTitle>Carlos Arévalo</CardTitle>
+            <CardTitle className="rounded-md bg-background/40">Carlos Arévalo</CardTitle>
           </div>
-          <CardDescription className="text-base">Cálculo 1</CardDescription>
+          <CardDescription className="text-base text-foreground backdrop-blur-sm rounded-md w-fit px-2 bg-background/40">Cálculo 1</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-2 py-2  rounded-md w-fit bg-background/40 mb-2">
           <div className="flex space-x-2">
             <Calendar />
             <p>30 Ene, 2024</p>
@@ -88,7 +88,7 @@ export function StudentView() {
             </Avatar>
             <CardTitle>Samantha Quintanchala</CardTitle>
           </div>
-          <CardDescription className="text-base">Cálculo 2</CardDescription>
+          <CardDescription className="text-base px-2">Cálculo 2</CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
           <div className="flex space-x-2">
@@ -119,7 +119,7 @@ export function StudentView() {
           <Button variant="secondary">Cancelar</Button>
         </CardFooter>
       </Card>
-      <Card>
+      <Card style={{ backgroundImage: 'url(/card-backgrounds/winter.gif)', backgroundSize: 'cover'}}>
         <CardHeader>
           <Badge className=" bg-yellow-500 w-fit mb-2">Pendiente</Badge>
 
@@ -128,11 +128,11 @@ export function StudentView() {
               <AvatarImage src="/photos/angie.remache.jpg" />
               <AvatarFallback>AR</AvatarFallback>
             </Avatar>
-            <CardTitle>Angie Remache</CardTitle>
+            <CardTitle className="rounded-md bg-background/40">Angie Remache</CardTitle>
           </div>
-          <CardDescription className="text-base">Biología 2</CardDescription>
+          <CardDescription className="w-fit text-foreground rounded-md bg-background/40 text-base px-2">Biología 2</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-2 rounded-md bg-background/40 py-2 mb-2 w-fit">
           <div className="flex space-x-2">
             <Calendar />
             <p>28 Feb, 2024</p>
@@ -209,7 +209,7 @@ export function StudentView() {
         </CardFooter>
       </Card>
 
-      <Card>
+      <Card style={{ backgroundImage: 'url(/card-backgrounds/forest.gif)', backgroundSize: 'cover'}}>
         <CardHeader>
           <Badge className=" bg-destructive w-fit mb-2 dark:text-foreground hover:dark:text-background">
             Cancelada
@@ -220,11 +220,11 @@ export function StudentView() {
               <AvatarImage src="/photos/carlos.arevalo.jpg" />
               <AvatarFallback>CA</AvatarFallback>
             </Avatar>
-            <CardTitle>Carlos Arévalo</CardTitle>
+            <CardTitle className="bg-background/40 rounded-md">Carlos Arévalo</CardTitle>
           </div>
-          <CardDescription className="text-base">Física 2</CardDescription>
+          <CardDescription className="text-base rounded-md w-fit bg-background/40 text-foreground px-2">Física 2</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-2  bg-background/40 py-2 rounded-md w-fit">
           <div className="flex space-x-2">
             <Calendar />
             <p>1 Mar, 2024</p>
