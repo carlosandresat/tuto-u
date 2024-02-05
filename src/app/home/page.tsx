@@ -84,7 +84,7 @@ export default function Home() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
         Top Tutores
       </h2>
-        <TutorsCarousel></TutorsCarousel>
+        <TutorsCarousel tutores={tutores}></TutorsCarousel>
     </main>
   );
 }
