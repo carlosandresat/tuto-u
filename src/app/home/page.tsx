@@ -87,7 +87,7 @@ export default function Home() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-32">
         Top Tutores
       </h2>
-        <TutorsCarousel></TutorsCarousel>
+        <TutorsCarousel tutores={tutores}></TutorsCarousel>
     </main>
     <footer className="flex flex-col gap-2 md:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
     <p className="text-xs text-gray-500 dark:text-gray-400 text-center">

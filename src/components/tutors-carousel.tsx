@@ -7,45 +7,14 @@ import {
 } from "@/components/ui/carousel";
 import { TutorCard } from "@/components/tutor-card";
 
-export function TutorsCarousel() {
-  const tutores = [
-    {
-      tutor: "Carlos Andrés Arévalo Torres",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 78,
-    },
-    {
-      tutor: "Carlos Arévalo2",
-      rating: 4.3,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 45,
-    },
-    {
-      tutor: "Carlos Arévalo3",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 19,
-    },
-    {
-      tutor: "Carlos Arévalo4",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 42,
-    },
-    {
-      tutor: "Carlos Arévalo5",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 29,
-    },
-    {
-      tutor: "Carlos Arévalo6",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 45,
-    },
-  ];
+type tutor={
+  tutor:string
+  rating:number
+  pic_url:string
+  nreviews:number
+}
+
+export function TutorsCarousel({tutores}:{tutores:tutor[]}) {
 
   return (
     <Carousel
