@@ -22,7 +22,7 @@ import Image from "next/image";
 export function StudentView() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
-      <Card style={{ backgroundImage: 'url(/card-backgrounds/forest.gif)', backgroundSize: 'cover'}}>
+      <Card>
         <CardHeader>
           <Badge className=" bg-green-500 w-fit mb-2">Aceptada</Badge>
 
@@ -119,7 +119,7 @@ export function StudentView() {
           <Button variant="secondary">Cancelar</Button>
         </CardFooter>
       </Card>
-      <Card style={{ backgroundImage: 'url(/card-backgrounds/winter.gif)', backgroundSize: 'cover'}}>
+      <Card>
         <CardHeader>
           <Badge className=" bg-yellow-500 w-fit mb-2">Pendiente</Badge>
 
@@ -209,7 +209,7 @@ export function StudentView() {
         </CardFooter>
       </Card>
 
-      <Card style={{ backgroundImage: 'url(/card-backgrounds/forest.gif)', backgroundSize: 'cover'}}>
+      <Card>
         <CardHeader>
           <Badge className=" bg-destructive w-fit mb-2 dark:text-foreground hover:dark:text-background">
             Cancelada
