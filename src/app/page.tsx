@@ -32,10 +32,10 @@ export default function Home() {
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
-                  ¿Por qué Tuto-U?
+                  ¿Qué es Tuto-U?
                 </h2>
                 <p className="mx-auto max-w-lg text-gray-500 md:text-xl dark:text-gray-400">
-                Tuto-U conecta a estudiantes con tutores que han destacado en los mismos cursos. Este enfoque único fomenta una comunidad de aprendices que se apoyan y aprenden mutuamente.
+                Tuto-U conecta a estudiantes con tutores que han destacado en los mismos cursos. Aprende, enseña, obtén logros y crea conexiones sólidas dentro de la universidad que te ayudarán a crecer en tu carrera profesional.
                 </p>
               </div>
             </div>
