@@ -8,7 +8,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
 
-  const onCampusDate = new Date("2024-02-24T05:00:00").getTime();
+  const onCampusDate = new Date("2024-03-18T17:00:00").getTime();
 
   return (
     <>
@@ -49,11 +49,11 @@ export default function Home() {
                   Cuenta Regresiva
                 </h2>
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400">
-                  Hult Prize 2024 OnCampus Finals
+                  Lanzamiento para Yachay Tech
                 </p>
                 <CountdownTimer targetTime={onCampusDate} />
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
-                  24 de Febrero de 2024
+                  18 de Marzo de 2024
                 </p>
 
               </div>
