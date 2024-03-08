@@ -1,3 +1,4 @@
+"use client"
 import {
   Card,
   CardContent,
@@ -12,9 +13,12 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
-import { Car } from "lucide-react";
+import { DollarSign } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 export default function MyProfile() {
+  const [durationSelected, setDurationSelected] = useState<string[]>([]);
   return (
     <>
       <section className="w-full py-12 flex items-center justify-center flex-col">
@@ -50,6 +54,54 @@ export default function MyProfile() {
               <button className="btn">Editar</button>
             </CardFooter>
 
+          </Card>
+          <Card className="w-full mt-6">
+            <CardHeader>
+              <CardTitle>Precios</CardTitle>
+              <CardDescription>Selecciona la duración de las tutorías con tus precios</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-center space-x-4 md:space-x-8">
+
+                <ToggleGroup type="multiple" variant="outline" className="lg:grid-cols-1 md:grid-cols-1 xl:grid-cols-1 2xl:grid-cols-1" value={durationSelected} onValueChange={setDurationSelected}>
+                  <ToggleGroupItem value="1h" aria-label="Toggle 1h"> 1 hora </ToggleGroupItem>
+                  <ToggleGroupItem value="1.5h" aria-label="Toggle 1.5h"> 1 hora 30 minutos </ToggleGroupItem>
+                  <ToggleGroupItem value="2h" aria-label="Toggle 2h"> 2 horas </ToggleGroupItem>
+                  <ToggleGroupItem value="2.5h" aria-label="Toggle 2.5h"> 2 horas 30 minutos </ToggleGroupItem>
+                  <ToggleGroupItem value="3h" aria-label="Toggle 3h"> 3 horas </ToggleGroupItem>
+                </ToggleGroup>
+
+                <div className="flex items-center justify-center flex-col space-y-2">
+                 
+                  
+                  <div className={`flex items-center justify-center ${!durationSelected.includes("1h") ? "invisible":null}`}>
+                    <DollarSign />
+                    <Input type="number" className="input" placeholder="Precio" step="0.5" />
+                  </div>
+                  <div className={`flex items-center justify-center ${!durationSelected.includes("1.5h") ? "invisible":null}`}>
+                    <DollarSign />
+                    <Input type="number" className="input" placeholder="Precio" step="0.5" />
+                  </div>
+                  <div className={`flex items-center justify-center ${!durationSelected.includes("2h") ? "invisible":null}`}>
+                    <DollarSign />
+                    <Input type="number" className="input" placeholder="Precio" step="0.5" />
+                  </div>
+                  <div className={`flex items-center justify-center ${!durationSelected.includes("2.5h") ? "invisible":null}`}>
+                    <DollarSign />
+                    <Input type="number" className="input" placeholder="Precio" step="0.5" />
+                  </div>
+                  <div className={`flex items-center justify-center ${!durationSelected.includes("3h") ? "invisible":null}`}>
+                    <DollarSign />
+                    <Input type="number" className="input" placeholder="Precio" step="0.5" />
+                  </div>
+                </div>
+
+              </div>
+
+            </CardContent>
+            <CardFooter>
+              <Button onClick={ ()=> console.log(durationSelected)}>Guardar</Button>
+            </CardFooter>
           </Card>
           <Card className="w-full mt-6">
             <CardHeader>
