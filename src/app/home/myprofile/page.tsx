@@ -21,12 +21,12 @@ export default function MyProfile() {
   const [durationSelected, setDurationSelected] = useState<string[]>([]);
   return (
     <>
-      <section className="w-full py-12 flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight pt-32 md:mt-6 max-w-screen-xl">
+      <section className="w-full py-8 flex items-center justify-center flex-col">
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 pt-32">
           Mi Perfil
         </h2>
 
-        <div className="flex mt-8 max-w-screen-xl w-full p-8 flex-col">
+        <div className="flex max-w-screen-xl w-full p-8 flex-col">
           <Card className="w-full">
             <CardHeader>
               <Image
@@ -39,7 +39,6 @@ export default function MyProfile() {
             </CardHeader>
             <CardContent>
               <CardTitle>Carlos Arévalo</CardTitle>
-              <CardDescription>
                 <p>
                   <span className="font-bold">Carrera:</span> Ingeniería en
                   Tecnologías de la Información
@@ -48,7 +47,6 @@ export default function MyProfile() {
                   <span className="font-bold">Correo:</span>{" "}
                   <a href="mailto:carlos.arevalo@yachaytech.edu.ec">carlos.arevalo@yachaytech.edu.ec</a>
                 </p>
-              </CardDescription>
             </CardContent>
             <CardFooter>
               <button className="btn">Editar</button>
