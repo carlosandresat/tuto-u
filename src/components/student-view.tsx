@@ -18,6 +18,7 @@ import {
   Banknote,
 } from "lucide-react";
 import Image from "next/image";
+import { CancelDialog } from "./cancel-dialog";
 
 export function StudentView() {
   return (
@@ -158,7 +159,7 @@ export function StudentView() {
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="secondary">Cancelar</Button>
+          <CancelDialog />
         </CardFooter>
       </Card>
       <Card>
