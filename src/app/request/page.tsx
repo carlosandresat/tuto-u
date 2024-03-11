@@ -109,16 +109,26 @@ export default function Component() {
       tutor: parseInt(data.tutor),
       duration: parseInt(data.duration),
       topic: data.topic,
-      ...(data.isOnline ? {place: "Online"} : {place: data.place} ),
+      ...(data.isOnline ? { place: "Online" } : { place: data.place }),
       isOnline: data.isOnline,
-    }
+    };
     toast({
       title: "Felicidades",
-      description: <><p>¡Gracias por probar nuestro formulario!</p><pre className="mt-2 w-[340px] rounded-md bg-secondary p-4">
-      <code>{JSON.stringify({...formattedData, date: datetime.toLocaleString()}, null, 2)}</code>
-    </pre></>,
+      description: (
+        <>
+          <p>¡Gracias por probar nuestro formulario!</p>
+          <pre className="mt-2 w-[340px] rounded-md bg-secondary p-4">
+            <code>
+              {JSON.stringify(
+                { ...formattedData, date: datetime.toLocaleString() },
+                null,
+                2
+              )}
+            </code>
+          </pre>
+        </>
+      ),
     });
-    
   }
 
   return (
@@ -420,42 +430,15 @@ export default function Component() {
                 <h2 className="text-xl font-semibold">Tutor Name</h2>
                 <div className="flex justify-center items-center mt-2 gap-x-2 flex-wrap gap-y-2">
                   <Badge className="">Rating: 4.7</Badge>
-                  <Badge className=" bg-yellow-400">Premium</Badge>
                 </div>
                 <p className="mt-2 text-sm text-gray-500">
-                  Tutor description goes here. This is a brief introduction of
-                  the tutor.
+                  Aquí viene la descripción del tutor. Esta es una breve
+                  descripción del tutor.
                 </p>
               </div>
             </CardContent>
             <CardFooter className="justify-center">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <AchievementsDialog></AchievementsDialog>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                      <DialogTitle>Logros</DialogTitle>
-                      <DialogDescription>
-                        Logros obtenidos por este usuario.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="flex items-center space-x-2 justify-center py-4">
-                    <h2 className="mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0">
-        Próximamente...
-      </h2>
-
-                    </div>
-                    <DialogFooter className="sm:justify-start">
-                      <DialogClose asChild>
-                        <Button type="button" variant="secondary">
-                          Cerrar
-                        </Button>
-                      </DialogClose>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-
+              <AchievementsDialog></AchievementsDialog>
             </CardFooter>
           </Card>
         </div>
