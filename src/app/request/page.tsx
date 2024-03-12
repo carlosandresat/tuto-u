@@ -179,44 +179,7 @@ export default function Component() {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={form.control}
-                    name="tutor"
-                    render={({ field }) => (
-                      <FormItem className="flex flex-col">
-                        <FormLabel>Tutor</FormLabel>
-                        <FormControl>
-                          <Select
-                            onValueChange={field.onChange}
-                            defaultValue={field.value}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Selecciona un tutor" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="1">
-                                Tutor 1{" "}
-                                <Badge className="ml-2 bg-yellow-400 z-10">
-                                  Premium
-                                </Badge>
-                              </SelectItem>
-
-                              <SelectItem value="2">
-                                Tutor 2{" "}
-                                <Badge className="ml-2 bg-yellow-400 z-10">
-                                  Premium
-                                </Badge>
-                              </SelectItem>
-                              <SelectItem value="3">Tutor 3</SelectItem>
-                              <SelectItem value="4">Tutor 4</SelectItem>
-                              <SelectItem value="5">Tutor 5</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  
 
                   <div className="flex gap-6 flex-col md:flex-row">
                     <FormField
@@ -305,6 +268,38 @@ export default function Component() {
                       )}
                     />
                   </div>
+                  <FormField
+                    control={form.control}
+                    name="tutor"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col">
+                        <FormLabel>Tutor</FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Selecciona un tutor" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="1">
+                                Tutor
+                              </SelectItem>
+
+                              <SelectItem value="2">
+                                Tutor 2
+                              </SelectItem>
+                              <SelectItem value="3">Tutor 3</SelectItem>
+                              <SelectItem value="4">Tutor 4</SelectItem>
+                              <SelectItem value="5">Tutor 5</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                   <div className="flex gap-6 flex-col items-center md:flex-row">
                     <FormField
                       control={form.control}
