@@ -4,6 +4,7 @@ import { Menu, LogIn } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
+import { LoginDialog } from "@/components/login-dialog";
 
 export function StartNavbar() {
   return (
@@ -100,8 +101,7 @@ export function StartNavbar() {
       </nav>
       <div className="hidden xl:block xl:space-x-2">
         <Button variant="outline"> Registrarse </Button>
-        <Link href="/home">
-        <Button> Entrar </Button></Link>
+        <LoginDialog></LoginDialog>
       </div>
       <div className="block xl:hidden">
         <Link href="/home"><Button> <LogIn /> </Button></Link>
