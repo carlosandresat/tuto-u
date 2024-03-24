@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LoginDialog } from "@/components/login-dialog";
 import { RegisterDialog } from "@/components/register-dialog";
+import { StartDropdownMenu } from "@/components/start-dropdown-menu";
 
 export function StartNavbar() {
   return (
@@ -105,7 +106,7 @@ export function StartNavbar() {
         <LoginDialog></LoginDialog>
       </div>
       <div className="block xl:hidden">
-        <Link href="/home"><Button> <LogIn /> </Button></Link>
+        <StartDropdownMenu></StartDropdownMenu>
       </div>
     </header>
   );
