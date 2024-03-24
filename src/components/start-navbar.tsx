@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
 import { LoginDialog } from "@/components/login-dialog";
+import { RegisterDialog } from "@/components/register-dialog";
 
 export function StartNavbar() {
   return (
@@ -100,7 +101,7 @@ export function StartNavbar() {
         </Link>
       </nav>
       <div className="hidden xl:block xl:space-x-2">
-        <Button variant="outline"> Registrarse </Button>
+        <RegisterDialog></RegisterDialog>
         <LoginDialog></LoginDialog>
       </div>
       <div className="block xl:hidden">
