@@ -8,7 +8,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
 
-  const onCampusDate = new Date("2024-03-18T17:00:00").getTime();
+  const onCampusDate = new Date("2024-04-15T17:00:00").getTime();
 
   return (
     <>
