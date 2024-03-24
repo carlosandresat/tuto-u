@@ -53,7 +53,7 @@ export default function Home() {
                 </p>
                 <CountdownTimer targetTime={onCampusDate} />
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
-                  18 de Marzo de 2024
+                  15 de Abril de 2024
                 </p>
 
               </div>
