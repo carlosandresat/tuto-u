@@ -1,32 +1,35 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CountdownTimer } from "@/components/countdown-timer";
 import { StartNavbar } from "@/components/start-navbar";
 import { ModeToggle } from "@/components/mode-toggle";
 
-
 export default function Home() {
-
   const onCampusDate = new Date("2024-04-15T17:00:00").getTime();
 
   return (
     <>
       <StartNavbar />
       <main className="flex min-h-screen flex-col items-center w-full">
-
         <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[380px] md:before:w-[580px] before:-translate-x-1 before:-translate-y-1/4 before:rounded-full before:bg-gradient-radial  before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic  after:blur-2xl after:content-[''] before:bg-gradient-to-br before:from-transparent before:to-blue-700 before:opacity-40  after:via-[#1a01ff] after:opacity-30 before:lg:h-[360px] z-[-2] pt-32 mt-20 lg:mt-40 mx-6 flex-col">
           <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl z-0 text-center">
             Tuto-U: Próximamente...
           </h1>
-          
         </div>
-        
-<Link href="/home" className="mt-8 md:mt-16 md:mb-32">
+        <div className="mt-8 md:mt-16 md:mb-32 space-x-2 flex flex-col md:flex-row">
+          <Link href="/home">
             <Button variant="default">
               Explora la página en desarrollo <ArrowRight className="ml-2" />
             </Button>
           </Link>
+          <Link href="/preregister">
+            <Button variant="outline">
+              ¡Pre-Registro! <Rocket className="ml-2" />
+            </Button>
+          </Link>
+        </div>
+
         <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary mt-20">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
@@ -35,7 +38,10 @@ export default function Home() {
                   ¿Qué es Tuto-U?
                 </h2>
                 <p className="mx-auto max-w-lg text-gray-500 md:text-xl dark:text-gray-400">
-                Tuto-U conecta a estudiantes con tutores que han destacado en los mismos cursos. Aprende, enseña, obtén logros y crea conexiones sólidas dentro de la universidad que te ayudarán a crecer en tu carrera profesional.
+                  Tuto-U conecta a estudiantes con tutores que han destacado en
+                  los mismos cursos. Aprende, enseña, obtén logros y crea
+                  conexiones sólidas dentro de la universidad que te ayudarán a
+                  crecer en tu carrera profesional.
                 </p>
               </div>
             </div>
@@ -55,7 +61,6 @@ export default function Home() {
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
                   15 de Abril de 2024
                 </p>
-
               </div>
             </div>
           </div>
@@ -76,7 +81,6 @@ export default function Home() {
           </Link>
         </nav>
         <ModeToggle></ModeToggle>
-
       </footer>
     </>
   );
