@@ -17,7 +17,7 @@ export default function Home() {
             Tuto-U: Próximamente...
           </h1>
         </div>
-        <div className="mt-8 md:mt-16 md:mb-32 space-x-2 flex flex-col md:flex-row">
+        <div className="mt-8 md:mt-16 md:mb-32 space-x-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
           <Link href="/home">
             <Button variant="default">
               Explora la página en desarrollo <ArrowRight className="ml-2" />
