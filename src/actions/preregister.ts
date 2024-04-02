@@ -60,5 +60,13 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
         }
     })
 
+    await db.preregister.create({
+        data: {
+            role,
+            school,
+            semester,
+        }
+    })
+
     return { sucess: "Pre-Registro completado" };
 };
