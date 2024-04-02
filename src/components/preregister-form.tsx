@@ -48,6 +48,7 @@ const FormSchema = z.object({
     })
     .min(8, "La contraseña debe contener mínimo 8 caracteres")
     .max(16, "La contraseña debe contener máximo 16 caracteres"),
+  gender: z.string().optional(),
   role: z.string().optional(),
   semester: z.string().optional(),
   school: z.string().optional(),
@@ -154,6 +155,32 @@ export function PreregisterForm() {
 
         <FormField
           control={form.control}
+          name="gender"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Género</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                <FormControl className=" w-32">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecciona" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="m">Masculino</SelectItem>
+                  <SelectItem value="f">Femenino</SelectItem>
+                  <SelectItem value="other">Otro</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                Selecciona tu género.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
           name="role"
           render={({ field }) => (
             <FormItem>
@@ -172,41 +199,6 @@ export function PreregisterForm() {
               </Select>
               <FormDescription>
                 Selecciona el rol que te interesa dentro de la plataforma.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="semester"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Semestre</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
-                <FormControl className=" w-32">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="pre">Nivelación</SelectItem>
-                  <SelectItem value="1">1ro</SelectItem>
-                  <SelectItem value="2">2do</SelectItem>
-                  <SelectItem value="3">3ro</SelectItem>
-                  <SelectItem value="4">4to</SelectItem>
-                  <SelectItem value="5">5to</SelectItem>
-                  <SelectItem value="6">6to</SelectItem>
-                  <SelectItem value="7">7mo</SelectItem>
-                  <SelectItem value="8">8vo</SelectItem>
-                  <SelectItem value="9">9no</SelectItem>
-                  <SelectItem value="10">10mo</SelectItem>
-                  <SelectItem value="graduated">Graduado</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormDescription>
-                Selecciona el semestre que estás cursando.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -253,6 +245,42 @@ export function PreregisterForm() {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="semester"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Semestre</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                <FormControl className=" w-32">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Selecciona" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="pre">Nivelación</SelectItem>
+                  <SelectItem value="1">1ro</SelectItem>
+                  <SelectItem value="2">2do</SelectItem>
+                  <SelectItem value="3">3ro</SelectItem>
+                  <SelectItem value="4">4to</SelectItem>
+                  <SelectItem value="5">5to</SelectItem>
+                  <SelectItem value="6">6to</SelectItem>
+                  <SelectItem value="7">7mo</SelectItem>
+                  <SelectItem value="8">8vo</SelectItem>
+                  <SelectItem value="9">9no</SelectItem>
+                  <SelectItem value="10">10mo</SelectItem>
+                  <SelectItem value="graduated">Graduado</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                Selecciona el semestre que estás cursando.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <Button type="submit" disabled={isPending}>Pre-Registrar</Button>
       </form>
     </Form>

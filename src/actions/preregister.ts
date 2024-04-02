@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 
 const FormSchema = z.object({
@@ -25,6 +25,8 @@ const FormSchema = z.object({
         })
         .min(8, "La contraseña debe contener mínimo 8 caracteres")
         .max(16, "La contraseña debe contener máximo 16 caracteres"),
+    gender: z.string().optional(),
+
     role: z.string().optional(),
     semester: z.string().optional(),
     school: z.string().optional(),
@@ -37,7 +39,7 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
         return { error: "Campos inválidos" };
     }
 
-    const { name, password, email, role, semester, school } =
+    const { name, password, email, role, semester, school, gender } =
         validatedFields.data;
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -65,6 +67,7 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
             role,
             school,
             semester,
+            gender,
         }
     })
 
