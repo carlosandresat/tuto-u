@@ -35,13 +35,14 @@ model Account {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  firstname     String?
+  lastname      String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   password      String?
   accounts      Account[]
-  createdAt DateTime @default(now())
+  createdAt     DateTime  @default(now())
 }
 
 model Preregister {

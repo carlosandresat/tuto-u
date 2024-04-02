@@ -59,7 +59,7 @@ export default function Home() {
                 </p>
                 <CountdownTimer targetTime={onCampusDate} />
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
-                  15 de Abril de 2024
+                  22 de Abril de 2024 - 12:00 PM
                 </p>
               </div>
             </div>
@@ -69,7 +69,7 @@ export default function Home() {
       </main>
       <footer className="flex flex-col gap-2 md:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-          © Tuto-U. Todos los derechos reservados. Desarrollado por{" "}
+          © Tuto-U. Desarrollado por{" "}
           <span className="font-bold text-foreground">Tuto-U Team</span>.
         </p>
         <nav className="md:ml-auto flex gap-4 md:gap-6 mr-6">

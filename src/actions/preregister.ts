@@ -5,12 +5,18 @@ import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 
 const FormSchema = z.object({
-    name: z
+    firstname: z
         .string({
-            required_error: "Por favor ingresa tu nombre completo",
+            required_error: "Por favor ingresa tus nombres",
         })
-        .min(10, "Tu nombre debe incluir más de 10 caracteres")
-        .max(40, "Tu nombre debe contener menos de 40 caracteres"),
+        .min(3, "Tu nombre debe incluir más de 3 caracteres")
+        .max(24, "Tu nombre debe contener menos de 24 caracteres"),
+    lastname: z
+        .string({
+            required_error: "Por favor ingresa tus apellidos",
+        })
+        .min(3, "Tu apellido debe incluir más de 3 caracteres")
+        .max(24, "Tu apellido debe contener menos de 24 caracteres"),
     email: z
         .string({
             required_error: "Por favor ingresa tu correo institucional.",
@@ -26,7 +32,6 @@ const FormSchema = z.object({
         .min(8, "La contraseña debe contener mínimo 8 caracteres")
         .max(16, "La contraseña debe contener máximo 16 caracteres"),
     gender: z.string().optional(),
-
     role: z.string().optional(),
     semester: z.string().optional(),
     school: z.string().optional(),
@@ -39,28 +44,28 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
         return { error: "Campos inválidos" };
     }
 
-    const { name, password, email, role, semester, school, gender } =
-        validatedFields.data;
+    const { firstname, lastname, password, email, role, semester, school, gender } = validatedFields.data;
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const existingUser = await db.user.findUnique({
         where: {
             email,
-        }
-    })
+        },
+    });
 
     if (existingUser) {
-        return { error: "Email ya registrado"}
+        return { error: "Email ya registrado" };
     }
 
     await db.user.create({
         data: {
-            name, 
-            email, 
+            firstname,
+            lastname,
+            email,
             password: hashedPassword,
-        }
-    })
+        },
+    });
 
     await db.preregister.create({
         data: {
@@ -68,8 +73,8 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
             school,
             semester,
             gender,
-        }
-    })
+        },
+    });
 
     return { sucess: "Pre-Registro completado" };
 };

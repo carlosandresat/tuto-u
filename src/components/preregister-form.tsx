@@ -28,12 +28,18 @@ import {
 import { toast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
-  name: z
+  firstname: z
     .string({
-      required_error: "Por favor ingresa tu nombre completo",
+      required_error: "Por favor ingresa tus nombres",
     })
-    .min(10, "Tu nombre debe incluir más de 10 caracteres")
-    .max(40, "Tu nombre debe contener menos de 40 caracteres"),
+    .min(3, "Tu nombre debe incluir más de 3 caracteres")
+    .max(24, "Tu nombre debe contener menos de 24 caracteres"),
+  lastname: z
+    .string({
+      required_error: "Por favor ingresa tus apellidos",
+    })
+    .min(3, "Tu apellido debe incluir más de 3 caracteres")
+    .max(24, "Tu apellido debe contener menos de 24 caracteres"),
   email: z
     .string({
       required_error: "Por favor ingresa tu correo institucional.",
@@ -90,14 +96,28 @@ export function PreregisterForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
         <FormField
           control={form.control}
-          name="name"
+          name="firstname"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nombre completo</FormLabel>
+              <FormLabel>Nombre</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>Ingresa tus nombres completos.</FormDescription>
+              <FormDescription>Ingresa tus nombres.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lastname"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Apellido</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormDescription>Ingresa tus apellidos.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
