@@ -95,7 +95,7 @@ export function PreregisterForm() {
             <FormItem>
               <FormLabel>Nombre completo</FormLabel>
               <FormControl>
-                <Input placeholder="Carlos Andrés Arévalo Torres" {...field} />
+                <Input {...field} />
               </FormControl>
               <FormDescription>Ingresa tus nombres completos.</FormDescription>
               <FormMessage />
@@ -130,7 +130,7 @@ export function PreregisterForm() {
               <FormLabel>Contraseña</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="Min 8 caracteres"
+                  placeholder="Min. 8 caracteres"
                   type="password"
                   disabled={isPending}
                   {...field}
@@ -162,7 +162,7 @@ export function PreregisterForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                 <FormControl className=" w-32">
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecciona" />
+                    <SelectValue placeholder="-" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -188,7 +188,7 @@ export function PreregisterForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecciona una opción" />
+                    <SelectValue placeholder="-" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -214,7 +214,7 @@ export function PreregisterForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecciona una opción" />
+                    <SelectValue placeholder="-" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -239,7 +239,7 @@ export function PreregisterForm() {
                 </SelectContent>
               </Select>
               <FormDescription>
-                Selecciona a la escuela que perteneces actualmente.
+                Selecciona la escuela que perteneces actualmente.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -255,7 +255,7 @@ export function PreregisterForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
                 <FormControl className=" w-32">
                   <SelectTrigger>
-                    <SelectValue placeholder="Selecciona" />
+                    <SelectValue placeholder="-" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -281,7 +281,7 @@ export function PreregisterForm() {
           )}
         />
 
-        <Button type="submit" disabled={isPending}>Pre-Registrar</Button>
+        <Button type="submit" disabled={isPending} className="w-full sm:w-auto">Pre-Registrar</Button>
       </form>
     </Form>
   );
