@@ -6,7 +6,7 @@ import { StartNavbar } from "@/components/start-navbar";
 import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
-  const onCampusDate = new Date("2024-04-22T17:00:00").getTime();
+  const onCampusDate = new Date("2024-05-15T17:00:00").getTime();
 
   return (
     <>
@@ -59,7 +59,7 @@ export default function Home() {
                 </p>
                 <CountdownTimer targetTime={onCampusDate} />
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
-                  22 de Abril de 2024 - 12:00 PM
+                  15 de Mayo de 2024 - 12:00 PM
                 </p>
               </div>
             </div>
