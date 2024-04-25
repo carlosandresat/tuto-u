@@ -35,22 +35,26 @@ export function StudentView() {
               />
               <AvatarFallback>CA</AvatarFallback>
             </Avatar>
-            <CardTitle className="rounded-md bg-background/40">Carlos Arévalo</CardTitle>
+            <CardTitle className="rounded-md bg-background/40">
+              Carlos Arévalo
+            </CardTitle>
           </div>
-          <CardDescription className="text-base text-foreground backdrop-blur-sm rounded-md w-fit px-2 bg-background/40">Cálculo 1</CardDescription>
+          <CardDescription className="text-base text-foreground backdrop-blur-sm rounded-md w-fit px-2 bg-background/40">
+            Cálculo 1
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2 py-2  rounded-md w-fit bg-background/40 mb-2">
           <div className="flex space-x-2">
             <Calendar />
-            <p>30 Ene, 2024</p>
+            <p>20 Abr, 2024</p>
           </div>
           <div className="flex space-x-2">
             <Clock1 />
-            <p> 2:00PM - 3:30PM</p>
+            <p> 4:00 - 6:00 PM</p>
           </div>
           <div className="flex space-x-2">
             <MapPin />
-            <p>Aula B-104</p>
+            <p>Sala de estudio biblioteca (planta baja)</p>
           </div>
           <div className="flex space-x-2">
             <LibraryBig />
@@ -58,7 +62,7 @@ export function StudentView() {
           </div>
           <div className="flex space-x-2">
             <Hourglass />
-            <p>1.5 horas</p>
+            <p>2 horas</p>
           </div>
           <div className="flex space-x-2">
             <Banknote /> <p>$5.00</p>
@@ -84,36 +88,43 @@ export function StudentView() {
 
           <div className="flex items-center space-x-2">
             <Avatar>
-              <AvatarImage src="/photos/samantha.quintanchala.jpg" />
-              <AvatarFallback>SQ</AvatarFallback>
+              <AvatarImage
+                src="/photos/carlos.arevalo.jpg"
+                className=" object-cover"
+              />
+              <AvatarFallback>CA</AvatarFallback>
             </Avatar>
-            <CardTitle>Samantha Quintanchala</CardTitle>
+            <CardTitle className="rounded-md bg-background/40">
+              Carlos Arévalo
+            </CardTitle>
           </div>
-          <CardDescription className="text-base px-2">Cálculo 2</CardDescription>
+          <CardDescription className="text-base px-2">
+            Cálculo 1
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
           <div className="flex space-x-2">
             <Calendar />
-            <p>25 Feb, 2024</p>
+            <p>20 Abr, 2024</p>
           </div>
           <div className="flex space-x-2">
             <Clock1 />
-            <p>8:00PM - 9:00PM</p>
+            <p> 4:00 - 6:00 PM</p>
           </div>
           <div className="flex space-x-2">
             <MapPin />
-            <p>Segundo piso de la biblioteca</p>
+            <p>Sala de estudio biblioteca (planta baja)</p>
           </div>
           <div className="flex space-x-2">
             <LibraryBig />
-            <p>Integrales dobles</p>
+            <p>Teorema fundamental del Cálculo</p>
           </div>
           <div className="flex space-x-2">
             <Hourglass />
-            <p>1 hora</p>
+            <p>2 horas</p>
           </div>
           <div className="flex space-x-2">
-            <Banknote /> <p>Gratuita</p>
+            <Banknote /> <p>$5.00</p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center">
@@ -126,29 +137,36 @@ export function StudentView() {
 
           <div className="flex items-center space-x-2">
             <Avatar>
-              <AvatarImage src="/photos/angie.remache.jpg" />
-              <AvatarFallback>AR</AvatarFallback>
+              <AvatarImage
+                src="/photos/carlos.arevalo.jpg"
+                className=" object-cover"
+              />
+              <AvatarFallback>CA</AvatarFallback>
             </Avatar>
-            <CardTitle className="rounded-md bg-background/40">Angie Remache</CardTitle>
+            <CardTitle className="rounded-md bg-background/40">
+              Carlos Arévalo
+            </CardTitle>
           </div>
-          <CardDescription className="w-fit text-foreground rounded-md bg-background/40 text-base px-2">Biología 2</CardDescription>
+          <CardDescription className="w-fit text-foreground rounded-md bg-background/40 text-base px-2">
+            Cálculo 1
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2 rounded-md bg-background/40 py-2 mb-2 w-fit">
           <div className="flex space-x-2">
             <Calendar />
-            <p>28 Feb, 2024</p>
+            <p>20 Abr, 2024</p>
           </div>
           <div className="flex space-x-2">
             <Clock1 />
-            <p> 10:00AM - 12:00PM</p>
+            <p> 4:00 - 6:00 PM</p>
           </div>
           <div className="flex space-x-2">
             <MapPin />
-            <p>Online</p>
+            <p>Sala de estudio biblioteca (planta baja)</p>
           </div>
           <div className="flex space-x-2">
             <LibraryBig />
-            <p>Ciclo de Krebs</p>
+            <p>Teorema fundamental del Cálculo</p>
           </div>
           <div className="flex space-x-2">
             <Hourglass />
@@ -164,49 +182,50 @@ export function StudentView() {
       </Card>
       <Card>
         <CardHeader>
-          <Badge className=" bg-blue-500 w-fit mb-2">Cambios propuestos</Badge>
+          <Badge className=" bg-yellow-500 w-fit mb-2">Pendiente</Badge>
 
           <div className="flex items-center space-x-2">
             <Avatar>
               <AvatarImage
-                src="/photos/ariel.pincay.jpg"
+                src="/photos/samantha.quintanchala.jpg"
                 className=" object-cover"
               />
-              <AvatarFallback>AP</AvatarFallback>
+              <AvatarFallback>SQ</AvatarFallback>
             </Avatar>
-            <CardTitle>Ariel Pincay</CardTitle>
+            <CardTitle>Samantha Quintanchala</CardTitle>
           </div>
-          <CardDescription className="text-base">
-            Ecuaciones Direfenciales
+          <CardDescription className="w-fit text-foreground rounded-md bg-background/40 text-base px-2">
+            Cálculo 1
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="space-y-2 rounded-md bg-background/40 py-2 mb-2 w-fit">
           <div className="flex space-x-2">
             <Calendar />
-            <p>29 Feb, 2024</p>
+            <p>20 Abr, 2024</p>
           </div>
           <div className="flex space-x-2">
             <Clock1 />
-            <p> 4:00PM - 6:30PM</p>
+            <p> 4:00 - 6:00 PM</p>
           </div>
           <div className="flex space-x-2">
             <MapPin />
-            <p>Aula I-203</p>
+            <p>Sala de estudio biblioteca (planta baja)</p>
           </div>
           <div className="flex space-x-2">
             <LibraryBig />
-            <p>Ecuaciones Diferenciales de orden superior</p>
+            <p>Teorema fundamental del Cálculo</p>
           </div>
           <div className="flex space-x-2">
             <Hourglass />
-            <p>2.5 horas</p>
+            <p>2 horas</p>
           </div>
           <div className="flex space-x-2">
-            <Banknote /> <p>Gratuita</p>
+            <Banknote /> <p>$5.00</p>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between items-center">
-          <Button>Revisar</Button>
+        <CardFooter className="flex justify-between">
+          <Button variant="secondary">Rechazar</Button>
+          <Button>Aceptar</Button>
         </CardFooter>
       </Card>
 
@@ -221,33 +240,37 @@ export function StudentView() {
               <AvatarImage src="/photos/carlos.arevalo.jpg" />
               <AvatarFallback>CA</AvatarFallback>
             </Avatar>
-            <CardTitle className="bg-background/40 rounded-md">Carlos Arévalo</CardTitle>
+            <CardTitle className="bg-background/40 rounded-md">
+              Carlos Arévalo
+            </CardTitle>
           </div>
-          <CardDescription className="text-base rounded-md w-fit bg-background/40 text-foreground px-2">Física 2</CardDescription>
+          <CardDescription className="text-base rounded-md w-fit bg-background/40 text-foreground px-2">
+            Cálculo 1
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2  bg-background/40 py-2 rounded-md w-fit">
           <div className="flex space-x-2">
             <Calendar />
-            <p>1 Mar, 2024</p>
+            <p>20 Abr, 2024</p>
           </div>
           <div className="flex space-x-2">
             <Clock1 />
-            <p> 10:00AM - 12:00PM</p>
+            <p> 4:00 - 6:00 PM</p>
           </div>
           <div className="flex space-x-2">
             <MapPin />
-            <p>Aula B-102</p>
+            <p>Sala de estudio biblioteca (planta baja)</p>
           </div>
           <div className="flex space-x-2">
             <LibraryBig />
-            <p>Circuitos eléctricos</p>
+            <p>Teorema fundamental del Cálculo</p>
           </div>
           <div className="flex space-x-2">
             <Hourglass />
             <p>2 horas</p>
           </div>
           <div className="flex space-x-2">
-            <Banknote /> <p>$7.00</p>
+            <Banknote /> <p>$5.00</p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center"></CardFooter>
