@@ -10,6 +10,8 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
+import { auth, signOut } from "@/auth"
+
 export function HomeNavbar() {
   return (
     <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10 border-b ">
@@ -103,9 +105,12 @@ export function HomeNavbar() {
           Estudiantes
         </Link>
       </nav>
-      <div>
-        <Link href="/"><Button> <LogOut /> </Button></Link>
-      </div>
+      <form action={async () => {
+        "use server";
+        await signOut()
+      }}>
+        <Button type="submit"> <LogOut /> </Button>
+      </form>
     </header>
   );
 }
