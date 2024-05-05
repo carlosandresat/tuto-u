@@ -23,26 +23,73 @@ import { toast } from "@/components/ui/use-toast";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import { UserPricingSchema } from "@/schemas";
-import {updateUserPricing} from '@/actions/user-configuration'
+import { updateUserPricing } from "@/actions/user-configuration";
+import { Decimal } from "@prisma/client/runtime/library";
 
-export function ProfilePricingForm({ userId }: { userId:string }) {
+export function ProfilePricingForm({
+  userId,
+  pricingConfig,
+}: {
+  userId: string;
+  pricingConfig: { duration: number; price: Decimal }[];
+}) {
   const [isPending, startTransition] = useTransition();
+  const durations = pricingConfig.map((row) => {
+    return `${row.duration / 60}h`.replace(".0", "");
+  });
+
+  let priceOneHour: number | undefined;
+  let priceOneHalfHour: number | undefined;
+  let priceTwoHours: number | undefined;
+  let priceTwoHalfHours: number | undefined;
+  let priceThreeHours: number | undefined;
+
+  pricingConfig.forEach((row) => {
+    switch (row.duration) {
+      case 60:
+        priceOneHour = Number(row.price);
+        break;
+      case 90:
+        priceOneHalfHour = Number(row.price);
+        break;
+      case 120:
+        priceTwoHours = Number(row.price);
+        break;
+      case 150:
+        priceTwoHalfHours = Number(row.price);
+        break;
+      case 180:
+        priceThreeHours = Number(row.price);
+        break;
+      default:
+        // No action needed for unspecified durations
+        break;
+    }
+  });
 
   const form = useForm<z.infer<typeof UserPricingSchema>>({
     resolver: zodResolver(UserPricingSchema),
     defaultValues: {
-      durations: [],
+      durations,
+      priceOneHour,
+      priceOneHalfHour,
+      priceTwoHalfHours,
+      priceTwoHours,
+      priceThreeHours,
     },
   });
 
   function onSubmit(data: z.infer<typeof UserPricingSchema>) {
     startTransition(async () => {
-      updateUserPricing(data, userId)
+      updateUserPricing(data, userId);
       toast({
         title: "¡Se han actualizado los precios de tus tutorías!",
-        description: <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-        <code className="text-white">{JSON.stringify(data, null, 2)}</code></pre>
-      })
+        description: (
+          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+          </pre>
+        ),
+      });
     });
   }
 

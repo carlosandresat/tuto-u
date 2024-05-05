@@ -5,6 +5,21 @@ import { db } from "@/lib/db";
 
 import { UserPricingSchema } from "@/schemas";
 
+export const getUserPricing = async(
+    userId: string
+) => {
+    const data = await db.userPricingConfiguration.findMany({
+        where: {
+            userId: userId,
+        },
+        select: {
+            duration: true,
+            price: true,
+        }
+    })
+    return data
+}
+
 export const updateUserPricing = async (
   data: z.infer<typeof UserPricingSchema>, userId: string
 ) => {

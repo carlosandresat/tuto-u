@@ -14,9 +14,11 @@ import {
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
 import { auth } from "@/auth";
+import { getUserPricing } from "@/actions/user-configuration";
 
 export default async function MyProfile() {
   const session = await auth()
+  const pricingConfig = await getUserPricing(session?.user?.id || "")
   
   return (
     <>
@@ -58,7 +60,7 @@ export default async function MyProfile() {
               <CardDescription>Selecciona la duración de las tutorías con tus precios</CardDescription>
             </CardHeader>
             <CardContent>
-              <ProfilePricingForm userId={session?.user?.id || ""}></ProfilePricingForm>
+              <ProfilePricingForm userId={session?.user?.id || ""} pricingConfig={JSON.parse(JSON.stringify(pricingConfig))}></ProfilePricingForm>
 
             </CardContent>
           </Card>
