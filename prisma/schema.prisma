@@ -54,6 +54,7 @@ model User {
   password      String?
   accounts      Account[]
   sessions      Session[]
+  tutor_pricing UserPricingConfiguration[]
   createdAt     DateTime  @default(now())
 
   @@map("users")
@@ -74,4 +75,14 @@ model Preregister {
   role     String?
   school   String?
   semester String?
+}
+
+model UserPricingConfiguration {
+  id       String  @id @default(cuid())
+  userId   String  @map("user_id")
+  duration Int
+  price    Decimal
+  tutor    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_pricing_configuration")
 }
