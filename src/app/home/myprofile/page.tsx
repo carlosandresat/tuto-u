@@ -1,4 +1,3 @@
-"use client"
 import {
   Card,
   CardContent,
@@ -14,8 +13,11 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
+import { auth } from "@/auth";
 
-export default function MyProfile() {
+export default async function MyProfile() {
+  const session = await auth()
+  
   return (
     <>
       <section className="w-full py-8 flex items-center justify-center flex-col">
@@ -56,7 +58,7 @@ export default function MyProfile() {
               <CardDescription>Selecciona la duración de las tutorías con tus precios</CardDescription>
             </CardHeader>
             <CardContent>
-              <ProfilePricingForm></ProfilePricingForm>
+              <ProfilePricingForm userId={session?.user?.id || ""}></ProfilePricingForm>
 
             </CardContent>
           </Card>

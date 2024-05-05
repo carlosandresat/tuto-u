@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { UserPricingSchema } from "@/schemas";
 
 export const updateUserPricing = async (
-  data: z.infer<typeof UserPricingSchema>
+  data: z.infer<typeof UserPricingSchema>, userId: string
 ) => {
   const validatedFields = UserPricingSchema.safeParse(data);
 
@@ -23,18 +23,24 @@ export const updateUserPricing = async (
     priceThreeHours,
   } = validatedFields.data;
 
+  await db.userPricingConfiguration.deleteMany({
+    where: {
+      userId: userId,
+    },
+  });
+
   const newPricing = [];
 
   if (durations.includes("1h")) {
     if (!priceOneHour) {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 60,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 60,
         price: priceOneHour,
       });
@@ -43,13 +49,13 @@ export const updateUserPricing = async (
   if (durations.includes("1.5h")) {
     if (!priceOneHalfHour) {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 90,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 90,
         price: priceOneHalfHour,
       });
@@ -58,13 +64,13 @@ export const updateUserPricing = async (
   if (durations.includes("2h")) {
     if (!priceTwoHours) {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 120,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 120,
         price: priceTwoHours,
       });
@@ -73,13 +79,13 @@ export const updateUserPricing = async (
   if (durations.includes("2.5h")) {
     if (!priceTwoHalfHours) {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 150,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 150,
         price: priceTwoHalfHours,
       });
@@ -88,32 +94,22 @@ export const updateUserPricing = async (
   if (durations.includes("3h")) {
     if (!priceThreeHours) {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 180,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: "1",
+        userId: userId,
         duration: 180,
         price: priceThreeHours,
       });
     }
   }
 
-  console.log(newPricing)
-
-  /*
-  await db.userPricingConfiguration.deleteMany({
-    where: {
-      userId: "1",
-    },
-  });
-
   await db.userPricingConfiguration.createMany({
     data: newPricing,
   });
-  */
 
-  return { sucess: "Pre-Registro completado" };
+  return { sucess: "Precios actualizados" };
 };
