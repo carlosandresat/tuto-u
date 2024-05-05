@@ -101,6 +101,8 @@ export const updateUserPricing = async (
     }
   }
 
+  console.log(newPricing)
+
   /*
   await db.userPricingConfiguration.deleteMany({
     where: {

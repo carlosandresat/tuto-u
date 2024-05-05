@@ -23,6 +23,7 @@ import { toast } from "@/components/ui/use-toast";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import { UserPricingSchema } from "@/schemas";
+import {updateUserPricing} from '@/actions/user-configuration'
 
 export function ProfilePricingForm() {
   const [isPending, startTransition] = useTransition();
@@ -36,6 +37,7 @@ export function ProfilePricingForm() {
 
   function onSubmit(data: z.infer<typeof UserPricingSchema>) {
     startTransition(async () => {
+      updateUserPricing(data)
       toast({
         title: "¡Se han actualizado los precios de tus tutorías!",
         description: <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
