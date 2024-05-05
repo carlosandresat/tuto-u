@@ -36,3 +36,12 @@ export const RegisterSchema = z.object({
         .min(8, "La contraseña debe contener mínimo 8 caracteres")
         .max(16, "La contraseña debe contener máximo 16 caracteres"),
 });
+
+export const UserPricingSchema = z.object({
+    durations: z.array(z.string()),
+    priceOneHour: z.coerce.number().multipleOf(0.01).optional(),
+    priceOneHalfHour: z.coerce.number().multipleOf(0.01).optional(),
+    priceTwoHours: z.coerce.number().multipleOf(0.01).optional(),
+    priceTwoHalfHours: z.coerce.number().multipleOf(0.01).optional(),
+    priceThreeHours: z.coerce.number().multipleOf(0.01).optional(),
+})
