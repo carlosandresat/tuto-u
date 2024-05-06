@@ -3,6 +3,7 @@
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
+import { redirect } from "next/navigation";
 
 const FormSchema = z.object({
     firstname: z
@@ -75,6 +76,5 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
             gender,
         },
     });
-
-    return { sucess: "Pre-Registro completado" };
+    redirect('/')
 };
