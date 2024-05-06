@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ProfilePricingForm } from "@/components/profile-pricing-form";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -14,11 +15,17 @@ import {
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
 import { auth } from "@/auth";
-import { getUserPricing } from "@/actions/user-configuration";
+import { getUserPricing, getUserData } from "@/actions/user-configuration";
 
 export default async function MyProfile() {
   const session = await auth()
   const pricingConfig = await getUserPricing(session?.user?.id || "")
+  const userBasicData = await getUserData(session?.user?.id || "")
+  let initials
+  if (userBasicData && userBasicData.firstname && userBasicData.lastname){
+    initials = `${Array.from(userBasicData.firstname)[0]}${Array.from(userBasicData.lastname)[0]}`
+  }
+  
   
   return (
     <>
@@ -30,28 +37,18 @@ export default async function MyProfile() {
         <div className="flex max-w-screen-xl w-full p-8 flex-col">
           <Card className="w-full">
             <CardHeader>
-              <Image
-                src="/photos/carlos.arevalo.jpg"
-                alt="Carlos Arévalo"
-                width={96}
-                height={96}
-                className="w-24 h-24 rounded-full"
-              />
+              <Avatar className="w-24 h-24">
+                <AvatarImage src={`/photos/${userBasicData?.email?.split("@")[0]}.jpg`}/>
+                <AvatarFallback>{initials}</AvatarFallback>
+              </Avatar>
             </CardHeader>
             <CardContent>
-              <CardTitle>Carlos Arévalo</CardTitle>
+              <CardTitle>{`${userBasicData?.firstname} ${userBasicData?.lastname}`}</CardTitle>
                 <p>
-                  <span className="font-bold">Carrera:</span> Ingeniería en
-                  Tecnologías de la Información
-                </p>
-                <p>
-                  <span className="font-bold">Correo:</span>{" "}
-                  <a href="mailto:carlos.arevalo@yachaytech.edu.ec">carlos.arevalo@yachaytech.edu.ec</a>
+                  <span className="font-bold">Correo:{" "}</span>
+                  <a href={`mailto:${userBasicData?.email}`} className=" hover:border-b border-foreground">{userBasicData?.email}</a>
                 </p>
             </CardContent>
-            <CardFooter>
-              <button className="btn">Editar</button>
-            </CardFooter>
 
           </Card>
           <Card className="w-full mt-6">

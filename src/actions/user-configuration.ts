@@ -5,6 +5,23 @@ import { db } from "@/lib/db";
 
 import { UserPricingSchema } from "@/schemas";
 
+export const getUserData = async(
+  userId: string
+) => {
+  const data = await db.user.findUnique({
+    where: {
+      id: userId
+    },
+    select: {
+      firstname: true, 
+      lastname: true,
+      email: true,
+    }
+  })
+
+  return data
+}
+
 export const getUserPricing = async(
     userId: string
 ) => {
