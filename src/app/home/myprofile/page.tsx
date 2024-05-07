@@ -14,6 +14,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
 } from "@/components/ui/toggle-group"
+import { ProfileCoursesForm } from "@/components/profile-courses-form";
 import { auth } from "@/auth";
 import { getUserPricing, getUserData } from "@/actions/user-configuration";
 
@@ -25,6 +26,26 @@ export default async function MyProfile() {
   if (userBasicData && userBasicData.firstname && userBasicData.lastname){
     initials = `${Array.from(userBasicData.firstname)[0]}${Array.from(userBasicData.lastname)[0]}`
   }
+
+  const courses = [
+    { id: 1, course: "Cálculo 1" },
+    { id: 2, course: "Cálculo 2" },
+    { id: 3, course: "Cálculo 3" },
+    { id: 4, course: "Algebra Lineal" },
+    { id: 5, course: "Química 1" },
+    { id: 6, course: "Química 2" },
+    { id: 7, course: "Física 1" },
+    { id: 8, course: "Física 2" },
+    { id: 9, course: "Biología 1" },
+    { id: 10, course: "Biología 2" },
+    { id: 11, course: "Ciencias de la Tierra" },
+    { id: 12, course: "Probabilidad y Estadística" },
+    { id: 13, course: "Introducción a la Programación" },
+    { id: 14, course: "Ecuaciones Diferenciales" },
+    { id: 15, course: "Métodos Numéricos" },
+    { id: 16, course: "Inglés" },
+  ];
+  
   
   
   return (
@@ -67,17 +88,7 @@ export default async function MyProfile() {
               <CardDescription>Selecciona las asignaturas a las que quieres ser solicitado para tutorías</CardDescription>
             </CardHeader>
             <CardContent>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="Fisica 1" aria-label="Toggle Física 1"> Física 1 </ToggleGroupItem>
-                <ToggleGroupItem value="Fisica 2" aria-label="Toggle Física 2"> Física 2 </ToggleGroupItem>
-                <ToggleGroupItem value="Matemáticas 1" aria-label="Toggle Matemáticas 1"> Matemáticas 1 </ToggleGroupItem>
-                <ToggleGroupItem value="Matemáticas 2" aria-label="Toggle Matemáticas 2"> Matemáticas 2 </ToggleGroupItem>
-                <ToggleGroupItem value="Matemáticas 3" aria-label="Toggle Matemáticas 3"> Matemáticas 3 </ToggleGroupItem>
-                <ToggleGroupItem value="Matemáticas 4" aria-label="Toggle Matemáticas 4"> Matemáticas 4 </ToggleGroupItem>
-                <ToggleGroupItem value="Matemáticas 5" aria-label="Toggle Matemáticas 5"> Matemáticas 5 </ToggleGroupItem>
-                <ToggleGroupItem value="Matemáticas 6" aria-label="Toggle Matemáticas 6"> Matemáticas 6 </ToggleGroupItem>
-
-              </ToggleGroup>
+              <ProfileCoursesForm userId={session?.user?.id} coursesConfig={courses}></ProfileCoursesForm>
             </CardContent>
             <CardFooter>
               <Button>Guardar</Button>

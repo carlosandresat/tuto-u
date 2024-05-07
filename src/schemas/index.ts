@@ -45,3 +45,7 @@ export const UserPricingSchema = z.object({
     priceTwoHalfHours: z.coerce.number().multipleOf(0.01).optional(),
     priceThreeHours: z.coerce.number().multipleOf(0.01).optional(),
 })
+
+export const UserCoursesSchema = z.object({
+    courses: z.array(z.coerce.number())
+})

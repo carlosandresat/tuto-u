@@ -9,6 +9,7 @@ export default function Home() {
   const asignaturas = [
     { course: "Cálculo 1", school: "mate" },
     { course: "Cálculo 2", school: "mate" },
+    { course: "Cálculo 3", school: "mate" },
     { course: "Algebra Lineal", school: "mate" },
     { course: "Química 1", school: "quim" },
     { course: "Química 2", school: "quim" },
@@ -18,6 +19,7 @@ export default function Home() {
     { course: "Biología 2", school: "bio" },
     { course: "Ciencias de la Tierra", school: "geo" },
     { course: "Probabilidad y Estadística", school: "mate" },
+    { course: "Introducción a la Programación", school: "mate" },
     { course: "Ecuaciones Diferenciales", school: "mate" },
     { course: "Métodos Numéricos", school: "mate" },
     { course: "Inglés", school: "lan" },
