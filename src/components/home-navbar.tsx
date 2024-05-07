@@ -62,7 +62,7 @@ export function HomeNavbar() {
         </Sheet>
       </div>
 
-      <Link href="/" className="flex items-center gap-6">
+      <Link href="/home" className="flex items-center gap-6">
         <Image src="/images/logo.png" alt="logo" width={60} height={60} className="w-12 lg:w-16"/>
         <h2 className="text-3xl font-semibold tracking-tight hidden lg:block">
       Tuto-U
