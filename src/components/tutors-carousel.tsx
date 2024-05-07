@@ -12,37 +12,37 @@ export function TutorsCarousel() {
     {
       tutor: "Carlos Andrés Arévalo Torres",
       rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
+      pic_url: "/photos/placeholder.jpg",
       nreviews: 78,
     },
     {
       tutor: "Carlos Arévalo2",
       rating: 4.3,
-      pic_url: "/photos/carlos.arevalo.jpg",
+      pic_url: "/photos/placeholder.jpg",
       nreviews: 45,
     },
     {
       tutor: "Carlos Arévalo3",
       rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
+      pic_url: "/photos/placeholder.jpg",
       nreviews: 19,
     },
     {
       tutor: "Carlos Arévalo4",
       rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
+      pic_url: "/photos/placeholder.jpg",
       nreviews: 42,
     },
     {
       tutor: "Carlos Arévalo5",
       rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
+      pic_url: "/photos/placeholder.jpg",
       nreviews: 29,
     },
     {
       tutor: "Carlos Arévalo6",
       rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
+      pic_url: "/photos/placeholder.jpg",
       nreviews: 45,
     },
   ];
