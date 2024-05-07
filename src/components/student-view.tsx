@@ -180,6 +180,7 @@ export function StudentView() {
           <CancelDialog />
         </CardFooter>
       </Card>
+      {/*Esta card es para tutor-view
       <Card>
         <CardHeader>
           <Badge className=" bg-yellow-500 w-fit mb-2">Pendiente</Badge>
@@ -228,6 +229,8 @@ export function StudentView() {
           <Button>Aceptar</Button>
         </CardFooter>
       </Card>
+            */}
+
 
       <Card>
         <CardHeader>

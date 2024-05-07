@@ -68,6 +68,9 @@ export default function Home() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 pt-32">
         Tus Tutorías
       </h2>
+      <p className="text-lg text-muted-foreground mt-2">
+      Estos solo son ejemplos de los diferentes estados en los que se puede encontrar una solicitud de tutoría
+    </p>
 
       <StudentView></StudentView>
 
