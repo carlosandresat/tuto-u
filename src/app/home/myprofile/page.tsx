@@ -90,9 +90,6 @@ export default async function MyProfile() {
             <CardContent>
               <ProfileCoursesForm userId={session?.user?.id || ""} coursesConfig={courses}></ProfileCoursesForm>
             </CardContent>
-            <CardFooter>
-              <Button>Guardar</Button>
-            </CardFooter>
           </Card>
           <Card className="w-full mt-6">
             <CardHeader>
