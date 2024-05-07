@@ -24,17 +24,19 @@ import { updateUserCourses } from "@/actions/user-configuration";
 
 export function ProfileCoursesForm({
   userId,
+  courses,
   coursesConfig,
 }: {
   userId: string;
-  coursesConfig: { id: number; course: string }[];
+  courses: { id: number; course: string }[];
+  coursesConfig: number[]
 }) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof UserCoursesSchema>>({
     resolver: zodResolver(UserCoursesSchema),
     defaultValues: {
-      courses: [],
+      courses: coursesConfig,
     },
   });
 
@@ -42,7 +44,7 @@ export function ProfileCoursesForm({
     startTransition(async () => {
       updateUserCourses(data, userId);
       toast({
-        title: "¡Se han actualizado los precios de tus tutorías!",
+        title: "¡Se han actualizado tus asignaturas!",
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
             <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -67,7 +69,7 @@ export function ProfileCoursesForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  {coursesConfig.map((row) => {
+                  {courses.map((row) => {
                     return(
                     <ToggleGroupItem
                       value={`${row.id}`}

@@ -16,12 +16,15 @@ import {
 } from "@/components/ui/toggle-group"
 import { ProfileCoursesForm } from "@/components/profile-courses-form";
 import { auth } from "@/auth";
-import { getUserPricing, getUserData } from "@/actions/user-configuration";
+import { getUserPricing, getUserData, getUserCourses } from "@/actions/user-configuration";
 
 export default async function MyProfile() {
   const session = await auth()
   const pricingConfig = await getUserPricing(session?.user?.id || "")
+  const preCoursesConfig = await getUserCourses(session?.user?.id || "")
+  const coursesConfig = preCoursesConfig.map((course) => course.courseId)
   const userBasicData = await getUserData(session?.user?.id || "")
+  
   let initials
   if (userBasicData && userBasicData.firstname && userBasicData.lastname){
     initials = `${Array.from(userBasicData.firstname)[0]}${Array.from(userBasicData.lastname)[0]}`
@@ -88,7 +91,7 @@ export default async function MyProfile() {
               <CardDescription>Selecciona las asignaturas a las que quieres ser solicitado para tutorías</CardDescription>
             </CardHeader>
             <CardContent>
-              <ProfileCoursesForm userId={session?.user?.id || ""} coursesConfig={courses}></ProfileCoursesForm>
+              <ProfileCoursesForm userId={session?.user?.id || ""} courses={courses} coursesConfig={coursesConfig}></ProfileCoursesForm>
             </CardContent>
           </Card>
           <Card className="w-full mt-6">

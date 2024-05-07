@@ -143,6 +143,18 @@ export const updateUserPricing = async (
   return { sucess: "Precios actualizados" };
 };
 
+export const getUserCourses = async (userId: string) => {
+  const data = await db.tutorCourse.findMany({
+    where: {
+      tutorId: userId,
+    },
+    select: {
+      courseId: true,
+    },
+  });
+  return data;
+};
+
 export const updateUserCourses = async (
   data: z.infer<typeof UserCoursesSchema>,
   userId: string
