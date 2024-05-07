@@ -20,13 +20,13 @@ import { toast } from "@/components/ui/use-toast";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import { UserCoursesSchema } from "@/schemas";
-import { updateUserPricing } from "@/actions/user-configuration";
+import { updateUserCourses } from "@/actions/user-configuration";
 
 export function ProfileCoursesForm({
   userId,
   coursesConfig,
 }: {
-  userId: string | undefined;
+  userId: string;
   coursesConfig: { id: number; course: string }[];
 }) {
   const [isPending, startTransition] = useTransition();
@@ -40,7 +40,7 @@ export function ProfileCoursesForm({
 
   function onSubmit(data: z.infer<typeof UserCoursesSchema>) {
     startTransition(async () => {
-      //updateUserPricing(data, userId);
+      updateUserCourses(data, userId);
       toast({
         title: "¡Se han actualizado los precios de tus tutorías!",
         description: (

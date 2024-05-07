@@ -88,7 +88,7 @@ export default async function MyProfile() {
               <CardDescription>Selecciona las asignaturas a las que quieres ser solicitado para tutorías</CardDescription>
             </CardHeader>
             <CardContent>
-              <ProfileCoursesForm userId={session?.user?.id} coursesConfig={courses}></ProfileCoursesForm>
+              <ProfileCoursesForm userId={session?.user?.id || ""} coursesConfig={courses}></ProfileCoursesForm>
             </CardContent>
             <CardFooter>
               <Button>Guardar</Button>

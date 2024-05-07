@@ -143,7 +143,7 @@ export const updateUserPricing = async (
   return { sucess: "Precios actualizados" };
 };
 
-export const UpdateUserCourses = async (
+export const updateUserCourses = async (
   data: z.infer<typeof UserCoursesSchema>,
   userId: string
 ) => {
@@ -155,6 +155,10 @@ export const UpdateUserCourses = async (
 
   const { courses } = validatedFields.data;
 
+  const newTutorCourses = courses.map((courseId) => {
+    return { tutorId: userId, courseId: courseId };
+  })
+
   try {
     await db.tutorCourse.deleteMany({
       where: {
@@ -162,11 +166,10 @@ export const UpdateUserCourses = async (
       },
     });
     await db.tutorCourse.createMany({
-      data: courses.map((courseId) => {
-        return { tutorId: userId, courseId: courseId };
-      }),
+      data: newTutorCourses,
     });
   } catch (error) {
+    console.log(error)
     return null;
   }
 };
