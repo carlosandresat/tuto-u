@@ -3,42 +3,39 @@
 import { z } from "zod";
 import { db } from "@/lib/db";
 
-import { UserPricingSchema } from "@/schemas";
+import { UserPricingSchema, UserCoursesSchema } from "@/schemas";
 
-export const getUserData = async(
-  userId: string
-) => {
+export const getUserData = async (userId: string) => {
   const data = await db.user.findUnique({
     where: {
-      id: userId
+      id: userId,
     },
     select: {
-      firstname: true, 
+      firstname: true,
       lastname: true,
       email: true,
-    }
-  })
+    },
+  });
 
-  return data
-}
+  return data;
+};
 
-export const getUserPricing = async(
-    userId: string
-) => {
-    const data = await db.userPricingConfiguration.findMany({
-        where: {
-            userId: userId,
-        },
-        select: {
-            duration: true,
-            price: true,
-        }
-    })
-    return data
-}
+export const getUserPricing = async (userId: string) => {
+  const data = await db.userPricingConfiguration.findMany({
+    where: {
+      userId: userId,
+    },
+    select: {
+      duration: true,
+      price: true,
+    },
+  });
+  return data;
+};
 
 export const updateUserPricing = async (
-  data: z.infer<typeof UserPricingSchema>, userId: string
+  data: z.infer<typeof UserPricingSchema>,
+  userId: string
 ) => {
   const validatedFields = UserPricingSchema.safeParse(data);
 
@@ -144,4 +141,32 @@ export const updateUserPricing = async (
   });
 
   return { sucess: "Precios actualizados" };
+};
+
+export const UpdateUserCourses = async (
+  data: z.infer<typeof UserCoursesSchema>,
+  userId: string
+) => {
+  const validatedFields = UserCoursesSchema.safeParse(data);
+
+  if (!validatedFields.success) {
+    return { error: "Campos inválidos" };
+  }
+
+  const { courses } = validatedFields.data;
+
+  try {
+    await db.tutorCourse.deleteMany({
+      where: {
+        tutorId: userId,
+      },
+    });
+    await db.tutorCourse.createMany({
+      data: courses.map((courseId) => {
+        return { tutorId: userId, courseId: courseId };
+      }),
+    });
+  } catch (error) {
+    return null;
+  }
 };

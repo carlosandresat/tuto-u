@@ -15,21 +15,21 @@ datasource db {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
- 
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
@@ -40,22 +40,24 @@ model Session {
   userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@map("sessions")
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String                     @id @default(cuid())
   firstname     String?
   lastname      String?
-  email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  email         String?                    @unique
+  emailVerified DateTime?                  @map("email_verified")
   image         String?
   password      String?
   accounts      Account[]
   sessions      Session[]
   tutor_pricing UserPricingConfiguration[]
-  createdAt     DateTime  @default(now())
+  tutorCourses  TutorCourse[]
+
+  createdAt DateTime @default(now())
 
   @@map("users")
 }
@@ -64,7 +66,7 @@ model VerificationToken {
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
   @@map("verificationtokens")
 }
@@ -85,4 +87,34 @@ model UserPricingConfiguration {
   tutor    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_pricing_configuration")
+}
+
+model TutorCourse {
+  id       Int    @id @default(autoincrement())
+  tutorId  String @map("tutor_id")
+  courseId Int    @map("course_id")
+  tutor    User   @relation(fields: [tutorId], references: [id], onDelete: Cascade)
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@map("tutor_courses")
+}
+
+model Course {
+  id           Int            @id @default(autoincrement())
+  name         String
+  schoolId     Int            @map("school_id")
+  school       School         @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  tutorCourses TutorCourse[]
+  
+  @@map("courses")
+
+}
+
+model School {
+  id      Int      @id @default(autoincrement())
+  name    String
+  code    String
+  courses Course[]
+
+  @@map("schools")
 }
