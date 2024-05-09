@@ -3,7 +3,11 @@
 import { z } from "zod";
 import { db } from "@/lib/db";
 
-import { UserPricingSchema, UserCoursesSchema } from "@/schemas";
+import {
+  UserPricingSchema,
+  UserCoursesSchema,
+  UserAvailabilitySchema,
+} from "@/schemas";
 
 export const getUserData = async (userId: string) => {
   const data = await db.user.findUnique({
@@ -169,7 +173,7 @@ export const updateUserCourses = async (
 
   const newTutorCourses = courses.map((courseId) => {
     return { tutorId: userId, courseId: courseId };
-  })
+  });
 
   try {
     await db.tutorCourse.deleteMany({
@@ -181,7 +185,91 @@ export const updateUserCourses = async (
       data: newTutorCourses,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
+    return null;
+  }
+};
+
+export const getUserAvailability = async (userId: string) => {
+  try {
+    const data = await db.tutorAvailability.findMany({
+      where: {
+        tutorId: userId,
+      },
+      select: {
+        dayOfWeek: true,
+        timeSlot: true,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+};
+
+export const updateUserAvailability = async (
+  data: z.infer<typeof UserAvailabilitySchema>,
+  userId: string
+) => {
+  const validatedFields = UserAvailabilitySchema.safeParse(data);
+
+  if (!validatedFields.success) {
+    return { error: "Campos inválidos" };
+  }
+
+  const {
+    mondayAvailability,
+    tuesdayAvailability,
+    wednesdayAvailability,
+    thursdayAvailability,
+    fridayAvailability,
+    saturdayAvailability,
+    sundayAvailability,
+  } = validatedFields.data;
+
+  const newMondayEntries = mondayAvailability.map((hour) => {
+    return { tutorId: userId, dayOfWeek: 0, timeSlot: hour };
+  });
+  const newTuesdayEntries = tuesdayAvailability.map((hour) => {
+    return { tutorId: userId, dayOfWeek: 1, timeSlot: hour };
+  });
+  const newWednesdayEntries = wednesdayAvailability.map((hour) => {
+    return { tutorId: userId, dayOfWeek: 2, timeSlot: hour };
+  });
+  const newThursdayEntries = thursdayAvailability.map((hour) => {
+    return { tutorId: userId, dayOfWeek: 3, timeSlot: hour };
+  });
+  const newFridayEntries = fridayAvailability.map((hour) => {
+    return { tutorId: userId, dayOfWeek: 4, timeSlot: hour };
+  });
+  const newSaturdayEntries = saturdayAvailability.map((hour) => {
+    return { tutorId: userId, dayOfWeek: 5, timeSlot: hour };
+  });
+  const newSundayEntries = sundayAvailability.map((hour) => {
+    return { tutorId: userId, dayOfWeek: 6, timeSlot: hour };
+  });
+
+  const newTutorCourses = newMondayEntries.concat(
+    newTuesdayEntries,
+    newWednesdayEntries,
+    newThursdayEntries,
+    newFridayEntries,
+    newSaturdayEntries,
+    newSundayEntries
+  );
+
+  try {
+    await db.tutorAvailability.deleteMany({
+      where: {
+        tutorId: userId,
+      },
+    });
+    await db.tutorAvailability.createMany({
+      data: newTutorCourses,
+    });
+  } catch (error) {
+    console.log(error);
     return null;
   }
 };

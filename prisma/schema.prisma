@@ -121,8 +121,10 @@ model School {
 
 model TutorAvailability {
   id        Int    @id @default(autoincrement())
-  id_tutor  String
-  dayOfWeek String @db.VarChar(3)
-  timeSlot  Int    @db.SmallInt
-  tutor     User   @relation(fields: [id_tutor], references: [id])
+  tutorId   String @map("tutor_id")
+  dayOfWeek Int    @map("day_of_week") @db.SmallInt
+  timeSlot  Int    @map("time_slot") @db.SmallInt
+  tutor     User   @relation(fields: [tutorId], references: [id])
+
+  @@map("tutor_availability")
 }

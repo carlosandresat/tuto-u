@@ -49,3 +49,13 @@ export const UserPricingSchema = z.object({
 export const UserCoursesSchema = z.object({
     courses: z.array(z.coerce.number())
 })
+
+export const UserAvailabilitySchema = z.object({
+    mondayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+    tuesdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+    wednesdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+    thursdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+    fridayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+    saturdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+    sundayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+})

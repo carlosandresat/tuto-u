@@ -16,7 +16,8 @@ import {
 } from "@/components/ui/toggle-group"
 import { ProfileCoursesForm } from "@/components/profile-courses-form";
 import { auth } from "@/auth";
-import { getUserPricing, getUserData, getUserCourses } from "@/actions/user-configuration";
+import { getUserPricing, getUserData, getUserCourses, getUserAvailability } from "@/actions/user-configuration";
+import { ProfileAvailabilityForm } from "@/components/profile-availability-form";
 
 export default async function MyProfile() {
   const session = await auth()
@@ -24,6 +25,7 @@ export default async function MyProfile() {
   const preCoursesConfig = await getUserCourses(session?.user?.id || "")
   const coursesConfig = preCoursesConfig.map((course) => course.courseId)
   const userBasicData = await getUserData(session?.user?.id || "")
+  const userAvailability = await getUserAvailability(session?.user?.id || "")
   
   let initials
   if (userBasicData && userBasicData.firstname && userBasicData.lastname){
@@ -100,101 +102,8 @@ export default async function MyProfile() {
               <CardDescription>Selecciona los horarios en los que estás disponible para ofrecer tutorías</CardDescription>
             </CardHeader>
             <CardContent>
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                Lunes
-              </h3>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="8am" aria-label="Toggle 8am"> 8am </ToggleGroupItem>
-                <ToggleGroupItem value="10am" aria-label="Toggle 10am"> 10am </ToggleGroupItem>
-                <ToggleGroupItem value="12pm" aria-label="Toggle 2pm"> 12pm </ToggleGroupItem>
-                <ToggleGroupItem value="2pm" aria-label="Toggle 2pm"> 2pm </ToggleGroupItem>
-                <ToggleGroupItem value="4pm" aria-label="Toggle 4pm"> 4pm </ToggleGroupItem>
-                <ToggleGroupItem value="6pm" aria-label="Toggle 6pm"> 6pm </ToggleGroupItem>
-                <ToggleGroupItem value="8pm" aria-label="Toggle 8pm"> 8pm </ToggleGroupItem>
-                <ToggleGroupItem value="10pm" aria-label="Toggle 10pm"> 10pm </ToggleGroupItem>
-              </ToggleGroup>
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                Martes
-              </h3>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="8am" aria-label="Toggle 8am"> 8am </ToggleGroupItem>
-                <ToggleGroupItem value="10am" aria-label="Toggle 10am"> 10am </ToggleGroupItem>
-                <ToggleGroupItem value="12pm" aria-label="Toggle 2pm"> 12pm </ToggleGroupItem>
-                <ToggleGroupItem value="2pm" aria-label="Toggle 2pm"> 2pm </ToggleGroupItem>
-                <ToggleGroupItem value="4pm" aria-label="Toggle 4pm"> 4pm </ToggleGroupItem>
-                <ToggleGroupItem value="6pm" aria-label="Toggle 6pm"> 6pm </ToggleGroupItem>
-                <ToggleGroupItem value="8pm" aria-label="Toggle 8pm"> 8pm </ToggleGroupItem>
-                <ToggleGroupItem value="10pm" aria-label="Toggle 10pm"> 10pm </ToggleGroupItem>
-              </ToggleGroup>
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                Miércoles
-              </h3>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="8am" aria-label="Toggle 8am"> 8am </ToggleGroupItem>
-                <ToggleGroupItem value="10am" aria-label="Toggle 10am"> 10am </ToggleGroupItem>
-                <ToggleGroupItem value="12pm" aria-label="Toggle 2pm"> 12pm </ToggleGroupItem>
-                <ToggleGroupItem value="2pm" aria-label="Toggle 2pm"> 2pm </ToggleGroupItem>
-                <ToggleGroupItem value="4pm" aria-label="Toggle 4pm"> 4pm </ToggleGroupItem>
-                <ToggleGroupItem value="6pm" aria-label="Toggle 6pm"> 6pm </ToggleGroupItem>
-                <ToggleGroupItem value="8pm" aria-label="Toggle 8pm"> 8pm </ToggleGroupItem>
-                <ToggleGroupItem value="10pm" aria-label="Toggle 10pm"> 10pm </ToggleGroupItem>
-              </ToggleGroup>
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                Jueves
-              </h3>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="8am" aria-label="Toggle 8am"> 8am </ToggleGroupItem>
-                <ToggleGroupItem value="10am" aria-label="Toggle 10am"> 10am </ToggleGroupItem>
-                <ToggleGroupItem value="12pm" aria-label="Toggle 2pm"> 12pm </ToggleGroupItem>
-                <ToggleGroupItem value="2pm" aria-label="Toggle 2pm"> 2pm </ToggleGroupItem>
-                <ToggleGroupItem value="4pm" aria-label="Toggle 4pm"> 4pm </ToggleGroupItem>
-                <ToggleGroupItem value="6pm" aria-label="Toggle 6pm"> 6pm </ToggleGroupItem>
-                <ToggleGroupItem value="8pm" aria-label="Toggle 8pm"> 8pm </ToggleGroupItem>
-                <ToggleGroupItem value="10pm" aria-label="Toggle 10pm"> 10pm </ToggleGroupItem>
-              </ToggleGroup>
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                Viernes
-              </h3>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="8am" aria-label="Toggle 8am"> 8am </ToggleGroupItem>
-                <ToggleGroupItem value="10am" aria-label="Toggle 10am"> 10am </ToggleGroupItem>
-                <ToggleGroupItem value="12pm" aria-label="Toggle 2pm"> 12pm </ToggleGroupItem>
-                <ToggleGroupItem value="2pm" aria-label="Toggle 2pm"> 2pm </ToggleGroupItem>
-                <ToggleGroupItem value="4pm" aria-label="Toggle 4pm"> 4pm </ToggleGroupItem>
-                <ToggleGroupItem value="6pm" aria-label="Toggle 6pm"> 6pm </ToggleGroupItem>
-                <ToggleGroupItem value="8pm" aria-label="Toggle 8pm"> 8pm </ToggleGroupItem>
-                <ToggleGroupItem value="10pm" aria-label="Toggle 10pm"> 10pm </ToggleGroupItem>
-              </ToggleGroup>
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                Sábado
-              </h3>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="8am" aria-label="Toggle 8am"> 8am </ToggleGroupItem>
-                <ToggleGroupItem value="10am" aria-label="Toggle 10am"> 10am </ToggleGroupItem>
-                <ToggleGroupItem value="12pm" aria-label="Toggle 2pm"> 12pm </ToggleGroupItem>
-                <ToggleGroupItem value="2pm" aria-label="Toggle 2pm"> 2pm </ToggleGroupItem>
-                <ToggleGroupItem value="4pm" aria-label="Toggle 4pm"> 4pm </ToggleGroupItem>
-                <ToggleGroupItem value="6pm" aria-label="Toggle 6pm"> 6pm </ToggleGroupItem>
-                <ToggleGroupItem value="8pm" aria-label="Toggle 8pm"> 8pm </ToggleGroupItem>
-                <ToggleGroupItem value="10pm" aria-label="Toggle 10pm"> 10pm </ToggleGroupItem>
-              </ToggleGroup>
-              <h3 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                Domingo
-              </h3>
-              <ToggleGroup type="multiple" variant="outline">
-                <ToggleGroupItem value="8am" aria-label="Toggle 8am"> 8am </ToggleGroupItem>
-                <ToggleGroupItem value="10am" aria-label="Toggle 10am"> 10am </ToggleGroupItem>
-                <ToggleGroupItem value="12pm" aria-label="Toggle 2pm"> 12pm </ToggleGroupItem>
-                <ToggleGroupItem value="2pm" aria-label="Toggle 2pm"> 2pm </ToggleGroupItem>
-                <ToggleGroupItem value="4pm" aria-label="Toggle 4pm"> 4pm </ToggleGroupItem>
-                <ToggleGroupItem value="6pm" aria-label="Toggle 6pm"> 6pm </ToggleGroupItem>
-                <ToggleGroupItem value="8pm" aria-label="Toggle 8pm"> 8pm </ToggleGroupItem>
-                <ToggleGroupItem value="10pm" aria-label="Toggle 10pm"> 10pm </ToggleGroupItem>
-              </ToggleGroup>
+              <ProfileAvailabilityForm userId={session?.user?.id || ""} availabilityConfig={userAvailability}></ProfileAvailabilityForm>
             </CardContent>
-            <CardFooter>
-              <Button>Guardar</Button>
-            </CardFooter>
           </Card>
 
         </div>
