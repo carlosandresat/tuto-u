@@ -43,17 +43,44 @@ export function ProfileAvailabilityForm({
   sundayAvailability: number[];
 }) {
   const [isPending, startTransition] = useTransition();
-
   const form = useForm<z.infer<typeof UserAvailabilitySchema>>({
     resolver: zodResolver(UserAvailabilitySchema),
     defaultValues: {
-      mondayAvailability,
-      tuesdayAvailability,
-      wednesdayAvailability,
-      thursdayAvailability,
-      fridayAvailability,
-      saturdayAvailability,
-      sundayAvailability,
+      mondayAvailability: mondayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }),
+      tuesdayAvailability: tuesdayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }),
+      wednesdayAvailability: wednesdayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }),
+      thursdayAvailability: thursdayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }),
+      fridayAvailability: fridayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }),
+      saturdayAvailability: saturdayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }),
+      sundayAvailability: sundayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }),
     },
   });
 

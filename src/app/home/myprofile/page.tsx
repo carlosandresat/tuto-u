@@ -35,42 +35,38 @@ export default async function MyProfile() {
   const userBasicData = await getUserData(session?.user?.id || "");
   const userAvailability = await getUserAvailability(session?.user?.id || "");
 
-  const localAvailabilities = userAvailability?.map((row) => {
-    const localHour = new Date();
-    localHour.setUTCHours(row.timeSlot);
-    return { dayOfWeek: row.dayOfWeek, timeSlot: localHour.getHours() };
-  });
-  const mondayAvailability = localAvailabilities
+  
+  const mondayAvailability = userAvailability
     ?.filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 0
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const tuesdayAvailability = localAvailabilities
+  const tuesdayAvailability = userAvailability
     ?.filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 1
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const wednesdayAvailability = localAvailabilities
+  const wednesdayAvailability = userAvailability
     ?.filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 2
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const thursdayAvailability = localAvailabilities
+  const thursdayAvailability = userAvailability
     ?.filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 3
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const fridayAvailability = localAvailabilities
+  const fridayAvailability = userAvailability
     ?.filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 4
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const saturdayAvailability = localAvailabilities
+  const saturdayAvailability = userAvailability
     ?.filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 5
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const sundayAvailability = localAvailabilities
+  const sundayAvailability = userAvailability
     ?.filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 6
     )
