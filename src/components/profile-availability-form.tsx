@@ -25,39 +25,24 @@ import { updateUserAvailability } from "@/actions/user-configuration";
 
 export function ProfileAvailabilityForm({
   userId,
-  availabilityConfig,
+  mondayAvailability,
+  tuesdayAvailability,
+  wednesdayAvailability,
+  thursdayAvailability,
+  fridayAvailability,
+  saturdayAvailability,
+  sundayAvailability,
 }: {
   userId: string;
-  availabilityConfig: { dayOfWeek: number; timeSlot: number }[];
+  mondayAvailability: number[];
+  tuesdayAvailability: number[];
+  wednesdayAvailability: number[];
+  thursdayAvailability: number[];
+  fridayAvailability: number[];
+  saturdayAvailability: number[];
+  sundayAvailability: number[];
 }) {
   const [isPending, startTransition] = useTransition();
-
-  const localAvailabilities = availabilityConfig.map((row) => {
-    const localHour = new Date();
-    localHour.setUTCHours(row.timeSlot);
-    return { dayOfWeek: row.dayOfWeek, timeSlot: localHour.getHours() };
-  });
-  const mondayAvailability = localAvailabilities
-    .filter((row) => row.dayOfWeek == 0)
-    .map((row) => row.timeSlot);
-  const tuesdayAvailability = localAvailabilities
-    .filter((row) => row.dayOfWeek == 1)
-    .map((row) => row.timeSlot);
-  const wednesdayAvailability = localAvailabilities
-    .filter((row) => row.dayOfWeek == 2)
-    .map((row) => row.timeSlot);
-  const thursdayAvailability = localAvailabilities
-    .filter((row) => row.dayOfWeek == 3)
-    .map((row) => row.timeSlot);
-  const fridayAvailability = localAvailabilities
-    .filter((row) => row.dayOfWeek == 4)
-    .map((row) => row.timeSlot);
-  const saturdayAvailability = localAvailabilities
-    .filter((row) => row.dayOfWeek == 5)
-    .map((row) => row.timeSlot);
-  const sundayAvailability = localAvailabilities
-    .filter((row) => row.dayOfWeek == 6)
-    .map((row) => row.timeSlot);
 
   const form = useForm<z.infer<typeof UserAvailabilitySchema>>({
     resolver: zodResolver(UserAvailabilitySchema),

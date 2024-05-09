@@ -35,6 +35,47 @@ export default async function MyProfile() {
   const userBasicData = await getUserData(session?.user?.id || "");
   const userAvailability = await getUserAvailability(session?.user?.id || "");
 
+  const localAvailabilities = userAvailability?.map((row) => {
+    const localHour = new Date();
+    localHour.setUTCHours(row.timeSlot);
+    return { dayOfWeek: row.dayOfWeek, timeSlot: localHour.getHours() };
+  });
+  const mondayAvailability = localAvailabilities
+    ?.filter(
+      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 0
+    )
+    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+  const tuesdayAvailability = localAvailabilities
+    ?.filter(
+      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 1
+    )
+    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+  const wednesdayAvailability = localAvailabilities
+    ?.filter(
+      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 2
+    )
+    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+  const thursdayAvailability = localAvailabilities
+    ?.filter(
+      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 3
+    )
+    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+  const fridayAvailability = localAvailabilities
+    ?.filter(
+      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 4
+    )
+    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+  const saturdayAvailability = localAvailabilities
+    ?.filter(
+      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 5
+    )
+    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+  const sundayAvailability = localAvailabilities
+    ?.filter(
+      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 6
+    )
+    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+
   let initials;
   if (userBasicData && userBasicData.firstname && userBasicData.lastname) {
     initials = `${Array.from(userBasicData.firstname)[0]}${
@@ -132,7 +173,19 @@ export default async function MyProfile() {
             <CardContent>
               <ProfileAvailabilityForm
                 userId={session?.user?.id || ""}
-                availabilityConfig={userAvailability || []}
+                mondayAvailability={mondayAvailability || [8, 10, 12, 14, 16]}
+                tuesdayAvailability={tuesdayAvailability || [8, 10, 12, 14, 16]}
+                wednesdayAvailability={
+                  wednesdayAvailability || [8, 10, 12, 14, 16]
+                }
+                thursdayAvailability={
+                  thursdayAvailability || [8, 10, 12, 14, 16]
+                }
+                fridayAvailability={fridayAvailability || [8, 10, 12, 14, 16]}
+                saturdayAvailability={
+                  saturdayAvailability || [8, 10, 12, 14, 16]
+                }
+                sundayAvailability={sundayAvailability || [8, 10, 12, 14, 16]}
               ></ProfileAvailabilityForm>
             </CardContent>
           </Card>
