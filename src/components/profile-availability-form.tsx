@@ -24,31 +24,51 @@ import { objectMap } from "@/lib/utils";
 import { updateUserAvailability } from "@/actions/user-configuration";
 
 export function ProfileAvailabilityForm({
-    userId,
-    availabilityConfig,
-  }: {
-    userId: string;
-    availabilityConfig: { dayOfWeek: number; timeSlot: number }[];
-  }) {
+  userId,
+  availabilityConfig,
+}: {
+  userId: string;
+  availabilityConfig: { dayOfWeek: number; timeSlot: number }[];
+}) {
   const [isPending, startTransition] = useTransition();
 
-  const localAvailabilities = availabilityConfig.map((row)=> {
-    const localHour = new Date()
-    localHour.setUTCHours(row.timeSlot)
-    return {dayOfWeek: row.dayOfWeek, timeSlot: localHour.getHours()}
-  })
-  console.log(localAvailabilities)
+  const localAvailabilities = availabilityConfig.map((row) => {
+    const localHour = new Date();
+    localHour.setUTCHours(row.timeSlot);
+    return { dayOfWeek: row.dayOfWeek, timeSlot: localHour.getHours() };
+  });
+  const mondayAvailability = localAvailabilities
+    .filter((row) => row.dayOfWeek == 0)
+    .map((row) => row.timeSlot);
+  const tuesdayAvailability = localAvailabilities
+    .filter((row) => row.dayOfWeek == 1)
+    .map((row) => row.timeSlot);
+  const wednesdayAvailability = localAvailabilities
+    .filter((row) => row.dayOfWeek == 2)
+    .map((row) => row.timeSlot);
+  const thursdayAvailability = localAvailabilities
+    .filter((row) => row.dayOfWeek == 3)
+    .map((row) => row.timeSlot);
+  const fridayAvailability = localAvailabilities
+    .filter((row) => row.dayOfWeek == 4)
+    .map((row) => row.timeSlot);
+  const saturdayAvailability = localAvailabilities
+    .filter((row) => row.dayOfWeek == 5)
+    .map((row) => row.timeSlot);
+  const sundayAvailability = localAvailabilities
+    .filter((row) => row.dayOfWeek == 6)
+    .map((row) => row.timeSlot);
 
   const form = useForm<z.infer<typeof UserAvailabilitySchema>>({
     resolver: zodResolver(UserAvailabilitySchema),
     defaultValues: {
-      mondayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 0).map((row)=> row.timeSlot),
-      tuesdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 1).map((row)=> row.timeSlot),
-      wednesdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 2).map((row)=> row.timeSlot),
-      thursdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 3).map((row)=> row.timeSlot),
-      fridayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 4).map((row)=> row.timeSlot),
-      saturdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 5).map((row)=> row.timeSlot),
-      sundayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 6).map((row)=> row.timeSlot),
+      mondayAvailability,
+      tuesdayAvailability,
+      wednesdayAvailability,
+      thursdayAvailability,
+      fridayAvailability,
+      saturdayAvailability,
+      sundayAvailability,
     },
   });
 
@@ -69,7 +89,9 @@ export function ProfileAvailabilityForm({
 
   function onSubmit(data: z.infer<typeof UserAvailabilitySchema>) {
     startTransition(async () => {
-      const dataUTC = toUTCAvailability(data) as z.infer<typeof UserAvailabilitySchema>
+      const dataUTC = toUTCAvailability(data) as z.infer<
+        typeof UserAvailabilitySchema
+      >;
       updateUserAvailability(dataUTC, userId);
       toast({
         title: "¡Se han actualizado tu horario disponible!",
