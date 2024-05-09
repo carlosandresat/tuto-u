@@ -132,7 +132,7 @@ export default async function MyProfile() {
             <CardContent>
               <ProfileAvailabilityForm
                 userId={session?.user?.id || ""}
-                availabilityConfig={userAvailability}
+                availabilityConfig={userAvailability || []}
               ></ProfileAvailabilityForm>
             </CardContent>
           </Card>

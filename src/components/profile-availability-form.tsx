@@ -28,26 +28,27 @@ export function ProfileAvailabilityForm({
     availabilityConfig,
   }: {
     userId: string;
-    availabilityConfig?: { dayOfWeek: number; timeSlot: number }[];
+    availabilityConfig: { dayOfWeek: number; timeSlot: number }[];
   }) {
   const [isPending, startTransition] = useTransition();
 
-  const localAvailabilities = availabilityConfig?.map((row)=> {
+  const localAvailabilities = availabilityConfig.map((row)=> {
     const localHour = new Date()
     localHour.setUTCHours(row.timeSlot)
     return {dayOfWeek: row.dayOfWeek, timeSlot: localHour.getHours()}
   })
+  console.log(localAvailabilities)
 
   const form = useForm<z.infer<typeof UserAvailabilitySchema>>({
     resolver: zodResolver(UserAvailabilitySchema),
     defaultValues: {
-      mondayAvailability: localAvailabilities?.filter((row)=> row.dayOfWeek == 0).map((row)=> row.timeSlot) || [],
-      tuesdayAvailability: localAvailabilities?.filter((row)=> row.dayOfWeek == 1).map((row)=> row.timeSlot) || [],
-      wednesdayAvailability: localAvailabilities?.filter((row)=> row.dayOfWeek == 2).map((row)=> row.timeSlot) || [],
-      thursdayAvailability: localAvailabilities?.filter((row)=> row.dayOfWeek == 3).map((row)=> row.timeSlot) || [],
-      fridayAvailability: localAvailabilities?.filter((row)=> row.dayOfWeek == 4).map((row)=> row.timeSlot) || [],
-      saturdayAvailability: localAvailabilities?.filter((row)=> row.dayOfWeek == 5).map((row)=> row.timeSlot) || [],
-      sundayAvailability: localAvailabilities?.filter((row)=> row.dayOfWeek == 6).map((row)=> row.timeSlot) || [],
+      mondayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 0).map((row)=> row.timeSlot),
+      tuesdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 1).map((row)=> row.timeSlot),
+      wednesdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 2).map((row)=> row.timeSlot),
+      thursdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 3).map((row)=> row.timeSlot),
+      fridayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 4).map((row)=> row.timeSlot),
+      saturdayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 5).map((row)=> row.timeSlot),
+      sundayAvailability: localAvailabilities.filter((row)=> row.dayOfWeek == 6).map((row)=> row.timeSlot),
     },
   });
 
