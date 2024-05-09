@@ -134,28 +134,28 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  <ToggleGroupItem value="8" aria-label="Toggle 8am">
+                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="10" aria-label="Toggle 10am">
+                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
                     10am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="12" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
                     12pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="14" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
                     2pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="16" aria-label="Toggle 4pm">
+                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
                     4pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="18" aria-label="Toggle 6pm">
+                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
                     6pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="20" aria-label="Toggle 8pm">
+                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
                     8pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="22" aria-label="Toggle 10pm">
+                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
                     10pm
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -178,28 +178,28 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  <ToggleGroupItem value="8" aria-label="Toggle 8am">
+                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="10" aria-label="Toggle 10am">
+                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
                     10am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="12" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
                     12pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="14" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
                     2pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="16" aria-label="Toggle 4pm">
+                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
                     4pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="18" aria-label="Toggle 6pm">
+                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
                     6pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="20" aria-label="Toggle 8pm">
+                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
                     8pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="22" aria-label="Toggle 10pm">
+                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
                     10pm
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -222,28 +222,28 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  <ToggleGroupItem value="8" aria-label="Toggle 8am">
+                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="10" aria-label="Toggle 10am">
+                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
                     10am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="12" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
                     12pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="14" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
                     2pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="16" aria-label="Toggle 4pm">
+                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
                     4pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="18" aria-label="Toggle 6pm">
+                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
                     6pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="20" aria-label="Toggle 8pm">
+                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
                     8pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="22" aria-label="Toggle 10pm">
+                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
                     10pm
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -266,28 +266,28 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  <ToggleGroupItem value="8" aria-label="Toggle 8am">
+                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="10" aria-label="Toggle 10am">
+                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
                     10am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="12" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
                     12pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="14" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
                     2pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="16" aria-label="Toggle 4pm">
+                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
                     4pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="18" aria-label="Toggle 6pm">
+                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
                     6pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="20" aria-label="Toggle 8pm">
+                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
                     8pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="22" aria-label="Toggle 10pm">
+                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
                     10pm
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -310,28 +310,28 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  <ToggleGroupItem value="8" aria-label="Toggle 8am">
+                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="10" aria-label="Toggle 10am">
+                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
                     10am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="12" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
                     12pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="14" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
                     2pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="16" aria-label="Toggle 4pm">
+                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
                     4pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="18" aria-label="Toggle 6pm">
+                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
                     6pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="20" aria-label="Toggle 8pm">
+                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
                     8pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="22" aria-label="Toggle 10pm">
+                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
                     10pm
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -354,28 +354,28 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  <ToggleGroupItem value="8" aria-label="Toggle 8am">
+                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="10" aria-label="Toggle 10am">
+                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
                     10am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="12" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
                     12pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="14" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
                     2pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="16" aria-label="Toggle 4pm">
+                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
                     4pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="18" aria-label="Toggle 6pm">
+                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
                     6pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="20" aria-label="Toggle 8pm">
+                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
                     8pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="22" aria-label="Toggle 10pm">
+                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
                     10pm
                   </ToggleGroupItem>
                 </ToggleGroup>
@@ -398,28 +398,28 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
-                  <ToggleGroupItem value="8" aria-label="Toggle 8am">
+                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="10" aria-label="Toggle 10am">
+                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
                     10am
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="12" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
                     12pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="14" aria-label="Toggle 2pm">
+                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
                     2pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="16" aria-label="Toggle 4pm">
+                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
                     4pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="18" aria-label="Toggle 6pm">
+                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
                     6pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="20" aria-label="Toggle 8pm">
+                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
                     8pm
                   </ToggleGroupItem>
-                  <ToggleGroupItem value="22" aria-label="Toggle 10pm">
+                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
                     10pm
                   </ToggleGroupItem>
                 </ToggleGroup>
