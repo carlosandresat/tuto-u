@@ -162,7 +162,7 @@ export default async function MyProfile() {
               <CardTitle>Horarios disponibles</CardTitle>
               <CardDescription>
                 Selecciona los horarios en los que estás disponible para ofrecer
-                tutorías
+                tutorías (Si no te carga tu horario, regresa y vuelve a acceder a &apos;Mi perfil&apos;)
               </CardDescription>
             </CardHeader>
             <CardContent>
