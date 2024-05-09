@@ -45,17 +45,18 @@ model Session {
 }
 
 model User {
-  id            String                     @id @default(cuid())
-  firstname     String?
-  lastname      String?
-  email         String?                    @unique
-  emailVerified DateTime?                  @map("email_verified")
-  image         String?
-  password      String?
-  accounts      Account[]
-  sessions      Session[]
-  tutor_pricing UserPricingConfiguration[]
-  tutorCourses  TutorCourse[]
+  id             String                     @id @default(cuid())
+  firstname      String?
+  lastname       String?
+  email          String?                    @unique
+  emailVerified  DateTime?                  @map("email_verified")
+  image          String?
+  password       String?
+  accounts       Account[]
+  sessions       Session[]
+  tutor_pricing  UserPricingConfiguration[]
+  tutorCourses   TutorCourse[]
+  availabilities TutorAvailability[]
 
   createdAt DateTime @default(now())
 
@@ -100,14 +101,13 @@ model TutorCourse {
 }
 
 model Course {
-  id           Int            @id @default(autoincrement())
+  id           Int           @id @default(autoincrement())
   name         String
-  schoolId     Int            @map("school_id")
-  school       School         @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  schoolId     Int           @map("school_id")
+  school       School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   tutorCourses TutorCourse[]
-  
-  @@map("courses")
 
+  @@map("courses")
 }
 
 model School {
@@ -117,4 +117,12 @@ model School {
   courses Course[]
 
   @@map("schools")
+}
+
+model TutorAvailability {
+  id        Int    @id @default(autoincrement())
+  id_tutor  String
+  dayOfWeek String @db.VarChar(3)
+  timeSlot  Int    @db.SmallInt
+  tutor     User   @relation(fields: [id_tutor], references: [id])
 }
