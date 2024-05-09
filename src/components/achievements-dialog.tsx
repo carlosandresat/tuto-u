@@ -334,7 +334,7 @@ export function AchievementsDialog() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                  Usurio Pre-Release
+                Usurio Pre-Registrado
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -342,7 +342,8 @@ export function AchievementsDialog() {
               </p>
 
               <p className="mt-2">
-                Eres un usuario que ha solicitado acceso a la versión Pre-Release de Tuto-U. ¡Gracias!
+              Eres un usuario que ha completado el Pre-Registro de
+                      Tuto-U. ¡Gracias!
               </p>
             </HoverCardContent>
           </HoverCard>
