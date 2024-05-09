@@ -204,7 +204,7 @@ export const getUserAvailability = async (userId: string) => {
     return data;
   } catch (error) {
     console.log(error);
-    return null;
+    return [];
   }
 };
 

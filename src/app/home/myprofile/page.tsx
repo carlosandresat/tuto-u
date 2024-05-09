@@ -35,39 +35,38 @@ export default async function MyProfile() {
   const userBasicData = await getUserData(session?.user?.id || "");
   const userAvailability = await getUserAvailability(session?.user?.id || "");
 
-  
   const mondayAvailability = userAvailability
-    ?.filter(
+    .filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 0
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
   const tuesdayAvailability = userAvailability
-    ?.filter(
+    .filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 1
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
   const wednesdayAvailability = userAvailability
-    ?.filter(
+    .filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 2
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
   const thursdayAvailability = userAvailability
-    ?.filter(
+    .filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 3
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
   const fridayAvailability = userAvailability
-    ?.filter(
+    .filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 4
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
   const saturdayAvailability = userAvailability
-    ?.filter(
+    .filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 5
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
   const sundayAvailability = userAvailability
-    ?.filter(
+    .filter(
       (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 6
     )
     .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
@@ -169,19 +168,13 @@ export default async function MyProfile() {
             <CardContent>
               <ProfileAvailabilityForm
                 userId={session?.user?.id || ""}
-                mondayAvailability={mondayAvailability || [8, 10, 12, 14, 16]}
-                tuesdayAvailability={tuesdayAvailability || [8, 10, 12, 14, 16]}
-                wednesdayAvailability={
-                  wednesdayAvailability || [8, 10, 12, 14, 16]
-                }
-                thursdayAvailability={
-                  thursdayAvailability || [8, 10, 12, 14, 16]
-                }
-                fridayAvailability={fridayAvailability || [8, 10, 12, 14, 16]}
-                saturdayAvailability={
-                  saturdayAvailability || [8, 10, 12, 14, 16]
-                }
-                sundayAvailability={sundayAvailability || [8, 10, 12, 14, 16]}
+                mondayAvailability={mondayAvailability}
+                tuesdayAvailability={tuesdayAvailability}
+                wednesdayAvailability={wednesdayAvailability}
+                thursdayAvailability={thursdayAvailability}
+                fridayAvailability={fridayAvailability}
+                saturdayAvailability={saturdayAvailability}
+                sundayAvailability={sundayAvailability}
               ></ProfileAvailabilityForm>
             </CardContent>
           </Card>
