@@ -14,7 +14,13 @@ export default function Pricing() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
           Precios
         </h2>
-        <div className="container px-4 md:px-6">
+        <div className="flex mt-8">
+        <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl">
+            Próximamente...
+          </h1>
+
+        </div>
+        {/*<div className="container px-4 md:px-6">
 
         <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-3 md:gap-8">
           <div className="border p-4 rounded-lg">
@@ -130,7 +136,7 @@ export default function Pricing() {
             </ul>
           </div>
         </div>
-      </div>
+      </div>*/}
 
         
       </section>
