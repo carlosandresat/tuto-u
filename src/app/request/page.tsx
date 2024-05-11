@@ -59,38 +59,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { IndividualSessionRequestSchema } from "@/schemas";
 import { AchievementsDialog } from "@/components/achievements-dialog";
 import { useState } from "react";
 
-const FormSchema = z.object({
-  date: z.date({
-    required_error: "Tienes que escoger una fecha.",
-  }),
-  course: z.string({
-    required_error: "Tienes que escoger un curso.",
-  }),
-  time: z.string({
-    required_error: "Tienes que escoger una hora.",
-  }),
-  tutor: z.string({
-    required_error: "Tienes que escoger un tutor.",
-  }),
-  duration: z.string({
-    required_error: "Tienes que escoger una duración.",
-  }),
-  topic: z
-    .string({
-      required_error: "Tienes que ingresar un tema.",
-    })
-    .min(5, "Minimo 5 caracteres")
-    .max(100, "Maximo 100 caracteres"),
-  place: z.string().optional(),
-  isOnline: z.boolean(),
-});
 
 export default function Component() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+  const form = useForm<z.infer<typeof IndividualSessionRequestSchema>>({
+    resolver: zodResolver(IndividualSessionRequestSchema),
     defaultValues: {
       //course: "2",
       place: "",
@@ -98,7 +74,7 @@ export default function Component() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  function onSubmit(data: z.infer<typeof IndividualSessionRequestSchema>) {
     const datetime = new Date(data.date);
     datetime.setHours(parseInt(data.time.split(":")[0]));
     datetime.setMinutes(parseInt(data.time.split(":")[1]));

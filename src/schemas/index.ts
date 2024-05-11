@@ -59,3 +59,29 @@ export const UserAvailabilitySchema = z.object({
     saturdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
     sundayAvailability: z.array(z.coerce.number().int().positive().max(23)),
 })
+
+export const IndividualSessionRequestSchema = z.object({
+    date: z.date({
+      required_error: "Tienes que escoger una fecha.",
+    }),
+    course: z.string({
+      required_error: "Tienes que escoger un curso.",
+    }),
+    time: z.string({
+      required_error: "Tienes que escoger una hora.",
+    }),
+    tutor: z.string({
+      required_error: "Tienes que escoger un tutor.",
+    }),
+    duration: z.string({
+      required_error: "Tienes que escoger una duración.",
+    }),
+    topic: z
+      .string({
+        required_error: "Tienes que ingresar un tema.",
+      })
+      .min(5, "Minimo 5 caracteres")
+      .max(100, "Maximo 100 caracteres"),
+    place: z.string().optional(),
+    isOnline: z.boolean(),
+  });
