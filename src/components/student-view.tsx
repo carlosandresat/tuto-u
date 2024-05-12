@@ -19,167 +19,68 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
+import { StudentSessionCard } from "@/components/student-session-card"
 
 export function StudentView() {
+  const someData = [
+    {
+      status:"accepted", 
+      fullname: "Carlos Andrés Arévalo Torres", 
+      photo_url: "carlos.arevalo", 
+      course:"Cálculo 1", 
+      date:"12 May, 2024", 
+      time: "2:00 PM",
+      place: "Sala de estudio biblioteca (planta baja)",
+      duration: 120, 
+      price: 5.00, 
+      topic: "Teorema fundamental del Cálculo",
+      rawDateTime: new Date("2024-05-12 14:41:50-05")
+    },
+    {
+      status:"accepted", 
+      fullname: "Carlos Andrés Arévalo Torres", 
+      photo_url: "carlos.arevalo", 
+      course:"Cálculo 1", 
+      date:"20 May, 2024", 
+      time: "4:00 PM",
+      place: "Sala de estudio biblioteca (planta baja)",
+      duration: 120, 
+      price: 5.00, 
+      topic: "Límites",
+      rawDateTime: new Date("2024-05-20 14:41:50-05")
+    },
+    {
+      status:"requested", 
+      fullname: "Carlos Andrés Arévalo Torres", 
+      photo_url: "carlos.arevalo", 
+      course:"Álgebra Lineal", 
+      date:"20 Abr, 2024", 
+      time: "6:00 PM",
+      place: "B-103",
+      duration: 60, 
+      price: 2.80, 
+      topic: "Espacios Vectoriales",
+      rawDateTime: new Date("2024-05-10 14:37:16-08")
+    },
+    {
+      status:"canceled", 
+      fullname: "Carlos Andrés Arévalo Torres", 
+      photo_url: "carlos.arevalo", 
+      course:"Química 2", 
+      date:"20 Abr, 2024", 
+      time: "6:00 PM",
+      place: "Sala de estudio biblioteca (planta alta)",
+      duration: 90, 
+      price: 3.50, 
+      topic: "Química Orgánica",
+      rawDateTime: new Date("2024-05-13 07:37:16-08")
+    },
+  ]
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
-      <Card>
-        <CardHeader>
-          <Badge className=" bg-green-500 w-fit mb-2">Aceptada</Badge>
-
-          <div className="flex items-center space-x-2">
-            <Avatar>
-              <AvatarImage
-                src="/photos/carlos.arevalo.jpg"
-                className=" object-cover"
-              />
-              <AvatarFallback>CA</AvatarFallback>
-            </Avatar>
-            <CardTitle className="rounded-md bg-background/40">
-              Carlos Arévalo
-            </CardTitle>
-          </div>
-          <CardDescription className="text-base text-foreground backdrop-blur-sm rounded-md w-fit px-2 bg-background/40">
-            Cálculo 1
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2 py-2  rounded-md w-fit bg-background/40 mb-2">
-          <div className="flex space-x-2">
-            <Calendar />
-            <p>20 Abr, 2024</p>
-          </div>
-          <div className="flex space-x-2">
-            <Clock1 />
-            <p> 4:00 - 6:00 PM</p>
-          </div>
-          <div className="flex space-x-2">
-            <MapPin />
-            <p>Sala de estudio biblioteca (planta baja)</p>
-          </div>
-          <div className="flex space-x-2">
-            <LibraryBig />
-            <p>Teorema fundamental del Cálculo</p>
-          </div>
-          <div className="flex space-x-2">
-            <Hourglass />
-            <p>2 horas</p>
-          </div>
-          <div className="flex space-x-2">
-            <Banknote /> <p>$5.00</p>
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between items-center space-x-2">
-          <Button variant="secondary">Reportar</Button>
-          <Button>
-            Calificar por 20
-            <Image
-              src="/images/tuto-gem.png"
-              alt="tuto-gem"
-              width={25}
-              height={25}
-              className="ml-2"
-            />
-          </Button>
-        </CardFooter>
-      </Card>
-      <Card>
-        <CardHeader>
-          <Badge className=" bg-green-500 w-fit mb-2">Aceptada</Badge>
-
-          <div className="flex items-center space-x-2">
-            <Avatar>
-              <AvatarImage
-                src="/photos/carlos.arevalo.jpg"
-                className=" object-cover"
-              />
-              <AvatarFallback>CA</AvatarFallback>
-            </Avatar>
-            <CardTitle className="rounded-md bg-background/40">
-              Carlos Arévalo
-            </CardTitle>
-          </div>
-          <CardDescription className="text-base px-2">
-            Cálculo 1
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <div className="flex space-x-2">
-            <Calendar />
-            <p>20 Abr, 2024</p>
-          </div>
-          <div className="flex space-x-2">
-            <Clock1 />
-            <p> 4:00 - 6:00 PM</p>
-          </div>
-          <div className="flex space-x-2">
-            <MapPin />
-            <p>Sala de estudio biblioteca (planta baja)</p>
-          </div>
-          <div className="flex space-x-2">
-            <LibraryBig />
-            <p>Teorema fundamental del Cálculo</p>
-          </div>
-          <div className="flex space-x-2">
-            <Hourglass />
-            <p>2 horas</p>
-          </div>
-          <div className="flex space-x-2">
-            <Banknote /> <p>$5.00</p>
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between items-center">
-          <Button variant="secondary">Cancelar</Button>
-        </CardFooter>
-      </Card>
-      <Card>
-        <CardHeader>
-          <Badge className=" bg-yellow-500 w-fit mb-2">Pendiente</Badge>
-
-          <div className="flex items-center space-x-2">
-            <Avatar>
-              <AvatarImage
-                src="/photos/carlos.arevalo.jpg"
-                className=" object-cover"
-              />
-              <AvatarFallback>CA</AvatarFallback>
-            </Avatar>
-            <CardTitle className="rounded-md bg-background/40">
-              Carlos Arévalo
-            </CardTitle>
-          </div>
-          <CardDescription className="w-fit text-foreground rounded-md bg-background/40 text-base px-2">
-            Cálculo 1
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2 rounded-md bg-background/40 py-2 mb-2 w-fit">
-          <div className="flex space-x-2">
-            <Calendar />
-            <p>20 Abr, 2024</p>
-          </div>
-          <div className="flex space-x-2">
-            <Clock1 />
-            <p> 4:00 - 6:00 PM</p>
-          </div>
-          <div className="flex space-x-2">
-            <MapPin />
-            <p>Sala de estudio biblioteca (planta baja)</p>
-          </div>
-          <div className="flex space-x-2">
-            <LibraryBig />
-            <p>Teorema fundamental del Cálculo</p>
-          </div>
-          <div className="flex space-x-2">
-            <Hourglass />
-            <p>2 horas</p>
-          </div>
-          <div className="flex space-x-2">
-            <Banknote /> <p>$5.00</p>
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <CancelDialog />
-        </CardFooter>
-      </Card>
+      {someData.map((row, index)=> 
+        <StudentSessionCard {...row} key={index}></StudentSessionCard>
+      )}
       {/*Esta card es para tutor-view
       <Card>
         <CardHeader>
@@ -230,54 +131,6 @@ export function StudentView() {
         </CardFooter>
       </Card>
             */}
-
-
-      <Card>
-        <CardHeader>
-          <Badge className=" bg-destructive w-fit mb-2 dark:text-foreground hover:dark:text-background">
-            Cancelada
-          </Badge>
-
-          <div className="flex items-center space-x-2">
-            <Avatar>
-              <AvatarImage src="/photos/carlos.arevalo.jpg" />
-              <AvatarFallback>CA</AvatarFallback>
-            </Avatar>
-            <CardTitle className="bg-background/40 rounded-md">
-              Carlos Arévalo
-            </CardTitle>
-          </div>
-          <CardDescription className="text-base rounded-md w-fit bg-background/40 text-foreground px-2">
-            Cálculo 1
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2  bg-background/40 py-2 rounded-md w-fit">
-          <div className="flex space-x-2">
-            <Calendar />
-            <p>20 Abr, 2024</p>
-          </div>
-          <div className="flex space-x-2">
-            <Clock1 />
-            <p> 4:00 - 6:00 PM</p>
-          </div>
-          <div className="flex space-x-2">
-            <MapPin />
-            <p>Sala de estudio biblioteca (planta baja)</p>
-          </div>
-          <div className="flex space-x-2">
-            <LibraryBig />
-            <p>Teorema fundamental del Cálculo</p>
-          </div>
-          <div className="flex space-x-2">
-            <Hourglass />
-            <p>2 horas</p>
-          </div>
-          <div className="flex space-x-2">
-            <Banknote /> <p>$5.00</p>
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between items-center"></CardFooter>
-      </Card>
     </div>
   );
 }
