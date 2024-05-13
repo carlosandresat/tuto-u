@@ -78,6 +78,8 @@ export default async function MyProfile() {
     }`;
   }
 
+  const timeOptions = ["8", "10", "12", "14", "16", "18", "20", "22"]
+
   const courses = [
     { id: 1, course: "Cálculo 1" },
     { id: 2, course: "Cálculo 2" },
@@ -168,6 +170,7 @@ export default async function MyProfile() {
             <CardContent>
               <ProfileAvailabilityForm
                 userId={session?.user?.id || ""}
+                timeOptions={timeOptions}
                 mondayAvailability={mondayAvailability}
                 tuesdayAvailability={tuesdayAvailability}
                 wednesdayAvailability={wednesdayAvailability}

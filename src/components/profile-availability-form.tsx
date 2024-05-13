@@ -25,6 +25,7 @@ import { updateUserAvailability } from "@/actions/user-configuration";
 
 export function ProfileAvailabilityForm({
   userId,
+  timeOptions,
   mondayAvailability,
   tuesdayAvailability,
   wednesdayAvailability,
@@ -34,6 +35,7 @@ export function ProfileAvailabilityForm({
   sundayAvailability,
 }: {
   userId: string;
+  timeOptions: string[],
   mondayAvailability: number[];
   tuesdayAvailability: number[];
   wednesdayAvailability: number[];
@@ -190,30 +192,10 @@ export function ProfileAvailabilityForm({
                   value={field.value.map((x) => x.toString())}
                   onValueChange={(e)=> {field.onChange(e.map((x)=> Number(x)));console.log("OnMondayChangeNumbers:", e.map((x)=> Number(x)));console.log("Tuesday form value", form.getValues("tuesdayAvailability"))}}
                 >
-                  <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
-                    8am
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="10" key="10" aria-label="Toggle 10am">
-                    10am
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="12" key="12" aria-label="Toggle 12pm">
-                    12pm
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="14" key="14" aria-label="Toggle 2pm">
-                    2pm
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="16" key="16" aria-label="Toggle 4pm">
-                    4pm
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="18" key="18" aria-label="Toggle 6pm">
-                    6pm
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="20" key="20" aria-label="Toggle 8pm">
-                    8pm
-                  </ToggleGroupItem>
-                  <ToggleGroupItem value="22" key="22" aria-label="Toggle 10pm">
-                    10pm
-                  </ToggleGroupItem>
+                  {timeOptions.map((hour, index)=>
+                  <ToggleGroupItem value={hour.toString()} key={index} aria-label={ Number(hour)<=12 ? `Toggle ${hour}am` : `Toggle ${Number(hour)%12}pm`}>
+                  { Number(hour)<=12 ? `${hour}am` : `${Number(hour)%12}pm`}
+                </ToggleGroupItem>)}
                 </ToggleGroup>
               </FormControl>
             </FormItem>
