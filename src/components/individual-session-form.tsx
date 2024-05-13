@@ -68,6 +68,8 @@ export function IndividualSessionForm() {
     {
       id: string;
       name: string;
+      email: string | null;
+      nameInitials: string;
       pricing: { duration: number; price: string }[];
     }[]
   >([]);
@@ -240,7 +242,7 @@ export function IndividualSessionForm() {
                               form.setValue("tutor", "");
                               if (
                                 form.getValues("course") !== undefined &&
-                                form.getValues("time") !== undefined && 
+                                form.getValues("time") !== undefined &&
                                 form.getValues("date") !== undefined
                               ) {
                                 const localHour = new Date();
@@ -488,10 +490,21 @@ export function IndividualSessionForm() {
         <CardContent className="flex flex-col items-center space-y-4">
           <Avatar className="w-32 h-32">
             <AvatarImage
-              src="/photos/carlos.arevalo.jpg"
-              alt="Carlos Arévalo"
+              src={`/photos/${
+                form.watch("tutor") !== undefined && form.watch("tutor") !== ""
+                  ? availableTutors
+                      .filter((row) => row.id === form.watch("tutor"))[0]
+                      .email?.split("@")[0]
+                  : null
+              }.jpg`}
+              alt="Tutor Pic"
+              className="object-cover"
             ></AvatarImage>
-            <AvatarFallback className="text-3xl">CA</AvatarFallback>
+            <AvatarFallback className="text-3xl">{form.watch("tutor") !== undefined && form.watch("tutor") !== ""
+                ? availableTutors.filter(
+                    (row) => row.id === form.watch("tutor")
+                  )[0].nameInitials
+                : null}</AvatarFallback>
           </Avatar>
           <div className="text-center">
             <h2 className="text-xl font-semibold">
@@ -501,6 +514,8 @@ export function IndividualSessionForm() {
                   )[0].name
                 : null}
             </h2>
+
+            {/*
             <div className="flex justify-center items-center mt-2 gap-x-2 flex-wrap gap-y-2">
               <Badge className="">Rating: 4.7</Badge>
             </div>
@@ -508,17 +523,27 @@ export function IndividualSessionForm() {
               Aquí viene la descripción del tutor. Esta es una breve descripción
               del tutor.
             </p>
-            <h2 className="text-xl font-semibold">
-                $ {" "}
-              {form.watch("tutor") !== undefined && form.watch("tutor") !== "" && form.watch("duration") !== undefined
-                ? availableTutors.filter(
-                    (row) => row.id === form.watch("tutor")
-                  )[0].pricing.filter(row => row.duration.toString() === form.watch("duration"))[0].price
+            */}
+
+            <h2 className="text-xl font-semibold mt-4">
+              {availableTutors.length != 0 &&
+              form.watch("duration") !== undefined &&
+              form.watch("duration") !== "" &&
+              form.watch("tutor") !== ""
+                ? `$ ${
+                    availableTutors
+                      .filter((row) => row.id === form.watch("tutor"))[0]
+                      .pricing.filter(
+                        (row) =>
+                          row.duration.toString() === form.watch("duration")
+                      )[0].price
+                  }`
                 : null}
             </h2>
           </div>
-          <AchievementsDialog></AchievementsDialog>
-
+          {/*
+            <AchievementsDialog></AchievementsDialog>
+           */}
         </CardContent>
       </Card>
     </>
