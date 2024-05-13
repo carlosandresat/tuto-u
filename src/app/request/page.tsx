@@ -1,4 +1,3 @@
-
 import {
   CardTitle,
   CardDescription,
@@ -29,47 +28,7 @@ export default function Component() {
           </Button>
         </Link>
         <div className="flex flex-col md:flex-row gap-6 max-w-screen-2xl w-full mt-12">
-          <Card className="w-full md:w-2/3">
-            <CardHeader>
-              <CardTitle>Solicitar Tutoría</CardTitle>
-              <CardDescription>
-                Llena los siguientes campos para solicitar una tutoría.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-            <IndividualSessionForm></IndividualSessionForm>
-            </CardContent>
-          </Card>
-          <Card className="w-full md:w-1/3">
-            <CardHeader>
-              <CardTitle>Detalles del tutor</CardTitle>
-              <CardDescription>
-                Información acerca del tutor seleccionado.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col items-center space-y-4">
-              <Avatar className="w-32 h-32">
-                <AvatarImage
-                  src="/photos/carlos.arevalo.jpg"
-                  alt="Carlos Arévalo"
-                ></AvatarImage>
-                <AvatarFallback className="text-3xl">CA</AvatarFallback>
-              </Avatar>
-              <div className="text-center">
-                <h2 className="text-xl font-semibold">Tutor Name</h2>
-                <div className="flex justify-center items-center mt-2 gap-x-2 flex-wrap gap-y-2">
-                  <Badge className="">Rating: 4.7</Badge>
-                </div>
-                <p className="mt-2 text-sm text-gray-500">
-                  Aquí viene la descripción del tutor. Esta es una breve
-                  descripción del tutor.
-                </p>
-              </div>
-            </CardContent>
-            <CardFooter className="justify-center">
-              <AchievementsDialog></AchievementsDialog>
-            </CardFooter>
-          </Card>
+          <IndividualSessionForm></IndividualSessionForm>
         </div>
       </section>
     </>
