@@ -128,20 +128,7 @@ export function IndividualSessionForm() {
     };
     toast({
       title: "Felicidades",
-      description: (
-        <>
-          <p>¡Gracias por probar nuestro formulario!</p>
-          <pre className="mt-2 w-[340px] rounded-md bg-secondary p-4">
-            <code>
-              {JSON.stringify(
-                { ...formattedData, date: datetime.toLocaleString() },
-                null,
-                2
-              )}
-            </code>
-          </pre>
-        </>
-      ),
+      description: "¡Gracias por probar nuestro formulario, pronto estará disponible!",
     });
   }
 
