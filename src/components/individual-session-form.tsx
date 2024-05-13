@@ -240,20 +240,14 @@ export function IndividualSessionForm() {
                               form.setValue("tutor", "");
                               if (
                                 form.getValues("course") !== undefined &&
-                                form.getValues("time") !== undefined
+                                form.getValues("time") !== undefined && 
+                                form.getValues("date") !== undefined
                               ) {
                                 const localHour = new Date();
                                 localHour.setHours(
                                   parseInt(
                                     form.getValues("time").split(":")[0],
                                     10
-                                  )
-                                );
-                                console.log(
-                                  await getAvailableTutors(
-                                    parseInt(form.getValues("course")),
-                                    form.getValues("date").getDay(),
-                                    localHour.getUTCHours()
                                   )
                                 );
                                 setAvailableTutors(
