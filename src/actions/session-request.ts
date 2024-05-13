@@ -9,6 +9,57 @@ import {
   UserAvailabilitySchema,
 } from "@/schemas";
 
+export const getAvailableTutors = async (courseId: number, dayOfWeek: number, timeSlot: number) => {
+    try {
+      const tutors = await db.tutorCourse.findMany({
+        where: {
+            OR: [
+                {
+                    courseId: courseId,
+                    tutor: {
+                      availabilities: {
+                        some: {
+                          dayOfWeek: dayOfWeek,
+                          timeSlot: timeSlot,
+                        }
+                      }
+                    }
+                },
+                {
+                    courseId: courseId,
+                    tutor: {
+                      availabilities: {
+                        some: {
+                          dayOfWeek: dayOfWeek,
+                          timeSlot: timeSlot-1,
+                        }
+                      }
+                    }
+                },
+            ]
+          
+        },
+        select: {
+          tutorId: true,
+          tutor: {
+            select: {
+              firstname: true,
+              lastname: true,
+              id: true
+            }
+          }
+        }
+      });
+      return tutors.map(tutorCourse => ({
+        id: tutorCourse.tutorId,
+        name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`
+      }));
+    } catch (error) {
+      console.error("Failed to fetch available tutors:", error);
+      throw new Error("Unable to fetch available tutors.");
+    }
+  };
+
 export const getUserData = async (userId: string) => {
   const data = await db.user.findUnique({
     where: {
