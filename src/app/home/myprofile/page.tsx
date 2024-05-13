@@ -11,6 +11,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import Link from "next/link";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ProfilePricingForm } from "@/components/profile-pricing-form";
@@ -19,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ProfileCoursesForm } from "@/components/profile-courses-form";
 import { auth } from "@/auth";
+import { ArrowLeft } from "lucide-react";
 import {
   getUserPricing,
   getUserData,
@@ -102,7 +104,13 @@ export default async function MyProfile() {
   return (
     <>
       <section className="w-full py-8 flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 pt-32">
+      <Link href="/home" className="mt-20 md:mt-28 p-6 self-start">
+      <Button variant="link">
+            <ArrowLeft className="mr-2" /> Regresar
+          </Button>
+        </Link>
+
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-4 xl:mt-0">
           Mi Perfil
         </h2>
 
