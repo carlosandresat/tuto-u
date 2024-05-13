@@ -51,7 +51,7 @@ export const getAvailableTutors = async (
         id: tutorCourse.tutor.id,
         email: tutorCourse.tutor.email,
         name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`,
-        nameInitials:  `${tutorCourse.tutor.firstname?.charAt(0)}${tutorCourse.tutor.lastname?.charAt(0)}}`,
+        nameInitials:  `${tutorCourse.tutor.firstname?.charAt(0)}${tutorCourse.tutor.lastname?.charAt(0)}`,
         pricing: tutorCourse.tutor.tutor_pricing.map(config => ({
           duration: config.duration,
           price: config.price.toNumber().toFixed(2) // Ensure the price is returned as a number, if necessary

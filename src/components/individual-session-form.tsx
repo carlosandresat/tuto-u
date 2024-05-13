@@ -167,6 +167,7 @@ export function IndividualSessionForm() {
                       <Select
                         onValueChange={async (e) => {
                           field.onChange(e);
+                          form.setValue("duration", "");
                           form.setValue("tutor", "");
                           if (
                             form.getValues("date") !== undefined &&
@@ -239,6 +240,7 @@ export function IndividualSessionForm() {
                             selected={field.value}
                             onSelect={async (e) => {
                               field.onChange(e);
+                              form.setValue("duration", "");
                               form.setValue("tutor", "");
                               if (
                                 form.getValues("course") !== undefined &&
@@ -284,6 +286,7 @@ export function IndividualSessionForm() {
                         <Select
                           onValueChange={async (e) => {
                             field.onChange(e);
+                            form.setValue("duration", "");
                             form.setValue("tutor", "");
                             if (
                               form.getValues("date") !== undefined &&
@@ -378,7 +381,7 @@ export function IndividualSessionForm() {
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
-                          defaultValue={field.value}
+                          value={field.value}
                           disabled={!form.watch("tutor")}
                         >
                           <SelectTrigger>
@@ -496,7 +499,7 @@ export function IndividualSessionForm() {
                       .filter((row) => row.id === form.watch("tutor"))[0]
                       .email?.split("@")[0]
                   : null
-              }.jpg`}
+              }x.jpg`}
               alt="Tutor Pic"
               className="object-cover"
             ></AvatarImage>
