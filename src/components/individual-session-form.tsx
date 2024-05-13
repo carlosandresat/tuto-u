@@ -65,7 +65,11 @@ import { useState } from "react";
 
 export function IndividualSessionForm() {
   const [availableTutors, setAvailableTutors] = useState<
-    { id: string; name: string }[]
+    {
+      id: string;
+      name: string;
+      pricing: { duration: number; price: string }[];
+    }[]
   >([]);
   const form = useForm<z.infer<typeof IndividualSessionRequestSchema>>({
     resolver: zodResolver(IndividualSessionRequestSchema),
@@ -94,6 +98,18 @@ export function IndividualSessionForm() {
     { id: 16, course: "Inglés" },
   ];
 
+  function formatDuration(duration:number) {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+    if (minutes === 0) {
+      // Return just the hours if there are no extra minutes
+      return `${hours} hora${hours > 1 ? 's' : ''}`;
+    } else {
+      // Convert the minutes to a decimal fraction
+      const decimal = minutes / 60;
+      return `${hours + decimal} horas`; // Adds the decimal to hours
+    }
+  }
   function onSubmit(data: z.infer<typeof IndividualSessionRequestSchema>) {
     const datetime = new Date(data.date);
     datetime.setHours(parseInt(data.time.split(":")[0]));
@@ -220,6 +236,13 @@ export function IndividualSessionForm() {
                           const localHour = new Date();
                           localHour.setHours(
                             parseInt(form.getValues("time").split(":")[0], 10)
+                          );
+                          console.log(
+                            await getAvailableTutors(
+                              parseInt(form.getValues("course")),
+                              form.getValues("date").getDay(),
+                              localHour.getUTCHours()
+                            )
                           );
                           setAvailableTutors(
                             await getAvailableTutors(
@@ -351,11 +374,13 @@ export function IndividualSessionForm() {
                       <SelectValue placeholder="Selecciona una duración" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="60">1 hora</SelectItem>
-                      <SelectItem value="90">1 hora y media</SelectItem>
-                      <SelectItem value="120">2 horas</SelectItem>
-                      <SelectItem value="150">2 horas y media</SelectItem>
-                      <SelectItem value="180">3 horas</SelectItem>
+                      {form.getValues("tutor") !== undefined && form.getValues("tutor") !== "" ? availableTutors
+                        .filter((row) => row.id === form.getValues("tutor"))[0]
+                        .pricing.map((row, index) => (
+                          <SelectItem value={row.duration.toString()} key={index}>
+                            {formatDuration(row.duration)}
+                          </SelectItem>
+                        )):null}
                     </SelectContent>
                   </Select>
                 </FormControl>
