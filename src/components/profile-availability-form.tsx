@@ -128,6 +128,8 @@ export function ProfileAvailabilityForm({
             return localHour.getHours();
           }),
       });
+      console.log("mondayAv: ", form.getValues("mondayAvailability"))
+      console.log("tuesdayAv: ", form.getValues("tuesdayAvailability"))
       console.log("Initial data: " ,mondayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
