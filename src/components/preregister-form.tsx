@@ -131,6 +131,7 @@ export function PreregisterForm() {
               <FormControl>
                 <Input
                   placeholder="nombre.apellido@yachaytech.edu.ec"
+                  type="email"
                   disabled={isPending}
                   {...field}
                 />
