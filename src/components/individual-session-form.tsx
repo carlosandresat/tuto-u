@@ -499,7 +499,7 @@ export function IndividualSessionForm() {
                       .filter((row) => row.id === form.watch("tutor"))[0]
                       .email?.split("@")[0]
                   : null
-              }x.jpg`}
+              }.jpg`}
               alt="Tutor Pic"
               className="object-cover"
             ></AvatarImage>
