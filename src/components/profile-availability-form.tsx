@@ -14,7 +14,7 @@ import {
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useTransition } from "react";
+import { useTransition, useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -43,6 +43,10 @@ export function ProfileAvailabilityForm({
   sundayAvailability: number[];
 }) {
   const [isPending, startTransition] = useTransition();
+  const [loaded, setLoaded] = useState(false);
+
+
+  
   const form = useForm<z.infer<typeof UserAvailabilitySchema>>({
     resolver: zodResolver(UserAvailabilitySchema),
     defaultValues: {
@@ -83,6 +87,51 @@ export function ProfileAvailabilityForm({
       }),
     },
   });
+
+  useEffect(() => {
+    if (!loaded) {
+      form.reset({
+        
+          mondayAvailability: mondayAvailability.map((hourUTC) => {
+            const localHour = new Date();
+            localHour.setUTCHours(hourUTC);
+            return localHour.getHours();
+          }),
+          tuesdayAvailability: tuesdayAvailability.map((hourUTC) => {
+            const localHour = new Date();
+            localHour.setUTCHours(hourUTC);
+            return localHour.getHours();
+          }),
+          wednesdayAvailability: wednesdayAvailability.map((hourUTC) => {
+            const localHour = new Date();
+            localHour.setUTCHours(hourUTC);
+            return localHour.getHours();
+          }),
+          thursdayAvailability: thursdayAvailability.map((hourUTC) => {
+            const localHour = new Date();
+            localHour.setUTCHours(hourUTC);
+            return localHour.getHours();
+          }),
+          fridayAvailability: fridayAvailability.map((hourUTC) => {
+            const localHour = new Date();
+            localHour.setUTCHours(hourUTC);
+            return localHour.getHours();
+          }),
+          saturdayAvailability: saturdayAvailability.map((hourUTC) => {
+            const localHour = new Date();
+            localHour.setUTCHours(hourUTC);
+            return localHour.getHours();
+          }),
+          sundayAvailability: sundayAvailability.map((hourUTC) => {
+            const localHour = new Date();
+            localHour.setUTCHours(hourUTC);
+            return localHour.getHours();
+          }),
+      });
+      setLoaded(true);
+    }
+  }, [form, mondayAvailability, tuesdayAvailability, wednesdayAvailability, thursdayAvailability, fridayAvailability, saturdayAvailability, sundayAvailability, loaded]);
+
 
   const toUTCAvailability = (data: z.infer<typeof UserAvailabilitySchema>) => {
     const transformFunction = (day: number[]) => {
@@ -396,6 +445,7 @@ export function ProfileAvailabilityForm({
                   type="multiple"
                   variant="outline"
                   value={field.value.map((x) => x.toString())}
+                  defaultValue={field.value.map((x) => x.toString())}
                   onValueChange={field.onChange}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
