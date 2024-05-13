@@ -128,6 +128,11 @@ export function ProfileAvailabilityForm({
             return localHour.getHours();
           }),
       });
+      console.log("Initial data: " ,mondayAvailability.map((hourUTC) => {
+        const localHour = new Date();
+        localHour.setUTCHours(hourUTC);
+        return localHour.getHours();
+      }).map((x) => x.toString()))
       setLoaded(true);
     }
   }, [form, mondayAvailability, tuesdayAvailability, wednesdayAvailability, thursdayAvailability, fridayAvailability, saturdayAvailability, sundayAvailability, loaded]);
@@ -181,7 +186,7 @@ export function ProfileAvailabilityForm({
                   type="multiple"
                   variant="outline"
                   value={field.value.map((x) => x.toString())}
-                  onValueChange={field.onChange}
+                  onValueChange={(e)=> {field.onChange(e.map((x)=> Number(x)));console.log("OnMondayChangeNumbers:", e.map((x)=> Number(x)));console.log("Tuesday form value", form.getValues("tuesdayAvailability"))}}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
