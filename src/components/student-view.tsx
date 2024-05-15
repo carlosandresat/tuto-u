@@ -24,7 +24,7 @@ import { getStudentSessions } from "@/actions/session-request";
 import { auth } from "@/auth";
 
 export async function StudentView() {
-  /*const session = await auth()
+  const session = await auth()
   const studentSessions:{
     sessionId: number;
     tutorInitials: string;
@@ -39,7 +39,7 @@ export async function StudentView() {
     price: number;
     topic: string;
     rawDateTime: Date;
-  }[] = await getStudentSessions(session?.user?.id || "")*/
+  }[] = await getStudentSessions(session?.user?.id || "")
   const someData: {
     sessionId: number;
     tutorInitials: string;
@@ -118,9 +118,9 @@ export async function StudentView() {
   ];
   return (
     <>
-      {someData.length !== 0 ? (
+      {studentSessions.length !== 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
-          {someData.map((row, index) => (
+          {studentSessions.map((row, index) => (
             <StudentSessionCard {...row} key={index}></StudentSessionCard>
           ))}
           {/*Esta card es para tutor-view

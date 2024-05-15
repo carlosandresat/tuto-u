@@ -4,7 +4,7 @@ import { auth } from "@/auth";
 import { TutorSessionCard } from "@/components/tutor-session-card";
 
 export async function TutorView() {
-  /*const session = await auth()
+  const session = await auth()
   const tutorSessions:{
     sessionId: number;
     tutorInitials: string;
@@ -19,7 +19,7 @@ export async function TutorView() {
     price: number;
     topic: string;
     rawDateTime: Date;
-  }[] = await getTutorSessions(session?.user?.id || "")*/
+  }[] = await getTutorSessions(session?.user?.id || "")
   const someData: {
     sessionId: number;
     tutorInitials: string;
@@ -98,7 +98,7 @@ export async function TutorView() {
   ];
   return (
     <>
-      {someData.length !== 0 ? (
+      {tutorSessions.length !== 0 ? (
         <>
           <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 pt-24">
             Tus Tutorías (Tutor)
@@ -107,7 +107,7 @@ export async function TutorView() {
             Estas son tus solcitudes de tutorías recibidas
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
-            {someData.map((row, index) => (
+            {tutorSessions.map((row, index) => (
               <TutorSessionCard {...row} key={index}></TutorSessionCard>
             ))}
           </div>

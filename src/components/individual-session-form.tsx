@@ -125,7 +125,6 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       )[0].price;
     datetime.setHours(parseInt(data.time.split(":")[0]));
     datetime.setMinutes(parseInt(data.time.split(":")[1]));
-    console.log(datetime.toISOString());
     const formattedData = {
       studentId: userId,
       tutorId: data.tutor,
@@ -137,12 +136,12 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       online: data.isOnline,
       topic: data.topic,
     };
-    toast({
+    /*toast({
       title: "¡Felicidades!",
       description: "Pronto estará disponible esta funcionalidad"
-    })
-    //const res = await requestIndividualSession(formattedData)
-    /*!res.error_message ?
+    })*/
+    const res = await requestIndividualSession(formattedData)
+    !res.error_message ?
     toast({
       title: "Sesión agendada con éxito",
       description: "Regresa a inicio para ver el estado de tu tutoría o solicita otra"
@@ -150,7 +149,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     toast({
       title: "Error",
       description: res.error_message
-    })*/
+    })
   })
     
   }
