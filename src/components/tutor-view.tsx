@@ -78,7 +78,7 @@ export async function TutorView() {
       duration: 60,
       price: 2.8,
       topic: "Espacios Vectoriales",
-      rawDateTime: new Date("2024-05-10 14:37:16-08"),
+      rawDateTime: new Date("2024-05-20 12:00:00-05"),
     },
     {
       sessionId: 4,
@@ -93,7 +93,7 @@ export async function TutorView() {
       duration: 90,
       price: 3.5,
       topic: "Química Orgánica",
-      rawDateTime: new Date("2024-05-13 07:37:16-08"),
+      rawDateTime: new Date("2024-05-20 12:00:00-05"),
     },
   ];
   return (
