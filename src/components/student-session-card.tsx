@@ -1,3 +1,5 @@
+"use client"
+
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import {
   CardTitle,
@@ -22,6 +24,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
+import { useState } from "react";
+import { stat } from "fs";
 
 export function StudentSessionCard({
   sessionId,
@@ -52,31 +56,34 @@ export function StudentSessionCard({
   topic: string;
   rawDateTime: Date;
 }) {
+
+  const [statusState, setStatusState] = useState(status)
+
   return (
     <Card>
       <CardHeader>
         <Badge
           className={cn(
             "bg-green-500 w-fit mb-2",
-            status === "accepted"
+            statusState === "accepted"
               ? "bg-green-500"
-              : status === "requested"
+              : statusState === "requested"
               ? "bg-yellow-500"
-              : status === "canceled"
+              : statusState === "canceled"
               ? "bg-destructive dark:text-foreground hover:dark:text-background"
               : ""
           )}
         >
-          {status.charAt(0).toUpperCase() + status.slice(1)}
+          {statusState.charAt(0).toUpperCase() + statusState.slice(1)}
         </Badge>
 
         <div className="flex items-center space-x-2">
           <Avatar>
             <AvatarImage
-              src="/photos/carlos.arevalo.jpg"
+              src={`/photos/${tutorEmail.split("@")[0]}.jpg`}
               className=" object-cover"
             />
-            <AvatarFallback>CA</AvatarFallback>
+            <AvatarFallback>{tutorInitials}</AvatarFallback>
           </Avatar>
           <CardTitle className="rounded-md bg-background/40">
             {tutorFullname}
@@ -121,18 +128,18 @@ export function StudentSessionCard({
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center space-x-2">
-        {status === "accepted" && rawDateTime > new Date() ? (
+        {statusState === "accepted" && rawDateTime > new Date() ? (
           <>
-            <CancelDialog />
+            <CancelDialog setState={setStatusState} sessionId={sessionId}/>
           </>
-        ) : status === "accepted" && rawDateTime < new Date() ? (
+        ) : statusState === "accepted" && rawDateTime < new Date() ? (
           <>
             <Button variant="secondary">Reportar</Button>
             <Button>Calificar</Button>
           </>
-        ) : status === "requested" ? (
-          <CancelDialog />
-        ) : status === "canceled" ? null : null}
+        ) : statusState === "requested" ? (
+          <CancelDialog setState={setStatusState} sessionId={sessionId}/>
+        ) : statusState === "canceled" ? null : null}
       </CardFooter>
     </Card>
   );
