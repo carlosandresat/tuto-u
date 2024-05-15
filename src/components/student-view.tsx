@@ -19,80 +19,94 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
-import { StudentSessionCard } from "@/components/student-session-card"
+import { StudentSessionCard } from "@/components/student-session-card";
 import { getStudentSessions } from "@/actions/session-request";
 import { auth } from "@/auth";
 
 export async function StudentView() {
   //const session = await auth()
   //const studentSessions = await getStudentSessions(session?.user?.id || "")
-  const someData = [
+  const someData: {
+    sessionId: number;
+    tutorInitials: string;
+    tutorEmail: string;
+    status: string;
+    tutorFullname: string;
+    sessionCourse: string;
+    dateString: string;
+    timeString: string;
+    place: string;
+    duration: number;
+    price: number;
+    topic: string;
+    rawDateTime: Date;
+  }[] = [
     {
       sessionId: 1,
-      status:"accepted", 
-      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      status: "accepted",
+      tutorFullname: "Carlos Andrés Arévalo Torres",
       tutorInitials: "CA",
-      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
-      sessionCourse:"Cálculo 1", 
-      dateString:"12 May, 2024", 
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec",
+      sessionCourse: "Cálculo 1",
+      dateString: "12 May, 2024",
       timeString: "2:00 PM",
       place: "Sala de estudio biblioteca (planta baja)",
-      duration: 120, 
-      price: 5.00, 
+      duration: 120,
+      price: 5.0,
       topic: "Teorema fundamental del Cálculo",
-      rawDateTime: new Date("2024-05-12 14:41:50-05")
+      rawDateTime: new Date("2024-05-12 14:41:50-05"),
     },
     {
       sessionId: 2,
-      status:"accepted", 
-      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      status: "accepted",
+      tutorFullname: "Carlos Andrés Arévalo Torres",
       tutorInitials: "CA",
-      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
-      sessionCourse:"Cálculo 1", 
-      dateString:"20 May, 2024", 
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec",
+      sessionCourse: "Cálculo 1",
+      dateString: "20 May, 2024",
       timeString: "4:00 PM",
       place: "Sala de estudio biblioteca (planta baja)",
-      duration: 120, 
-      price: 5.00, 
+      duration: 120,
+      price: 5.0,
       topic: "Límites",
-      rawDateTime: new Date("2024-05-20 14:41:50-05")
+      rawDateTime: new Date("2024-05-20 14:41:50-05"),
     },
     {
       sessionId: 3,
-      status:"requested", 
-      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      status: "requested",
+      tutorFullname: "Carlos Andrés Arévalo Torres",
       tutorInitials: "CA",
-      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
-      sessionCourse:"Álgebra Lineal", 
-      dateString:"20 Abr, 2024", 
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec",
+      sessionCourse: "Álgebra Lineal",
+      dateString: "20 Abr, 2024",
       timeString: "6:00 PM",
       place: "B-103",
-      duration: 60, 
-      price: 2.80, 
+      duration: 60,
+      price: 2.8,
       topic: "Espacios Vectoriales",
-      rawDateTime: new Date("2024-05-10 14:37:16-08")
+      rawDateTime: new Date("2024-05-10 14:37:16-08"),
     },
     {
       sessionId: 4,
-      status:"canceled", 
-      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      status: "canceled",
+      tutorFullname: "Carlos Andrés Arévalo Torres",
       tutorInitials: "CA",
-      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
-      sessionCourse:"Química 2", 
-      dateString:"20 Abr, 2024", 
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec",
+      sessionCourse: "Química 2",
+      dateString: "20 Abr, 2024",
       timeString: "6:00 PM",
       place: "Sala de estudio biblioteca (planta alta)",
-      duration: 90, 
-      price: 3.50, 
+      duration: 90,
+      price: 3.5,
       topic: "Química Orgánica",
-      rawDateTime: new Date("2024-05-13 07:37:16-08")
+      rawDateTime: new Date("2024-05-13 07:37:16-08"),
     },
-  ]
+  ];
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
-      {someData.map((row, index)=> 
+      {someData.map((row, index) => (
         <StudentSessionCard {...row} key={index}></StudentSessionCard>
-      )}
+      ))}
       {/*Esta card es para tutor-view
       <Card>
         <CardHeader>
