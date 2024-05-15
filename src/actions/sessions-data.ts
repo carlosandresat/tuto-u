@@ -22,3 +22,43 @@ export const cancelSession = async (sessionId: number): Promise<string> => {
     );
   }
 };
+
+export const acceptSession = async (sessionId: number): Promise<string> => {
+  try {
+    const updatedSession = await db.individualSession.update({
+      where: {
+        id: sessionId,
+      },
+      data: {
+        status: "accepted",
+      },
+    });
+
+    return `Session ${updatedSession.id} has been successfully accepted.`;
+  } catch (error) {
+    console.error("Failed to accept the session:", error);
+    throw new Error(
+      "Unable to accept the session. Please make sure the session ID is correct."
+    );
+  }
+};
+
+export const rejectSession = async (sessionId: number): Promise<string> => {
+  try {
+    const updatedSession = await db.individualSession.update({
+      where: {
+        id: sessionId,
+      },
+      data: {
+        status: "rejected",
+      },
+    });
+
+    return `Session ${updatedSession.id} has been successfully rejected.`;
+  } catch (error) {
+    console.error("Failed to reject the session:", error);
+    throw new Error(
+      "Unable to reject the session. Please make sure the session ID is correct."
+    );
+  }
+};

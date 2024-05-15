@@ -8,7 +8,7 @@ import {
     DialogClose,
   } from "@/components/ui/dialog";
   import { Button } from "@/components/ui/button";
-  import { cancelSession } from "@/actions/sessions-data";
+  import { acceptSession } from "@/actions/sessions-data";
   
   export function AcceptDialog({ sessionId, setState }: { sessionId: number, setState:any }) {
     return (
@@ -31,7 +31,7 @@ import {
   
             <Button onClick={async () => {
               setState("accepted")
-              //await cancelSession(sessionId)
+              //await acceptSession(sessionId)
             }}>Aceptar</Button>
             </DialogClose>
             <DialogClose asChild>
