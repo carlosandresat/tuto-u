@@ -68,7 +68,7 @@ export function TutorSessionCard({
               ? "bg-green-500"
               : statusState === "requested"
               ? "bg-yellow-500"
-              : statusState === "canceled"
+              : statusState === "canceled" || statusState === "rejected"
               ? "bg-destructive dark:text-foreground hover:dark:text-background"
               : ""
           )}
