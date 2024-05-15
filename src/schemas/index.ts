@@ -81,7 +81,7 @@ export const IndividualSessionRequestSchema = z
       .min(1, "Tienes que escoger un tutor."),
     duration: z.string({
       required_error: "Tienes que escoger una duración.",
-    }),
+    }).min(1, "Tienes que escoger una duración"),
     topic: z
       .string({
         required_error: "Tienes que ingresar un tema.",
