@@ -4,8 +4,22 @@ import { auth } from "@/auth";
 import { TutorSessionCard } from "@/components/tutor-session-card";
 
 export async function TutorView() {
-  //const session = await auth()
-  //const studentSessions = await getStudentSessions(session?.user?.id || "")
+  /*const session = await auth()
+  const studentSessions:{
+    sessionId: number;
+    tutorInitials: string;
+    tutorEmail: string;
+    status: string;
+    tutorFullname: string;
+    sessionCourse: string;
+    dateString: string;
+    timeString: string;
+    place: string;
+    duration: number;
+    price: number;
+    topic: string;
+    rawDateTime: Date;
+  }[] = await getStudentSessions(session?.user?.id || "")*/
   const someData: {
     sessionId: number;
     tutorInitials: string;
