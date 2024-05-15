@@ -1,11 +1,11 @@
 import { StudentSessionCard } from "@/components/student-session-card";
-import { getStudentSessions } from "@/actions/session-request";
+import { getTutorSessions } from "@/actions/sessions-data";
 import { auth } from "@/auth";
 import { TutorSessionCard } from "@/components/tutor-session-card";
 
 export async function TutorView() {
   /*const session = await auth()
-  const studentSessions:{
+  const tutorSessions:{
     sessionId: number;
     tutorInitials: string;
     tutorEmail: string;
@@ -19,7 +19,7 @@ export async function TutorView() {
     price: number;
     topic: string;
     rawDateTime: Date;
-  }[] = await getStudentSessions(session?.user?.id || "")*/
+  }[] = await getTutorSessions(session?.user?.id || "")*/
   const someData: {
     sessionId: number;
     tutorInitials: string;
