@@ -98,7 +98,7 @@ export const IndividualSessionRequestSchema = z
       } else {
         if (
           parseInt(schema.time.split(":")[0], 10) <=
-          new Date().getHours() + 4
+          new Date().getHours() + 8
         ) {
           return false;
         } else {
@@ -107,7 +107,7 @@ export const IndividualSessionRequestSchema = z
       }
     },
     {
-      message: "Debes solicitar la tutoría con 4 horas de anticipación",
+      message: "Debes solicitar la tutoría con 8 horas de anticipación",
       path: ["time"],
     }
   );
