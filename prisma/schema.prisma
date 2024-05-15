@@ -133,7 +133,7 @@ model TutorAvailability {
 }
 
 model IndividualSession {
-  id              String   @id @default(cuid())
+  id              Int      @id @default(autoincrement())
   studentId       String   @map("student_id")
   tutorId         String   @map("tutor_id")
   courseId        Int      @map("course_id")
