@@ -60,10 +60,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { IndividualSessionRequestSchema } from "@/schemas";
-import { getAvailableTutors } from "@/actions/session-request";
-import { useState } from "react";
+import { getAvailableTutors, requestIndividualSession } from "@/actions/session-request";
+import { useState, useTransition } from "react";
 
 export function IndividualSessionForm({ userId }: { userId: string }) {
+  const [isPending, startTransition] = useTransition();
+
   const [availableTutors, setAvailableTutors] = useState<
     {
       id: string;
@@ -113,6 +115,8 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     }
   }
   function onSubmit(data: z.infer<typeof IndividualSessionRequestSchema>) {
+    startTransition(async ()=>{
+
     const datetime = new Date(data.date);
     const selectedPrice = availableTutors
       .filter((row) => row.id === data.tutor)[0]
@@ -133,6 +137,8 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       online: data.isOnline,
       topic: data.topic,
     };
+    const res = await requestIndividualSession(formattedData)
+    !res.error_message ?
     toast({
       title: "Felicidades",
       description: (
@@ -143,7 +149,13 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
           </pre>
         </>
       ),
-    });
+    }) :
+    toast({
+      title: "Error",
+      description: res.error_message
+    })
+  })
+    
   }
 
   return (

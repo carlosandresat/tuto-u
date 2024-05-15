@@ -62,3 +62,24 @@ export const getAvailableTutors = async (
     throw new Error("Unable to fetch available tutors.");
   }
 };
+
+export const requestIndividualSession = async (data: {
+  studentId: string;
+  tutorId: string;
+  courseId: number;
+  sessionDateTime: string;
+  duration: number;
+  price: number;
+  place: string | null | undefined;
+  online: boolean;
+  topic: string;
+}) => {
+  try {
+    await db.individualSession.create({
+      data: {...data, status: "requested"}
+    })
+    return {message: "¡Sesión registrada con éxito!"}
+  } catch (error) {
+    return {error_message: "Hubo un error en el sistema. Contacta con los administradores por favor", error}
+  }
+};
