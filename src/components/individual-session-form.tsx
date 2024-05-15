@@ -356,7 +356,10 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                     <FormLabel>Tutor</FormLabel>
                     <FormControl>
                       <Select
-                        onValueChange={field.onChange}
+                        onValueChange={(e)=> {
+                          field.onChange(e)
+                          form.setValue("duration", "");
+                        }}
                         value={field.value}
                         disabled={
                           !form.watch("course") ||
