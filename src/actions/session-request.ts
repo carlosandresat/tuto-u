@@ -83,3 +83,17 @@ export const requestIndividualSession = async (data: {
     return {error_message: "Hubo un error en el sistema. Contacta con los administradores por favor", error}
   }
 };
+
+export const getStudentSessions = async () => {
+  try {
+    const data = await db.individualSession.findMany({
+      where: {
+        studentId: "cluijjimt000014nd96x1xk46",
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};

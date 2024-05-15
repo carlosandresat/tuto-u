@@ -137,23 +137,20 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       online: data.isOnline,
       topic: data.topic,
     };
-    const res = await requestIndividualSession(formattedData)
-    !res.error_message ?
     toast({
-      title: "Felicidades",
-      description: (
-        <>
-          <p>¡Gracias por probar nuestro formulario!</p>
-          <pre className="mt-2 w-[340px] rounded-md bg-secondary p-4">
-            <code>{JSON.stringify({ ...formattedData }, null, 2)}</code>
-          </pre>
-        </>
-      ),
+      title: "¡Felicidades!",
+      description: "Pronto estará disponible esta funcionalidad"
+    })
+    //const res = await requestIndividualSession(formattedData)
+    /*!res.error_message ?
+    toast({
+      title: "Sesión agendada con éxito",
+      description: "Regresa a inicio para ver el estado de tu tutoría o solicita otra"
     }) :
     toast({
       title: "Error",
       description: res.error_message
-    })
+    })*/
   })
     
   }
