@@ -18,29 +18,34 @@ import {
   LibraryBig,
   Hourglass,
   Banknote,
+  Mail,
 } from "lucide-react";
 import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
 
 export function StudentSessionCard({
+  sessionId,
+  tutorInitials,
   status,
-  fullname,
-  photo_url,
-  course,
-  date,
-  time,
+  tutorFullname,
+  tutorEmail,
+  sessionCourse,
+  dateString,
+  timeString,
   place,
   topic,
   duration,
   price,
   rawDateTime,
 }: {
+  sessionId: number;
+  tutorInitials: string;
+  tutorEmail: string;
   status: string;
-  fullname: string;
-  photo_url: string;
-  course: string;
-  date: string;
-  time: string;
+  tutorFullname: string;
+  sessionCourse: string;
+  dateString: string;
+  timeString: string;
   place: string;
   duration: number;
   price: number;
@@ -74,21 +79,21 @@ export function StudentSessionCard({
             <AvatarFallback>CA</AvatarFallback>
           </Avatar>
           <CardTitle className="rounded-md bg-background/40">
-            {fullname}
+            {tutorFullname}
           </CardTitle>
         </div>
         <CardDescription className="text-base text-foreground backdrop-blur-sm rounded-md w-fit px-2 bg-background/40">
-          {course}
+          {sessionCourse}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2 py-2  rounded-md w-fit bg-background/40 mb-2">
         <div className="flex space-x-2">
           <Calendar />
-          <p>{date}</p>
+          <p>{dateString}</p>
         </div>
         <div className="flex space-x-2">
           <Clock1 />
-          <p> {time}</p>
+          <p> {timeString}</p>
         </div>
         <div className="flex space-x-2">
           <MapPin />
@@ -104,6 +109,15 @@ export function StudentSessionCard({
         </div>
         <div className="flex space-x-2">
           <Banknote /> <p>{price != 0 ? `$${price.toFixed(2)}` : "Gratuita"}</p>
+        </div>
+        <div className="flex space-x-2">
+          <Mail />
+          <a
+            href={`mailto:${tutorEmail}`}
+            className=" hover:border-b border-foreground"
+          >
+            {tutorEmail}
+          </a>
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center space-x-2">

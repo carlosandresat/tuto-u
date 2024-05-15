@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { db } from "@/lib/db";
+import { addHours } from "date-fns";
 
 import {
   UserPricingSchema,
@@ -84,16 +85,56 @@ export const requestIndividualSession = async (data: {
   }
 };
 
-export const getStudentSessions = async () => {
+function capitalizeMonth(dateStr:string) {
+  return dateStr.replace(/(\d+)\s([a-z]+)\s(\d+)/i, (match, day, month, year) => {
+    return `${day} ${month.charAt(0).toUpperCase() + month.slice(1)}, ${year}`;
+  });
+}
+
+export const getStudentSessions = async (userId:string) => {
+  const aDayAgo = addHours(new Date(), -24)
+
   try {
-    const data = await db.individualSession.findMany({
+    const sessions = await db.individualSession.findMany({
       where: {
-        studentId: "cluijjimt000014nd96x1xk46",
+        studentId: userId,
+        sessionDateTime: {
+          gte: aDayAgo
+        }
       },
+      include: {
+        tutor: {
+          select: {
+            firstname: true,
+            lastname: true,
+            email: true
+          }
+        },
+        course: {
+          select: {
+            name: true
+          }
+        }
+      }
     });
-    return data;
+
+    return sessions.map(session => ({
+      sessionId: session.id,
+      tutorFullname: `${session.tutor.firstname} ${session.tutor.lastname}`,
+      tutorInitials: `${session.tutor.firstname?.charAt(0)}${session.tutor.lastname?.charAt(0)}`,
+      tutorEmail: session.tutor.email || "",
+      status: session.status,
+      sessionCourse: session.course.name,
+      rawDateTime: session.sessionDateTime,
+      dateString: capitalizeMonth(session.sessionDateTime.toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'})),
+      timeString: session.sessionDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
+      place: session.place || "",
+      duration: session.duration,
+      price: Number(session.price),
+      topic: session.topic
+    }));
   } catch (error) {
-    console.log(error);
-    return [];
+    console.error("Failed to fetch student sessions:", error);
+    throw new Error("Unable to fetch student sessions.");
   }
 };

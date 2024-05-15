@@ -20,16 +20,22 @@ import {
 import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
 import { StudentSessionCard } from "@/components/student-session-card"
+import { getStudentSessions } from "@/actions/session-request";
+import { auth } from "@/auth";
 
-export function StudentView() {
+export async function StudentView() {
+  //const session = await auth()
+  //const studentSessions = await getStudentSessions(session?.user?.id || "")
   const someData = [
     {
+      sessionId: 1,
       status:"accepted", 
-      fullname: "Carlos Andrés Arévalo Torres", 
-      photo_url: "carlos.arevalo", 
-      course:"Cálculo 1", 
-      date:"12 May, 2024", 
-      time: "2:00 PM",
+      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      tutorInitials: "CA",
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
+      sessionCourse:"Cálculo 1", 
+      dateString:"12 May, 2024", 
+      timeString: "2:00 PM",
       place: "Sala de estudio biblioteca (planta baja)",
       duration: 120, 
       price: 5.00, 
@@ -37,12 +43,14 @@ export function StudentView() {
       rawDateTime: new Date("2024-05-12 14:41:50-05")
     },
     {
+      sessionId: 2,
       status:"accepted", 
-      fullname: "Carlos Andrés Arévalo Torres", 
-      photo_url: "carlos.arevalo", 
-      course:"Cálculo 1", 
-      date:"20 May, 2024", 
-      time: "4:00 PM",
+      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      tutorInitials: "CA",
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
+      sessionCourse:"Cálculo 1", 
+      dateString:"20 May, 2024", 
+      timeString: "4:00 PM",
       place: "Sala de estudio biblioteca (planta baja)",
       duration: 120, 
       price: 5.00, 
@@ -50,12 +58,14 @@ export function StudentView() {
       rawDateTime: new Date("2024-05-20 14:41:50-05")
     },
     {
+      sessionId: 3,
       status:"requested", 
-      fullname: "Carlos Andrés Arévalo Torres", 
-      photo_url: "carlos.arevalo", 
-      course:"Álgebra Lineal", 
-      date:"20 Abr, 2024", 
-      time: "6:00 PM",
+      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      tutorInitials: "CA",
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
+      sessionCourse:"Álgebra Lineal", 
+      dateString:"20 Abr, 2024", 
+      timeString: "6:00 PM",
       place: "B-103",
       duration: 60, 
       price: 2.80, 
@@ -63,12 +73,14 @@ export function StudentView() {
       rawDateTime: new Date("2024-05-10 14:37:16-08")
     },
     {
+      sessionId: 4,
       status:"canceled", 
-      fullname: "Carlos Andrés Arévalo Torres", 
-      photo_url: "carlos.arevalo", 
-      course:"Química 2", 
-      date:"20 Abr, 2024", 
-      time: "6:00 PM",
+      tutorFullname: "Carlos Andrés Arévalo Torres", 
+      tutorInitials: "CA",
+      tutorEmail: "carlos.arevalo@yachaytech.edu.ec", 
+      sessionCourse:"Química 2", 
+      dateString:"20 Abr, 2024", 
+      timeString: "6:00 PM",
       place: "Sala de estudio biblioteca (planta alta)",
       duration: 90, 
       price: 3.50, 
