@@ -1,4 +1,5 @@
 import { StudentView } from "@/components/student-view";
+import { TutorView } from "@/components/tutor-view";
 import { CourseCard } from "@/components/course-card";
 import { TutorCard } from "@/components/tutor-card";
 import { TutorsCarousel } from "@/components/tutors-carousel";
@@ -75,6 +76,8 @@ export default function Home() {
     </p>
 
       <StudentView></StudentView>
+
+      <TutorView></TutorView>
 
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-24">
         Asignaturas
