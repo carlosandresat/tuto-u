@@ -23,6 +23,7 @@ import {
   Mail,
 } from "lucide-react";
 import { CancelDialog } from "@/components/cancel-dialog";
+import { RejectDialog } from "@/components/reject-dialog";
 import { AcceptDialog } from "@/components/accept-dialog";
 import { useState } from "react";
 
@@ -137,7 +138,7 @@ export function TutorSessionCard({
           </>
         ) : statusState === "requested" ? (
           <>
-            <CancelDialog setState={setStatusState} sessionId={sessionId} />
+            <RejectDialog setState={setStatusState} sessionId={sessionId} />
             <AcceptDialog setState={setStatusState} sessionId={sessionId} />
 
           </>
