@@ -140,9 +140,9 @@ model IndividualSession {
   sessionDateTime DateTime @map("session_date_time") // Combined date and time of the session
   duration        Int      @db.SmallInt
   price           Decimal  @db.Decimal(5, 2)// Price agreed upon for the session
-  place           String // Optional: for in-person sessions
+  place           String? // Optional: for in-person sessions
   online          Boolean // Whether the session is online
-  topic           String? // Optional: topic or focus area for the session
+  topic           String // Optional: topic or focus area for the session
   status          String // Status of the session e.g., "scheduled", "completed", "cancelled"
   studentRating   Float?   @map("student_rating") // Rating given by the student, range 0-5
   studentComment  String?  @map("student_comment") // Optional comment provided by the student
