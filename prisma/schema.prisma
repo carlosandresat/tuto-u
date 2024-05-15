@@ -45,18 +45,20 @@ model Session {
 }
 
 model User {
-  id             String                     @id @default(cuid())
-  firstname      String?
-  lastname       String?
-  email          String?                    @unique
-  emailVerified  DateTime?                  @map("email_verified")
-  image          String?
-  password       String?
-  accounts       Account[]
-  sessions       Session[]
-  tutor_pricing  UserPricingConfiguration[]
-  tutorCourses   TutorCourse[]
-  availabilities TutorAvailability[]
+  id              String                     @id @default(cuid())
+  firstname       String?
+  lastname        String?
+  email           String?                    @unique
+  emailVerified   DateTime?                  @map("email_verified")
+  image           String?
+  password        String?
+  accounts        Account[]
+  sessions        Session[]
+  tutor_pricing   UserPricingConfiguration[]
+  tutorCourses    TutorCourse[]
+  availabilities  TutorAvailability[]
+  studentSessions IndividualSession[]        @relation("StudentSession")
+  tutorSessions   IndividualSession[]        @relation("TutorSession")
 
   createdAt DateTime @default(now())
 
@@ -101,11 +103,12 @@ model TutorCourse {
 }
 
 model Course {
-  id           Int           @id @default(autoincrement())
-  name         String
-  schoolId     Int           @map("school_id")
-  school       School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  tutorCourses TutorCourse[]
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  schoolId           Int                 @map("school_id")
+  school             School              @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  tutorCourses       TutorCourse[]
+  individualSessions IndividualSession[]
 
   @@map("courses")
 }
@@ -127,4 +130,28 @@ model TutorAvailability {
   tutor     User   @relation(fields: [tutorId], references: [id])
 
   @@map("tutor_availability")
+}
+
+model IndividualSession {
+  id              String   @id @default(cuid())
+  studentId       String   @map("student_id")
+  tutorId         String   @map("tutor_id")
+  courseId        Int      @map("course_id")
+  sessionDateTime DateTime @map("session_date_time") // Combined date and time of the session
+  duration        Int      @db.SmallInt
+  price           Decimal  @db.Decimal(5, 2)// Price agreed upon for the session
+  place           String // Optional: for in-person sessions
+  online          Boolean // Whether the session is online
+  topic           String? // Optional: topic or focus area for the session
+  status          String // Status of the session e.g., "scheduled", "completed", "cancelled"
+  studentRating   Float?   @map("student_rating") // Rating given by the student, range 0-5
+  studentComment  String?  @map("student_comment") // Optional comment provided by the student
+  tutorRating     Float?   @map("tutort_rating") // Rating given by the tutor, range 0-5
+  tutorComment    String?  @map("tutor_comment") // Optional comment provided by the tutor
+
+  student User   @relation(name: "StudentSession", fields: [studentId], references: [id])
+  tutor   User   @relation(name: "TutorSession", fields: [tutorId], references: [id])
+  course  Course @relation(fields: [courseId], references: [id])
+
+  @@map("individual_sessions")
 }
