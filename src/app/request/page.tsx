@@ -7,6 +7,7 @@ import {
   Card,
 } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
+import { auth } from "@/auth";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -17,7 +18,9 @@ import { AchievementsDialog } from "@/components/achievements-dialog";
 import { IndividualSessionForm } from "@/components/individual-session-form";
 
 
-export default function Component() {
+export default async function Component() {
+  const session = await auth();
+
   return (
     <>
       <section className="md:min-h-screen w-full p-6 md:p-12 items-center justify-center flex">
@@ -28,7 +31,7 @@ export default function Component() {
           </Button>
         </Link>
         <div className="flex flex-col md:flex-row gap-6 max-w-screen-2xl w-full mt-12">
-          <IndividualSessionForm></IndividualSessionForm>
+          <IndividualSessionForm userId={session?.user?.id || ""}></IndividualSessionForm>
         </div>
       </section>
     </>

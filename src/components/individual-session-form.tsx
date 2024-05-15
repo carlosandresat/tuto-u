@@ -63,7 +63,7 @@ import { IndividualSessionRequestSchema } from "@/schemas";
 import { getAvailableTutors } from "@/actions/session-request";
 import { useState } from "react";
 
-export function IndividualSessionForm() {
+export function IndividualSessionForm({ userId }: { userId: string }) {
   const [availableTutors, setAvailableTutors] = useState<
     {
       id: string;
@@ -114,21 +114,35 @@ export function IndividualSessionForm() {
   }
   function onSubmit(data: z.infer<typeof IndividualSessionRequestSchema>) {
     const datetime = new Date(data.date);
+    const selectedPrice = availableTutors
+      .filter((row) => row.id === data.tutor)[0]
+      .pricing.filter(
+        (row) => row.duration.toString() === data.duration
+      )[0].price;
     datetime.setHours(parseInt(data.time.split(":")[0]));
     datetime.setMinutes(parseInt(data.time.split(":")[1]));
     console.log(datetime.toISOString());
     const formattedData = {
-      date: datetime.toISOString(),
-      course: parseInt(data.course),
-      tutor: data.tutor,
+      studentId: userId,
+      tutorId: data.tutor,
+      courseId: parseInt(data.course),
+      sessionDateTime: datetime.toISOString(),
       duration: parseInt(data.duration),
+      price: Number(selectedPrice),
+      place: !data.isOnline ? data.place : null,
+      online: data.isOnline,
       topic: data.topic,
-      ...(data.isOnline ? { place: "Online" } : { place: data.place }),
-      isOnline: data.isOnline,
     };
     toast({
       title: "Felicidades",
-      description: "¡Gracias por probar nuestro formulario, pronto estará disponible!",
+      description: (
+        <>
+          <p>¡Gracias por probar nuestro formulario!</p>
+          <pre className="mt-2 w-[340px] rounded-md bg-secondary p-4">
+            <code>{JSON.stringify({ ...formattedData }, null, 2)}</code>
+          </pre>
+        </>
+      ),
     });
   }
 
@@ -490,11 +504,13 @@ export function IndividualSessionForm() {
               alt="Tutor Pic"
               className="object-cover"
             ></AvatarImage>
-            <AvatarFallback className="text-3xl">{form.watch("tutor") !== undefined && form.watch("tutor") !== ""
+            <AvatarFallback className="text-3xl">
+              {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
                 ? availableTutors.filter(
                     (row) => row.id === form.watch("tutor")
                   )[0].nameInitials
-                : null}</AvatarFallback>
+                : null}
+            </AvatarFallback>
           </Avatar>
           <div className="text-center">
             <h2 className="text-xl font-semibold">
