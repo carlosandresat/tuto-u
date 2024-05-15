@@ -117,11 +117,13 @@ export async function StudentView() {
     },
   ];
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
-      {someData.map((row, index) => (
-        <StudentSessionCard {...row} key={index}></StudentSessionCard>
-      ))}
-      {/*Esta card es para tutor-view
+    <>
+      {someData.length !== 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
+          {someData.map((row, index) => (
+            <StudentSessionCard {...row} key={index}></StudentSessionCard>
+          ))}
+          {/*Esta card es para tutor-view
       <Card>
         <CardHeader>
           <Badge className=" bg-yellow-500 w-fit mb-2">Pendiente</Badge>
@@ -171,6 +173,12 @@ export async function StudentView() {
         </CardFooter>
       </Card>
             */}
-    </div>
+        </div>
+      ) : (
+        <p className="text-lg mt-6 border-b pb-2">
+          No has solicitado ninguna tutoría
+        </p>
+      )}
+    </>
   );
 }
