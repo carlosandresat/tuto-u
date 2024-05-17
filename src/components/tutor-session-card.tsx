@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, capitalizeMonth } from "@/lib/utils";
 
 import {
   Calendar,
@@ -34,8 +34,6 @@ export function TutorSessionCard({
   tutorFullname,
   tutorEmail,
   sessionCourse,
-  dateString,
-  timeString,
   place,
   topic,
   duration,
@@ -48,8 +46,6 @@ export function TutorSessionCard({
   status: string;
   tutorFullname: string;
   sessionCourse: string;
-  dateString: string;
-  timeString: string;
   place: string;
   duration: number;
   price: number;
@@ -95,11 +91,11 @@ export function TutorSessionCard({
       <CardContent className="space-y-2 py-2  rounded-md w-fit bg-background/40 mb-2">
         <div className="flex space-x-2">
           <Calendar />
-          <p>{dateString}</p>
+          <p>{capitalizeMonth(rawDateTime.toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'}))}</p>
         </div>
         <div className="flex space-x-2">
           <Clock1 />
-          <p> {timeString}</p>
+          <p> {rawDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</p>
         </div>
         <div className="flex space-x-2">
           <MapPin />

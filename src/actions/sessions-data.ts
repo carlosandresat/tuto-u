@@ -44,8 +44,6 @@ export const getTutorSessions = async (userId:string) => {
       status: session.status,
       sessionCourse: session.course.name,
       rawDateTime: session.sessionDateTime,
-      dateString: capitalizeMonth(session.sessionDateTime.toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'})),
-      timeString: session.sessionDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
       place: session.place || "",
       duration: session.duration,
       price: Number(session.price),

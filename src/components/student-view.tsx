@@ -32,8 +32,6 @@ export async function StudentView() {
     status: string;
     tutorFullname: string;
     sessionCourse: string;
-    dateString: string;
-    timeString: string;
     place: string;
     duration: number;
     price: number;
