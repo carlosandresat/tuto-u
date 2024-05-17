@@ -148,6 +148,8 @@ model IndividualSession {
   studentComment  String?  @map("student_comment") // Optional comment provided by the student
   tutorRating     Float?   @map("tutort_rating") // Rating given by the tutor, range 0-5
   tutorComment    String?  @map("tutor_comment") // Optional comment provided by the tutor
+  createdAt       DateTime @default(now())
+
 
   student User   @relation(name: "StudentSession", fields: [studentId], references: [id])
   tutor   User   @relation(name: "TutorSession", fields: [tutorId], references: [id])
