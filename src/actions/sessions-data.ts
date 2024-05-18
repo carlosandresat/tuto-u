@@ -15,13 +15,13 @@ export const getTutorSessions = async (userId:string) => {
   try {
     const sessions = await db.individualSession.findMany({
       where: {
-        tutorId: userId,
+        tutorId: "clw772ddq001eujqikld587z6",
         sessionDateTime: {
           gte: aDayAgo
         }
       },
       include: {
-        tutor: {
+        student: {
           select: {
             firstname: true,
             lastname: true,
@@ -38,9 +38,9 @@ export const getTutorSessions = async (userId:string) => {
 
     return sessions.map(session => ({
       sessionId: session.id,
-      tutorFullname: `${session.tutor.firstname} ${session.tutor.lastname}`,
-      tutorInitials: `${session.tutor.firstname?.charAt(0)}${session.tutor.lastname?.charAt(0)}`,
-      tutorEmail: session.tutor.email || "",
+      tutorFullname: `${session.student.firstname} ${session.student.lastname}`,
+      tutorInitials: `${session.student.firstname?.charAt(0)}${session.student.lastname?.charAt(0)}`,
+      tutorEmail: session.student.email || "",
       status: session.status,
       sessionCourse: session.course.name,
       rawDateTime: session.sessionDateTime,
