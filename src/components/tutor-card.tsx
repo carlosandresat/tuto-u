@@ -2,7 +2,7 @@ import * as React from "react";
 import { Star, StarHalf } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { AchievementsDialog } from "@/components/achievements-dialog";
+import { AchievementsDialogFull } from "@/components/achievements-dialog-full";
 import Image from "next/image";
 
 function DrawStar({raiting}:{raiting:number}){
@@ -61,7 +61,7 @@ export function TutorCard({
           {rating} <span className="text-muted-foreground pl-2">({nreviews} reviews)</span>
         </h3>
       </div>
-      <AchievementsDialog/>
+      <AchievementsDialogFull/>
     </div>
   );
 }

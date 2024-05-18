@@ -562,6 +562,10 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                 : null}
             </h2>
           </div>
+          {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
+                ?  <AchievementsDialog userId={form.watch("tutor")}/>
+                : null}
+
           {/*
             <AchievementsDialog></AchievementsDialog>
            */}
