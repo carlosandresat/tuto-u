@@ -6,9 +6,8 @@ import { AchievementsDialogFull } from "@/components/achievements-dialog-full";
 import Image from "next/image";
 
 function DrawStar({raiting}:{raiting:number}){
-  const int = (raiting|0);
-  const numStar = int/2;
-  const isOdd = int%2!==0?true:false;
+  const numStar = (raiting|0);
+  const isOdd = raiting%1>=0.5?true:false;
   return(
     <>
     {
@@ -58,7 +57,7 @@ export function TutorCard({
         </div>
 
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
-          {rating} <span className="text-muted-foreground pl-2">({nreviews} reviews)</span>
+          {rating} <span className=" text-sm self-end pb-[2px] pl-1">/ 5</span> <span className="text-muted-foreground pl-2">({nreviews} reviews)</span>
         </h3>
       </div>
       <AchievementsDialogFull/>
