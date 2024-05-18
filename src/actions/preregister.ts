@@ -59,7 +59,7 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
         return { error: "Email ya registrado" };
     }
 
-    await db.user.create({
+    const result = await db.user.create({
         data: {
             firstname,
             lastname,
@@ -67,6 +67,13 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
             password: hashedPassword,
         },
     });
+
+    await db.userAchievement.create({
+        data: {
+            userId: result.id,
+            achievementId: 1,
+        }
+    })
 
     await db.preregister.create({
         data: {
