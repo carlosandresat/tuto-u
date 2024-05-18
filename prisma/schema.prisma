@@ -59,6 +59,7 @@ model User {
   availabilities  TutorAvailability[]
   studentSessions IndividualSession[]        @relation("StudentSession")
   tutorSessions   IndividualSession[]        @relation("TutorSession")
+  userAchievements UserAchievement[]
 
   createdAt DateTime @default(now())
 
@@ -156,4 +157,28 @@ model IndividualSession {
   course  Course @relation(fields: [courseId], references: [id])
 
   @@map("individual_sessions")
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  tier        String   // Ejemplo: "Bronze", "Silver", "Gold"
+  imageUrl    String   @map("image_url")// URL a una imagen representativa del logro
+
+  users       UserAchievement[]
+
+  @@map("achievements")
+}
+
+model UserAchievement {
+  id            Int         @id @default(autoincrement())
+  userId        String      @map("user_id")
+  achievementId Int         @map("achievement_id")
+  achievedDate  DateTime    @map("achieved_date") @default(now()) // Fecha cuando el logro fue obtenido
+
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@map("user_achievements")
 }
