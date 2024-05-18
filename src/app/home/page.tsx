@@ -8,6 +8,10 @@ import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
   const asignaturas = [
+    { course: "Nivelación: Fundamentos de Matemáticas", school: "yt" },
+    { course: "Nivelación: Física", school: "yt" },
+    { course: "Nivelación: Química", school: "yt" },
+    { course: "Nivelación: Redacción", school: "yt" },
     { course: "Cálculo 1", school: "mate" },
     { course: "Cálculo 2", school: "mate" },
     { course: "Cálculo 3", school: "mate" },

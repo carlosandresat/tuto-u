@@ -84,6 +84,10 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
   });
 
   const courses = [
+    { id: 17, course: "Nivelación: Fundamentos de Matemáticas"},
+    { id: 18, course: "Nivelación: Física"},
+    { id: 19, course: "Nivelación: Química"},
+    { id: 20, course: "Nivelación: Redacción"},
     { id: 1, course: "Cálculo 1" },
     { id: 2, course: "Cálculo 2" },
     { id: 3, course: "Cálculo 3" },

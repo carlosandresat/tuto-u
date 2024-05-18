@@ -83,6 +83,10 @@ export default async function MyProfile() {
   const timeOptions = ["8", "10", "12", "14", "16", "18", "20", "22"]
 
   const courses = [
+    { id: 17, course: "Nivelación: Fundamentos de Matemáticas"},
+    { id: 18, course: "Nivelación: Física"},
+    { id: 19, course: "Nivelación: Química"},
+    { id: 20, course: "Nivelación: Redacción"},
     { id: 1, course: "Cálculo 1" },
     { id: 2, course: "Cálculo 2" },
     { id: 3, course: "Cálculo 3" },
