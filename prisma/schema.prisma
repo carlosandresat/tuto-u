@@ -165,6 +165,7 @@ model Achievement {
   description String
   tier        String   // Ejemplo: "Bronze", "Silver", "Gold"
   imageUrl    String   @map("image_url")// URL a una imagen representativa del logro
+  isInverted  Boolean  @map("is_inverted")
 
   users       UserAchievement[]
 
