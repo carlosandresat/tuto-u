@@ -15,7 +15,7 @@ export const getTutorSessions = async (userId:string) => {
   try {
     const sessions = await db.individualSession.findMany({
       where: {
-        tutorId: "clw772ddq001eujqikld587z6",
+        tutorId: userId,
         sessionDateTime: {
           gte: aDayAgo
         }
