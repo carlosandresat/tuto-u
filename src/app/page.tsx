@@ -1,4 +1,5 @@
 import { ArrowRight, Rocket } from "lucide-react";
+import { LoginDialog } from "@/components/login-dialog";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CountdownTimer } from "@/components/countdown-timer";
@@ -14,7 +15,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center w-full">
         <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[380px] md:before:w-[580px] before:-translate-x-1 before:-translate-y-1/4 before:rounded-full before:bg-gradient-radial  before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic  after:blur-2xl after:content-[''] before:bg-gradient-to-br before:from-transparent before:to-blue-700 before:opacity-40  after:via-[#1a01ff] after:opacity-30 before:lg:h-[360px] z-[-2] pt-32 mt-20 lg:mt-40 mx-6 flex-col">
           <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl z-0 text-center">
-            Tuto-U: Próximamente...
+            Aprende, Enseña y Conecta
           </h1>
         </div>
         <div className="mt-8 md:mt-16 md:mb-32 space-x-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
@@ -23,6 +24,7 @@ export default function Home() {
               ¡Pre-Registro! <Rocket className="ml-2" />
             </Button>
           </Link>
+          <LoginDialog buttonText="¡Entra ya!" />
         </div>
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary mt-20">

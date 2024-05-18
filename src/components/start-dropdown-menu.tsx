@@ -22,7 +22,7 @@ export function StartDropdownMenu() {
       <DropdownMenuContent>
         <div className="flex flex-col">
           <RegisterDialog></RegisterDialog>
-          <LoginDialog></LoginDialog>
+          <LoginDialog buttonText="Entrar"></LoginDialog>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

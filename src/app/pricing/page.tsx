@@ -10,7 +10,7 @@ export default function Pricing() {
     <>
       <StartNavbar />
 
-      <section className="w-full py-12 flex items-center justify-center flex-col pt-44">
+      <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col">
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
           Precios
         </h2>

@@ -9,12 +9,12 @@ import {
   import { LoginForm } from "@/components/login-form";
 
   
-  export function LoginDialog() {
+  export function LoginDialog({buttonText}:{buttonText:string}) {
     return (
       <Dialog>
         <DialogTrigger asChild>
           <Button className="w-full md:w-auto">
-            Entrar
+            {buttonText}
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-md">
