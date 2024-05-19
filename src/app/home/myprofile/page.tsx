@@ -149,7 +149,7 @@ export default async function MyProfile() {
             <CardHeader>
               <CardTitle>Precios</CardTitle>
               <CardDescription>
-                Selecciona la duración de las tutorías con tus precios
+                Selecciona la duración de las tutorías con tus precios. Si el precio queda vacío o en 0 significa que tus tutorías son gratuitas
               </CardDescription>
             </CardHeader>
             <CardContent>
