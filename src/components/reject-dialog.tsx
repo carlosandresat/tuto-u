@@ -32,6 +32,7 @@ import {
             <Button variant="destructive" onClick={async () => {
               setState("rejected")
               await rejectSession(sessionId)
+              window.location.reload()
             }}>Aceptar</Button>
             </DialogClose>
             <DialogClose asChild>

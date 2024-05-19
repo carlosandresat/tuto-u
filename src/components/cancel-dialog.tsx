@@ -32,6 +32,7 @@ export function CancelDialog({ sessionId, setState }: { sessionId: number, setSt
           <Button variant="destructive" onClick={async () => {
             setState("canceled")
             await cancelSession(sessionId)
+            window.location.reload()
           }}>Cancelar</Button>
           </DialogClose>
           <DialogClose asChild>

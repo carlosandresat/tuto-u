@@ -32,6 +32,7 @@ import {
             <Button onClick={async () => {
               setState("accepted")
               await acceptSession(sessionId)
+              window.location.reload()
             }}>Aceptar</Button>
             </DialogClose>
             <DialogClose asChild>
