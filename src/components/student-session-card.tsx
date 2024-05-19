@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
+import { RateDialog } from "@/components/rate-dialog";
 import { useState } from "react";
 import { stat } from "fs";
 
@@ -131,7 +132,7 @@ export function StudentSessionCard({
         ) : statusState === "accepted" && rawDateTime < new Date() ? (
           <>
             <Button variant="secondary">Reportar</Button>
-            <Button>Calificar</Button>
+            <RateDialog buttonText="Calificar" role="student"></RateDialog>
           </>
         ) : statusState === "requested" ? (
           <CancelDialog setState={setStatusState} sessionId={sessionId}/>
