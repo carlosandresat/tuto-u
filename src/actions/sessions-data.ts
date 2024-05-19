@@ -114,3 +114,35 @@ export const rejectSession = async (sessionId: number): Promise<string> => {
     );
   }
 };
+
+export const rateSession = async (sessionId: number, role: string, rating:number, comment:string|undefined): Promise<string> => {
+  try {
+    if(role==="student"){
+      await db.individualSession.update({
+        where: {
+          id: sessionId,
+        },
+        data: {
+          studentRating: rating,
+          studentComment: comment,
+        },
+      });
+    } if (role === "tutor") {
+      await db.individualSession.update({
+        where: {
+          id: sessionId,
+        },
+        data: {
+          tutorRating: rating,
+          tutorComment: comment,
+        },
+      });
+    }
+    return `Session has been successfully rated.`;
+  } catch (error) {
+    console.error("Failed to rate the session:", error);
+    throw new Error(
+      "Unable to rate the session. Please make sure the session ID is correct."
+    );
+  }
+};
