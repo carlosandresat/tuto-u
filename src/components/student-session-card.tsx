@@ -21,6 +21,7 @@ import {
   Hourglass,
   Banknote,
   Mail,
+  Star,
 } from "lucide-react";
 import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
@@ -40,6 +41,7 @@ export function StudentSessionCard({
   duration,
   price,
   rawDateTime,
+  rate,
 }: {
   sessionId: number;
   tutorInitials: string;
@@ -52,6 +54,7 @@ export function StudentSessionCard({
   price: number;
   topic: string;
   rawDateTime: Date;
+  rate: number | null;
 }) {
 
   const [statusState, setStatusState] = useState(status)
@@ -129,11 +132,15 @@ export function StudentSessionCard({
           <>
             <CancelDialog setState={setStatusState} sessionId={sessionId}/>
           </>
-        ) : statusState === "accepted" && rawDateTime < new Date() ? (
+        ) : statusState === "accepted" && rawDateTime < new Date() && rate === null ? (
           <>
             <Button variant="secondary">Reportar</Button>
-            <RateDialog buttonText="Calificar" role="student"></RateDialog>
+            <RateDialog buttonText="Calificar" role="student" sessionId={sessionId}></RateDialog>
           </>
+        ) : statusState === "accepted" && rawDateTime < new Date() && rate !== null ? (
+          <div className="flex gap-2">
+            <p>{rate}</p> <Star className="h-6 w-6 fill-yellow-200" />
+          </div>
         ) : statusState === "requested" ? (
           <CancelDialog setState={setStatusState} sessionId={sessionId}/>
         ) : statusState === "canceled" ? null : null}

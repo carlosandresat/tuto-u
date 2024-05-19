@@ -25,7 +25,7 @@ import { StarHalf, Star } from "lucide-react";
 
 import { RateSessionSchema } from "@/schemas";
 
-export function RateForm({role}:{role:string}) {
+export function RateForm({role, sessionId}:{role:string, sessionId:number}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof RateSessionSchema>>({
@@ -37,7 +37,8 @@ export function RateForm({role}:{role:string}) {
 
   function onSubmit(data: z.infer<typeof RateSessionSchema>) {
     startTransition(async () => {
-      console.log(data);
+      await rateSession(sessionId, role, data.rate, data.comment);
+      window.location.reload()
       /*const response = await login(data);
       if (response && response.error) {
         toast({

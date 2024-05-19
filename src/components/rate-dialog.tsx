@@ -9,7 +9,7 @@ import {
   import { RateForm } from "@/components/rate-form";
 
   
-  export function RateDialog({buttonText, role}:{buttonText:string, role:string}) {
+  export function RateDialog({buttonText, role, sessionId}:{buttonText:string, role:string, sessionId:number}) {
     return (
       <Dialog>
         <DialogTrigger asChild>
@@ -21,7 +21,7 @@ import {
           <DialogHeader>
             <DialogTitle>Califica la tutoría</DialogTitle>
           </DialogHeader>
-          <RateForm role={role}/>  
+          <RateForm role={role} sessionId={sessionId}/>  
         </DialogContent>
       </Dialog>
     );

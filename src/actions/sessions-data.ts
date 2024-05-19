@@ -47,7 +47,8 @@ export const getTutorSessions = async (userId:string) => {
       place: session.place || "",
       duration: session.duration,
       price: Number(session.price),
-      topic: session.topic
+      topic: session.topic,
+      rate: session.tutorRating !== null ? Number(session.tutorRating) : null
     }));
   } catch (error) {
     console.error("Failed to fetch student sessions:", error);
@@ -115,7 +116,7 @@ export const rejectSession = async (sessionId: number): Promise<string> => {
   }
 };
 
-export const rateSession = async (sessionId: number, role: string, rating:number, comment:string|undefined): Promise<string> => {
+export const rateSession = async (sessionId: number, role: string, rate:number, comment:string|undefined): Promise<string> => {
   try {
     if(role==="student"){
       await db.individualSession.update({
@@ -123,7 +124,7 @@ export const rateSession = async (sessionId: number, role: string, rating:number
           id: sessionId,
         },
         data: {
-          studentRating: rating,
+          studentRating: rate,
           studentComment: comment,
         },
       });
@@ -133,7 +134,7 @@ export const rateSession = async (sessionId: number, role: string, rating:number
           id: sessionId,
         },
         data: {
-          tutorRating: rating,
+          tutorRating: rate,
           tutorComment: comment,
         },
       });

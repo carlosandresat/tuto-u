@@ -133,7 +133,8 @@ export const getStudentSessions = async (userId:string) => {
       place: session.place || "",
       duration: session.duration,
       price: Number(session.price),
-      topic: session.topic
+      topic: session.topic,
+      rate: session.studentRating !== null ? Number(session.studentRating) : null
     }));
   } catch (error) {
     console.error("Failed to fetch student sessions:", error);

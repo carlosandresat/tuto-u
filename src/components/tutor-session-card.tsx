@@ -21,12 +21,13 @@ import {
   Hourglass,
   Banknote,
   Mail,
+  Star,
 } from "lucide-react";
 import { CancelDialog } from "@/components/cancel-dialog";
 import { RejectDialog } from "@/components/reject-dialog";
 import { AcceptDialog } from "@/components/accept-dialog";
 import { RateDialog } from "@/components/rate-dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function TutorSessionCard({
   sessionId,
@@ -40,6 +41,7 @@ export function TutorSessionCard({
   duration,
   price,
   rawDateTime,
+  rate,
 }: {
   sessionId: number;
   tutorInitials: string;
@@ -52,8 +54,10 @@ export function TutorSessionCard({
   price: number;
   topic: string;
   rawDateTime: Date;
+  rate: number | null;
 }) {
   const [statusState, setStatusState] = useState(status);
+  const [rateState, setRateState] = useState<number|null>(rate)
 
   return (
     <Card>
@@ -128,11 +132,15 @@ export function TutorSessionCard({
           <>
             <CancelDialog setState={setStatusState} sessionId={sessionId} />
           </>
-        ) : statusState === "accepted" && rawDateTime < new Date() ? (
+        ) : statusState === "accepted" && rawDateTime < new Date() && rateState === null ? (
           <>
             <Button variant="secondary">Reportar</Button>
-            <RateDialog buttonText="Calificar" role="tutor"></RateDialog>
+            <RateDialog buttonText="Calificar" role="tutor" sessionId={sessionId}></RateDialog>
           </>
+        ) : statusState === "accepted" && rawDateTime < new Date() && rateState !== null ? (
+          <div className="flex gap-2">
+            <p>{rateState}</p> <Star className="h-6 w-6 fill-yellow-200" />
+          </div>
         ) : statusState === "requested" ? (
           <>
             <RejectDialog setState={setStatusState} sessionId={sessionId} />

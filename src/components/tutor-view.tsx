@@ -17,6 +17,7 @@ export async function TutorView() {
     price: number;
     topic: string;
     rawDateTime: Date;
+    rate: number | null;
   }[] = await getTutorSessions(session?.user?.id || "")
   const someData: {
     sessionId: number;
@@ -32,6 +33,7 @@ export async function TutorView() {
     price: number;
     topic: string;
     rawDateTime: Date;
+    rate: number | null;
   }[] = [
     {
       sessionId: 1,
@@ -47,6 +49,7 @@ export async function TutorView() {
       price: 5.0,
       topic: "Teorema fundamental del Cálculo",
       rawDateTime: new Date("2024-05-12 14:41:50-05"),
+      rate: null,
     },
     {
       sessionId: 2,
@@ -62,6 +65,7 @@ export async function TutorView() {
       price: 5.0,
       topic: "Límites",
       rawDateTime: new Date("2024-05-20 14:41:50-05"),
+      rate: null,
     },
     {
       sessionId: 3,
@@ -77,6 +81,7 @@ export async function TutorView() {
       price: 2.8,
       topic: "Espacios Vectoriales",
       rawDateTime: new Date("2024-05-20 12:00:00-05"),
+      rate: null,
     },
     {
       sessionId: 4,
@@ -92,6 +97,7 @@ export async function TutorView() {
       price: 3.5,
       topic: "Química Orgánica",
       rawDateTime: new Date("2024-05-20 12:00:00-05"),
+      rate: null,
     },
   ];
   return (
