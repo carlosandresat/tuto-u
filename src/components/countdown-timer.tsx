@@ -8,11 +8,9 @@ interface TimeRemaining {
   seconds: number;
 }
 
-interface CountdownTimerProps {
-  targetTime: number;
-}
+export const CountdownTimer = () => {
+  const targetTime = new Date("2024-05-27T06:00:00").getTime();
 
-export const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetTime }) => {
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(
     calculateTimeRemaining()
   );

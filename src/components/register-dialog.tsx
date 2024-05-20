@@ -11,12 +11,13 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { RegisterForm } from "@/components/register-form";
+import { ReactElement } from "react";
 
-export function RegisterDialog() {
+export function RegisterDialog({buttonText}:{buttonText:ReactElement}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Registro</Button>
+        <Button variant="outline">{buttonText}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

@@ -21,7 +21,7 @@ export function StartDropdownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <div className="flex flex-col">
-          <RegisterDialog></RegisterDialog>
+          <RegisterDialog buttonText={<>Registro</>}></RegisterDialog>
           <LoginDialog buttonText="Entrar"></LoginDialog>
         </div>
       </DropdownMenuContent>

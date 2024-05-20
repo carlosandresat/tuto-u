@@ -10,7 +10,7 @@ import { StartDropdownMenu } from "@/components/start-dropdown-menu";
 
 export function StartNavbar() {
   return (
-    <header className="flex items-center justify-between p-6 fixed top-0 w-full  bg-background z-10 border-b border-border">
+    <header className="flex items-center justify-between p-6 md:p-4 fixed top-0 w-full  bg-background z-10 border-b border-border">
       <div className="lg:hidden">
         <Sheet>
           <SheetTrigger asChild>
@@ -102,7 +102,7 @@ export function StartNavbar() {
         </Link>
       </nav>
       <div className="hidden xl:block xl:space-x-2">
-        <RegisterDialog></RegisterDialog>
+        <RegisterDialog buttonText={<>Registro</>}></RegisterDialog>
         <LoginDialog buttonText="Entrar"></LoginDialog>
       </div>
       <div className="block xl:hidden">

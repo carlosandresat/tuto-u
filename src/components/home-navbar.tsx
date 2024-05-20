@@ -14,7 +14,7 @@ import { auth, signOut } from "@/auth"
 
 export function HomeNavbar() {
   return (
-    <header className="flex items-center justify-between p-6 fixed top-0 left-0 right-0 bg-background z-10 border-b ">
+    <header className="flex items-center justify-between p-6 md:p-4 fixed top-0 left-0 right-0 bg-background z-10 border-b ">
       <div className="lg:hidden">
         <Sheet>
           <SheetTrigger asChild>

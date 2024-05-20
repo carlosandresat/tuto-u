@@ -6,9 +6,9 @@ import Link from "next/link";
 import { CountdownTimer } from "@/components/countdown-timer";
 import { StartNavbar } from "@/components/start-navbar";
 import { ModeToggle } from "@/components/mode-toggle";
+import { UserPlus } from "lucide-react";
 
 export default function Home() {
-  const onCampusDate = new Date("2024-05-15T17:00:00").getTime();
 
   return (
     <>
@@ -19,8 +19,8 @@ export default function Home() {
             Aprende, Enseña y Conecta
           </h1>
         </div>
-        <div className="mt-8 md:mt-16 md:mb-32 space-x-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
-          <RegisterDialog />
+        <div className="mt-8 md:mt-16 md:mb-32 space-x-0 md:space-x-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
+          <RegisterDialog buttonText={<>Regístrate <UserPlus className="ml-2"></UserPlus></>} />
           <LoginDialog buttonText="¡Entra ya!" />
         </div>
 
@@ -49,11 +49,11 @@ export default function Home() {
                   Cuenta Regresiva
                 </h2>
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400">
-                  Lanzamiento para Yachay Tech
+                  Próxima Actualización
                 </p>
-                <CountdownTimer targetTime={onCampusDate} />
+                <CountdownTimer />
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
-                  15 de Mayo de 2024 - 12:00 PM
+                  27 de Mayo de 2024 - 06:00 AM
                 </p>
               </div>
             </div>
