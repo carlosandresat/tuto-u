@@ -16,7 +16,7 @@ export function RegisterDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full md:w-auto" variant="outline">Registro</Button>
+        <Button variant="outline">Registro</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

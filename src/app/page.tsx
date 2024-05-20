@@ -1,5 +1,6 @@
 import { ArrowRight, Rocket } from "lucide-react";
 import { LoginDialog } from "@/components/login-dialog";
+import { RegisterDialog } from "@/components/register-dialog";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { CountdownTimer } from "@/components/countdown-timer";
@@ -19,11 +20,7 @@ export default function Home() {
           </h1>
         </div>
         <div className="mt-8 md:mt-16 md:mb-32 space-x-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
-          <Link href="/preregister">
-            <Button variant="outline">
-              ¡Pre-Registro! <Rocket className="ml-2" />
-            </Button>
-          </Link>
+          <RegisterDialog />
           <LoginDialog buttonText="¡Entra ya!" />
         </div>
 
