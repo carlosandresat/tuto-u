@@ -1,10 +1,12 @@
 "use server"
 
 import * as z from "zod";
-import { LoginSchema } from "@/schemas";
+import { LoginSchema, RegisterSchema } from "@/schemas";
+import bcrypt from "bcryptjs";
 import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
+import { db } from "@/lib/db";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
     const validatedFields = LoginSchema.safeParse(values);
@@ -33,3 +35,45 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         throw error;
     }
 }
+
+export const register = async (data: z.infer<typeof RegisterSchema>) => {
+    try {
+        const validatedFields = RegisterSchema.safeParse(data);
+
+        if (!validatedFields.success) {
+            return { error: "Campos inválidos" };
+        }
+    
+        const { firstname, lastname, password, email } = validatedFields.data;
+    
+        const hashedPassword = await bcrypt.hash(password, 10);
+    
+        const existingUser = await db.user.findUnique({
+            where: {
+                email,
+            },
+        });
+    
+        if (existingUser) {
+            throw new Error(
+                "Email ya registrado"
+              );
+        }
+    
+        await db.user.create({
+            data: {
+                firstname,
+                lastname,
+                email,
+                password: hashedPassword,
+            },
+        });
+
+        return {message: "Registro realizado con éxito"}
+    
+    } catch (error) {
+        throw new Error(
+            `Hubo un error inesperado. ${error}`
+        );
+    }
+};

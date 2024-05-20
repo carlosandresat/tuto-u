@@ -16,12 +16,18 @@ export const LoginSchema = z.object({
 });
 
 export const RegisterSchema = z.object({
-  name: z
+  firstname: z
     .string({
       required_error: "Por favor ingresa tus nombres",
     })
     .min(3, "Tu nombre debe incluir más de 3 caracteres")
     .max(24, "Tu nombre debe contener menos de 24 caracteres"),
+  lastname: z
+    .string({
+      required_error: "Por favor ingresa tus apellidos",
+    })
+    .min(3, "Tu apellido debe incluir más de 3 caracteres")
+    .max(24, "Tu apellido debe contener menos de 24 caracteres"),
   email: z
     .string({
       required_error: "Por favor ingresa tu correo institucional.",
