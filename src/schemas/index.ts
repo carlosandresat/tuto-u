@@ -58,13 +58,13 @@ export const UserCoursesSchema = z.object({
 });
 
 export const UserAvailabilitySchema = z.object({
-  mondayAvailability: z.array(z.coerce.number().int().positive().max(23)),
-  tuesdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
-  wednesdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
-  thursdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
-  fridayAvailability: z.array(z.coerce.number().int().positive().max(23)),
-  saturdayAvailability: z.array(z.coerce.number().int().positive().max(23)),
-  sundayAvailability: z.array(z.coerce.number().int().positive().max(23)),
+  mondayAvailability: z.array(z.string()),
+  tuesdayAvailability: z.array(z.string()),
+  wednesdayAvailability: z.array(z.string()),
+  thursdayAvailability: z.array(z.string()),
+  fridayAvailability: z.array(z.string()),
+  saturdayAvailability: z.array(z.string()),
+  sundayAvailability: z.array(z.string()),
 });
 
 export const IndividualSessionRequestSchema = z

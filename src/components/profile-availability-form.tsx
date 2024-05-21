@@ -45,9 +45,6 @@ export function ProfileAvailabilityForm({
   sundayAvailability: number[];
 }) {
   const [isPending, startTransition] = useTransition();
-  const [loaded, setLoaded] = useState(false);
-
-
   
   const form = useForm<z.infer<typeof UserAvailabilitySchema>>({
     resolver: zodResolver(UserAvailabilitySchema),
@@ -55,99 +52,47 @@ export function ProfileAvailabilityForm({
       mondayAvailability: mondayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
+        return localHour.getHours().toString();
       }),
       tuesdayAvailability: tuesdayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
+        return localHour.getHours().toString();
       }),
       wednesdayAvailability: wednesdayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
+        return localHour.getHours().toString();
       }),
       thursdayAvailability: thursdayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
+        return localHour.getHours().toString();
       }),
       fridayAvailability: fridayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
+        return localHour.getHours().toString();
       }),
       saturdayAvailability: saturdayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
+        return localHour.getHours().toString();
       }),
       sundayAvailability: sundayAvailability.map((hourUTC) => {
         const localHour = new Date();
         localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
+        return localHour.getHours().toString();
       }),
     },
   });
 
-  useEffect(() => {
-    if (!loaded) {
-      form.reset({
-        
-          mondayAvailability: mondayAvailability.map((hourUTC) => {
-            const localHour = new Date();
-            localHour.setUTCHours(hourUTC);
-            return localHour.getHours();
-          }),
-          tuesdayAvailability: tuesdayAvailability.map((hourUTC) => {
-            const localHour = new Date();
-            localHour.setUTCHours(hourUTC);
-            return localHour.getHours();
-          }),
-          wednesdayAvailability: wednesdayAvailability.map((hourUTC) => {
-            const localHour = new Date();
-            localHour.setUTCHours(hourUTC);
-            return localHour.getHours();
-          }),
-          thursdayAvailability: thursdayAvailability.map((hourUTC) => {
-            const localHour = new Date();
-            localHour.setUTCHours(hourUTC);
-            return localHour.getHours();
-          }),
-          fridayAvailability: fridayAvailability.map((hourUTC) => {
-            const localHour = new Date();
-            localHour.setUTCHours(hourUTC);
-            return localHour.getHours();
-          }),
-          saturdayAvailability: saturdayAvailability.map((hourUTC) => {
-            const localHour = new Date();
-            localHour.setUTCHours(hourUTC);
-            return localHour.getHours();
-          }),
-          sundayAvailability: sundayAvailability.map((hourUTC) => {
-            const localHour = new Date();
-            localHour.setUTCHours(hourUTC);
-            return localHour.getHours();
-          }),
-      });
-      console.log("mondayAv: ", form.getValues("mondayAvailability"))
-      console.log("tuesdayAv: ", form.getValues("tuesdayAvailability"))
-      console.log("Initial data: " ,mondayAvailability.map((hourUTC) => {
-        const localHour = new Date();
-        localHour.setUTCHours(hourUTC);
-        return localHour.getHours();
-      }).map((x) => x.toString()))
-      setLoaded(true);
-    }
-  }, [form, mondayAvailability, tuesdayAvailability, wednesdayAvailability, thursdayAvailability, fridayAvailability, saturdayAvailability, sundayAvailability, loaded]);
-
-
   const toUTCAvailability = (data: z.infer<typeof UserAvailabilitySchema>) => {
-    const transformFunction = (day: number[]) => {
+    const transformFunction = (day: string[]) => {
       const UTCDay = day.map((hour) => {
         const time = new Date();
-        time.setHours(hour);
-        return time.getUTCHours();
+        time.setHours(Number(hour));
+        return time.getUTCHours().toString();
       });
 
       return UTCDay;
@@ -184,8 +129,8 @@ export function ProfileAvailabilityForm({
                 <ToggleGroup
                   type="multiple"
                   variant="outline"
-                  value={field.value.map((x) => x.toString())}
-                  onValueChange={(e)=> {field.onChange(e.map((x)=> Number(x)));console.log("OnMondayChangeNumbers:", e.map((x)=> Number(x)));console.log("Tuesday form value", form.getValues("tuesdayAvailability"))}}
+                  value={field.value}
+                  onValueChange={field.onChange}
                 >
                   {timeOptions.map((hour, index)=>
                   <ToggleGroupItem value={hour.toString()} key={index} aria-label={ Number(hour)<=12 ? `Toggle ${hour}am` : `Toggle ${Number(hour)%12}pm`}>
@@ -208,7 +153,7 @@ export function ProfileAvailabilityForm({
                 <ToggleGroup
                   type="multiple"
                   variant="outline"
-                  value={field.value.map((x) => x.toString())}
+                  value={field.value}
                   onValueChange={field.onChange}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
@@ -252,7 +197,7 @@ export function ProfileAvailabilityForm({
                 <ToggleGroup
                   type="multiple"
                   variant="outline"
-                  value={field.value.map((x) => x.toString())}
+                  value={field.value}
                   onValueChange={field.onChange}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
@@ -296,7 +241,7 @@ export function ProfileAvailabilityForm({
                 <ToggleGroup
                   type="multiple"
                   variant="outline"
-                  value={field.value.map((x) => x.toString())}
+                  value={field.value}
                   onValueChange={field.onChange}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
@@ -340,7 +285,7 @@ export function ProfileAvailabilityForm({
                 <ToggleGroup
                   type="multiple"
                   variant="outline"
-                  value={field.value.map((x) => x.toString())}
+                  value={field.value}
                   onValueChange={field.onChange}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
@@ -384,7 +329,7 @@ export function ProfileAvailabilityForm({
                 <ToggleGroup
                   type="multiple"
                   variant="outline"
-                  value={field.value.map((x) => x.toString())}
+                  value={field.value}
                   onValueChange={field.onChange}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
@@ -428,8 +373,8 @@ export function ProfileAvailabilityForm({
                 <ToggleGroup
                   type="multiple"
                   variant="outline"
-                  value={field.value.map((x) => x.toString())}
-                  defaultValue={field.value.map((x) => x.toString())}
+                  value={field.value}
+                  defaultValue={field.value}
                   onValueChange={field.onChange}
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">

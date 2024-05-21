@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { db } from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
 import {
   UserPricingSchema,
@@ -144,6 +145,8 @@ export const updateUserPricing = async (
     data: newPricing,
   });
 
+  revalidatePath("/home/myprofile")
+
   return { sucess: "Precios actualizados" };
 };
 
@@ -184,6 +187,7 @@ export const updateUserCourses = async (
     await db.tutorCourse.createMany({
       data: newTutorCourses,
     });
+    revalidatePath("/home/myprofile")
   } catch (error) {
     console.log(error);
     return null;
@@ -229,25 +233,25 @@ export const updateUserAvailability = async (
   } = validatedFields.data;
 
   const newMondayEntries = mondayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 1, timeSlot: hour };
+    return { tutorId: userId, dayOfWeek: 1, timeSlot: Number(hour) };
   });
   const newTuesdayEntries = tuesdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 2, timeSlot: hour };
+    return { tutorId: userId, dayOfWeek: 2, timeSlot: Number(hour) };
   });
   const newWednesdayEntries = wednesdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 3, timeSlot: hour };
+    return { tutorId: userId, dayOfWeek: 3, timeSlot: Number(hour) };
   });
   const newThursdayEntries = thursdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 4, timeSlot: hour };
+    return { tutorId: userId, dayOfWeek: 4, timeSlot: Number(hour) };
   });
   const newFridayEntries = fridayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 5, timeSlot: hour };
+    return { tutorId: userId, dayOfWeek: 5, timeSlot: Number(hour) };
   });
   const newSaturdayEntries = saturdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 6, timeSlot: hour };
+    return { tutorId: userId, dayOfWeek: 6, timeSlot: Number(hour) };
   });
   const newSundayEntries = sundayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 0, timeSlot: hour };
+    return { tutorId: userId, dayOfWeek: 0, timeSlot: Number(hour) };
   });
 
   const newTutorCourses = newMondayEntries.concat(
@@ -268,6 +272,7 @@ export const updateUserAvailability = async (
     await db.tutorAvailability.createMany({
       data: newTutorCourses,
     });
+    revalidatePath("/home/myprofile")
   } catch (error) {
     console.log(error);
     return null;
