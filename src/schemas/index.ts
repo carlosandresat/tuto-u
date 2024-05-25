@@ -124,5 +124,5 @@ export const RateSessionSchema = z.object({
 });
 
 export const UserBasicsSchema = z.object({
-  description: z.string().max(50).optional()
+  description: z.string().max(80).optional()
 })

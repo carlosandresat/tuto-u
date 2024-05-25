@@ -63,6 +63,7 @@ export function ProfileBasicsForm({userId, descriptionConfig}: {userId:string; d
                   {...field}
                 />
               </FormControl>
+              <FormMessage></FormMessage>
             </FormItem>
           )}
         />
