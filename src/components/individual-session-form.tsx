@@ -73,6 +73,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       email: string | null;
       nameInitials: string;
       pricing: { duration: number; price: string }[];
+      description: string | null;
     }[]
   >([]);
   const form = useForm<z.infer<typeof IndividualSessionRequestSchema>>({
@@ -535,6 +536,14 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                   )[0].name
                 : null}
             </h2>
+            <p>
+            {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
+                ? availableTutors.filter(
+                    (row) => row.id === form.watch("tutor")
+                  )[0].description
+                : null}
+    </p>
+
 
             {/*
             <div className="flex justify-center items-center mt-2 gap-x-2 flex-wrap gap-y-2">

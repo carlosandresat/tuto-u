@@ -40,6 +40,7 @@ export const getAvailableTutors = async (
             lastname: true,
             email: true,
             id: true,
+            description: true,
             tutor_pricing: {
               select: {
                 duration: true,
@@ -58,7 +59,8 @@ export const getAvailableTutors = async (
         pricing: tutorCourse.tutor.tutor_pricing.map(config => ({
           duration: config.duration,
           price: config.price.toNumber().toFixed(2) // Ensure the price is returned as a number, if necessary
-        }))
+        })),
+        description: tutorCourse.tutor.description
       }));
   } catch (error) {
     console.error("Failed to fetch available tutors:", error);
