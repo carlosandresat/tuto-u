@@ -24,10 +24,10 @@ import { toast } from "@/components/ui/use-toast";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import { UserBasicsSchema } from "@/schemas";
-import { updateUserPricing } from "@/actions/user-configuration";
+import { updateUserDescription } from "@/actions/user-configuration";
 import { Decimal } from "@prisma/client/runtime/library";
 
-export function ProfileBasicsForm({}: {}) {
+export function ProfileBasicsForm({userId}: {userId:string}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof UserBasicsSchema>>({
@@ -39,8 +39,7 @@ export function ProfileBasicsForm({}: {}) {
 
   function onSubmit(data: z.infer<typeof UserBasicsSchema>) {
     startTransition(async () => {
-      console.log(data);
-      //await updateUserPricing(data, userId);
+      await updateUserDescription(data, userId);
       toast({
         title: "¡Has actualizado tu información básica!",
       });

@@ -8,6 +8,7 @@ import {
   UserPricingSchema,
   UserCoursesSchema,
   UserAvailabilitySchema,
+  UserBasicsSchema
 } from "@/schemas";
 
 export const getUserData = async (userId: string) => {
@@ -271,6 +272,36 @@ export const updateUserAvailability = async (
     });
     await db.tutorAvailability.createMany({
       data: newTutorCourses,
+    });
+    revalidatePath("/home/myprofile")
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const updateUserDescription = async (
+  data: z.infer<typeof UserBasicsSchema>,
+  userId: string
+) => {
+  const validatedFields = UserBasicsSchema.safeParse(data);
+
+  if (!validatedFields.success) {
+    return { error: "Campos inválidos" };
+  }
+
+  const {
+    description
+  } = validatedFields.data;
+
+  try {
+    const updatedSession = await db.user.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        description: description,
+      },
     });
     revalidatePath("/home/myprofile")
   } catch (error) {
