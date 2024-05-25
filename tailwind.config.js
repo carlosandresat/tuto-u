@@ -70,6 +70,31 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        stripes: "linear-gradient(45deg, hsl(var(--secondary)) 25%, transparent 25%, transparent 50%, hsl(var(--secondary)) 50%, hsl(var(--secondary)) 75%, transparent 75%, transparent)",
+        dots: "radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)",
+        'zigzag': "linear-gradient(135deg, #3b82f6 25%, transparent 25%) -50px 0/ calc(100px + 10px) calc(100px + 10px), linear-gradient(225deg, #3b82f6 25%, transparent 25%) -50px 0/ calc(100px + 10px) calc(100px + 10px), linear-gradient(315deg, #3b82f6 25%, transparent 25%) 0 0/ calc(100px + 10px) calc(100px + 10px), linear-gradient(45deg, #3b82f6 25%, transparent 25%) 0 0/ calc(100px + 10px) calc(100px + 10px)",
+        'waves': "radial-gradient(circle, #3b82f6 20%, transparent 20%), radial-gradient(circle, #3b82f6 20%, transparent 20%) 10px 10px",
+        'circles': "radial-gradient(circle, #3b82f6 1px, transparent 1px)",
+        'checkerboard': "linear-gradient(90deg, #3b82f6 50%, transparent 50%), linear-gradient(90deg, transparent 50%, #3b82f6 50%), linear-gradient(0deg, #3b82f6 50%, transparent 50%), linear-gradient(0deg, transparent 50%, #3b82f6 50%)",
+        'chevron': "linear-gradient(45deg, hsl(var(--primary)) 20%, transparent 20%, transparent 40%, hsl(var(--primary)) 40%, hsl(var(--primary)) 60%, transparent 60%, transparent 80%, hsl(var(--primary)) 80%, hsl(var(--primary)), linear-gradient(135deg, hsl(var(--primary)) 25%, transparent 25%, transparent 50%, hsl(var(--primary)) 50%, hsl(var(--primary)) 75%, transparent 75%, transparent)",
+        'hexagons': "linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px), linear-gradient(30deg, #e5e7eb 1px, transparent 1px), linear-gradient(-30deg, #e5e7eb 1px, transparent 1px)",
+        'grid': "linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)) 1px, hsl(var(--background)) 1px)",
+
+
+
+
+        // Add more patterns here
+      },
+      backgroundSize: {
+        'stripes': '18.28px 18.28px',
+        'dots': '10px 10px',
+        'circles': '10px 10px',
+        'checkerboard': '2px 2px',
+        'waves': '20px 20px',
+        'grid': '8px 8px',
+
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
