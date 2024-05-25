@@ -149,7 +149,7 @@ export default async function MyProfile() {
             <CardHeader>
               <CardTitle>Precios</CardTitle>
               <CardDescription>
-                Selecciona la duración de las tutorías con tus precios. Si el precio queda vacío o en 0 significa que tus tutorías son gratuitas
+                Selecciona la duración de las tutorías con tus precios. Si seleccionas una duración y el precio queda vacío significa que tus tutorías son gratuitas
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -180,7 +180,7 @@ export default async function MyProfile() {
               <CardTitle>Horarios disponibles</CardTitle>
               <CardDescription>
                 Selecciona los horarios en los que estás disponible para ofrecer
-                tutorías (<span className="text-destructive">Bug: </span>Si no te carga tu horario guardado, regresa y vuelve a entrar a &apos;Mi perfil&apos;)
+                tutorías
               </CardDescription>
             </CardHeader>
             <CardContent>
