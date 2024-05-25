@@ -81,7 +81,7 @@ export function ProfilePricingForm({
 
   function onSubmit(data: z.infer<typeof UserPricingSchema>) {
     startTransition(async () => {
-      updateUserPricing(data, userId);
+      await updateUserPricing(data, userId);
       toast({
         title: "¡Se han actualizado los precios de tus tutorías!",
       });
