@@ -495,7 +495,7 @@ export function AchievementsDialogFull() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                El Narcisista
+                Narcisista
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">

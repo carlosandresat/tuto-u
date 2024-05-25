@@ -206,7 +206,7 @@ export default async function MyProfile() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-3 gap-6 max-w-screen-2xl mt-6 justify-center">
+              <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6 justify-center">
               {achievements.map((row, index)=>
           <AchievementCard {...row} key={index} pathname="/home/myprofile"></AchievementCard>
           )}
