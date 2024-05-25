@@ -27,13 +27,13 @@ import { UserBasicsSchema } from "@/schemas";
 import { updateUserDescription } from "@/actions/user-configuration";
 import { Decimal } from "@prisma/client/runtime/library";
 
-export function ProfileBasicsForm({userId}: {userId:string}) {
+export function ProfileBasicsForm({userId, descriptionConfig}: {userId:string; descriptionConfig:string}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof UserBasicsSchema>>({
     resolver: zodResolver(UserBasicsSchema),
     defaultValues: {
-      description: "",
+      description: descriptionConfig,
     },
   });
 

@@ -144,7 +144,7 @@ export default async function MyProfile() {
                   {userBasicData?.email}
                 </a>
               </p>
-              <ProfileBasicsForm userId={session?.user?.id || ""}></ProfileBasicsForm>
+              <ProfileBasicsForm userId={session?.user?.id || ""} descriptionConfig={userBasicData?.description || ""}></ProfileBasicsForm>
             </CardContent>
           </Card>
           <Card className="w-full mt-6">
