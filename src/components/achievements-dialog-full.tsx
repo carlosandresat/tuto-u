@@ -383,10 +383,91 @@ export function AchievementsDialogFull() {
               </p>
 
               <p className="mt-2">
-              Has resportado un bug de la plataforma ¡Gracias por tu colaboración!
+              Has reportado un bug de la plataforma ¡Gracias por tu colaboración!
               </p>
             </HoverCardContent>
           </HoverCard>
+
+          <HoverCard>
+            <HoverCardTrigger className="flex justify-center">
+              <Button
+                className="w-20 h-20 p-4 text-center border flex flex-col items-center rounded-full justify-between hover:cursor-help"
+                variant="outline"
+              >
+                <Image
+                  src="/achievements/graduate.png"
+                  alt="Pre-Release"
+                  width={64}
+                  height={64}
+                  className="dark:invert"
+                />
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex justify-start my-2 items-center">
+                <div className="w-14 h-14 flex items-center mr-2 justify-center bg-secondary rounded-full">
+                  <Image
+                    src="/achievements/graduate.png"
+                    alt="Pre-Release"
+                    width={40}
+                    height={40}
+                    className="dark:invert p-1"
+                  />
+                </div>
+                <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
+                Graduado
+                </h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                0 usuarios tienen este logro
+              </p>
+
+              <p className="mt-2">
+              Eres alguien que terminó la carrera y ahora tienes un título universitario. ¡Felicidades por tu esfuerzo!
+              </p>
+            </HoverCardContent>
+          </HoverCard>
+
+          <HoverCard>
+            <HoverCardTrigger className="flex justify-center">
+              <Button
+                className="w-20 h-20 p-4 text-center border flex flex-col items-center rounded-full justify-between hover:cursor-help"
+                variant="outline"
+              >
+                <Image
+                  src="/achievements/rocket.png"
+                  alt="Pre-Release"
+                  width={64}
+                  height={64}
+                  className="dark:invert"
+                />
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex justify-start my-2 items-center">
+                <div className="w-14 h-14 flex items-center mr-2 justify-center bg-secondary rounded-full">
+                  <Image
+                    src="/achievements/rocket.png"
+                    alt="Pre-Release"
+                    width={40}
+                    height={40}
+                    className="dark:invert p-1"
+                  />
+                </div>
+                <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
+                El Inicio
+                </h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                0 usuarios tienen este logro
+              </p>
+
+              <p className="mt-2">
+              Has iniciado tu camino en Tuto-U. Completaste todos los pasos desde solicitar hasta calificar tu primera tutoría. ¡Este es tu primer paso!
+              </p>
+            </HoverCardContent>
+          </HoverCard>
+
 
         </div>
 
