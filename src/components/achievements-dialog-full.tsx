@@ -443,7 +443,7 @@ export function AchievementsDialogFull() {
                 />
               </Button>
             </HoverCardTrigger>
-            <HoverCardContent className="bg-grid">
+            <HoverCardContent>
               <div className="flex justify-start my-2 items-center">
                 <div className="w-14 h-14 flex items-center mr-2 justify-center bg-secondary rounded-full">
                   <Image
