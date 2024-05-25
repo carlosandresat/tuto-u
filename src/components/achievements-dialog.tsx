@@ -20,7 +20,6 @@ import { usePathname } from "next/navigation";
 export function AchievementsDialog({userId}:{userId:string}) {
   const [achievements, setAchievements] = useState<{ id: number; name: string; description: string; tier: string; imageUrl: string; userCount: number; isInverted: boolean; }[]>([])
   const pathname = usePathname()
-  console.log(pathname)
 
   useEffect(() => {
     const loadAchievements = async () => {
@@ -33,10 +32,7 @@ export function AchievementsDialog({userId}:{userId:string}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full md:w-auto" onClick={async ()=> {
-      const res = await getUserAchievements(userId)
-      setAchievements(res)
-    }}>Ver Logros</Button>
+        <Button className="w-full md:w-auto">Ver Logros</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
