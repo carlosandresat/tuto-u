@@ -122,3 +122,7 @@ export const RateSessionSchema = z.object({
   rate: z.number().min(0).max(5).multipleOf(0.5),
   comment: z.string().max(50).optional()
 });
+
+export const UserBasicsSchema = z.object({
+  description: z.string().max(50).optional()
+})

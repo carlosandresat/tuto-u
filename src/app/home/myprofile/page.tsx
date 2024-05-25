@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/hover-card";
 import Link from "next/link";
 import { AchievementCard } from "@/components/achievement-card";
+import { ProfileBasicsForm } from "@/components/profile-basics-form";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ProfilePricingForm } from "@/components/profile-pricing-form";
@@ -143,6 +144,7 @@ export default async function MyProfile() {
                   {userBasicData?.email}
                 </a>
               </p>
+              <ProfileBasicsForm></ProfileBasicsForm>
             </CardContent>
           </Card>
           <Card className="w-full mt-6">
