@@ -143,3 +143,28 @@ export const getStudentSessions = async (userId:string) => {
     throw new Error("Unable to fetch student sessions.");
   }
 };
+
+export const addNarcissismAchievement = async (id:string) => {
+  try {
+    const existingAchievement = await db.userAchievement.findFirst({
+      where: {
+          userId: id,
+          achievementId: 12,
+      },
+    });
+
+    if (existingAchievement) {
+      return {message: "¿Otra vez? Ya te ganaste el logro por intentar esto"}
+    } else {
+      await db.userAchievement.create({
+        data: {
+          userId: id,
+          achievementId: 12,
+        }
+      })
+      return {message: "¿Enserio intentaste eso? ¿Solicitarte a ti mismo? Acabas de ganar el logro 'Narcisista por Excelencia'. Revísalo en tu perfil"}
+    }
+  } catch (error) {
+    return {error_message: "Hubo un error en el sistema. Contacta con los administradores por favor", error}
+  }
+};

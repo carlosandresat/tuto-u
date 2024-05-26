@@ -60,7 +60,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { IndividualSessionRequestSchema } from "@/schemas";
-import { getAvailableTutors, requestIndividualSession } from "@/actions/session-request";
+import { getAvailableTutors, requestIndividualSession, addNarcissismAchievement } from "@/actions/session-request";
 import { useState, useTransition } from "react";
 
 export function IndividualSessionForm({ userId }: { userId: string }) {
@@ -145,6 +145,17 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       title: "¡Felicidades!",
       description: "Pronto estará disponible esta funcionalidad"
     })*/
+    if (data.tutor === userId) {
+      const res = await addNarcissismAchievement(userId)
+      console.log(res)
+      if (res.message !== undefined){
+        console.log(res.message)
+        toast({
+          title: "WTF",
+          description: res.message
+        })
+      }
+    } else {
     const res = await requestIndividualSession(formattedData)
     !res.error_message ?
     toast({
@@ -155,6 +166,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       title: "Error",
       description: res.error_message
     })
+  }
   })
     
   }
