@@ -82,12 +82,6 @@ export const requestIndividualSession = async (data: {
   }
 };
 
-function capitalizeMonth(dateStr:string) {
-  return dateStr.replace(/(\d+)\s([a-z]+)\s(\d+)/i, (match, day, month, year) => {
-    return `${day} ${month.charAt(0).toUpperCase() + month.slice(1)}, ${year}`;
-  });
-}
-
 export const getStudentSessions = async (userId:string) => {
   const aDayAgo = addHours(new Date(), -24)
 

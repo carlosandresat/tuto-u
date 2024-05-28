@@ -296,7 +296,7 @@ export const updateUserDescription = async (
   } = validatedFields.data;
 
   try {
-    const updatedSession = await db.user.update({
+    await db.user.update({
       where: {
         id: userId,
       },
