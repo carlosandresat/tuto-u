@@ -89,7 +89,7 @@ export const requestIndividualSession = async (data: {
 };
 
 export const getStudentSessions = async (userId: string) => {
-  const aDayAgo = addHours(new Date(), -24);
+  const aDayAgo = addHours(new Date(), -60);
 
   try {
     const sessions = await db.individualSession.findMany({

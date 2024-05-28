@@ -4,7 +4,7 @@ import { db } from "@/lib/db";
 import { addHours } from "date-fns";
 
 export const getTutorSessions = async (userId: string) => {
-  const aDayAgo = addHours(new Date(), -24);
+  const aDayAgo = addHours(new Date(), -60);
 
   try {
     const sessions = await db.individualSession.findMany({
