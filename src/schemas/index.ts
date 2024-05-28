@@ -120,9 +120,9 @@ export const IndividualSessionRequestSchema = z
 
 export const RateSessionSchema = z.object({
   rate: z.number().min(0).max(5).multipleOf(0.5),
-  comment: z.string().max(50).optional()
+  comment: z.string().max(80, "El comentario no debe contener más de 80 caracteres").optional()
 });
 
 export const UserBasicsSchema = z.object({
-  description: z.string().max(80).optional()
+  description: z.string().max(80, "La descripción no debe contener más de 80 caracteres").optional()
 })
