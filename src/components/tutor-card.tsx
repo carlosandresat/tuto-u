@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Star, StarHalf } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { AchievementsDialogFull } from "@/components/achievements-dialog-full";
 import Image from "next/image";
 

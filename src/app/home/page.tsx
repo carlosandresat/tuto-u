@@ -1,7 +1,6 @@
 import { StudentView } from "@/components/student-view";
 import { TutorView } from "@/components/tutor-view";
 import { CourseCard } from "@/components/course-card";
-import { TutorCard } from "@/components/tutor-card";
 import { TutorsCarousel } from "@/components/tutors-carousel";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -28,45 +27,6 @@ export default function Home() {
     { course: "Ecuaciones Diferenciales", school: "mate" },
     { course: "Métodos Numéricos", school: "mate" },
     { course: "Inglés", school: "lan" },
-  ];
-
-  const tutores = [
-    {
-      tutor: "Carlos Andrés Arévalo Torres",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 78,
-    },
-    {
-      tutor: "Carlos Arévalo2",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 45,
-    },
-    {
-      tutor: "Carlos Arévalo3",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 19,
-    },
-    {
-      tutor: "Carlos Arévalo4",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 42,
-    },
-    {
-      tutor: "Carlos Arévalo5",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 29,
-    },
-    {
-      tutor: "Carlos Arévalo6",
-      rating: 9.7,
-      pic_url: "/photos/carlos.arevalo.jpg",
-      nreviews: 45,
-    },
   ];
 
   return (

@@ -1,24 +1,3 @@
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
-  Card,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Calendar,
-  Clock1,
-  MapPin,
-  LibraryBig,
-  Hourglass,
-  Banknote,
-} from "lucide-react";
-import Image from "next/image";
-import { CancelDialog } from "./cancel-dialog";
 import { StudentSessionCard } from "@/components/student-session-card";
 import { getStudentSessions } from "@/actions/session-request";
 import { auth } from "@/auth";

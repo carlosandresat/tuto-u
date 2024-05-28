@@ -1,14 +1,7 @@
 "use server";
 
-import { z } from "zod";
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
-
-import {
-  UserPricingSchema,
-  UserCoursesSchema,
-  UserAvailabilitySchema,
-} from "@/schemas";
 
 export const getAvailableTutors = async (
   courseId: number,

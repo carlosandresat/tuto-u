@@ -1,22 +1,9 @@
-import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
-  CardContent,
-  CardFooter,
-  Card,
-} from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import { auth } from "@/auth";
 
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { IndividualSessionRequestSchema } from "@/schemas";
-import { AchievementsDialog } from "@/components/achievements-dialog";
 import { IndividualSessionForm } from "@/components/individual-session-form";
-
 
 export default async function Component() {
   const session = await auth();

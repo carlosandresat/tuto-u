@@ -1,8 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { ModeToggle } from "@/components/mode-toggle";
 import { StartNavbar } from "@/components/start-navbar";
 
 export default function Pricing() {

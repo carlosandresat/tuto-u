@@ -6,26 +6,20 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { login } from "@/actions/login";
-import { DollarSign } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import { UserBasicsSchema } from "@/schemas";
 import { updateUserDescription } from "@/actions/user-configuration";
-import { Decimal } from "@prisma/client/runtime/library";
 
 export function ProfileBasicsForm({userId, descriptionConfig}: {userId:string; descriptionConfig:string}) {
   const [isPending, startTransition] = useTransition();

@@ -23,11 +23,9 @@ import {
   Mail,
   Star,
 } from "lucide-react";
-import Image from "next/image";
 import { CancelDialog } from "./cancel-dialog";
 import { RateDialog } from "@/components/rate-dialog";
 import { useState } from "react";
-import { stat } from "fs";
 
 export function StudentSessionCard({
   sessionId,

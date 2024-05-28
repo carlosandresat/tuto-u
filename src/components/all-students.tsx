@@ -1,7 +1,3 @@
-import { StudentSessionCard } from "@/components/student-session-card";
-import { getTutorSessions } from "@/actions/sessions-data";
-import { auth } from "@/auth";
-import { TutorSessionCard } from "@/components/tutor-session-card";
 import { TutorCard } from "@/components/tutor-card";
 
 export async function AllStudents() {

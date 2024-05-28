@@ -27,7 +27,7 @@ import { CancelDialog } from "@/components/cancel-dialog";
 import { RejectDialog } from "@/components/reject-dialog";
 import { AcceptDialog } from "@/components/accept-dialog";
 import { RateDialog } from "@/components/rate-dialog";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export function TutorSessionCard({
   sessionId,

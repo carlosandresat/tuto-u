@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ModeToggle } from "@/components/mode-toggle";
 import { Menu, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,7 +9,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-import { auth, signOut } from "@/auth"
+import { signOut } from "@/auth"
 
 export function HomeNavbar() {
   return (

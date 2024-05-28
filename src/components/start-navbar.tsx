@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Menu, LogIn } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { ModeToggle } from "@/components/mode-toggle";
 import { LoginDialog } from "@/components/login-dialog";
 import { RegisterDialog } from "@/components/register-dialog";
 import { StartDropdownMenu } from "@/components/start-dropdown-menu";

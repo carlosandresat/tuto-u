@@ -1,6 +1,4 @@
 import { StartNavbar } from "@/components/start-navbar";
-import Instructions from "@/components/instructions";
-import ScrollElement from "@/components/scroll-to";
 
 export default function How() {
 

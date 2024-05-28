@@ -19,7 +19,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTransition } from "react";
 import { z } from "zod";
-import { toast } from "@/components/ui/use-toast";
 import { rateSession } from "@/actions/sessions-data";
 import { StarHalf, Star } from "lucide-react";
 

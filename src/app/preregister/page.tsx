@@ -1,7 +1,4 @@
 import {
-  CardTitle,
-  CardDescription,
-  CardHeader,
   CardContent,
   Card,
 } from "@/components/ui/card";
@@ -9,8 +6,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
-
-import { PreregisterForm } from "@/components/preregister-form";
 
 export default function Preregister() {
   return (
