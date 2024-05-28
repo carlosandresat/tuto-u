@@ -8,7 +8,7 @@ import {
   UserPricingSchema,
   UserCoursesSchema,
   UserAvailabilitySchema,
-  UserBasicsSchema
+  UserBasicsSchema,
 } from "@/schemas";
 
 export const getUserData = async (userId: string) => {
@@ -147,7 +147,7 @@ export const updateUserPricing = async (
     data: newPricing,
   });
 
-  revalidatePath("/home/myprofile")
+  revalidatePath("/home/myprofile");
 
   return { sucess: "Precios actualizados" };
 };
@@ -189,7 +189,7 @@ export const updateUserCourses = async (
     await db.tutorCourse.createMany({
       data: newTutorCourses,
     });
-    revalidatePath("/home/myprofile")
+    revalidatePath("/home/myprofile");
   } catch (error) {
     console.log(error);
     return null;
@@ -274,7 +274,7 @@ export const updateUserAvailability = async (
     await db.tutorAvailability.createMany({
       data: newTutorCourses,
     });
-    revalidatePath("/home/myprofile")
+    revalidatePath("/home/myprofile");
   } catch (error) {
     console.log(error);
     return null;
@@ -291,9 +291,7 @@ export const updateUserDescription = async (
     return { error: "Campos inválidos" };
   }
 
-  const {
-    description
-  } = validatedFields.data;
+  const { description } = validatedFields.data;
 
   try {
     await db.user.update({
@@ -304,7 +302,7 @@ export const updateUserDescription = async (
         description: description,
       },
     });
-    revalidatePath("/home/myprofile")
+    revalidatePath("/home/myprofile");
   } catch (error) {
     console.log(error);
     return null;

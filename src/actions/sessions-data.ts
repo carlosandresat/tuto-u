@@ -3,37 +3,39 @@
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
 
-export const getTutorSessions = async (userId:string) => {
-  const aDayAgo = addHours(new Date(), -24)
+export const getTutorSessions = async (userId: string) => {
+  const aDayAgo = addHours(new Date(), -24);
 
   try {
     const sessions = await db.individualSession.findMany({
       where: {
         tutorId: userId,
         sessionDateTime: {
-          gte: aDayAgo
-        }
+          gte: aDayAgo,
+        },
       },
       include: {
         student: {
           select: {
             firstname: true,
             lastname: true,
-            email: true
-          }
+            email: true,
+          },
         },
         course: {
           select: {
-            name: true
-          }
-        }
-      }
+            name: true,
+          },
+        },
+      },
     });
 
-    return sessions.map(session => ({
+    return sessions.map((session) => ({
       sessionId: session.id,
       tutorFullname: `${session.student.firstname} ${session.student.lastname}`,
-      tutorInitials: `${session.student.firstname?.charAt(0)}${session.student.lastname?.charAt(0)}`,
+      tutorInitials: `${session.student.firstname?.charAt(
+        0
+      )}${session.student.lastname?.charAt(0)}`,
       tutorEmail: session.student.email || "",
       status: session.status,
       sessionCourse: session.course.name,
@@ -42,7 +44,7 @@ export const getTutorSessions = async (userId:string) => {
       duration: session.duration,
       price: Number(session.price),
       topic: session.topic,
-      rate: session.tutorRating !== null ? Number(session.tutorRating) : null
+      rate: session.tutorRating !== null ? Number(session.tutorRating) : null,
     }));
   } catch (error) {
     console.error("Failed to fetch student sessions:", error);
@@ -110,9 +112,14 @@ export const rejectSession = async (sessionId: number): Promise<string> => {
   }
 };
 
-export const rateSession = async (sessionId: number, role: string, rate:number, comment:string|undefined): Promise<string> => {
+export const rateSession = async (
+  sessionId: number,
+  role: string,
+  rate: number,
+  comment: string | undefined
+): Promise<string> => {
   try {
-    if(role==="student"){
+    if (role === "student") {
       await db.individualSession.update({
         where: {
           id: sessionId,
@@ -122,7 +129,8 @@ export const rateSession = async (sessionId: number, role: string, rate:number, 
           studentComment: comment,
         },
       });
-    } if (role === "tutor") {
+    }
+    if (role === "tutor") {
       await db.individualSession.update({
         where: {
           id: sessionId,

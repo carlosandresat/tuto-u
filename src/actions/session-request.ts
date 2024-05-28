@@ -44,17 +44,19 @@ export const getAvailableTutors = async (
         },
       },
     });
-    return tutors.map(tutorCourse => ({
-        id: tutorCourse.tutor.id,
-        email: tutorCourse.tutor.email,
-        name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`,
-        nameInitials:  `${tutorCourse.tutor.firstname?.charAt(0)}${tutorCourse.tutor.lastname?.charAt(0)}`,
-        pricing: tutorCourse.tutor.tutor_pricing.map(config => ({
-          duration: config.duration,
-          price: config.price.toNumber().toFixed(2) // Ensure the price is returned as a number, if necessary
-        })),
-        description: tutorCourse.tutor.description
-      }));
+    return tutors.map((tutorCourse) => ({
+      id: tutorCourse.tutor.id,
+      email: tutorCourse.tutor.email,
+      name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`,
+      nameInitials: `${tutorCourse.tutor.firstname?.charAt(
+        0
+      )}${tutorCourse.tutor.lastname?.charAt(0)}`,
+      pricing: tutorCourse.tutor.tutor_pricing.map((config) => ({
+        duration: config.duration,
+        price: config.price.toNumber().toFixed(2), // Ensure the price is returned as a number, if necessary
+      })),
+      description: tutorCourse.tutor.description,
+    }));
   } catch (error) {
     console.error("Failed to fetch available tutors:", error);
     throw new Error("Unable to fetch available tutors.");
@@ -74,45 +76,51 @@ export const requestIndividualSession = async (data: {
 }) => {
   try {
     await db.individualSession.create({
-      data: {...data, status: "requested"}
-    })
-    return {message: "¡Sesión registrada con éxito!"}
+      data: { ...data, status: "requested" },
+    });
+    return { message: "¡Sesión registrada con éxito!" };
   } catch (error) {
-    return {error_message: "Hubo un error en el sistema. Contacta con los administradores por favor", error}
+    return {
+      error_message:
+        "Hubo un error en el sistema. Contacta con los administradores por favor",
+      error,
+    };
   }
 };
 
-export const getStudentSessions = async (userId:string) => {
-  const aDayAgo = addHours(new Date(), -24)
+export const getStudentSessions = async (userId: string) => {
+  const aDayAgo = addHours(new Date(), -24);
 
   try {
     const sessions = await db.individualSession.findMany({
       where: {
         studentId: userId,
         sessionDateTime: {
-          gte: aDayAgo
-        }
+          gte: aDayAgo,
+        },
       },
       include: {
         tutor: {
           select: {
             firstname: true,
             lastname: true,
-            email: true
-          }
+            email: true,
+          },
         },
         course: {
           select: {
-            name: true
-          }
-        }
-      }
+            name: true,
+          },
+        },
+      },
     });
 
-    return sessions.map(session => ({
+    return sessions.map((session) => ({
       sessionId: session.id,
       tutorFullname: `${session.tutor.firstname} ${session.tutor.lastname}`,
-      tutorInitials: `${session.tutor.firstname?.charAt(0)}${session.tutor.lastname?.charAt(0)}`,
+      tutorInitials: `${session.tutor.firstname?.charAt(
+        0
+      )}${session.tutor.lastname?.charAt(0)}`,
       tutorEmail: session.tutor.email || "",
       status: session.status,
       sessionCourse: session.course.name,
@@ -123,7 +131,8 @@ export const getStudentSessions = async (userId:string) => {
       duration: session.duration,
       price: Number(session.price),
       topic: session.topic,
-      rate: session.studentRating !== null ? Number(session.studentRating) : null
+      rate:
+        session.studentRating !== null ? Number(session.studentRating) : null,
     }));
   } catch (error) {
     console.error("Failed to fetch student sessions:", error);
@@ -131,27 +140,34 @@ export const getStudentSessions = async (userId:string) => {
   }
 };
 
-export const addNarcissismAchievement = async (id:string) => {
+export const addNarcissismAchievement = async (id: string) => {
   try {
     const existingAchievement = await db.userAchievement.findFirst({
       where: {
-          userId: id,
-          achievementId: 12,
+        userId: id,
+        achievementId: 12,
       },
     });
 
     if (existingAchievement) {
-      return {message: "¿Otra vez? Ya te ganaste el logro por intentar esto"}
+      return { message: "¿Otra vez? Ya te ganaste el logro por intentar esto" };
     } else {
       await db.userAchievement.create({
         data: {
           userId: id,
           achievementId: 12,
-        }
-      })
-      return {message: "¿Enserio intentaste eso? ¿Solicitarte a ti mismo? Acabas de ganar el logro 'Narcisista por Excelencia'. Revísalo en tu perfil"}
+        },
+      });
+      return {
+        message:
+          "¿Enserio intentaste eso? ¿Solicitarte a ti mismo? Acabas de ganar el logro 'Narcisista por Excelencia'. Revísalo en tu perfil",
+      };
     }
   } catch (error) {
-    return {error_message: "Hubo un error en el sistema. Contacta con los administradores por favor", error}
+    return {
+      error_message:
+        "Hubo un error en el sistema. Contacta con los administradores por favor",
+      error,
+    };
   }
 };
