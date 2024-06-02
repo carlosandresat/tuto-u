@@ -2,6 +2,8 @@
 
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
+import { auth } from "@/auth";
+
 
 export const getTutorSessions = async (userId: string) => {
   const aDayAgo = addHours(new Date(), -60);
@@ -118,6 +120,11 @@ export const rateSession = async (
   rate: number,
   comment: string | undefined
 ): Promise<string> => {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error('You must be signed in to perform this action')
+  }
+
   try {
     if (role === "student") {
       await db.individualSession.update({
@@ -139,6 +146,24 @@ export const rateSession = async (
           tutorRating: rate,
           tutorComment: comment,
         },
+      });
+    }
+    const countRatings = await db.individualSession.count({
+      where: {
+        [role === 'student' ? 'studentId' : 'tutorId']: session.user.id,
+        [role === 'student' ? 'studentRating' : 'tutorRating']: {
+          not: null
+        }
+      }
+    });
+
+    // If it's the first time, add an achievement
+    if (countRatings === 1) {
+      await db.userAchievement.create({
+        data: {
+          userId: session.user.id,
+          achievementId: 11
+        }
       });
     }
     return `Session has been successfully rated.`;
