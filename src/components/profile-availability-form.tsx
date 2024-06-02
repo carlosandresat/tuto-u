@@ -142,6 +142,7 @@ export function ProfileAvailabilityForm({
                   variant="outline"
                   value={field.value}
                   onValueChange={field.onChange}
+                  className="grid-cols-3 md:grid-cols-3"
                 >
                   {timeOptions.map((hour, index)=>
                   <ToggleGroupItem value={hour.toString()} key={index} aria-label={ Number(hour)<=12 ? `Toggle ${hour}am` : `Toggle ${Number(hour)%12}pm`}>
@@ -171,6 +172,7 @@ export function ProfileAvailabilityForm({
                     localHour.setUTCHours(hourUTC);
                     return localHour.getHours().toString();
                   })}
+                  className="grid-cols-3 md:grid-cols-3"
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
@@ -220,6 +222,7 @@ export function ProfileAvailabilityForm({
                     localHour.setUTCHours(hourUTC);
                     return localHour.getHours().toString();
                   })}
+                  className="grid-cols-3 md:grid-cols-3"
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
@@ -269,6 +272,7 @@ export function ProfileAvailabilityForm({
                     localHour.setUTCHours(hourUTC);
                     return localHour.getHours().toString();
                   })}
+                  className="grid-cols-3 md:grid-cols-3"
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
@@ -318,6 +322,7 @@ export function ProfileAvailabilityForm({
                     localHour.setUTCHours(hourUTC);
                     return localHour.getHours().toString();
                   })}
+                  className="grid-cols-3 md:grid-cols-3"
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
@@ -367,6 +372,7 @@ export function ProfileAvailabilityForm({
                     localHour.setUTCHours(hourUTC);
                     return localHour.getHours().toString();
                   })}
+                  className="grid-cols-3 md:grid-cols-3"
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
@@ -416,6 +422,7 @@ export function ProfileAvailabilityForm({
                     localHour.setUTCHours(hourUTC);
                     return localHour.getHours().toString();
                   })}
+                  className="grid-cols-3 md:grid-cols-3"
                 >
                   <ToggleGroupItem value="8" key="8" aria-label="Toggle 8am">
                     8am
