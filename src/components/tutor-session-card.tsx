@@ -28,6 +28,7 @@ import { RejectDialog } from "@/components/reject-dialog";
 import { AcceptDialog } from "@/components/accept-dialog";
 import { RateDialog } from "@/components/rate-dialog";
 import { useState } from "react";
+import { addHours } from "date-fns";
 
 export function TutorSessionCard({
   sessionId,
@@ -141,13 +142,15 @@ export function TutorSessionCard({
           <div className="flex gap-2">
             <p>{rateState}</p> <Star className="h-6 w-6 fill-yellow-200" />
           </div>
-        ) : statusState === "requested" ? (
+        ) : statusState === "requested" && rawDateTime > addHours(new Date(), 1)? ( //solo se puede aceptar 1 hora antes
           <>
             <RejectDialog setState={setStatusState} sessionId={sessionId} />
             <AcceptDialog setState={setStatusState} sessionId={sessionId} />
 
           </>
-        ) : statusState === "canceled" ? null : null}
+        ) : statusState === "requested" && rawDateTime < addHours(new Date(), 1)? ( //solo se puede aceptar 1 hora antes
+        <p className="text-center text-destructive leading-4">No respondiste a tiempo, vuelve a configurar tu perfil</p>
+       ) : statusState === "canceled" ? null : null}
       </CardFooter>
     </Card>
   );
