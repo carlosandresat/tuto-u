@@ -20,6 +20,7 @@ import { ProfilePricingForm } from "@/components/profile-pricing-form";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ModeToggle } from "@/components/mode-toggle";
 import { ProfileCoursesForm } from "@/components/profile-courses-form";
 import { auth } from "@/auth";
 import { ArrowLeft } from "lucide-react";
@@ -216,6 +217,18 @@ export default async function MyProfile() {
               </div>
             </CardContent>
           </Card>
+          <Card className="w-full mt-6">
+            <CardHeader>
+              <CardTitle>Temas</CardTitle>
+              <CardDescription>
+                Selecciona un tema para la aplicación
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ModeToggle/>
+            </CardContent>
+          </Card>
+
         </div>
       </section>
     </>
