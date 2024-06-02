@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
+import { newSessionTutorNotificationEmail } from "@/lib/mail";
 
 export const getAvailableTutors = async (
   courseId: number,
@@ -78,6 +79,17 @@ export const requestIndividualSession = async (data: {
     await db.individualSession.create({
       data: { ...data, status: "requested" },
     });
+    const res = await db.user.findUnique({
+      where: {
+        id: data.tutorId,
+      },
+      select: {
+        email: true,
+      },
+    });
+    if (res?.email){
+      await newSessionTutorNotificationEmail(res.email)
+    }
     return { message: "¡Sesión registrada con éxito!" };
   } catch (error) {
     return {
