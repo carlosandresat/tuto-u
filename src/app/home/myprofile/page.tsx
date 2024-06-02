@@ -221,7 +221,7 @@ export default async function MyProfile() {
             <CardHeader>
               <CardTitle>Temas</CardTitle>
               <CardDescription>
-                Selecciona un tema para la aplicación
+                Selecciona un tema para Tuto-U en este dispositivo
               </CardDescription>
             </CardHeader>
             <CardContent>
