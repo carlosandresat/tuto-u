@@ -85,10 +85,11 @@ export const requestIndividualSession = async (data: {
       },
       select: {
         email: true,
+        firstname: true,
       },
     });
     if (res?.email){
-      await newSessionTutorNotificationEmail(res.email)
+      await newSessionTutorNotificationEmail(res.email, res.firstname, data.topic, data.sessionDateTime)
     }
     return { message: "¡Sesión registrada con éxito!" };
   } catch (error) {
