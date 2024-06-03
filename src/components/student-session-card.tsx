@@ -87,11 +87,11 @@ export function StudentSessionCard({
             {tutorFullname}
           </CardTitle>
         </div>
-        <CardDescription className="text-base text-foreground backdrop-blur-sm rounded-md w-fit px-2 bg-background/40">
+        <CardDescription className="text-base text-foreground backdrop-blur-sm rounded-md px-2 bg-background/40">
           {sessionCourse}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2 py-2  rounded-md w-fit bg-background/40 mb-2">
+      <CardContent className="space-y-2 py-2 rounded-md bg-background/40 mb-2">
         <div className="flex space-x-2">
           <Calendar />
           <p>{capitalizeMonth(rawDateTime.toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'}))}</p>
@@ -115,14 +115,16 @@ export function StudentSessionCard({
         <div className="flex space-x-2">
           <Banknote /> <p>{price != 0 ? `$${price.toFixed(2)}` : "Gratuita"}</p>
         </div>
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 w-full">
           <Mail />
+          <p className="break-all">
           <a
             href={`mailto:${tutorEmail}`}
             className=" hover:border-b border-foreground"
           >
             {tutorEmail}
           </a>
+          </p>
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center space-x-2">
