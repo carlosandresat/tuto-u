@@ -22,3 +22,10 @@ export function capitalizeMonth(dateStr: string) {
     }
   );
 }
+
+export function capitalizeFirstLetter(string: string) {
+  if (string.length === 0) {
+    return string; // Si la cadena está vacía, retornarla como está
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

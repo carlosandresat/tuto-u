@@ -131,7 +131,6 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     })*/
     if (data.tutor === userId) {
       const res = await addNarcissismAchievement(userId)
-      console.log(res)
       if (res.message !== undefined){
         console.log(res.message)
         toast({
