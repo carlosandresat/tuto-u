@@ -71,7 +71,7 @@ export const requestIndividualSession = async (data: {
   sessionDateTime: string;
   duration: number;
   price: number;
-  place: string | null | undefined;
+  place: string;
   online: boolean;
   topic: string;
 }) => {
