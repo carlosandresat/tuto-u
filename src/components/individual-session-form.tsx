@@ -121,7 +121,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       sessionDateTime: datetime.toISOString(),
       duration: parseInt(data.duration),
       price: Number(selectedPrice),
-      place: !data.isOnline ? data.place : "Online",
+      place: data.isOnline ? "Online" : data.place !== undefined && data.place !== "" ? data.place : "A disposición del tutor" ,
       online: data.isOnline,
       topic: data.topic,
     };
