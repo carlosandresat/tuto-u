@@ -45,9 +45,10 @@ export function RegisterForm() {
             description: e,
           });
         } else if (e instanceof Error) {
+          const message = e.message
           toast({
             title: "¡Error!",
-            description: e.message,
+            description: message,
           });
         }
       }
