@@ -108,7 +108,7 @@ export async function TutorView() {
             Tus Tutorías (Tutor)
           </h2>
           <p className="text-lg text-muted-foreground mt-2">
-            Estas son tus solcitudes de tutorías recibidas
+            Estas son tus solicitudes de tutorías recibidas
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4  max-w-screen-2xl w-full pt-6">
             {tutorSessions.map((row, index) => (
