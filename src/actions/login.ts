@@ -69,6 +69,6 @@ export const register = async (data: z.infer<typeof RegisterSchema>) => {
 
     return { message: "Registro realizado con éxito" };
   } catch (error) {
-    throw error;
+    return {error: "Email ya registrado"};
   }
 };

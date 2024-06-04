@@ -33,10 +33,18 @@ export function RegisterForm() {
     startTransition(async () => {
       try {
         const response = await register(data);
-        toast({
-          title: "¡Felicidades!",
-          description: response.message,
-        });
+        
+        if (response && response.error) {
+          toast({
+            title: "¡Error!",
+            description: response.error,
+          });
+        } else {
+          toast({
+            title: "¡Felicidades!",
+            description: response.message,
+          });
+        }  
         form.reset({ firstname: "", lastname: "", email: "", password: "" });
       } catch (e) {
         if (typeof e === "string") {
