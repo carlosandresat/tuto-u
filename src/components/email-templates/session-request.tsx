@@ -36,7 +36,7 @@ const SessionRequestEmail = ({
           </Text>
           <Text style={text}>
             Tienes una nueva solicitud de tutoría. Por favor, acepta o rechaza
-            la solicitud y contacta con el estudiante en caso de ser necesario.
+            la solicitud y contacta con el estudiante. No olvides acordar de antemano el pago por la tutoría en caso de ser necesario.
             Ten en cuenta que hay 24 horas después de realizada la tutoría para
             calificar la sesión, si puedes recordárselo al estudiante sería de
             mucha ayuda.
