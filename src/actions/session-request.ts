@@ -3,6 +3,8 @@
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
 import { newSessionTutorNotificationEmail } from "@/lib/mail";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export const getAvailableTutors = async (
   courseId: number,
@@ -91,7 +93,6 @@ export const requestIndividualSession = async (data: {
     if (res?.email){
       await newSessionTutorNotificationEmail(res.email, res.firstname, data.topic, data.sessionDateTime)
     }
-    return { message: "¡Sesión registrada con éxito!" };
   } catch (error) {
     return {
       error_message:
@@ -99,6 +100,9 @@ export const requestIndividualSession = async (data: {
       error,
     };
   }
+  revalidatePath("/home");
+  redirect("/home")
+
 };
 
 export const getStudentSessions = async (userId: string) => {

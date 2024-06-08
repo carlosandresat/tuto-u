@@ -140,15 +140,12 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       }
     } else {
     const res = await requestIndividualSession(formattedData)
-    !res.error_message ?
-    toast({
-      title: "Sesión agendada con éxito",
-      description: "Regresa a inicio para ver el estado de tu tutoría o solicita otra"
-    }) :
-    toast({
-      title: "Error",
-      description: res.error_message
-    })
+    if(res.error_message ) {
+      toast({
+        title: "Error",
+        description: res.error_message
+      })
+    }
   }
   })
     
