@@ -485,7 +485,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                   </FormItem>
                 )}
               />
-              <Button className="w-full md:w-max" type="submit">
+              <Button className="w-full md:w-max" type="submit" disabled={isPending}>
                 Solicitar tutoría
               </Button>
             </form>
