@@ -10,7 +10,7 @@ import {
   import { Button } from "@/components/ui/button";
   import { rejectSession } from "@/actions/sessions-data";
   
-  export function RejectDialog({ sessionId, setState }: { sessionId: number, setState:any }) {
+  export function RejectDialog({ sessionId, setState, studentEmail, studentName }: { sessionId: number, setState:any, studentEmail:string, studentName:string}) {
     return (
       <Dialog>
         <DialogTrigger asChild>
@@ -31,7 +31,7 @@ import {
   
             <Button variant="destructive" onClick={async () => {
               setState("rejected")
-              await rejectSession(sessionId)
+              await rejectSession(sessionId, studentEmail, studentName)
               window.location.reload()
             }}>Aceptar</Button>
             </DialogClose>

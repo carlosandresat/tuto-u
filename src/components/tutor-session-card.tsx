@@ -146,8 +146,8 @@ export function TutorSessionCard({
           </div>
         ) : statusState === "requested" && rawDateTime > addHours(new Date(), 1)? ( //solo se puede aceptar 1 hora antes
           <>
-            <RejectDialog setState={setStatusState} sessionId={sessionId} />
-            <AcceptDialog setState={setStatusState} sessionId={sessionId} />
+            <RejectDialog setState={setStatusState} sessionId={sessionId} studentEmail={tutorEmail} studentName={tutorFullname}/>
+            <AcceptDialog setState={setStatusState} sessionId={sessionId} studentEmail={tutorEmail} studentName={tutorFullname}/>
 
           </>
         ) : statusState === "requested" && rawDateTime < addHours(new Date(), 1)? ( //solo se puede aceptar 1 hora antes

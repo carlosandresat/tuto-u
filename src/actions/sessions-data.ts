@@ -3,6 +3,7 @@
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
 import { auth } from "@/auth";
+import { sessionResponseNotificationEmail } from "@/lib/mail";
 
 
 export const getTutorSessions = async (userId: string) => {
@@ -74,7 +75,7 @@ export const cancelSession = async (sessionId: number): Promise<string> => {
   }
 };
 
-export const acceptSession = async (sessionId: number): Promise<string> => {
+export const acceptSession = async (sessionId: number, email:string, studentName:string): Promise<string> => {
   try {
     const updatedSession = await db.individualSession.update({
       where: {
@@ -85,6 +86,17 @@ export const acceptSession = async (sessionId: number): Promise<string> => {
       },
     });
 
+    const res = await db.user.findUnique({
+      where: {
+        id: updatedSession.tutorId,
+      },
+      select: {
+        firstname: true,
+      },
+    });
+
+    await sessionResponseNotificationEmail(email, res?.firstname || "", updatedSession.topic, updatedSession.sessionDateTime, studentName, "accepted")
+
     return `Session ${updatedSession.id} has been successfully accepted.`;
   } catch (error) {
     console.error("Failed to accept the session:", error);
@@ -94,7 +106,7 @@ export const acceptSession = async (sessionId: number): Promise<string> => {
   }
 };
 
-export const rejectSession = async (sessionId: number): Promise<string> => {
+export const rejectSession = async (sessionId: number, email:string, studentName:string): Promise<string> => {
   try {
     const updatedSession = await db.individualSession.update({
       where: {
@@ -104,6 +116,17 @@ export const rejectSession = async (sessionId: number): Promise<string> => {
         status: "rejected",
       },
     });
+
+    const res = await db.user.findUnique({
+      where: {
+        id: updatedSession.tutorId,
+      },
+      select: {
+        firstname: true,
+      },
+    });
+
+    await sessionResponseNotificationEmail(email, res?.firstname || "", updatedSession.topic, updatedSession.sessionDateTime, studentName, "rejected")
 
     return `Session ${updatedSession.id} has been successfully rejected.`;
   } catch (error) {

@@ -10,7 +10,7 @@ import {
   import { Button } from "@/components/ui/button";
   import { acceptSession } from "@/actions/sessions-data";
   
-  export function AcceptDialog({ sessionId, setState }: { sessionId: number, setState:any }) {
+  export function AcceptDialog({ sessionId, setState, studentEmail, studentName }: { sessionId: number, setState:any, studentEmail:string, studentName:string }) {
     return (
       <Dialog>
         <DialogTrigger asChild>
@@ -31,7 +31,7 @@ import {
   
             <Button onClick={async () => {
               setState("accepted")
-              await acceptSession(sessionId)
+              await acceptSession(sessionId, studentEmail, studentName)
               window.location.reload()
             }}>Aceptar</Button>
             </DialogClose>
