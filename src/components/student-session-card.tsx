@@ -26,6 +26,7 @@ import {
 import { CancelDialog } from "./cancel-dialog";
 import { RateDialog } from "@/components/rate-dialog";
 import { useState } from "react";
+import { ReportSessionDialog } from "@/components/report-session-dialog";
 
 export function StudentSessionCard({
   sessionId,
@@ -134,7 +135,7 @@ export function StudentSessionCard({
           </>
         ) : statusState === "accepted" && rawDateTime < new Date() && rate === null ? (
           <>
-            <Button variant="secondary">Reportar</Button>
+            <ReportSessionDialog buttonText="Reportar" sessionId={sessionId} role="student"/>
             <RateDialog buttonText="Calificar" role="student" sessionId={sessionId}></RateDialog>
           </>
         ) : statusState === "accepted" && rawDateTime < new Date() && rate !== null ? (

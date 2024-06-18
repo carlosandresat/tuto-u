@@ -26,6 +26,7 @@ import {
 import { CancelDialog } from "@/components/cancel-dialog";
 import { RejectDialog } from "@/components/reject-dialog";
 import { AcceptDialog } from "@/components/accept-dialog";
+import { ReportSessionDialog } from "@/components/report-session-dialog";
 import { RateDialog } from "@/components/rate-dialog";
 import { useState } from "react";
 import { addHours } from "date-fns";
@@ -137,7 +138,7 @@ export function TutorSessionCard({
           </>
         ) : statusState === "accepted" && rawDateTime < new Date() && rateState === null ? (
           <>
-            <Button variant="secondary">Reportar</Button>
+            <ReportSessionDialog buttonText="Reportar" sessionId={sessionId} role="tutor"/>
             <RateDialog buttonText="Calificar" role="tutor" sessionId={sessionId}></RateDialog>
           </>
         ) : statusState === "accepted" && rawDateTime < new Date() && rateState !== null ? (
