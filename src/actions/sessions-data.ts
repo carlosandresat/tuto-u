@@ -199,3 +199,42 @@ export const rateSession = async (
     );
   }
 };
+
+export const reportSession = async (sessionId: number, description: string, role: string): Promise<string> => {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error('You must be signed in to perform this action');
+  }
+
+  try {
+    // Update the session with a zero rating and a REPORTED SESSION comment based on the user's role
+    const updatedSessionData = role === "student" ? {
+      studentRating: 0,
+      studentComment: "REPORTED SESSION"
+    } : {
+      tutorRating: 0,
+      tutorComment: "REPORTED SESSION"
+    };
+
+    await db.individualSession.update({
+      where: {
+        id: sessionId,
+      },
+      data: updatedSessionData,
+    });
+
+    // Create a new report entry
+    await db.sessionReport.create({
+      data: {
+        sessionId: sessionId,
+        reporterId: session.user.id,
+        description: description,
+      }
+    });
+
+    return `Session has been successfully reported and the related report has been recorded.`;
+  } catch (error) {
+    console.error("Failed to report the session:", error);
+    throw new Error("Unable to report the session. Please make sure the session ID is correct.");
+  }
+};
