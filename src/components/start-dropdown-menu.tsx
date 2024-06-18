@@ -11,7 +11,7 @@ import { RegisterDialog } from "@/components/register-dialog";
 export function StartDropdownMenu() {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button>
           <LogIn />
         </Button>
