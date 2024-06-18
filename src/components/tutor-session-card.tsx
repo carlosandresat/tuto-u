@@ -133,7 +133,7 @@ export function TutorSessionCard({
       <CardFooter className="flex justify-between items-center space-x-2">
         {statusState === "accepted" && rawDateTime > new Date() ? (
           <>
-            <CancelDialog setState={setStatusState} sessionId={sessionId} />
+            <CancelDialog setState={setStatusState} sessionId={sessionId} email={tutorEmail} userName={tutorFullname}/>
           </>
         ) : statusState === "accepted" && rawDateTime < new Date() && rateState === null ? (
           <>

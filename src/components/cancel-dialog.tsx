@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { cancelSession } from "@/actions/sessions-data";
 
-export function CancelDialog({ sessionId, setState }: { sessionId: number, setState:any }) {
+export function CancelDialog({ sessionId, setState, email, userName }: { sessionId: number, setState:any, email:string, userName:string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -31,7 +31,7 @@ export function CancelDialog({ sessionId, setState }: { sessionId: number, setSt
 
           <Button variant="destructive" onClick={async () => {
             setState("canceled")
-            await cancelSession(sessionId)
+            await cancelSession(sessionId, email, userName)
             window.location.reload()
           }}>Cancelar</Button>
           </DialogClose>

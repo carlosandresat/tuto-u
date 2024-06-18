@@ -130,7 +130,7 @@ export function StudentSessionCard({
       <CardFooter className="flex justify-between items-center space-x-2">
         {statusState === "accepted" && rawDateTime > new Date() ? (
           <>
-            <CancelDialog setState={setStatusState} sessionId={sessionId}/>
+            <CancelDialog setState={setStatusState} sessionId={sessionId} email={tutorEmail} userName={tutorFullname}/>
           </>
         ) : statusState === "accepted" && rawDateTime < new Date() && rate === null ? (
           <>
@@ -142,7 +142,7 @@ export function StudentSessionCard({
             <p>{rate}</p> <Star className="h-6 w-6 fill-yellow-200" />
           </div>
         ) : statusState === "requested" ? (
-          <CancelDialog setState={setStatusState} sessionId={sessionId}/>
+          <CancelDialog setState={setStatusState} sessionId={sessionId} email={tutorEmail} userName={tutorFullname}/>
         ) : statusState === "canceled" ? null : null}
       </CardFooter>
     </Card>

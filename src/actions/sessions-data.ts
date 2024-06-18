@@ -3,7 +3,7 @@
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
 import { auth } from "@/auth";
-import { sessionResponseNotificationEmail } from "@/lib/mail";
+import { sessionResponseNotificationEmail, sessionCancelNotificationEmail } from "@/lib/mail";
 
 
 export const getTutorSessions = async (userId: string) => {
@@ -55,7 +55,7 @@ export const getTutorSessions = async (userId: string) => {
   }
 };
 
-export const cancelSession = async (sessionId: number): Promise<string> => {
+export const cancelSession = async (sessionId: number, email:string, userName:string): Promise<string> => {
   try {
     const updatedSession = await db.individualSession.update({
       where: {
@@ -65,6 +65,8 @@ export const cancelSession = async (sessionId: number): Promise<string> => {
         status: "canceled",
       },
     });
+
+    await sessionCancelNotificationEmail(email, userName, new Date())
 
     return `Session ${updatedSession.id} has been successfully canceled.`;
   } catch (error) {
