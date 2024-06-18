@@ -506,6 +506,45 @@ export function AchievementsDialogFull() {
               </p>
             </HoverCardContent>
           </HoverCard>
+          <HoverCard>
+            <HoverCardTrigger className="flex justify-center">
+              <Button
+                className="w-20 h-20 p-4 text-center border flex flex-col items-center rounded-full justify-between hover:cursor-help"
+                variant="outline"
+              >
+                <Image
+                  src="/achievements/tester.png"
+                  alt="Tester"
+                  width={64}
+                  height={64}
+                  className="dark:invert"
+                />
+              </Button>
+            </HoverCardTrigger>
+            <HoverCardContent>
+              <div className="flex justify-start my-2 items-center">
+                <div className="w-14 h-14 flex items-center mr-2 justify-center bg-secondary rounded-full">
+                  <Image
+                    src="/achievements/tester.png"
+                    alt="Tester"
+                    width={40}
+                    height={40}
+                    className="dark:invert p-1"
+                  />
+                </div>
+                <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
+                Tester
+                </h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                0 usuarios tienen este logro
+              </p>
+
+              <p className="mt-2">
+              Has ayudado a probar una funcionalidad de Tuto-U. ¡Gracias por tu apoyo!
+              </p>
+            </HoverCardContent>
+          </HoverCard>
 
         </div>
 
