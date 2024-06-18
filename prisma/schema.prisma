@@ -61,6 +61,7 @@ model User {
   studentSessions IndividualSession[]        @relation("StudentSession")
   tutorSessions   IndividualSession[]        @relation("TutorSession")
   userAchievements UserAchievement[]
+  reports         SessionReport[]
 
   createdAt DateTime @default(now())
 
@@ -151,6 +152,7 @@ model IndividualSession {
   tutorRating     Decimal?  @db.Decimal(2, 1) @map("tutort_rating") // Rating given by the tutor, range 0-5
   tutorComment    String?  @map("tutor_comment") // Optional comment provided by the tutor
   createdAt       DateTime @default(now())
+  reports         SessionReport[]
 
 
   student User   @relation(name: "StudentSession", fields: [studentId], references: [id])
@@ -183,4 +185,17 @@ model UserAchievement {
   achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
 
   @@map("user_achievements")
+}
+
+model SessionReport {
+  id           Int             @id @default(autoincrement())
+  sessionId    Int             @map("session_id")
+  reporterId   String          @map("reporter_id")
+  description  String
+  createdAt    DateTime        @default(now())
+
+  session      IndividualSession @relation(fields: [sessionId], references: [id])
+  reporter     User              @relation(fields: [reporterId], references: [id])
+
+  @@map("session_reports")
 }
