@@ -6,8 +6,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { TutorCard } from "@/components/tutor-card";
+import { getRatedTutors } from "@/actions/rating-data";
 
-export function TutorsCarousel() {
+export async function TutorsCarousel() {
   const tutores = [
     {
       tutor: "Tutor #1",
@@ -47,6 +48,8 @@ export function TutorsCarousel() {
     },
   ];
 
+  const tutorList = await getRatedTutors()
+
   return (
     <Carousel
       opts={{
@@ -55,12 +58,12 @@ export function TutorsCarousel() {
       className="w-full px-6 2xl:px-0 max-w-screen-2xl mt-6"
     >
       <CarouselContent>
-        {tutores.map((tutor) => (
+        {tutorList.map((tutor) => (
             <CarouselItem key={tutor.tutor}  className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <TutorCard
                     tutor={tutor.tutor}
                     rating={tutor.rating}
-                    pic_url={tutor.pic_url}
+                    pic_url={tutor.pic_url || "/photos/placeholder.jpg"}
                     nreviews={tutor.nreviews}
                 />
             </CarouselItem>
