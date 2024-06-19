@@ -18,7 +18,7 @@ export default function OurTeam() {
     <>
       <StartNavbar />
 
-      <section className="pt-32 pb-12 w-full flex items-center justify-center flex-col">
+      <section className="pt-40 pb-12 w-full flex items-center justify-center flex-col">
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
           Nuestro Equipo
         </h2>
