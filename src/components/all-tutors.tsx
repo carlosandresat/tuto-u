@@ -1,3 +1,4 @@
+import { getRatedTutors } from "@/actions/rating-data";
 import { TutorCard } from "@/components/tutor-card";
 
 export async function AllTutors() {
@@ -64,13 +65,15 @@ export async function AllTutors() {
       },
   ];
 
+  const tutorList = await getRatedTutors()
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6 w-full">
-      {tutores.map((tutor, index) => (
+      {tutorList.map((tutor, index) => (
         <TutorCard
           tutor={tutor.tutor}
           rating={tutor.rating}
-          pic_url={tutor.pic_url}
+          pic_url={tutor.pic_url || "/photos/placeholder.jpg"}
           nreviews={tutor.nreviews}
           key={index}
         />

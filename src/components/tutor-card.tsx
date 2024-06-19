@@ -56,7 +56,7 @@ export function TutorCard({
         </div>
 
         <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
-          {rating} <span className=" text-sm self-end pb-[2px] pl-1">/ 5</span> <span className="text-muted-foreground pl-2">({nreviews} reviews)</span>
+          {rating%1 === 0 ? rating : rating.toFixed(1)} <span className=" text-sm pl-1">/ 5</span> <span className="text-muted-foreground pl-2">({nreviews} reviews)</span>
         </h3>
       </div>
       <AchievementsDialogFull/>
