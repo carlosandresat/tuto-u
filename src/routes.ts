@@ -8,8 +8,8 @@ export const publicRoutes = [
 ];
 
 export const authRoutes = [
-    "/",
-    "/preregister",
+    "/auth/login",
+    "/auth/register",
 ];
 
 export const apiAuthPrefix = "/api/auth";
