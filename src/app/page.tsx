@@ -5,6 +5,7 @@ import { CountdownTimer } from "@/components/countdown-timer";
 import { StartNavbar } from "@/components/start-navbar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserPlus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
 
@@ -18,8 +19,9 @@ export default function Home() {
           </h1>
         </div>
         <div className="mt-8 md:mt-16 md:mb-32 space-x-0 md:space-x-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
-          <RegisterDialog buttonText={<>Regístrate <UserPlus className="ml-2"></UserPlus></>} />
-          <LoginDialog buttonText="¡Entra ya!" />
+        <Link href="/auth/register"><Button variant="outline">Regístrate <UserPlus className="ml-2"></UserPlus></Button></Link>
+        <Link href="/auth/login"><Button >¡Entrar ya!</Button></Link>
+
         </div>
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary mt-20">

@@ -101,8 +101,8 @@ export function StartNavbar() {
         </Link>
       </nav>
       <div className="hidden xl:block xl:space-x-2">
-        <RegisterDialog buttonText={<>Registro</>}></RegisterDialog>
-        <LoginDialog buttonText="Entrar"></LoginDialog>
+      <Link href="/auth/register"><Button variant="outline">Registro</Button></Link>
+      <Link href="/auth/login"><Button >Entrar</Button></Link>
       </div>
       <div className="block xl:hidden">
         <StartDropdownMenu></StartDropdownMenu>

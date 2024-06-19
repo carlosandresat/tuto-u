@@ -7,6 +7,7 @@ import { LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LoginDialog } from "@/components/login-dialog";
 import { RegisterDialog } from "@/components/register-dialog";
+import Link from "next/link";
 
 export function StartDropdownMenu() {
   return (
@@ -18,8 +19,8 @@ export function StartDropdownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <div className="flex flex-col">
-          <RegisterDialog buttonText={<>Registro</>}></RegisterDialog>
-          <LoginDialog buttonText="Entrar"></LoginDialog>
+          <Link href="/auth/register"><Button variant="outline" className="w-full">Registro</Button></Link>
+          <Link href="/auth/login" ><Button className="w-full">Entrar</Button></Link>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>
