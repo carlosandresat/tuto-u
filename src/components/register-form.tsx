@@ -19,6 +19,9 @@ import { useForm } from "react-hook-form";
 import { useTransition } from "react";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast"
+import Link from "next/link";
+
 
 import { RegisterSchema } from "@/schemas";
 
@@ -43,6 +46,7 @@ export function RegisterForm() {
           toast({
             title: "¡Felicidades!",
             description: response.message,
+            action: <ToastAction altText="Login"><Link href="/auth/login">Login</Link></ToastAction>
           });
         }  
         form.reset({ firstname: "", lastname: "", email: "", password: "" });
