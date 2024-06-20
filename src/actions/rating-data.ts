@@ -50,7 +50,6 @@ export const getRatedTutors = async () => {
       }))
       .sort((a, b) => b.rating - a.rating || b.nreviews - a.nreviews); // Sort by rating in descending order
 
-    console.log(tutorsWithRatings)
     return tutorsWithRatings;
   } catch (error) {
     console.error("Failed to fetch rated tutors:", error);
@@ -105,7 +104,6 @@ export const getRatedStudents = async () => {
         }))
         .sort((a, b) => b.rating - a.rating || b.nreviews - a.nreviews); // Sort by rating in descending order
   
-      console.log(studentsWithRatings)
       return studentsWithRatings;
     } catch (error) {
       console.error("Failed to fetch rated tutors:", error);
