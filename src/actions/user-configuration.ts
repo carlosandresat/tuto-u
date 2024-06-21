@@ -20,6 +20,7 @@ export const getUserData = async (userId: string) => {
       firstname: true,
       lastname: true,
       email: true,
+      image: true,
       description: true,
     },
   });
