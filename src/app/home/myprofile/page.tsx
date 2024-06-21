@@ -129,7 +129,7 @@ export default async function MyProfile() {
             <CardHeader>
               <Avatar className="w-24 h-24">
                 <AvatarImage
-                  src={`/photos/${userBasicData?.email?.split("@")[0]}.jpg`}
+                  src={`${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${userBasicData?.image}`}
                 />
                 <AvatarFallback>{initials}</AvatarFallback>
               </Avatar>
