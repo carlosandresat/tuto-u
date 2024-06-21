@@ -56,6 +56,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       name: string;
       email: string | null;
       nameInitials: string;
+      image: string | null;
       pricing: { duration: number; price: string }[];
       description: string | null;
     }[]
@@ -501,13 +502,13 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
         <CardContent className="flex flex-col items-center space-y-4">
           <Avatar className="w-32 h-32">
             <AvatarImage
-              src={`/photos/${
+              src={`${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${
                 form.watch("tutor") !== undefined && form.watch("tutor") !== ""
                   ? availableTutors
                       .filter((row) => row.id === form.watch("tutor"))[0]
-                      .email?.split("@")[0]
+                      .image
                   : null
-              }.jpg`}
+              }`}
               alt="Tutor Pic"
               className="object-cover"
             ></AvatarImage>
