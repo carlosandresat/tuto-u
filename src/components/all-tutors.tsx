@@ -73,7 +73,7 @@ export async function AllTutors() {
         <TutorCard
           tutor={tutor.tutor}
           rating={tutor.rating}
-          pic_url={tutor.pic_url || "/photos/placeholder.jpg"}
+          pic_url={tutor.pic_url !== null ? `${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${tutor.pic_url}` : "/photos/placeholder.jpg"}
           nreviews={tutor.nreviews}
           key={index}
         />
