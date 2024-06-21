@@ -297,14 +297,14 @@ export default function OurTeam() {
           <div className="flex flex-col justify-center items-center">
             <Avatar className="w-24 h-24 border-8 border-yellow-700">
               <AvatarImage
-                alt="Team member 1"
-                src="/photos/placeholder.jpg"
+                alt="Edwin Hurtado Image"
+                src={`${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/edwin.hurtado.jpg`}
                 className="object-cover"
               />
               <AvatarFallback>PH</AvatarFallback>
             </Avatar>
             <div className="space-y-2 p-2">
-              <h3 className="text-xl font-bold text-center">Donante 4</h3>
+              <h3 className="text-xl font-bold text-center">Edwin Hurtado</h3>
             </div>
           </div>
           <div className="flex flex-col justify-center items-center">
