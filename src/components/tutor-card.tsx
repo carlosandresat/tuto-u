@@ -48,7 +48,7 @@ export function TutorCard({
           alt={`${tutor} pic`}
           width={200}
           height={200}
-          className="rounded-lg"
+          className="rounded-full object-cover"
         />
         <h3 className="my-4 scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
           {tutor}
