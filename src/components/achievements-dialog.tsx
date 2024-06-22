@@ -21,18 +21,13 @@ export function AchievementsDialog({userId}:{userId:string}) {
   const [achievements, setAchievements] = useState<{ id: number; name: string; description: string; tier: string; imageUrl: string; userCount: number; isInverted: boolean; }[]>([])
   const pathname = usePathname()
 
-  useEffect(() => {
-    const loadAchievements = async () => {
-      const userAchievements = await getUserAchievements(userId)
-      setAchievements(userAchievements)
-    }
- 
-    loadAchievements()
-  }, [userId])
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full md:w-auto">Ver Logros</Button>
+        <Button className="w-full md:w-auto" onClick={async () => {
+          const userAchievements = await getUserAchievements(userId)
+          setAchievements(userAchievements)
+        }}>Ver Logros</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
