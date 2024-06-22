@@ -41,6 +41,7 @@ export const getRatedTutors = async () => {
     // Map through the tutors to calculate the average rating and count reviews
     const tutorsWithRatings = ratedTutors
       .map((tutor) => ({
+        id: tutor.id,
         tutor: `${tutor.firstname} ${tutor.lastname}`,
         pic_url: tutor.image,
         rating: calculateAverage(
@@ -95,6 +96,7 @@ export const getRatedStudents = async () => {
       // Map through the tutors to calculate the average rating and count reviews
       const studentsWithRatings = ratedStudents
         .map((student) => ({
+          id: student.id,
           student: `${student.firstname} ${student.lastname}`,
           pic_url: student.image,
           rating: calculateAverage(

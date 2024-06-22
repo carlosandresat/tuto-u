@@ -5,6 +5,7 @@ import { Star, StarHalf } from "lucide-react";
 import { AchievementsDialogFull } from "@/components/achievements-dialog-full";
 import Image from "next/image";
 import { SoonButton } from "@/components/soon-button";
+import { AchievementsDialog } from "@/components/achievements-dialog";
 
 function DrawStar({raiting}:{raiting:number}){
   const numStar = (raiting|0);
@@ -27,11 +28,13 @@ function DrawStar({raiting}:{raiting:number}){
 }
 
 export function TutorCard({
+  id,
   tutor,
   rating,
   pic_url,
   nreviews,
 }: {
+  id: string;
   tutor: string;
   rating: number;
   pic_url: string;
@@ -61,7 +64,7 @@ export function TutorCard({
           {rating%1 === 0 ? rating : rating.toFixed(1)} <span className=" text-sm pl-1">/ 5</span> <span className="text-muted-foreground pl-2">({nreviews} reviews)</span>
         </h3>
       </div>
-      <SoonButton />
+      <AchievementsDialog userId={id} />
     </div>
   );
 }

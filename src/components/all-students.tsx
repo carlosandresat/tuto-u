@@ -71,6 +71,7 @@ export async function AllStudents() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6 w-full">
       {studentList.map((tutor, index) => (
         <TutorCard
+          id={tutor.id}
           tutor={tutor.student}
           rating={tutor.rating}
           pic_url={tutor.pic_url !== null ? `${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${tutor.pic_url}` : "/photos/placeholder.jpg"}
