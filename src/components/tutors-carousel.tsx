@@ -61,6 +61,7 @@ export async function TutorsCarousel() {
         {tutorList.map((tutor) => (
             <CarouselItem key={tutor.tutor}  className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
                 <TutorCard
+                    id={tutor.id}
                     tutor={tutor.tutor}
                     rating={tutor.rating}
                     pic_url={tutor.pic_url !== null ? `${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${tutor.pic_url}` : "/photos/placeholder.jpg"}
