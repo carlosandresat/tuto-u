@@ -173,22 +173,20 @@ export const rateSession = async (
         },
       });
     }
-    const countRatings = await db.individualSession.count({
+    const achievementExists = await db.userAchievement.findFirst({
       where: {
-        [role === 'student' ? 'studentId' : 'tutorId']: session.user.id,
-        [role === 'student' ? 'studentRating' : 'tutorRating']: {
-          not: null
-        }
-      }
+        userId: session.user.id,
+        achievementId: 11 
+      },
     });
 
     // If it's the first time, add an achievement
-    if (countRatings === 1) {
+    if (!achievementExists) {
       await db.userAchievement.create({
         data: {
           userId: session.user.id,
           achievementId: 11
-        }
+        },
       });
     }
     return `Session has been successfully rated.`;
