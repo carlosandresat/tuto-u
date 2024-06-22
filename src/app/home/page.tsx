@@ -27,6 +27,7 @@ export default function Home() {
     { course: "Ecuaciones Diferenciales", school: "mate" },
     { course: "Métodos Numéricos", school: "mate" },
     { course: "Inglés", school: "lan" },
+    { course: "Aplicaciones Web", school: "mate" },
   ];
 
   return (

@@ -109,6 +109,7 @@ export default async function MyProfile() {
     { id: 14, course: "Ecuaciones Diferenciales" },
     { id: 15, course: "Métodos Numéricos" },
     { id: 16, course: "Inglés" },
+    { id: 21, course: "Aplicaciones Web"}
   ];
 
   return (
