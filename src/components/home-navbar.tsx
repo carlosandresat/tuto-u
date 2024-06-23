@@ -17,7 +17,7 @@ export function HomeNavbar() {
       <div className="lg:hidden">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline">
+            <Button variant="outline" aria-label="Menu Button">
               <Menu />
             </Button>
           </SheetTrigger>
