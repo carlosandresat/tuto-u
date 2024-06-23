@@ -108,7 +108,7 @@ export function HomeNavbar() {
         "use server";
         await signOut()
       }}>
-        <Button type="submit"> <LogOut /> </Button>
+        <Button type="submit" aria-label="Logout Button"> <LogOut /> </Button>
       </form>
     </header>
   );
