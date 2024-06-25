@@ -9,15 +9,19 @@ interface TimeRemaining {
 }
 
 export const CountdownTimer = () => {
-  const targetTime = new Date("2024-05-27T06:00:00").getTime();
 
   const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(
-    calculateTimeRemaining()
+    {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0,
+    }
   );
 
   function calculateTimeRemaining(): TimeRemaining {
     const now = new Date().getTime();
-    const difference = targetTime - now;
+    const difference = 1719594000000 - now;
 
     if (difference <= 0) {
       // Timer has reached or passed the target time
@@ -48,10 +52,9 @@ export const CountdownTimer = () => {
     }, 1000);
 
     return () => clearInterval(timerInterval);
-  }, [targetTime]);
+  }, []);
 
   return (
-    <div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
           <div>
             <p className="text-5xl">{timeRemaining.days}</p>
@@ -70,6 +73,5 @@ export const CountdownTimer = () => {
             <p className="text-muted-foreground">Segundos</p>
           </div>
        </div>
-    </div>
   );
 };
