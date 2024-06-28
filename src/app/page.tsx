@@ -53,7 +53,7 @@ export default function Home() {
                 </p>
                 <CountdownTimer />
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
-                  28 de Junio de 2024 - 12:00 PM
+                  30 de Junio de 2024 - 12:00 PM
                 </p>
               </div>
             </div>
