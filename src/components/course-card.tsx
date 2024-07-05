@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import Link from "next/link"
  
-export function CourseCard({course, school}:{course:string, school:string}) {
+export function CourseCard({id, course, school}:{id:number, course:string, school:string}) {
   return (
     <div
             className="p-8 text-center border flex flex-col items-center rounded-lg justify-between"
@@ -21,9 +21,14 @@ export function CourseCard({course, school}:{course:string, school:string}) {
                 {course}
               </h3>
             </div>
+            <div className="flex flex-col space-y-2 w-full">
+            <Link href={`/syllabus/${id}`} className="w-full md:w-auto">
+            <Button className="w-full md:w-auto" variant="secondary">Ver Syllabus</Button>
+            </Link>
             <Link href="/request" className="w-full md:w-auto">
             <Button className="w-full md:w-auto">Solicitar tutoría</Button>
-            </Link>
+            </Link> 
+            </div>
           </div>
   )
 }
