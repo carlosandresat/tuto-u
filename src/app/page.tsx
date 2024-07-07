@@ -6,8 +6,32 @@ import { StartNavbar } from "@/components/start-navbar";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CourseCard } from "@/components/course-card";
 
 export default function Home() {
+  const asignaturas = [
+    { id: 17, name: "Nivelación: Fundamentos de Matemáticas", school: "yt" },
+    { id: 18, name: "Nivelación: Física", school: "yt" },
+    { id: 19, name: "Nivelación: Química", school: "yt" },
+    { id: 20, name: "Nivelación: Redacción", school: "yt" },
+    { id: 1, name: "Cálculo 1", school: "mate" },
+    { id: 2, name: "Cálculo 2", school: "mate" },
+    { id: 3, name: "Cálculo 3", school: "mate" },
+    { id: 4, name: "Algebra Lineal", school: "mate" },
+    { id: 5, name: "Química 1", school: "quim" },
+    { id: 6, name: "Química 2", school: "quim" },
+    { id: 7, name: "Física 1", school: "fis" },
+    { id: 8, name: "Física 2", school: "fis" },
+    { id: 9, name: "Biología 1", school: "bio" },
+    { id: 10, name: "Biología 2", school: "bio" },
+    { id: 11, name: "Ciencias de la Tierra", school: "geo" },
+    { id: 12, name: "Probabilidad y Estadística", school: "mate" },
+    { id: 13, name: "Introducción a la Programación", school: "mate" },
+    { id: 14, name: "Ecuaciones Diferenciales", school: "mate" },
+    { id: 15, name: "Métodos Numéricos", school: "mate" },
+    { id: 16, name: "Inglés", school: "lan" },
+    { id: 21, name: "Aplicaciones Web", school: "mate" }
+];
 
   return (
     <>
@@ -41,8 +65,26 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 mt-2">
-          <div className="container px-4 md:px-6">
+        <section className="w-full py-12 md:py-24 lg:py-32 mt-2 flex flex-col justify-center items-center">
+        <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
+                  Nuestras asignaturas
+                </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-8 w-full">
+        {asignaturas.map((asignatura) => (
+          <CourseCard
+            id={asignatura.id}
+            course={asignatura.name}
+            school={asignatura.school}
+            key={asignatura.id}
+          />
+        ))}
+      </div>
+          
+        </section>
+        <section className="w-full bg-secondary py-12 md:py-24 lg:py-32 mt-2">
+
+        <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
@@ -58,6 +100,8 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          
         </section>
         {/*Section with an animated countdown for release*/}
       </main>
