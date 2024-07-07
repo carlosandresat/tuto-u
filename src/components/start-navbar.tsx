@@ -31,14 +31,6 @@ export function StartNavbar() {
               >
                 Cómo funciona
               </Link>
-
-              <Link
-                href="/pricing"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Precios
-              </Link>
-
               <Link
                 href="/ourteam"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
@@ -78,14 +70,7 @@ export function StartNavbar() {
         >
           Cómo funciona
         </Link>
-
-        <Link
-          href="/pricing"
-          className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-        >
-          Precios
-        </Link>
-
+        
         <Link
           href="/ourteam"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
