@@ -44,6 +44,12 @@ export function StartNavbar() {
               >
                 Preguntas frecuentes
               </Link>
+              <Link
+                href="/patch-notes"
+                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+              >
+                Notas de Versión
+              </Link>
             </div>
           </SheetContent>
         </Sheet>
@@ -83,6 +89,12 @@ export function StartNavbar() {
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Preguntas frecuentes
+        </Link>
+        <Link
+          href="/patch-notes"
+          className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+        >
+          Notas de Versión
         </Link>
       </nav>
       <div className="hidden xl:block xl:space-x-2">
