@@ -1,40 +1,52 @@
 import { StartNavbar } from "@/components/start-navbar";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import SocialNetwork from "@/components/social-networks";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { faq } from "@/data/faq";
 
 export default function FAQ() {
   return (
     <>
       <StartNavbar />
-      <section className="w-full px-8 translate-y-1/4 md:translate-y-1/2  flex items-center flex-col">
-        <div className="max-w-screen-2xl flex flex-col md:flex-row md:justify-between w-full pb-8 md:pb-10">
-          <div className="sm:w-full md:w-2/5 md:border-r-2 md:mr-4 md:py-12 mb-7 md:mb-0 md:pr-2">
-          <h2 className="md:text-5xl text-3xl text-center w-1/2 md:w-full md:border-b-0 border-b-2 m-auto pb-1 md:pb-0">Preguntas<br />frecuentes</h2>
-          </div>
-          <div className="w-full md:w-3/4 md:px-8">
-            <Accordion type="single" collapsible>
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </div>
-      <SocialNetwork/>
+      <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col pt-40">
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
+          Preguntas Frecuentes
+        </h2>
+        {faq.map((section, index) => {
+          return (
+            <>
+              <h3
+                className="scroll-m-20 text-2xl font-semibold tracking-tight mt-12"
+                key={`Section${index}`}
+              >
+                Sección {index + 1}: {section.section}
+              </h3>
+              <Accordion
+                type="multiple"
+                className="w-full max-w-7xl px-8 pt-6 text-left"
+              >
+                {section.questions.map((question, index) => {
+                  return (
+                    <AccordionItem
+                      value={`item-${index}`}
+                      key={`item-${index}`}
+                    >
+                      <AccordionTrigger className="text-left">
+                        {question.questionTitle}
+                      </AccordionTrigger>
+                      <AccordionContent className="bg-secondary border rounded p-6">
+                        {question.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
+            </>
+          );
+        })}
       </section>
     </>
   );
