@@ -4,6 +4,7 @@ export const publicRoutes = [
     "/how",
     "/ourteam",
     "/preregister",
+    "/patch-notes",
     "/pricing"
 ];
 
