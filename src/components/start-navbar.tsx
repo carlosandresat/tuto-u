@@ -26,12 +26,6 @@ export function StartNavbar() {
                 Inicio
               </Link>
               <Link
-                href="/how"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Cómo funciona
-              </Link>
-              <Link
                 href="/ourteam"
                 className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
               >
@@ -69,12 +63,6 @@ export function StartNavbar() {
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Inicio
-        </Link>
-        <Link
-          href="/how"
-          className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-        >
-          Cómo funciona
         </Link>
         
         <Link
