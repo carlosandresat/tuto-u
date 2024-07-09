@@ -33,14 +33,15 @@ export default async function Page({ params }: { params: { id: string } }) {
   
     return (
       <>
-        <section className="md:min-h-screen w-full p-6 md:p-12 items-center justify-center flex flex-col">
+        <section className="min-h-screen w-full p-6 md:p-12 items-center justify-start flex flex-col">
           {/* Button Back */}
-          <Link href={session?.user ? "/home" : "/"} className="absolute top-0 left-0 m-6">
+          <Link href={session?.user ? "/home" : "/"} className="self-start">
             <Button variant="link">
               <ArrowLeft className="mr-2" /> Regresar
             </Button>
           </Link>
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16">
+          <div className="flex flex-col justify-center items-center justify-self-stretch min-h-[calc(100vh-150px)] py-4">
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             {syllabus.classname}
           </h1>
           <p className="text-md text-muted-foreground max-w-4xl mt-4">
@@ -67,7 +68,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                   <div className="space-y-4 p-8">
                     {unit.topics.map((topic, topicIndex) => (
                       <div key={topicIndex}>
-                        <h4 className="font-bold">{topic.name}</h4>
+                        <h4 className="font-semibold">{topic.name}</h4>
                         <p>{topic.description}</p>
                       </div>
                     ))}
@@ -76,6 +77,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               </AccordionItem>
             ))}
           </Accordion>
+          </div>
         </section>
       </>
     );
