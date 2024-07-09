@@ -44,7 +44,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             {syllabus.classname}
           </h1>
-          <p className="text-md text-muted-foreground max-w-4xl mt-4">
+          <p className="text-md text-muted-foreground max-w-4xl mt-8">
             {syllabus.description}
           </p>
   

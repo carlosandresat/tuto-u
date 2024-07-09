@@ -42,7 +42,7 @@ export function TutorCard({
 }) {
   return (
     <div
-      className="p-8 text-center border flex flex-col items-center rounded-lg justify-between"
+      className="p-8 text-center border flex flex-col items-center rounded-lg justify-between h-full"
       key={tutor}
     >
       <div className="flex flex-col items-center pb-6 h-full">
