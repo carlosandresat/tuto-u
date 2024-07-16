@@ -4,6 +4,13 @@ import { CourseCard } from "@/components/course-card";
 import { TutorsCarousel } from "@/components/tutors-carousel";
 import Link from "next/link";
 import { ModeToggle } from "@/components/mode-toggle";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+import { Megaphone } from "lucide-react";
+
 
 export default function Home() {
   const asignaturas = [
@@ -47,6 +54,15 @@ export default function Home() {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-24">
         Asignaturas
       </h2>
+      <div className="flex max-w-screen-2xl w-full">
+            <Alert className="w-fit justify-self-start">
+              <Megaphone className="h-4 w-4" />
+              <AlertTitle>En desarrollo</AlertTitle>
+              <AlertDescription>
+                Aún estamos añadiendo la información de los syllabus
+              </AlertDescription>
+            </Alert>
+          </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6 w-full">
         {asignaturas.map((asignatura) => (
