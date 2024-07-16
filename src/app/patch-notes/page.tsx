@@ -16,7 +16,7 @@ export default function PatchNotes() {
               1.4
             </div>
             <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight ml-4">
-              Versión 1.4 – 9 de julio de 2024
+              Versión 1.4 – 15 de julio de 2024
             </h3>
           </div>
           <div className="w-full flex">
