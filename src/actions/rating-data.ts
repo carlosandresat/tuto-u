@@ -3,6 +3,8 @@
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
 
+const filterDate = new Date("2024-08-15");
+
 export const getRatedTutors = async () => {
   const session = await auth();
   if (!session?.user?.id) {
@@ -29,6 +31,9 @@ export const getRatedTutors = async () => {
           where: {
             studentRating: {
               not: null,
+            },
+            sessionDateTime: {
+              gte: filterDate,
             },
           },
           select: {
@@ -84,6 +89,9 @@ export const getRatedStudents = async () => {
             where: {
                 tutorRating: {
                 not: null,
+              },
+              sessionDateTime: {
+                gte: filterDate,
               },
             },
             select: {
