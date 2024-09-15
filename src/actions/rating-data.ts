@@ -19,6 +19,9 @@ export const getRatedTutors = async () => {
             studentRating: {
               not: null,
             },
+            sessionDateTime: {
+              gte: filterDate,
+            },
           },
         },
       },
@@ -76,6 +79,9 @@ export const getRatedStudents = async () => {
             some: {
               tutorRating: {
                 not: null,
+              },
+              sessionDateTime: {
+                gte: filterDate,
               },
             },
           },
