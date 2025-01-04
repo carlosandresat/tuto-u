@@ -3,8 +3,10 @@
 import { db } from "@/lib/db";
 import { addHours } from "date-fns";
 import { auth } from "@/auth";
-import { sessionResponseNotificationEmail, sessionCancelNotificationEmail } from "@/lib/mail";
-
+import {
+  sessionResponseNotificationEmail,
+  sessionCancelNotificationEmail,
+} from "@/lib/mail";
 
 export const getTutorSessions = async (userId: string) => {
   const aDayAgo = addHours(new Date(), -60);
@@ -55,7 +57,11 @@ export const getTutorSessions = async (userId: string) => {
   }
 };
 
-export const cancelSession = async (sessionId: number, email:string, userName:string): Promise<string> => {
+export const cancelSession = async (
+  sessionId: number,
+  email: string,
+  userName: string
+): Promise<string> => {
   try {
     const updatedSession = await db.individualSession.update({
       where: {
@@ -66,7 +72,7 @@ export const cancelSession = async (sessionId: number, email:string, userName:st
       },
     });
 
-    await sessionCancelNotificationEmail(email, userName, new Date())
+    await sessionCancelNotificationEmail(email, userName, new Date());
 
     return `Session ${updatedSession.id} has been successfully canceled.`;
   } catch (error) {
@@ -77,7 +83,11 @@ export const cancelSession = async (sessionId: number, email:string, userName:st
   }
 };
 
-export const acceptSession = async (sessionId: number, email:string, studentName:string): Promise<string> => {
+export const acceptSession = async (
+  sessionId: number,
+  email: string,
+  studentName: string
+): Promise<string> => {
   try {
     const updatedSession = await db.individualSession.update({
       where: {
@@ -97,7 +107,14 @@ export const acceptSession = async (sessionId: number, email:string, studentName
       },
     });
 
-    await sessionResponseNotificationEmail(email, res?.firstname || "", updatedSession.topic, updatedSession.sessionDateTime, studentName, "accepted")
+    await sessionResponseNotificationEmail(
+      email,
+      res?.firstname || "",
+      updatedSession.topic,
+      updatedSession.sessionDateTime,
+      studentName,
+      "accepted"
+    );
 
     return `Session ${updatedSession.id} has been successfully accepted.`;
   } catch (error) {
@@ -108,7 +125,11 @@ export const acceptSession = async (sessionId: number, email:string, studentName
   }
 };
 
-export const rejectSession = async (sessionId: number, email:string, studentName:string): Promise<string> => {
+export const rejectSession = async (
+  sessionId: number,
+  email: string,
+  studentName: string
+): Promise<string> => {
   try {
     const updatedSession = await db.individualSession.update({
       where: {
@@ -128,7 +149,14 @@ export const rejectSession = async (sessionId: number, email:string, studentName
       },
     });
 
-    await sessionResponseNotificationEmail(email, res?.firstname || "", updatedSession.topic, updatedSession.sessionDateTime, studentName, "rejected")
+    await sessionResponseNotificationEmail(
+      email,
+      res?.firstname || "",
+      updatedSession.topic,
+      updatedSession.sessionDateTime,
+      studentName,
+      "rejected"
+    );
 
     return `Session ${updatedSession.id} has been successfully rejected.`;
   } catch (error) {
@@ -147,7 +175,7 @@ export const rateSession = async (
 ): Promise<string> => {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error('You must be signed in to perform this action')
+    throw new Error("You must be signed in to perform this action");
   }
 
   try {
@@ -176,7 +204,7 @@ export const rateSession = async (
     const achievementExists = await db.userAchievement.findFirst({
       where: {
         userId: session.user.id,
-        achievementId: 11 
+        achievementId: 11,
       },
     });
 
@@ -185,7 +213,7 @@ export const rateSession = async (
       await db.userAchievement.create({
         data: {
           userId: session.user.id,
-          achievementId: 11
+          achievementId: 11,
         },
       });
     }
@@ -198,21 +226,28 @@ export const rateSession = async (
   }
 };
 
-export const reportSession = async (sessionId: number, description: string, role: string): Promise<string> => {
+export const reportSession = async (
+  sessionId: number,
+  description: string,
+  role: string
+): Promise<string> => {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error('You must be signed in to perform this action');
+    throw new Error("You must be signed in to perform this action");
   }
 
   try {
     // Update the session with a zero rating and a REPORTED SESSION comment based on the user's role
-    const updatedSessionData = role === "student" ? {
-      studentRating: 0,
-      studentComment: "REPORTED SESSION"
-    } : {
-      tutorRating: 0,
-      tutorComment: "REPORTED SESSION"
-    };
+    const updatedSessionData =
+      role === "student"
+        ? {
+            studentRating: 0,
+            studentComment: "REPORTED SESSION",
+          }
+        : {
+            tutorRating: 0,
+            tutorComment: "REPORTED SESSION",
+          };
 
     await db.individualSession.update({
       where: {
@@ -227,12 +262,14 @@ export const reportSession = async (sessionId: number, description: string, role
         sessionId: sessionId,
         reporterId: session.user.id,
         description: description,
-      }
+      },
     });
 
     return `Session has been successfully reported and the related report has been recorded.`;
   } catch (error) {
     console.error("Failed to report the session:", error);
-    throw new Error("Unable to report the session. Please make sure the session ID is correct.");
+    throw new Error(
+      "Unable to report the session. Please make sure the session ID is correct."
+    );
   }
 };

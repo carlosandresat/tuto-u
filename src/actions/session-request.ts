@@ -92,8 +92,13 @@ export const requestIndividualSession = async (data: {
         firstname: true,
       },
     });
-    if (res?.email){
-      await newSessionTutorNotificationEmail(res.email, res.firstname, data.topic, data.sessionDateTime)
+    if (res?.email) {
+      await newSessionTutorNotificationEmail(
+        res.email,
+        res.firstname,
+        data.topic,
+        data.sessionDateTime
+      );
     }
   } catch (error) {
     return {
@@ -103,8 +108,7 @@ export const requestIndividualSession = async (data: {
     };
   }
   revalidatePath("/home");
-  redirect("/home")
-
+  redirect("/home");
 };
 
 export const getStudentSessions = async (userId: string) => {
