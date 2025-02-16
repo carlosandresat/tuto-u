@@ -56,7 +56,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </Alert>
           </div>
 
-          <div className="flex flex-col justify-center items-center justify-self-stretch min-h-[calc(100vh-150px)] py-4">
+          <div className="flex flex-col justify-center items-center justify-self-stretch py-8">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             {syllabus.classname}
           </h1>
