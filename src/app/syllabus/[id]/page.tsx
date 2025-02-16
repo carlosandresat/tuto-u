@@ -9,6 +9,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { syllabusData } from "@/data/syllabus";
 import { auth } from "@/auth";
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
+import { Megaphone } from "lucide-react";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const session = await auth()
@@ -40,6 +46,16 @@ export default async function Page({ params }: { params: { id: string } }) {
               <ArrowLeft className="mr-2" /> Regresar
             </Button>
           </Link>
+                    <div className="flex mt-6 max-w-4xl w-full">
+            <Alert className="max-w-3xl justify-self-start">
+              <Megaphone className="h-4 w-4" />
+              <AlertTitle>Importante</AlertTitle>
+              <AlertDescription>
+                Los syllabus fueron recopilados de semestres anteriores y su información fue extraída mediante IA. Próximamente se actualizarán manualmente con la información más reciente.
+              </AlertDescription>
+            </Alert>
+          </div>
+
           <div className="flex flex-col justify-center items-center justify-self-stretch min-h-[calc(100vh-150px)] py-4">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             {syllabus.classname}
