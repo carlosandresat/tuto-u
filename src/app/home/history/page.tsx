@@ -7,10 +7,9 @@ export default function History() {
         </h2>
 
         <div className="flex mt-8">
-        <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl">
+          <h1 className="scroll-m-20 text-4xl md:text-6xl font-extrabold tracking-tight lg:text-8xl">
             Próximamente...
           </h1>
-
         </div>
       </section>
     </>

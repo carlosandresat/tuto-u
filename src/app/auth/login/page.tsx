@@ -25,10 +25,10 @@ export default function Login() {
   return (
     <section className="flex min-h-screen flex-col items-center  p-8 justify-center">
       <Link href="/" className="absolute top-0 left-0 p-6">
-          <Button variant="link">
-            <ArrowLeft className="mr-2" /> Regresar
-          </Button>
-        </Link>
+        <Button variant="link">
+          <ArrowLeft className="mr-2" /> Regresar
+        </Button>
+      </Link>
       <Image
         src="/images/logo.png"
         alt="logo"

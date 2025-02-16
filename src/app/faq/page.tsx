@@ -12,7 +12,7 @@ export default function FAQ() {
     <>
       <StartNavbar />
       <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col pt-40">
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
           Preguntas Frecuentes
         </h2>
         {faq.map((section, index) => {

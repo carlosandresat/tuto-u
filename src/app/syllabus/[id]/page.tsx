@@ -9,62 +9,67 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { syllabusData } from "@/data/syllabus";
 import { auth } from "@/auth";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Megaphone } from "lucide-react";
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const session = await auth()
+  const session = await auth();
 
-    const syllabus = syllabusData.find(s => s.id === parseInt(params.id));
+  const syllabus = syllabusData.find((s) => s.id === parseInt(params.id));
 
-    if (!syllabus) {
-      return (
-        <section className="min-h-screen w-full p-6 md:p-12 items-center justify-center flex flex-col">
-          {/* Button Back */}
-          <Link href={session?.user ? "/home" : "/"} className="absolute top-0 left-0 m-6">
-            <Button variant="link">
-              <ArrowLeft className="mr-2" /> Regresar
-            </Button>
-          </Link>
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16">
-            Syllabus not found
-          </h1>
-        </section>
-      );
-    }
-  
+  if (!syllabus) {
     return (
-      <>
-        <section className="min-h-screen w-full p-6 md:p-12 items-center justify-start flex flex-col">
-          {/* Button Back */}
-          <Link href={session?.user ? "/home" : "/"} className="self-start">
-            <Button variant="link">
-              <ArrowLeft className="mr-2" /> Regresar
-            </Button>
-          </Link>
-                    <div className="flex mt-6 max-w-4xl w-full">
-            <Alert className="max-w-3xl justify-self-start">
-              <Megaphone className="h-4 w-4" />
-              <AlertTitle>Importante</AlertTitle>
-              <AlertDescription>
-                Los syllabus fueron recopilados de semestres anteriores y su información fue extraída mediante IA. Próximamente se actualizarán manualmente con la información más reciente.
-              </AlertDescription>
-            </Alert>
-          </div>
+      <section className="min-h-screen w-full p-6 md:p-12 items-center justify-center flex flex-col">
+        {/* Button Back */}
+        <Link
+          href={session?.user ? "/home" : "/"}
+          className="absolute top-0 left-0 m-6"
+        >
+          <Button variant="link">
+            <ArrowLeft className="mr-2" /> Regresar
+          </Button>
+        </Link>
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16">
+          Syllabus not found
+        </h1>
+      </section>
+    );
+  }
 
-          <div className="flex flex-col justify-center items-center justify-self-stretch py-8">
+  return (
+    <>
+      <section className="min-h-screen w-full p-6 md:p-12 items-center justify-start flex flex-col">
+        {/* Button Back */}
+        <Link href={session?.user ? "/home" : "/"} className="self-start">
+          <Button variant="link">
+            <ArrowLeft className="mr-2" /> Regresar
+          </Button>
+        </Link>
+        <div className="flex mt-6 max-w-4xl w-full">
+          <Alert className="max-w-3xl justify-self-start">
+            <Megaphone className="h-4 w-4" />
+            <AlertTitle>Importante</AlertTitle>
+            <AlertDescription>
+              Los syllabus fueron recopilados de semestres anteriores y su
+              información fue extraída mediante IA. Próximamente se actualizarán
+              manualmente con la información más reciente.
+            </AlertDescription>
+          </Alert>
+        </div>
+
+        <div className="flex flex-col justify-center items-center justify-self-stretch py-8">
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             {syllabus.classname}
           </h1>
           <p className="text-md text-muted-foreground max-w-4xl mt-8">
             {syllabus.description}
           </p>
-  
-          <Accordion type="single" collapsible className="w-full max-w-4xl mt-8">
+
+          <Accordion
+            type="single"
+            collapsible
+            className="w-full max-w-4xl mt-8"
+          >
             {syllabus.units.map((unit, index) => (
               <AccordionItem key={index} value={`item-${index + 1}`}>
                 <AccordionTrigger className="border rounded-md px-4">
@@ -76,7 +81,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                     </div>
                     <div className="self-center w-full">
                       <h3 className="text-lg font-medium">{unit.name}</h3>
-                      
                     </div>
                   </div>
                 </AccordionTrigger>
@@ -93,8 +97,8 @@ export default async function Page({ params }: { params: { id: string } }) {
               </AccordionItem>
             ))}
           </Accordion>
-          </div>
-        </section>
-      </>
-    );
-  }
+        </div>
+      </section>
+    </>
+  );
+}

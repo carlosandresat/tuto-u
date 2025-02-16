@@ -171,7 +171,10 @@ export default function OurTeam() {
           Nuestros Partners
         </h2>
         <p className="scroll-m-20 text-muted-foreground max-w-screen-2xl text-center p-8">
-        Estamos orgullosos de colaborar con diversas organizaciones que comparten nuestra visión de una educación colaborativa. Desde instituciones académicas hasta grupos o asociaciones que mejoran nuestras capacidades y amplían nuestro alcance
+          Estamos orgullosos de colaborar con diversas organizaciones que
+          comparten nuestra visión de una educación colaborativa. Desde
+          instituciones académicas hasta grupos o asociaciones que mejoran
+          nuestras capacidades y amplían nuestro alcance
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 max-w-screen-xl p-8 w-full">
           <Card className="transition-all duration-300 hover:shadow-lg">
@@ -335,28 +338,31 @@ export default function OurTeam() {
           </div>
         </div>
         <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="link" className="text-md">¿Quieres apoyarnos? Averigua cómo aquí</Button>
-            </DialogTrigger>
+          <DialogTrigger asChild>
+            <Button variant="link" className="text-md">
+              ¿Quieres apoyarnos? Averigua cómo aquí
+            </Button>
+          </DialogTrigger>
 
-            <DialogContent className="sm:max-w-2xl">
-              <DialogHeader>
-                <DialogTitle>Gracias por tu apoyo</DialogTitle>
-                <DialogDescription>
-                  Dona desde $1 y contáctanos por nuestras redes para añadirte en esta sección. Tu donación ayuda mucho a los desarrolladores y el mantenimiento de la aplicación.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="flex justify-center">
-                <Image
-                  src={`/instructions/howdonate.png`}
-                  alt="Restart password instructions"
-                  width={900}
-                  height={900}
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
-          
+          <DialogContent className="sm:max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Gracias por tu apoyo</DialogTitle>
+              <DialogDescription>
+                Dona desde $1 y contáctanos por nuestras redes para añadirte en
+                esta sección. Tu donación ayuda mucho a los desarrolladores y el
+                mantenimiento de la aplicación.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex justify-center">
+              <Image
+                src={`/instructions/howdonate.png`}
+                alt="Restart password instructions"
+                width={900}
+                height={900}
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
       </section>
       <footer className="flex flex-col gap-2 md:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
         <p className="text-xs text-gray-500 dark:text-gray-400 text-center">

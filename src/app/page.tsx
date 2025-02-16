@@ -7,13 +7,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/course-card";
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from "@/components/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Megaphone } from "lucide-react";
-
 
 export default function Home() {
   const asignaturas = [
@@ -37,8 +32,8 @@ export default function Home() {
     { id: 14, name: "Ecuaciones Diferenciales", school: "mate" },
     { id: 15, name: "Métodos Numéricos", school: "mate" },
     { id: 16, name: "Inglés", school: "lan" },
-    { id: 21, name: "Aplicaciones Web", school: "mate" }
-];
+    { id: 21, name: "Aplicaciones Web", school: "mate" },
+  ];
 
   return (
     <>
@@ -50,9 +45,14 @@ export default function Home() {
           </h1>
         </div>
         <div className="mt-8 md:mt-16 md:mb-32 space-x-0 md:space-x-2 flex flex-col md:flex-row items-center space-y-2 md:space-y-0">
-        <Link href="/auth/register"><Button variant="outline">Regístrate <UserPlus className="ml-2"></UserPlus></Button></Link>
-        <Link href="/auth/login"><Button >¡Entrar ya!</Button></Link>
-
+          <Link href="/auth/register">
+            <Button variant="outline">
+              Regístrate <UserPlus className="ml-2"></UserPlus>
+            </Button>
+          </Link>
+          <Link href="/auth/login">
+            <Button>¡Entrar ya!</Button>
+          </Link>
         </div>
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-secondary mt-20">
@@ -73,25 +73,23 @@ export default function Home() {
           </div>
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32 mt-2 flex flex-col justify-center items-center">
-        <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
-                  Nuestras asignaturas
-                </h2>
+          <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
+            Nuestras asignaturas
+          </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl w-full px-8 mt-8">
-        {asignaturas.map((asignatura) => (
-          <CourseCard
-            id={asignatura.id}
-            course={asignatura.name}
-            school={asignatura.school}
-            key={asignatura.id}
-          />
-        ))}
-      </div>
-          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl w-full px-8 mt-8">
+            {asignaturas.map((asignatura) => (
+              <CourseCard
+                id={asignatura.id}
+                course={asignatura.name}
+                school={asignatura.school}
+                key={asignatura.id}
+              />
+            ))}
+          </div>
         </section>
         <section className="w-full bg-secondary py-12 md:py-24 lg:py-32 mt-2">
-
-        <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl">
@@ -107,8 +105,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          
         </section>
         {/*Section with an animated countdown for release*/}
       </main>

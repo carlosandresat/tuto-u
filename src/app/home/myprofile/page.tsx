@@ -84,15 +84,15 @@ export default async function MyProfile() {
     }`;
   }
 
-  const achievements = await getUserAchievements(session?.user?.id || "")
+  const achievements = await getUserAchievements(session?.user?.id || "");
 
-  const timeOptions = ["8", "10", "12", "14", "16", "18", "20", "22"]
+  const timeOptions = ["8", "10", "12", "14", "16", "18", "20", "22"];
 
   const courses = [
-    { id: 17, course: "Nivelación: Fundamentos de Matemáticas"},
-    { id: 18, course: "Nivelación: Física"},
-    { id: 19, course: "Nivelación: Química"},
-    { id: 20, course: "Nivelación: Redacción"},
+    { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
+    { id: 18, course: "Nivelación: Física" },
+    { id: 19, course: "Nivelación: Química" },
+    { id: 20, course: "Nivelación: Redacción" },
     { id: 1, course: "Cálculo 1" },
     { id: 2, course: "Cálculo 2" },
     { id: 3, course: "Cálculo 3" },
@@ -109,14 +109,14 @@ export default async function MyProfile() {
     { id: 14, course: "Ecuaciones Diferenciales" },
     { id: 15, course: "Métodos Numéricos" },
     { id: 16, course: "Inglés" },
-    { id: 21, course: "Aplicaciones Web"}
+    { id: 21, course: "Aplicaciones Web" },
   ];
 
   return (
     <>
       <section className="w-full py-8 flex items-center justify-center flex-col">
-      <Link href="/home" className="mt-20 md:mt-28 p-6 self-start">
-      <Button variant="link">
+        <Link href="/home" className="mt-20 md:mt-28 p-6 self-start">
+          <Button variant="link">
             <ArrowLeft className="mr-2" /> Regresar
           </Button>
         </Link>
@@ -146,14 +146,19 @@ export default async function MyProfile() {
                   {userBasicData?.email}
                 </a>
               </p>
-              <ProfileBasicsForm userId={session?.user?.id || ""} descriptionConfig={userBasicData?.description || ""}></ProfileBasicsForm>
+              <ProfileBasicsForm
+                userId={session?.user?.id || ""}
+                descriptionConfig={userBasicData?.description || ""}
+              ></ProfileBasicsForm>
             </CardContent>
           </Card>
           <Card className="w-full mt-6">
             <CardHeader>
               <CardTitle>Precios</CardTitle>
               <CardDescription>
-                Selecciona la duración de las tutorías con tus precios. Si seleccionas una duración y el precio queda vacío significa que las tutorías que ofreces son gratuitas
+                Selecciona la duración de las tutorías con tus precios. Si
+                seleccionas una duración y el precio queda vacío significa que
+                las tutorías que ofreces son gratuitas
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -211,10 +216,13 @@ export default async function MyProfile() {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6 justify-center">
-              {achievements.map((row, index)=>
-          <AchievementCard {...row} key={index} pathname="/home/myprofile"></AchievementCard>
-          )}
-
+                {achievements.map((row, index) => (
+                  <AchievementCard
+                    {...row}
+                    key={index}
+                    pathname="/home/myprofile"
+                  ></AchievementCard>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -226,10 +234,9 @@ export default async function MyProfile() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ModeToggle/>
+              <ModeToggle />
             </CardContent>
           </Card>
-
         </div>
       </section>
     </>
