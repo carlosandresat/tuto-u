@@ -124,7 +124,7 @@ export const RateSessionSchema = z.object({
 });
 
 export const UserBasicsSchema = z.object({
-  description: z.string().max(80, "La descripción no debe contener más de 80 caracteres").optional()
+  description: z.string().max(160, "La descripción no debe contener más de 160 caracteres").optional()
 })
 
 export const SessionReportSchema = z.object({
