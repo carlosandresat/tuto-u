@@ -3,8 +3,8 @@ import { getStudentSessions } from "@/actions/session-request";
 import { auth } from "@/auth";
 
 export async function StudentView() {
-  const session = await auth()
-  const studentSessions:{
+  const session = await auth();
+  const studentSessions: {
     sessionId: number;
     tutorInitials: string;
     tutorEmail: string;
@@ -17,7 +17,7 @@ export async function StudentView() {
     topic: string;
     rawDateTime: Date;
     rate: number | null;
-  }[] = await getStudentSessions(session?.user?.id || "")
+  }[] = await getStudentSessions(session?.user?.id || "");
   const someData: {
     sessionId: number;
     tutorInitials: string;

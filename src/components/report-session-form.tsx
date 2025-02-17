@@ -21,7 +21,13 @@ import { reportSession } from "@/actions/sessions-data";
 
 import { SessionReportSchema } from "@/schemas";
 
-export function ReportSessionForm({role, sessionId}:{role:string, sessionId:number}) {
+export function ReportSessionForm({
+  role,
+  sessionId,
+}: {
+  role: string;
+  sessionId: number;
+}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof SessionReportSchema>>({
@@ -31,7 +37,7 @@ export function ReportSessionForm({role, sessionId}:{role:string, sessionId:numb
   function onSubmit(data: z.infer<typeof SessionReportSchema>) {
     startTransition(async () => {
       await reportSession(sessionId, data.description, role);
-      window.location.reload()
+      window.location.reload();
       /*const response = await login(data);
       if (response && response.error) {
         toast({
@@ -41,7 +47,6 @@ export function ReportSessionForm({role, sessionId}:{role:string, sessionId:numb
       }*/
     });
   }
-
 
   return (
     <Form {...form}>
@@ -59,13 +64,21 @@ export function ReportSessionForm({role, sessionId}:{role:string, sessionId:numb
                   {...field}
                 />
               </FormControl>
-              <FormDescription>Lamentamos que hayas tenido una mala experiencia. Por favor coméntanos tu inconveniente durante la tutoría</FormDescription>
+              <FormDescription>
+                Lamentamos que hayas tenido una mala experiencia. Por favor
+                coméntanos tu inconveniente durante la tutoría
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" variant="destructive" disabled={isPending} className="w-full sm:w-auto">
+        <Button
+          type="submit"
+          variant="destructive"
+          disabled={isPending}
+          className="w-full sm:w-auto"
+        >
           Reportar
         </Button>
       </form>

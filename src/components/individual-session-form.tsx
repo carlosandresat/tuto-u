@@ -44,7 +44,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { IndividualSessionRequestSchema } from "@/schemas";
-import { getAvailableTutors, requestIndividualSession, addNarcissismAchievement } from "@/actions/session-request";
+import {
+  getAvailableTutors,
+  requestIndividualSession,
+  addNarcissismAchievement,
+} from "@/actions/session-request";
 import { useState, useTransition } from "react";
 
 export function IndividualSessionForm({ userId }: { userId: string }) {
@@ -70,10 +74,10 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
   });
 
   const courses = [
-    { id: 17, course: "Nivelación: Fundamentos de Matemáticas"},
-    { id: 18, course: "Nivelación: Física"},
-    { id: 19, course: "Nivelación: Química"},
-    { id: 20, course: "Nivelación: Redacción"},
+    { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
+    { id: 18, course: "Nivelación: Física" },
+    { id: 19, course: "Nivelación: Química" },
+    { id: 20, course: "Nivelación: Redacción" },
     { id: 1, course: "Cálculo 1" },
     { id: 2, course: "Cálculo 2" },
     { id: 3, course: "Cálculo 3" },
@@ -90,7 +94,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     { id: 14, course: "Ecuaciones Diferenciales" },
     { id: 15, course: "Métodos Numéricos" },
     { id: 16, course: "Inglés" },
-    { id: 21, course: "Aplicaciones Web"}
+    { id: 21, course: "Aplicaciones Web" },
   ];
 
   function formatDuration(duration: number) {
@@ -106,50 +110,52 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     }
   }
   function onSubmit(data: z.infer<typeof IndividualSessionRequestSchema>) {
-    startTransition(async ()=>{
-
-    const datetime = new Date(data.date);
-    const selectedPrice = availableTutors
-      .filter((row) => row.id === data.tutor)[0]
-      .pricing.filter(
-        (row) => row.duration.toString() === data.duration
-      )[0].price;
-    datetime.setHours(parseInt(data.time.split(":")[0]));
-    datetime.setMinutes(parseInt(data.time.split(":")[1]));
-    const formattedData = {
-      studentId: userId,
-      tutorId: data.tutor,
-      courseId: parseInt(data.course),
-      sessionDateTime: datetime.toISOString(),
-      duration: parseInt(data.duration),
-      price: Number(selectedPrice),
-      place: data.isOnline ? "Online" : data.place !== undefined && data.place !== "" ? data.place : "A disposición del tutor" ,
-      online: data.isOnline,
-      topic: data.topic,
-    };
-    /*toast({
+    startTransition(async () => {
+      const datetime = new Date(data.date);
+      const selectedPrice = availableTutors
+        .filter((row) => row.id === data.tutor)[0]
+        .pricing.filter(
+          (row) => row.duration.toString() === data.duration
+        )[0].price;
+      datetime.setHours(parseInt(data.time.split(":")[0]));
+      datetime.setMinutes(parseInt(data.time.split(":")[1]));
+      const formattedData = {
+        studentId: userId,
+        tutorId: data.tutor,
+        courseId: parseInt(data.course),
+        sessionDateTime: datetime.toISOString(),
+        duration: parseInt(data.duration),
+        price: Number(selectedPrice),
+        place: data.isOnline
+          ? "Online"
+          : data.place !== undefined && data.place !== ""
+          ? data.place
+          : "A disposición del tutor",
+        online: data.isOnline,
+        topic: data.topic,
+      };
+      /*toast({
       title: "¡Felicidades!",
       description: "Pronto estará disponible esta funcionalidad"
     })*/
-    if (data.tutor === userId) {
-      const res = await addNarcissismAchievement(userId)
-      if (res.message !== undefined){
-        toast({
-          title: "WTF",
-          description: res.message
-        })
+      if (data.tutor === userId) {
+        const res = await addNarcissismAchievement(userId);
+        if (res.message !== undefined) {
+          toast({
+            title: "WTF",
+            description: res.message,
+          });
+        }
+      } else {
+        const res = await requestIndividualSession(formattedData);
+        if (res.error_message) {
+          toast({
+            title: "Error",
+            description: res.error_message,
+          });
+        }
       }
-    } else {
-    const res = await requestIndividualSession(formattedData)
-    if(res.error_message ) {
-      toast({
-        title: "Error",
-        description: res.error_message
-      })
-    }
-  }
-  })
-    
+    });
   }
 
   return (
@@ -353,8 +359,8 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                     <FormLabel>Tutor</FormLabel>
                     <FormControl>
                       <Select
-                        onValueChange={(e)=> {
-                          field.onChange(e)
+                        onValueChange={(e) => {
+                          field.onChange(e);
                           form.setValue("duration", "");
                         }}
                         value={field.value}
@@ -486,7 +492,11 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                   </FormItem>
                 )}
               />
-              <Button className="w-full md:w-max" type="submit" disabled={isPending}>
+              <Button
+                className="w-full md:w-max"
+                type="submit"
+                disabled={isPending}
+              >
                 Solicitar tutoría
               </Button>
             </form>
@@ -503,11 +513,13 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
         <CardContent className="flex flex-col items-center space-y-4">
           <Avatar className="w-32 h-32">
             <AvatarImage
-              src={`${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${
+              src={`${
+                process.env.NEXT_PUBLIC_BLOB_STORAGE_URL
+              }/profile-pictures/${
                 form.watch("tutor") !== undefined && form.watch("tutor") !== ""
-                  ? availableTutors
-                      .filter((row) => row.id === form.watch("tutor"))[0]
-                      .image
+                  ? availableTutors.filter(
+                      (row) => row.id === form.watch("tutor")
+                    )[0].image
                   : null
               }`}
               alt="Tutor Pic"
@@ -530,13 +542,12 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                 : null}
             </h2>
             <p>
-            {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
+              {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
                 ? availableTutors.filter(
                     (row) => row.id === form.watch("tutor")
                   )[0].description
                 : null}
-    </p>
-
+            </p>
 
             {/*
             <div className="flex justify-center items-center mt-2 gap-x-2 flex-wrap gap-y-2">
@@ -564,9 +575,9 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                 : null}
             </h2>
           </div>
-          {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
-                ?  <AchievementsDialog userId={form.watch("tutor")}/>
-                : null}
+          {form.watch("tutor") !== undefined && form.watch("tutor") !== "" ? (
+            <AchievementsDialog userId={form.watch("tutor")} />
+          ) : null}
 
           {/*
             <AchievementsDialog></AchievementsDialog>

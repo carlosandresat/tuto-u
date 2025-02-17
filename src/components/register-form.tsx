@@ -19,9 +19,8 @@ import { useForm } from "react-hook-form";
 import { useTransition } from "react";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast"
+import { ToastAction } from "@/components/ui/toast";
 import Link from "next/link";
-
 
 import { RegisterSchema } from "@/schemas";
 
@@ -36,7 +35,7 @@ export function RegisterForm() {
     startTransition(async () => {
       try {
         const response = await register(data);
-        
+
         if (response && response.error) {
           toast({
             title: "¡Error!",
@@ -46,9 +45,13 @@ export function RegisterForm() {
           toast({
             title: "¡Felicidades!",
             description: response.message,
-            action: <ToastAction altText="Login"><Link href="/auth/login">Login</Link></ToastAction>
+            action: (
+              <ToastAction altText="Login">
+                <Link href="/auth/login">Login</Link>
+              </ToastAction>
+            ),
           });
-        }  
+        }
         form.reset({ firstname: "", lastname: "", email: "", password: "" });
       } catch (e) {
         if (typeof e === "string") {
@@ -57,7 +60,7 @@ export function RegisterForm() {
             description: e,
           });
         } else if (e instanceof Error) {
-          const message = e.message
+          const message = e.message;
           toast({
             title: "¡Error!",
             description: message,

@@ -4,8 +4,8 @@ import { auth } from "@/auth";
 import { TutorSessionCard } from "@/components/tutor-session-card";
 
 export async function TutorView() {
-  const session = await auth()
-  const tutorSessions:{
+  const session = await auth();
+  const tutorSessions: {
     sessionId: number;
     tutorInitials: string;
     tutorEmail: string;
@@ -18,7 +18,7 @@ export async function TutorView() {
     topic: string;
     rawDateTime: Date;
     rate: number | null;
-  }[] = await getTutorSessions(session?.user?.id || "")
+  }[] = await getTutorSessions(session?.user?.id || "");
   const someData: {
     sessionId: number;
     tutorInitials: string;

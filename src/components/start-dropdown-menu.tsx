@@ -19,8 +19,14 @@ export function StartDropdownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <div className="flex flex-col">
-          <Link href="/auth/register"><Button variant="outline" className="w-full">Registro</Button></Link>
-          <Link href="/auth/login" ><Button className="w-full">Entrar</Button></Link>
+          <Link href="/auth/register">
+            <Button variant="outline" className="w-full">
+              Registro
+            </Button>
+          </Link>
+          <Link href="/auth/login">
+            <Button className="w-full">Entrar</Button>
+          </Link>
         </div>
       </DropdownMenuContent>
     </DropdownMenu>

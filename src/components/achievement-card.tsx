@@ -56,22 +56,27 @@ export function AchievementCard({
       </HoverCardTrigger>
       <HoverCardContent className={cn(tier === "secret" ? "bg-grid" : null)}>
         <div className="flex justify-start my-2 items-center">
-          <div className={cn("p-3 flex items-center mr-2 justify-center bg-yellow-400 rounded-full", tier === "unique" || tier === "secret"
-              ? "bg-secondary"
-              : tier === "bronze"
-              ? "bg-amber-950"
-              : tier === "silver"
-              ? "bg-gray-400 "
-              : tier === "gold"
-              ? "bg-yellow-400"
-              : null)}>
+          <div
+            className={cn(
+              "p-3 flex items-center mr-2 justify-center bg-yellow-400 rounded-full",
+              tier === "unique" || tier === "secret"
+                ? "bg-secondary"
+                : tier === "bronze"
+                ? "bg-amber-950"
+                : tier === "silver"
+                ? "bg-gray-400 "
+                : tier === "gold"
+                ? "bg-yellow-400"
+                : null
+            )}
+          >
             <Image
               src={`/achievements/${imageUrl}`}
               alt={`${name} image`}
               width={40}
               height={40}
               className={cn(isInverted ? "dark:invert" : "invert p-1")}
-              />
+            />
           </div>
           <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
             {name}
@@ -81,7 +86,11 @@ export function AchievementCard({
           {userCount} usuarios tienen este logro
         </p>
 
-        <p className="mt-2">{tier === "secret" && pathname !== "/home/myprofile" ? "Logro secreto. ¡Desbloquéalo para conocer la descripción!" : description}</p>
+        <p className="mt-2">
+          {tier === "secret" && pathname !== "/home/myprofile"
+            ? "Logro secreto. ¡Desbloquéalo para conocer la descripción!"
+            : description}
+        </p>
       </HoverCardContent>
     </HoverCard>
   );

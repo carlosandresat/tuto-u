@@ -10,7 +10,17 @@ import {
 import { Button } from "@/components/ui/button";
 import { cancelSession } from "@/actions/sessions-data";
 
-export function CancelDialog({ sessionId, setState, email, userName }: { sessionId: number, setState:any, email:string, userName:string }) {
+export function CancelDialog({
+  sessionId,
+  setState,
+  email,
+  userName,
+}: {
+  sessionId: number;
+  setState: any;
+  email: string;
+  userName: string;
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -27,13 +37,17 @@ export function CancelDialog({ sessionId, setState, email, userName }: { session
         </h4>
 
         <DialogFooter className="sm:justify-end flex flex-col">
-        <DialogClose asChild>
-
-          <Button variant="destructive" onClick={async () => {
-            setState("canceled")
-            await cancelSession(sessionId, email, userName)
-            window.location.reload()
-          }}>Cancelar</Button>
+          <DialogClose asChild>
+            <Button
+              variant="destructive"
+              onClick={async () => {
+                setState("canceled");
+                await cancelSession(sessionId, email, userName);
+                window.location.reload();
+              }}
+            >
+              Cancelar
+            </Button>
           </DialogClose>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

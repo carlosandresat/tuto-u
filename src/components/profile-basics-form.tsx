@@ -21,7 +21,13 @@ import { toast } from "@/components/ui/use-toast";
 import { UserBasicsSchema } from "@/schemas";
 import { updateUserDescription } from "@/actions/user-configuration";
 
-export function ProfileBasicsForm({userId, descriptionConfig}: {userId:string; descriptionConfig:string}) {
+export function ProfileBasicsForm({
+  userId,
+  descriptionConfig,
+}: {
+  userId: string;
+  descriptionConfig: string;
+}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof UserBasicsSchema>>({
@@ -51,7 +57,7 @@ export function ProfileBasicsForm({userId, descriptionConfig}: {userId:string; d
               <FormLabel className="font-bold">Descripción:</FormLabel>
               <FormControl>
                 <Textarea
-                 className=" max-w-screen-sm"
+                  className=" max-w-screen-sm"
                   placeholder="Ingresa una descripción..."
                   disabled={isPending}
                   {...field}

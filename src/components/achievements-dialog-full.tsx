@@ -32,7 +32,7 @@ export function AchievementsDialogFull() {
           </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-3 gap-6 max-w-screen-2xl mt-6 justify-center">
-        <HoverCard>
+          <HoverCard>
             <HoverCardTrigger className="flex justify-center">
               <Button
                 className="w-20 h-20 p-4 text-center border flex flex-col items-center rounded-full justify-between hover:cursor-help bg-yellow-400 hover:bg-yellow-400/80"
@@ -66,9 +66,7 @@ export function AchievementsDialogFull() {
                 0 usuarios tienen este logro
               </p>
 
-              <p className="mt-2">
-                Has asistido a 30 tutorías. ¡Felicidades!
-              </p>
+              <p className="mt-2">Has asistido a 30 tutorías. ¡Felicidades!</p>
             </HoverCardContent>
           </HoverCard>
           <HoverCard>
@@ -105,9 +103,7 @@ export function AchievementsDialogFull() {
                 0 usuarios tienen este logro
               </p>
 
-              <p className="mt-2">
-                Has asistido a 15 tutorías. ¡Felicidades!
-              </p>
+              <p className="mt-2">Has asistido a 15 tutorías. ¡Felicidades!</p>
             </HoverCardContent>
           </HoverCard>
           <HoverCard>
@@ -144,9 +140,7 @@ export function AchievementsDialogFull() {
                 0 usuarios tienen este logro
               </p>
 
-              <p className="mt-2">
-                Has asistido a 5 tutorías. ¡Felicidades!
-              </p>
+              <p className="mt-2">Has asistido a 5 tutorías. ¡Felicidades!</p>
             </HoverCardContent>
           </HoverCard>
           <HoverCard>
@@ -183,9 +177,7 @@ export function AchievementsDialogFull() {
                 0 usuarios tienen este logro
               </p>
 
-              <p className="mt-2">
-                Has realizado 30 tutorías. ¡Felicidades!
-              </p>
+              <p className="mt-2">Has realizado 30 tutorías. ¡Felicidades!</p>
             </HoverCardContent>
           </HoverCard>
           <HoverCard>
@@ -222,9 +214,7 @@ export function AchievementsDialogFull() {
                 0 usuarios tienen este logro
               </p>
 
-              <p className="mt-2">
-                Has realizado 15 tutorías. ¡Felicidades!
-              </p>
+              <p className="mt-2">Has realizado 15 tutorías. ¡Felicidades!</p>
             </HoverCardContent>
           </HoverCard>
           <HoverCard>
@@ -261,9 +251,7 @@ export function AchievementsDialogFull() {
                 0 usuarios tienen este logro
               </p>
 
-              <p className="mt-2">
-                Has realizado 5 tutorías. ¡Felicidades!
-              </p>
+              <p className="mt-2">Has realizado 5 tutorías. ¡Felicidades!</p>
             </HoverCardContent>
           </HoverCard>
 
@@ -334,7 +322,7 @@ export function AchievementsDialogFull() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                Usurio Pre-Registrado
+                  Usurio Pre-Registrado
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -342,8 +330,8 @@ export function AchievementsDialogFull() {
               </p>
 
               <p className="mt-2">
-              Eres un usuario que ha completado el Pre-Registro de
-                      Tuto-U. ¡Gracias!
+                Eres un usuario que ha completado el Pre-Registro de Tuto-U.
+                ¡Gracias!
               </p>
             </HoverCardContent>
           </HoverCard>
@@ -375,7 +363,7 @@ export function AchievementsDialogFull() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                Caza-Bichos
+                  Caza-Bichos
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -383,7 +371,8 @@ export function AchievementsDialogFull() {
               </p>
 
               <p className="mt-2">
-              Has reportado un bug de la plataforma ¡Gracias por tu colaboración!
+                Has reportado un bug de la plataforma ¡Gracias por tu
+                colaboración!
               </p>
             </HoverCardContent>
           </HoverCard>
@@ -415,7 +404,7 @@ export function AchievementsDialogFull() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                Graduado
+                  Graduado
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -423,7 +412,8 @@ export function AchievementsDialogFull() {
               </p>
 
               <p className="mt-2">
-              Eres alguien que terminó la carrera y ahora tienes un título universitario. ¡Felicidades por tu esfuerzo!
+                Eres alguien que terminó la carrera y ahora tienes un título
+                universitario. ¡Felicidades por tu esfuerzo!
               </p>
             </HoverCardContent>
           </HoverCard>
@@ -455,7 +445,7 @@ export function AchievementsDialogFull() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                El Inicio
+                  El Inicio
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -463,7 +453,9 @@ export function AchievementsDialogFull() {
               </p>
 
               <p className="mt-2">
-              Has iniciado tu camino en Tuto-U. Completaste todos los pasos desde solicitar hasta calificar tu primera tutoría. ¡Este es tu primer paso!
+                Has iniciado tu camino en Tuto-U. Completaste todos los pasos
+                desde solicitar hasta calificar tu primera tutoría. ¡Este es tu
+                primer paso!
               </p>
             </HoverCardContent>
           </HoverCard>
@@ -495,14 +487,14 @@ export function AchievementsDialogFull() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                Narcisista Por Excelencia
+                  Narcisista Por Excelencia
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
                 0 usuarios tienen este logro
               </p>
               <p className="mt-2">
-              Logro secreto. ¡Desbloquéalo para conocer la descripción!
+                Logro secreto. ¡Desbloquéalo para conocer la descripción!
               </p>
             </HoverCardContent>
           </HoverCard>
@@ -533,7 +525,7 @@ export function AchievementsDialogFull() {
                   />
                 </div>
                 <h3 className="scroll-m-20 text-xl font-semibold tracking-tight h-full">
-                Tester
+                  Tester
                 </h3>
               </div>
               <p className="text-sm text-muted-foreground">
@@ -541,17 +533,17 @@ export function AchievementsDialogFull() {
               </p>
 
               <p className="mt-2">
-              Has ayudado a probar una funcionalidad de Tuto-U. ¡Gracias por tu apoyo!
+                Has ayudado a probar una funcionalidad de Tuto-U. ¡Gracias por
+                tu apoyo!
               </p>
             </HoverCardContent>
           </HoverCard>
-
         </div>
 
         <DialogFooter className="sm:justify-end flex flex-col">
-            <Link href="#" className="w-full">
-                <Button className="w-full">Ver Perfil</Button>
-            </Link>
+          <Link href="#" className="w-full">
+            <Button className="w-full">Ver Perfil</Button>
+          </Link>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Cerrar

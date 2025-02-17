@@ -49,13 +49,17 @@ export function StartNavbar() {
         </Sheet>
       </div>
       <Link href="/" className="flex items-center gap-6">
-        <Image src="/images/logo.png" alt="logo" width={60} height={60} className="w-12 lg:w-16"/>
+        <Image
+          src="/images/logo.png"
+          alt="logo"
+          width={60}
+          height={60}
+          className="w-12 lg:w-16"
+        />
         <h2 className="text-3xl font-semibold tracking-tight hidden lg:block">
-      Tuto-U
-    </h2>
-
+          Tuto-U
+        </h2>
       </Link>
-
 
       <nav className="navbar hidden lg:block">
         <Link
@@ -64,7 +68,7 @@ export function StartNavbar() {
         >
           Inicio
         </Link>
-        
+
         <Link
           href="/ourteam"
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
@@ -86,8 +90,12 @@ export function StartNavbar() {
         </Link>
       </nav>
       <div className="hidden xl:block xl:space-x-2">
-      <Link href="/auth/register"><Button variant="outline">Registro</Button></Link>
-      <Link href="/auth/login"><Button >Entrar</Button></Link>
+        <Link href="/auth/register">
+          <Button variant="outline">Registro</Button>
+        </Link>
+        <Link href="/auth/login">
+          <Button>Entrar</Button>
+        </Link>
       </div>
       <div className="block xl:hidden">
         <StartDropdownMenu></StartDropdownMenu>

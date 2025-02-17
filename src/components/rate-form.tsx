@@ -24,7 +24,13 @@ import { StarHalf, Star } from "lucide-react";
 
 import { RateSessionSchema } from "@/schemas";
 
-export function RateForm({role, sessionId}:{role:string, sessionId:number}) {
+export function RateForm({
+  role,
+  sessionId,
+}: {
+  role: string;
+  sessionId: number;
+}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof RateSessionSchema>>({
@@ -37,7 +43,7 @@ export function RateForm({role, sessionId}:{role:string, sessionId:number}) {
   function onSubmit(data: z.infer<typeof RateSessionSchema>) {
     startTransition(async () => {
       await rateSession(sessionId, role, data.rate, data.comment);
-      window.location.reload()
+      window.location.reload();
       /*const response = await login(data);
       if (response && response.error) {
         toast({
@@ -97,7 +103,8 @@ export function RateForm({role, sessionId}:{role:string, sessionId:number}) {
                 </div>
               </FormControl>
               <FormDescription>
-                Ingresa la calificación para tu {role==="student"? "tutor":"estudiante"}
+                Ingresa la calificación para tu{" "}
+                {role === "student" ? "tutor" : "estudiante"}
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -112,7 +119,9 @@ export function RateForm({role, sessionId}:{role:string, sessionId:number}) {
               <FormControl>
                 <Textarea
                   disabled={isPending}
-                  placeholder={`Deja un comentario para tu ${role==="student"? "tutor":"estudiante"}...`}
+                  placeholder={`Deja un comentario para tu ${
+                    role === "student" ? "tutor" : "estudiante"
+                  }...`}
                   {...field}
                 />
               </FormControl>

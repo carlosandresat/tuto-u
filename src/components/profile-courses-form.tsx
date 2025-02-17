@@ -2,12 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -26,7 +21,7 @@ export function ProfileCoursesForm({
 }: {
   userId: string;
   courses: { id: number; course: string }[];
-  coursesConfig: number[]
+  coursesConfig: number[];
 }) {
   const [isPending, startTransition] = useTransition();
 
@@ -62,17 +57,16 @@ export function ProfileCoursesForm({
                   onValueChange={field.onChange}
                 >
                   {courses.map((row) => {
-                    return(
-                    <ToggleGroupItem
-                      value={`${row.id}`}
-                      key={`${row.id}`}
-                      aria-label={`Toggle ${row.course}`}
-                    >
-                      {row.course}
-                    </ToggleGroupItem>
-                    )
+                    return (
+                      <ToggleGroupItem
+                        value={`${row.id}`}
+                        key={`${row.id}`}
+                        aria-label={`Toggle ${row.course}`}
+                      >
+                        {row.course}
+                      </ToggleGroupItem>
+                    );
                   })}
-                  
                 </ToggleGroup>
               </FormControl>
             </FormItem>

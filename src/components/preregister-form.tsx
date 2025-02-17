@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTransition } from "react";
 import { z } from "zod";
-import { preregister } from "@/actions/preregister"; 
+import { preregister } from "@/actions/preregister";
 
 import {
   Form,
@@ -68,11 +68,9 @@ export function PreregisterForm() {
   });
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-
-
-    startTransition(async ()=>{
-      const response = await preregister(data)
-      if(!response.error){
+    startTransition(async () => {
+      const response = await preregister(data);
+      if (!response.error) {
         toast({
           title: "¡Pre-Registro completo!",
           description:
@@ -81,14 +79,10 @@ export function PreregisterForm() {
       } else {
         toast({
           title: "¡Error en Pre-Registro!",
-          description:
-            response.error,
+          description: response.error,
         });
       }
-    })
-
-    
-    
+    });
   }
 
   return (
@@ -180,7 +174,11 @@ export function PreregisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Género</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isPending}
+              >
                 <FormControl className=" w-32">
                   <SelectTrigger>
                     <SelectValue placeholder="-" />
@@ -192,9 +190,7 @@ export function PreregisterForm() {
                   <SelectItem value="other">Otro</SelectItem>
                 </SelectContent>
               </Select>
-              <FormDescription>
-                Selecciona tu género.
-              </FormDescription>
+              <FormDescription>Selecciona tu género.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -206,7 +202,11 @@ export function PreregisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Rol interesado</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isPending}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="-" />
@@ -232,7 +232,11 @@ export function PreregisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Escuela</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isPending}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="-" />
@@ -273,7 +277,11 @@ export function PreregisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Semestre</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+              <Select
+                onValueChange={field.onChange}
+                defaultValue={field.value}
+                disabled={isPending}
+              >
                 <FormControl className=" w-32">
                   <SelectTrigger>
                     <SelectValue placeholder="-" />
@@ -302,7 +310,9 @@ export function PreregisterForm() {
           )}
         />
 
-        <Button type="submit" disabled={isPending} className="w-full sm:w-auto">Pre-Registrar</Button>
+        <Button type="submit" disabled={isPending} className="w-full sm:w-auto">
+          Pre-Registrar
+        </Button>
       </form>
     </Form>
   );

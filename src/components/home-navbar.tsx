@@ -9,7 +9,7 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
-import { signOut } from "@/auth"
+import { signOut } from "@/auth";
 
 export function HomeNavbar() {
   return (
@@ -62,11 +62,16 @@ export function HomeNavbar() {
       </div>
 
       <Link href="/home" className="flex items-center gap-6">
-        <Image src="/images/logo.png" alt="logo" width={60} height={60} className="w-12 lg:w-16"/>
+        <Image
+          src="/images/logo.png"
+          alt="logo"
+          width={60}
+          height={60}
+          className="w-12 lg:w-16"
+        />
         <h2 className="text-3xl font-semibold tracking-tight hidden lg:block">
-      Tuto-U
-    </h2>
-
+          Tuto-U
+        </h2>
       </Link>
 
       <nav className="navbar hidden lg:block">
@@ -104,11 +109,15 @@ export function HomeNavbar() {
           Estudiantes
         </Link>
       </nav>
-      <form action={async () => {
-        "use server";
-        await signOut()
-      }}>
-        <Button type="submit" aria-label="Logout Button"> <LogOut /> </Button>
+      <form
+        action={async () => {
+          "use server";
+          await signOut();
+        }}
+      >
+        <Button type="submit" aria-label="Logout Button">
+          <LogOut />
+        </Button>
       </form>
     </header>
   );

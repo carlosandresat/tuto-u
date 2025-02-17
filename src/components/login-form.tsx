@@ -51,7 +51,12 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Correo</FormLabel>
               <FormControl>
-                <Input disabled={isPending} type="email" {...field} placeholder="nombre.apellido@yachaytech.edu.ec"/>
+                <Input
+                  disabled={isPending}
+                  type="email"
+                  {...field}
+                  placeholder="nombre.apellido@yachaytech.edu.ec"
+                />
               </FormControl>
               <FormDescription>Ingresa tu correo institucional</FormDescription>
               <FormMessage />
@@ -72,9 +77,7 @@ export function LoginForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                Ingresa tu contraseña de Tuto-U
-              </FormDescription>
+              <FormDescription>Ingresa tu contraseña de Tuto-U</FormDescription>
               <FormMessage />
             </FormItem>
           )}

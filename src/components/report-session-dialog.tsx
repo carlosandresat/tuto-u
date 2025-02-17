@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { ReportSessionForm } from "@/components/report-session-form"
+import { ReportSessionForm } from "@/components/report-session-form";
 
 export function ReportSessionDialog({
   role,

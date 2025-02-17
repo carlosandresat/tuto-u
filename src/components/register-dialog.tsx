@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { RegisterForm } from "@/components/register-form";
 import { ReactElement } from "react";
 
-export function RegisterDialog({buttonText}:{buttonText:ReactElement}) {
+export function RegisterDialog({ buttonText }: { buttonText: ReactElement }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -22,9 +22,11 @@ export function RegisterDialog({buttonText}:{buttonText:ReactElement}) {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Registro</DialogTitle>
-          <DialogDescription>Completa el siguiente formulario para registrar tu cuenta</DialogDescription>
+          <DialogDescription>
+            Completa el siguiente formulario para registrar tu cuenta
+          </DialogDescription>
         </DialogHeader>
-        <RegisterForm/>
+        <RegisterForm />
       </DialogContent>
     </Dialog>
   );
