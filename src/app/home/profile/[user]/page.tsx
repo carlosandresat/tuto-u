@@ -7,13 +7,15 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const user = params.user;
-
+  const title = `${user} | Tuto-U`;
+  const description = `Visita el perfil de ${user}. Conoce su progreso en Tuto-U.`;
+  const page_url = `https://tutou.app/home/profile/${user}`
   // fetch data
 
   return {
-    metadataBase: new URL(`https://tutou.app/home/profile/${user}`),
-    title: `${user} | Tuto-U`,
-    description: `Visita el perfil de ${user}. Conoce su progreso en Tuto-U.`
+    metadataBase: new URL(page_url),
+    title: title,
+    description: description,
   };
 }
 
