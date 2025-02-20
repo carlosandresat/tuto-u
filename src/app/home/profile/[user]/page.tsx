@@ -11,7 +11,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // fetch data
 
   return {
+    metadataBase: new URL(`https://tutou.app/home/profile/${user}`),
     title: `${user} | Tuto-U`,
+    description: `Visita el perfil de ${user}. Conoce su progreso en Tuto-U.`
   };
 }
 
