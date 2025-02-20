@@ -10,6 +10,7 @@ import "./globals.css";
 const inter = Chakra_Petch({ subsets: ["latin"], weight: "500" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tutou.app"),
   title: "Tuto-U",
   description: "Tuto-U es una plataforma para tutorías entre estudiantes de la Universidad Yachay Tech. Creemos juntos un espacio de aprendizaje colaborativo para la comunidad universitaria. ¡Únete!",
 };
