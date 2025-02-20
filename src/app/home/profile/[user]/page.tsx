@@ -4,7 +4,7 @@ type Props = {
   params: { user: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+/*export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const user = params.user;
   const title = `${user} | Tuto-U`;
@@ -17,7 +17,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: title,
     description: description,
   };
-}
+}*/
+
+export const metadata: Metadata = {
+    title: "¡Visita mi perfil!",
+    description: "Conoce toda mi información en Tuto-U",
+  };
 
 export default function Page({ params }: Props) {
   return (
