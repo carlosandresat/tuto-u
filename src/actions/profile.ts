@@ -18,7 +18,7 @@ export const getUserProfile = async (email: string) => {
     });
 
     if (!user) {
-      throw new Error("User not found");
+      return {error: "Unable to fetch user profile"};
     }
 
     return {

@@ -28,7 +28,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const session = await auth();
   const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
-  const tutorData = await getUserProfile(email)
+  const tutorData = await getUserProfile(email);
+  if (tutorData.error !== undefined) {
+    return (
+      <section className="w-full p-8 flex items-center justify-center flex-col space-y-6 min-h-screen">
+        <Button variant="link" asChild>
+          <Link
+            href={session?.user ? "/home" : "/"}
+            className="absolute top-0 left-0 m-6"
+          >
+            <ArrowLeft className="mr-2" /> Regresar
+          </Link>
+        </Button>
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16">
+          User Not Found
+        </h1>
+      </section>
+    );
+  }
 
   return (
     <section className="w-full p-8 flex items-center justify-center flex-col space-y-6">
