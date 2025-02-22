@@ -26,6 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const session = await auth();
+  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  console.log(email)
 
   const tutorData = {
     name: "Jane Smith",
