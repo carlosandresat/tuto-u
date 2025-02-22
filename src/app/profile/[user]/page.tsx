@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "@/auth";
+import { getUserProfile } from "@/actions/profile";
 
 type Props = {
   params: { user: string };
@@ -27,30 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const session = await auth();
   const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
-  console.log(email)
-
-  const tutorData = {
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    whatsapp: "+1234567890",
-    profilePic: "/photos/placeholder.jpg",
-    courses: [
-      { name: "Mathematics", price: 25 },
-      { name: "Physics", price: 30 },
-      { name: "Computer Science", price: 35 },
-    ],
-    pricing: [
-      { duration: "1h", price: 2.25 },
-      { duration: "1.5h", price: 3.3 },
-      { duration: "2h", price: 4.3 },
-    ],
-    availability: [
-      { day: "Lunes", hours: [8, 10, 18, 20, 22] },
-      { day: "Miércoles", hours: [12, 18, 20, 22] },
-      { day: "Viernes", hours: [8, 10, 18, 20] },
-      { day: "Sábado", hours: [8, 10, 16, 18, 20, 22] },
-    ],
-  };
+  const tutorData = await getUserProfile(email)
 
   return (
     <section className="w-full p-8 flex items-center justify-center flex-col space-y-6">
@@ -84,12 +62,12 @@ export default async function Page({ params }: Props) {
                 <Mail className="w-4 h-4 mr-2" />
                 <span>{tutorData.email}</span>
               </div>
-              {tutorData.whatsapp && (
+              {/*tutorData.whatsapp && (
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
                   <span>{tutorData.whatsapp}</span>
                 </div>
-              )}
+              )*/}
             </div>
           </div>
         </CardHeader>
