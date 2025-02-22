@@ -22,8 +22,7 @@ export default async function Image({ params }: { params: { user: string } }) {
 
   const userName = params.user;
   const email = userName.replace("-", ".").concat("@yachaytech.edu.ec");
-  const response = await getUserNameByEmail(email);
-  //const user = response.error !== undefined ? "Not Found User" : response.name;
+  const name = await getUserNameByEmail(email);
 
   return new ImageResponse(
     (
@@ -41,19 +40,19 @@ export default async function Image({ params }: { params: { user: string } }) {
           gap: 16,
         }}
       >
-        {/*<img
+        <img
           src={`${import.meta.url}/images/logo.png`}
           alt="logo"
           width="80"
           height="80"
-        />*/}
+        />
         <div
           style={{
             maxWidth: "45%",
             textAlign: "center"
           }}
         >
-          Test Name Example
+          {name}
         </div>
       </div>
     ),
