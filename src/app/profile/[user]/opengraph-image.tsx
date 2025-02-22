@@ -40,19 +40,7 @@ export default async function Image({ params }: { params: { user: string } }) {
           gap: 16,
         }}
       >
-        <img
-          src={`${import.meta.url}/images/logo.png`}
-          alt="logo"
-          width="80"
-          height="80"
-        />
-        <div
-          style={{
-            width: "50%",
-          }}
-        >
-          {user}
-        </div>
+        {user}
       </div>
     ),
     // ImageResponse options
