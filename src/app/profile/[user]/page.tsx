@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "@/auth";
 import { getUserProfile } from "@/actions/profile";
+import { ClientTimeBadges } from "@/components/client-time-badges";
 
 type Props = {
   params: { user: string };
@@ -132,13 +133,8 @@ export default async function Page({ params }: Props) {
               <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
                 {data.day}
               </h4>
-              <div className="flex flex-wrap gap-4">
-                {data.hours.map((hour, index) => (
-                  <Badge key={index}>
-                    {hour <= 12 ? hour : hour % 12} {hour < 12 ? "AM" : "PM"}
-                  </Badge>
-                ))}
-              </div>
+
+              <ClientTimeBadges hours={data.hours} />
             </div>
           ))}
         </CardContent>
