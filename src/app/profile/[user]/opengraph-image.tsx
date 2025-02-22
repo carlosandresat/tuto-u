@@ -1,3 +1,4 @@
+import { getUserNameByEmail } from "@/actions/profile";
 import { ImageResponse } from "next/og";
 
 // Route segment config
@@ -19,21 +20,34 @@ export default async function Image({ params }: { params: { user: string } }) {
     new URL("./ChakraPetch-SemiBold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
+  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  const response = await getUserNameByEmail(email);
+  const user = response.error !== undefined ? "Not Found User" : response.name;
+
   return new ImageResponse(
     (
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 128,
+          fontSize: 92,
           background: "white",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          flexDirection: "column",
+          gap: 16,
         }}
       >
-        {params.user}
+        <img src="/images/logo.png" alt="logo" width={80} height={80} />
+        <p
+          style={{
+            width: "50%",
+          }}
+        >
+          {user}
+        </p>
       </div>
     ),
     // ImageResponse options
