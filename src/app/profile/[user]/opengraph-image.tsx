@@ -43,8 +43,8 @@ export default async function Image({ params }: { params: { user: string } }) {
         <img
           src={`${import.meta.url}/images/logo.png`}
           alt="logo"
-          width={80}
-          height={80}
+          width="80"
+          height="80"
         />
         <p
           style={{
