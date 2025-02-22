@@ -20,7 +20,8 @@ export default async function Image({ params }: { params: { user: string } }) {
     new URL("./ChakraPetch-SemiBold.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
-  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  const userName = params.user;
+  const email = userName.replace("-", ".").concat("@yachaytech.edu.ec");
   const response = await getUserNameByEmail(email);
   const user = response.error !== undefined ? "Not Found User" : response.name;
 
@@ -29,7 +30,7 @@ export default async function Image({ params }: { params: { user: string } }) {
       // ImageResponse JSX element
       <div
         style={{
-          fontSize: 92,
+          fontSize: 72,
           background: "white",
           width: "100%",
           height: "100%",
@@ -40,7 +41,20 @@ export default async function Image({ params }: { params: { user: string } }) {
           gap: 16,
         }}
       >
-        {user}
+        {/*<img
+          src={`${import.meta.url}/images/logo.png`}
+          alt="logo"
+          width="80"
+          height="80"
+        />*/}
+        <div
+          style={{
+            width: "45%",
+            textAlign: "center"
+          }}
+        >
+          {user}
+        </div>
       </div>
     ),
     // ImageResponse options
