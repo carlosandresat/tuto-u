@@ -16,8 +16,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
-  const response = await getUserNameByEmail(email);
-  const user = response.error !== undefined ? "Not Found User" : response.name
+  const user = await getUserNameByEmail(email);
   const title = `${user} | Tuto-U`;
   const description = `Visita el perfil de ${user}. Conoce su progreso en Tuto-U.`;
   // fetch data

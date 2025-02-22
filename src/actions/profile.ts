@@ -72,12 +72,12 @@ export const getUserNameByEmail = async (email: string) => {
     });
 
     if (!user) {
-      return { error: "Unable to fetch user profile" };
+      return "Not Found User";
     }
 
-    return { name: `${user.firstname} ${user.lastname}` };
+    return `${user.firstname} ${user.lastname}`;
   } catch (error) {
     console.error("Failed to fetch user profile:", error);
-    throw new Error("Unable to fetch user profile.");
+    return "Not Found User";
   }
 };

@@ -53,7 +53,7 @@ export default async function Image({ params }: { params: { user: string } }) {
             textAlign: "center"
           }}
         >
-          {response.name}
+          Test Name Example
         </div>
       </div>
     ),
