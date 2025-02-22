@@ -22,8 +22,8 @@ export default async function Image({ params }: { params: { user: string } }) {
 
   const userName = params.user;
   const email = userName.replace("-", ".").concat("@yachaytech.edu.ec");
-  const response = await getUserNameByEmail(email);
-  const user = response.error !== undefined ? "Not Found User" : response.name;
+  /*const response = await getUserNameByEmail(email);
+  const user = response.error !== undefined ? "Not Found User" : response.name;*/
 
   return new ImageResponse(
     (
