@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "@/auth";
-import { getUserProfile } from "@/actions/profile";
+import { getUserNameByEmail, getUserProfile } from "@/actions/profile";
 import { ClientTimeBadges } from "@/components/client-time-badges";
 
 type Props = {
@@ -15,7 +15,9 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
-  const user = params.user;
+  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  const response = await getUserNameByEmail(email);
+  const user = response.error !== undefined ? "Not Found User" : response.name
   const title = `${user} | Tuto-U`;
   const description = `Visita el perfil de ${user}. Conoce su progreso en Tuto-U.`;
   // fetch data

@@ -60,3 +60,24 @@ export const getUserProfile = async (email: string) => {
     throw new Error("Unable to fetch user profile.");
   }
 };
+
+export const getUserNameByEmail = async (email: string) => {
+  try {
+    const user = await db.user.findUnique({
+      where: { email },
+      select: {
+        firstname: true,
+        lastname: true,
+      },
+    });
+
+    if (!user) {
+      return { error: "Unable to fetch user profile" };
+    }
+
+    return { name: `${user.firstname} ${user.lastname}` };
+  } catch (error) {
+    console.error("Failed to fetch user profile:", error);
+    throw new Error("Unable to fetch user profile.");
+  }
+};
