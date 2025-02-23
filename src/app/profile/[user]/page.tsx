@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
         <Button variant="link" asChild>
           <Link
             href={session?.user ? "/home" : "/"}
-            className="absolute top-0 left-0 m-6"
+            className="absolute top-0 left-0 mt-6"
           >
             <ArrowLeft className="mr-2" /> Regresar
           </Link>
@@ -52,7 +52,7 @@ export default async function Page({ params }: Props) {
   return (
     <section className="w-full p-8 flex items-center justify-center flex-col space-y-6">
       <Button variant="link" asChild>
-        <Link href={session?.user ? "/home" : "/"} className="self-start">
+        <Link href={session?.user ? "/home" : "/"} className="self-start px-0">
           <ArrowLeft className="mr-2" /> Regresar
         </Link>
       </Button>
