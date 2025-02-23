@@ -124,8 +124,24 @@ export const RateSessionSchema = z.object({
 });
 
 export const UserBasicsSchema = z.object({
-  description: z.string().max(160, "La descripción no debe contener más de 160 caracteres").optional()
-})
+  description: z
+    .string()
+    .max(160, "La descripción no debe contener más de 160 caracteres")
+    .optional(),
+  whatsapp: z
+    .string()
+    .refine((val) => val.startsWith("+"), {
+      message: "El número debe comenzar con '+'.",
+    })
+    .refine((val) => /^\+\d+$/.test(val), {
+      message:
+        "El número solo debe contener dígitos después del '+', sin espacios ni guiones.",
+    })
+    .refine((val) => val.length >= 10 && val.length <= 16, {
+      message: "El número debe tener entre 10 y 16 caracteres en total.",
+    })
+    .optional(),
+});
 
 export const SessionReportSchema = z.object({
   description: z.string().max(120, "La descripción no debe contener más de 120 caracteres")
