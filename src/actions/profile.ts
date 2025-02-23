@@ -24,6 +24,7 @@ export const getUserProfile = async (email: string) => {
     return {
       name: `${user.firstname} ${user.lastname}`,
       email: user.email,
+      description: user.description,
       whatsapp: user.whatsapp,
       profilePic: user.image || "/photos/placeholder.jpg",
       courses: user.tutorCourses.map((tc) => ({

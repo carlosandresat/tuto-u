@@ -98,6 +98,9 @@ export default async function Page({ params }: Props) {
             </div>
           </div>
         </CardHeader>
+        <CardContent>
+          <p className="leading-relaxed">{tutorData.description}</p>
+        </CardContent>
       </Card>
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
         Resumen de Tutor
