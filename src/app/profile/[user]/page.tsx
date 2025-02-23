@@ -78,8 +78,10 @@ export default async function Page({ params }: Props) {
             </CardTitle>
             <div className="flex flex-col sm:flex-row items-center mt-2 space-y-2 sm:space-y-0 sm:space-x-4">
               <div className="flex items-center">
-                <Mail className="w-4 h-4 mr-2" />
-                <span>{tutorData.email}</span>
+                <Mail className="w-4 h-4 mr-2 shrink-0" />
+                <a href={`mailto:${tutorData.email}`} className="break-all">
+                  {tutorData.email}
+                </a>
               </div>
               {/*tutorData.whatsapp && (
                 <div className="flex items-center">
