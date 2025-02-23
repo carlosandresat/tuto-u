@@ -53,6 +53,7 @@ model User {
   image           String?
   password        String?
   description     String?
+  whatsapp        String?
   accounts        Account[]
   sessions        Session[]
   tutor_pricing   UserPricingConfiguration[]
