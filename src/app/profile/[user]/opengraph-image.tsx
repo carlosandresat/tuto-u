@@ -22,7 +22,9 @@ export default async function Image({ params }: { params: { user: string } }) {
 
   const userName = params.user;
   const email = userName.replace("-", ".").concat("@yachaytech.edu.ec");
-  const name = await getUserNameByEmail(email);
+  const name = await fetch(
+    new URL(`../profile/${email}`, import.meta.url)
+  ).then((res) => res.json());
 
   return new ImageResponse(
     (
@@ -43,7 +45,7 @@ export default async function Image({ params }: { params: { user: string } }) {
         <div
           style={{
             maxWidth: "45%",
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           {name}
