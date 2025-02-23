@@ -64,6 +64,10 @@ export default async function Page({ params }: Props) {
       <Card className="w-full max-w-screen-xl">
         <CardHeader className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
           <Avatar className="w-24 h-24">
+            <AvatarImage
+              src={`${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${tutorData.profilePic}`}
+              alt={tutorData.name}
+            />
             <AvatarImage src={tutorData.profilePic} alt={tutorData.name} />
             <AvatarFallback>
               {tutorData.name
