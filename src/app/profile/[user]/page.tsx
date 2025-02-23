@@ -90,7 +90,9 @@ export default async function Page({ params }: Props) {
               {tutorData.whatsapp && (
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
-                  <span>{tutorData.whatsapp}</span>
+                  <a href={`https://wa.me/${tutorData.whatsapp.substring(1)}`}>
+                    {tutorData.whatsapp}
+                  </a>
                 </div>
               )}
             </div>
