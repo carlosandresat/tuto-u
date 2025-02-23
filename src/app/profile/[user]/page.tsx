@@ -87,12 +87,12 @@ export default async function Page({ params }: Props) {
                   {tutorData.email}
                 </a>
               </div>
-              {/*tutorData.whatsapp && (
+              {tutorData.whatsapp && (
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-2" />
                   <span>{tutorData.whatsapp}</span>
                 </div>
-              )*/}
+              )}
             </div>
           </div>
         </CardHeader>
