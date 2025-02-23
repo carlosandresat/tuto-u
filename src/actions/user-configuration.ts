@@ -293,7 +293,7 @@ export const updateUserDescription = async (
     return { error: "Campos inválidos" };
   }
 
-  const { description } = validatedFields.data;
+  const { description, whatsapp } = validatedFields.data;
 
   try {
     await db.user.update({
@@ -302,6 +302,7 @@ export const updateUserDescription = async (
       },
       data: {
         description: description,
+        whatsapp: whatsapp,
       },
     });
     revalidatePath("/home/myprofile");
