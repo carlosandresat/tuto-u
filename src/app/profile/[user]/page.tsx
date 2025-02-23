@@ -94,55 +94,77 @@ export default async function Page({ params }: Props) {
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
         Resumen de Tutor
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-screen-xl">
-        <Card>
-          <CardHeader>
-            <CardTitle>Asignaturas</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-              {tutorData.courses.map((course, index) => (
-                <li key={index}>{course.name}</li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+      {tutorData.courses.length === 0 &&
+      tutorData.pricing.length === 0 &&
+      tutorData.availability.length === 0 ? (
+        <p className="text-center">
+          Este usuario no posee información como tutor
+        </p>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-screen-xl">
+            <Card>
+              <CardHeader>
+                <CardTitle>Asignaturas</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {tutorData.courses.length === 0 && (
+                  <p className="text-center">No hay asignaturas disponibles</p>
+                )}
+                <ul className="ml-6 list-disc [&>li]:mt-2">
+                  {tutorData.courses.map((course, index) => (
+                    <li key={index}>{course.name}</li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Precios</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {tutorData.pricing.map((slot, index) => (
-                <li key={index} className="flex justify-between items-center">
-                  <span>{slot.duration}</span>
-                  <Badge variant="outline">${slot.price.toFixed(2)}</Badge>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
-      </div>
-      <Card className="w-full max-w-screen-xl">
-        <CardHeader>
-          <CardTitle>Horario</CardTitle>
-        </CardHeader>
-        <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {tutorData.availability.map((data, index) => (
-            <div key={index} className="space-y-2">
-              <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                {data.day}
-              </h4>
+            <Card>
+              <CardHeader>
+                <CardTitle>Precios</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2">
+                  {tutorData.pricing.length === 0 && (
+                    <p className="text-center">No hay precios disponibles</p>
+                  )}
+                  {tutorData.pricing.map((slot, index) => (
+                    <li
+                      key={index}
+                      className="flex justify-between items-center"
+                    >
+                      <span>{slot.duration}</span>
+                      <Badge variant="outline">${slot.price.toFixed(2)}</Badge>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+          <Card className="w-full max-w-screen-xl">
+            <CardHeader>
+              <CardTitle>Horario</CardTitle>
+            </CardHeader>
+            {tutorData.availability.length === 0 && (
+              <p className="text-center">No hay horario disponible</p>
+            )}
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {tutorData.availability.map((data, index) => (
+                <div key={index} className="space-y-2">
+                  <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+                    {data.day}
+                  </h4>
 
-              <ClientTimeBadges hours={data.hours} />
-            </div>
-          ))}
-        </CardContent>
-      </Card>
-      <Button size="lg">
-        <Calendar className="mr-2 h-4 w-4" /> ¡Solicita una tutoría!
-      </Button>
+                  <ClientTimeBadges hours={data.hours} />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+          <Button size="lg">
+            <Calendar className="mr-2 h-4 w-4" /> ¡Solicita una tutoría!
+          </Button>
+        </>
+      )}
     </section>
   );
 }
