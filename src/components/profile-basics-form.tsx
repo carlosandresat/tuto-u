@@ -26,9 +26,11 @@ import { Input } from "@/components/ui/input";
 export function ProfileBasicsForm({
   userId,
   descriptionConfig,
+  whatsappConfig,
 }: {
   userId: string;
   descriptionConfig: string;
+  whatsappConfig: string;
 }) {
   const [isPending, startTransition] = useTransition();
 
@@ -36,6 +38,7 @@ export function ProfileBasicsForm({
     resolver: zodResolver(UserBasicsSchema),
     defaultValues: {
       description: descriptionConfig,
+      whatsapp: whatsappConfig,
     },
   });
 

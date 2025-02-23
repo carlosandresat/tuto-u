@@ -149,6 +149,7 @@ export default async function MyProfile() {
               <ProfileBasicsForm
                 userId={session?.user?.id || ""}
                 descriptionConfig={userBasicData?.description || ""}
+                whatsappConfig={userBasicData?.whatsapp || ""}
               ></ProfileBasicsForm>
             </CardContent>
           </Card>

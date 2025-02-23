@@ -22,6 +22,7 @@ export const getUserData = async (userId: string) => {
       email: true,
       image: true,
       description: true,
+      whatsapp: true,
     },
   });
 
