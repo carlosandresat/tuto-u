@@ -37,6 +37,7 @@ export function TutorSessionCard({
   status,
   tutorFullname,
   tutorEmail,
+  studentWhatsapp,
   sessionCourse,
   place,
   topic,
@@ -48,6 +49,7 @@ export function TutorSessionCard({
   sessionId: number;
   tutorInitials: string;
   tutorEmail: string;
+  studentWhatsapp: string | null;
   status: string;
   tutorFullname: string;
   sessionCourse: string;

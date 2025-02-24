@@ -9,6 +9,7 @@ export async function TutorView() {
     sessionId: number;
     tutorInitials: string;
     tutorEmail: string;
+    studentWhatsapp: string | null;
     status: string;
     tutorFullname: string;
     sessionCourse: string;
