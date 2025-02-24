@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { getUserAchievements } from "@/actions/achievements-data";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { AchievementCard } from "@/components/achievement-card";
 import { usePathname } from "next/navigation";
 import { getUserById } from "@/actions/profile";
@@ -30,7 +30,9 @@ export function AchievementsDialog({ userId }: { userId: string }) {
       isInverted: boolean;
     }[]
   >([]);
-  const [userTag, setUserTag] = useState<string>("not-found")
+  const [userTag, setUserTag] = useState<string>("not-found");
+  const [isPending, startTransition] = useTransition();
+
   const pathname = usePathname();
 
   return (
@@ -38,12 +40,14 @@ export function AchievementsDialog({ userId }: { userId: string }) {
       <DialogTrigger asChild>
         <Button
           className="w-full md:w-auto"
-          onClick={async () => {
-            const userAchievements = await getUserAchievements(userId);
-            const user = await getUserById(userId)
-            setAchievements(userAchievements);
-            setUserTag(user)
-          }}
+          onClick={() =>
+            startTransition(async () => {
+              const userAchievements = await getUserAchievements(userId);
+              const user = await getUserById(userId);
+              setAchievements(userAchievements);
+              setUserTag(user);
+            })
+          }
         >
           Ver Logros
         </Button>
@@ -67,7 +71,7 @@ export function AchievementsDialog({ userId }: { userId: string }) {
 
         <DialogFooter className="sm:justify-end flex flex-col">
           <Link href={`/${userTag}/profile`} className="w-full">
-            <Button className="w-full">Ver Perfil</Button>
+            <Button className="w-full" disabled={isPending}>Ver Perfil</Button>
           </Link>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
