@@ -16,6 +16,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { AchievementCard } from "@/components/achievement-card";
 import { usePathname } from "next/navigation";
+import { getUserById } from "@/actions/profile";
 
 export function AchievementsDialog({ userId }: { userId: string }) {
   const [achievements, setAchievements] = useState<
@@ -29,6 +30,7 @@ export function AchievementsDialog({ userId }: { userId: string }) {
       isInverted: boolean;
     }[]
   >([]);
+  const [userTag, setUserTag] = useState<string>("not-found")
   const pathname = usePathname();
 
   return (
@@ -38,7 +40,9 @@ export function AchievementsDialog({ userId }: { userId: string }) {
           className="w-full md:w-auto"
           onClick={async () => {
             const userAchievements = await getUserAchievements(userId);
+            const user = await getUserById(userId)
             setAchievements(userAchievements);
+            setUserTag(user)
           }}
         >
           Ver Logros
@@ -62,7 +66,7 @@ export function AchievementsDialog({ userId }: { userId: string }) {
         </div>
 
         <DialogFooter className="sm:justify-end flex flex-col">
-          <Link href="#" className="w-full">
+          <Link href={`/${userTag}/profile`} className="w-full">
             <Button className="w-full">Ver Perfil</Button>
           </Link>
           <DialogClose asChild>
