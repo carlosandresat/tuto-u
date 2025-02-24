@@ -128,6 +128,7 @@ export const getStudentSessions = async (userId: string) => {
             firstname: true,
             lastname: true,
             email: true,
+            whatsapp: true,
           },
         },
         course: {
@@ -145,6 +146,7 @@ export const getStudentSessions = async (userId: string) => {
         0
       )}${session.tutor.lastname?.charAt(0)}`,
       tutorEmail: session.tutor.email || "",
+      tutorWhatsapp: session.tutor.whatsapp,
       status: session.status,
       sessionCourse: session.course.name,
       rawDateTime: session.sessionDateTime,

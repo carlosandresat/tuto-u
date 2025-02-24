@@ -8,6 +8,7 @@ export async function StudentView() {
     sessionId: number;
     tutorInitials: string;
     tutorEmail: string;
+    tutorWhatsapp: string | null;
     status: string;
     tutorFullname: string;
     sessionCourse: string;
