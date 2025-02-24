@@ -70,9 +70,11 @@ export function AchievementsDialog({ userId }: { userId: string }) {
         </div>
 
         <DialogFooter className="sm:justify-end flex flex-col">
-          <Link href={`/${userTag}/profile`} className="w-full">
-            <Button className="w-full" disabled={isPending}>Ver Perfil</Button>
-          </Link>
+          <Button className="w-full" disabled={isPending} asChild={!isPending}>
+            <Link href={`/${userTag}/profile`} className="w-full">
+              Ver Perfil
+            </Link>
+          </Button>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Cerrar
