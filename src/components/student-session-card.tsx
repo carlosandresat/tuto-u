@@ -22,6 +22,7 @@ import {
   Banknote,
   Mail,
   Star,
+  Phone,
 } from "lucide-react";
 import { CancelDialog } from "./cancel-dialog";
 import { RateDialog } from "@/components/rate-dialog";
@@ -133,15 +134,32 @@ export function StudentSessionCard({
           <Banknote /> <p>{price != 0 ? `$${price.toFixed(2)}` : "Gratuita"}</p>
         </div>
         <div className="flex space-x-2 w-full">
-          <Mail />
-          <p className="break-all">
-            <a
-              href={`mailto:${tutorEmail}`}
-              className=" hover:border-b border-foreground"
-            >
-              {tutorEmail}
-            </a>
-          </p>
+          {tutorWhatsapp ? (
+            <>
+              <Phone />
+              <p className="break-all">
+                <a
+                  href={`https://wa.me/${tutorWhatsapp.substring(1)}`}
+                  target="_blank"
+                  className=" hover:border-b border-foreground"
+                >
+                  {tutorWhatsapp}
+                </a>
+              </p>
+            </>
+          ) : (
+            <>
+              <Mail />
+              <p className="break-all">
+                <a
+                  href={`mailto:${tutorEmail}`}
+                  className=" hover:border-b border-foreground"
+                >
+                  {tutorEmail}
+                </a>
+              </p>
+            </>
+          )}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center space-x-2">
