@@ -13,8 +13,8 @@ import { ProfileRequestForm } from "@/components/profile-request-form";
 export default function Page() {
   return (
     <section className="md:min-h-screen w-full p-6 items-center flex flex-col space-y-6">
-      <Button variant="link" asChild>
-        <Link href="#" className="self-start">
+      <Button variant="link" className="px-0 self-start" asChild>
+        <Link href="#">
           <ArrowLeft className="mr-2" /> Regresar
         </Link>
       </Button>
