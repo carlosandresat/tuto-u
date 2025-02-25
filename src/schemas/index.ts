@@ -146,3 +146,51 @@ export const UserBasicsSchema = z.object({
 export const SessionReportSchema = z.object({
   description: z.string().max(120, "La descripción no debe contener más de 120 caracteres")
 })
+
+export const ProfileSessionRequestSchema = z
+  .object({
+    date: z.date({
+      required_error: "Tienes que escoger una fecha.",
+    }),
+    course: z.string({
+      required_error: "Tienes que escoger un curso.",
+    }),
+    time: z
+      .string({
+        required_error: "Tienes que escoger una hora.",
+      })
+      .min(4, "Debes ingresar una hora válida"),
+    duration: z
+      .string({
+        required_error: "Tienes que escoger una duración.",
+      })
+      .min(1, "Tienes que escoger una duración"),
+    topic: z
+      .string({
+        required_error: "Tienes que ingresar un tema.",
+      })
+      .min(5, "Minimo 5 caracteres")
+      .max(200, "Maximo 200 caracteres"),
+    place: z.string().optional(),
+    isOnline: z.boolean(),
+  })
+  .refine(
+    (schema) => {
+      if (format(new Date(), "dd/MM/y") !== format(schema.date, "dd/MM/y")) {
+        return true;
+      } else {
+        if (
+          parseInt(schema.time.split(":")[0], 10) <=
+          new Date().getHours() + 8
+        ) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    },
+    {
+      message: "Debes solicitar la tutoría con 8 horas de anticipación",
+      path: ["time"],
+    }
+  );
