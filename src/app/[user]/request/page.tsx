@@ -8,6 +8,7 @@ import {
   CardContent,
   Card,
 } from "@/components/ui/card";
+import { ProfileRequestForm } from "@/components/profile-request-form";
 
 export default function Page() {
   return (
@@ -24,7 +25,9 @@ export default function Page() {
             Llena el formulario para realizar una solicitud de tutoría
           </CardDescription>
         </CardHeader>
-        <CardContent>Aquí irá el formulario</CardContent>
+        <CardContent>
+          <ProfileRequestForm />
+        </CardContent>
       </Card>
     </section>
   );
