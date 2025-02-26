@@ -171,8 +171,10 @@ export default async function Page({ params }: Props) {
               ))}
             </CardContent>
           </Card>
-          <Button size="lg">
-            <Calendar className="mr-2 h-4 w-4" /> ¡Solicita una tutoría!
+          <Button size="lg" asChild>
+            <Link href={`/${params.user}/request`}>
+              <Calendar className="mr-2 h-4 w-4" /> ¡Solicita una tutoría!
+            </Link>
           </Button>
         </>
       )}
