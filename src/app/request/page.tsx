@@ -10,14 +10,14 @@ export default async function Component() {
 
   return (
     <>
-      <section className="md:min-h-screen w-full p-6 md:p-12 items-center justify-center flex">
+      <section className="md:min-h-screen w-full p-6 items-center justify-center flex flex-col space-y-6">
         {/* Button Back */}
-        <Link href="/home" className="absolute top-0 left-0 p-6">
-          <Button variant="link">
-            <ArrowLeft className="mr-2" /> Regresar
-          </Button>
+        <Button variant="link" className="px-0 self-start" asChild>
+          <Link href="/home" >
+          <ArrowLeft className="mr-2" /> Regresar
         </Link>
-        <div className="flex flex-col md:flex-row gap-6 max-w-screen-2xl w-full mt-12">
+        </Button>
+        <div className="flex flex-col md:flex-row gap-6 max-w-screen-2xl w-full">
           <IndividualSessionForm userId={session?.user?.id || ""}></IndividualSessionForm>
         </div>
       </section>
