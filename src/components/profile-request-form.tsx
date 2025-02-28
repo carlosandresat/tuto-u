@@ -39,7 +39,7 @@ import { useState, useTransition } from "react";
 
 export function ProfileRequestForm() {
   const [isPending, startTransition] = useTransition();
-  const [availableTimes, setAvailableTimes] = useState<number[]>([])
+  const [availableTimes, setAvailableTimes] = useState<number[]>([]);
 
   const form = useForm<z.infer<typeof ProfileSessionRequestSchema>>({
     resolver: zodResolver(ProfileSessionRequestSchema),
@@ -50,13 +50,13 @@ export function ProfileRequestForm() {
   });
 
   const availability = [
-    {day: 0, hours: [10, 11, 18, 19, 20, 21, 22, 23]},
-    {day: 1, hours: [20, 21, 22, 23]},
-    {day: 2, hours: [18, 19, 20, 21, 22, 23]},
-    {day: 4, hours: [10, 11, 18, 19, 20, 21]},
-    {day: 5, hours: [18, 19, 20, 21]},
-    {day: 6, hours: [10, 11, 18, 19, 20, 21, 22, 23]},
-  ]
+    { day: 0, hours: [10, 11, 18, 19, 20, 21, 22, 23] },
+    { day: 1, hours: [20, 21, 22, 23] },
+    { day: 2, hours: [18, 19, 20, 21, 22, 23] },
+    { day: 4, hours: [10, 11, 18, 19, 20, 21] },
+    { day: 5, hours: [18, 19, 20, 21] },
+    { day: 6, hours: [10, 11, 18, 19, 20, 21, 22, 23] },
+  ];
 
   const courses = [
     { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
@@ -163,7 +163,9 @@ export function ProfileRequestForm() {
                         field.onChange(e);
                         if (e) {
                           const day = e.getDay();
-                          const availableHours = availability.find(a => a.day === day)?.hours || [];
+                          const availableHours =
+                            availability.find((a) => a.day === day)?.hours ||
+                            [];
                           setAvailableTimes(availableHours);
                         }
                         form.setValue("duration", "");
@@ -200,7 +202,10 @@ export function ProfileRequestForm() {
                     </SelectTrigger>
                     <SelectContent>
                       {availableTimes.map((time) => (
-                        <SelectItem value={time.toString().padStart(2, "0") + ":00"} key={time}>
+                        <SelectItem
+                          value={time.toString().padStart(2, "0") + ":00"}
+                          key={time}
+                        >
                           {time.toString().padStart(2, "0") + ":00"}
                         </SelectItem>
                       ))}
