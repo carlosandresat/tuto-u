@@ -72,6 +72,16 @@ export function ProfileRequestForm({
     },
   });
 
+  //Pending: Order the hours in ascending order
+  const availabilityLocalTimes = availability.map((a) => ({
+    ...a,
+    hours: a.hours.map((h) => {
+      const date = new Date();
+      date.setUTCHours(h);
+      return date.getHours();
+    }),
+  }));
+
   function onSubmit(data: z.infer<typeof ProfileSessionRequestSchema>) {
     startTransition(async () => {
       toast({
@@ -155,7 +165,7 @@ export function ProfileRequestForm({
                         if (e) {
                           const day = e.getDay();
                           const availableHours =
-                            availability.find((a) => a.day === day)?.hours ||
+                          availabilityLocalTimes.find((a) => a.day === day)?.hours ||
                             [];
                           setAvailableTimes(availableHours);
                         }
