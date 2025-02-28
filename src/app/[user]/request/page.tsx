@@ -10,8 +10,14 @@ import {
 } from "@/components/ui/card";
 import { ProfileRequestForm } from "@/components/profile-request-form";
 import { getTutorFormData } from "@/actions/profile";
+import { auth } from "@/auth";
 
 export default async function Page({ params }: { params: { user: string } }) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return null;
+  }
+
   const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
   const formData = await getTutorFormData(email);
 
@@ -50,7 +56,7 @@ export default async function Page({ params }: { params: { user: string } }) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ProfileRequestForm {...formData} />
+          <ProfileRequestForm {...formData} studentId={session.user.id}/>
         </CardContent>
       </Card>
     </section>

@@ -38,6 +38,7 @@ import { ProfileSessionRequestSchema } from "@/schemas";
 import { useState, useTransition } from "react";
 
 interface FormData {
+  studentId: string;
   tutorId: string;
   courses: { id: number; course: string }[];
   availability: { day: number; hours: number[] }[];
@@ -45,6 +46,7 @@ interface FormData {
 }
 
 export function ProfileRequestForm({
+  studentId,
   tutorId,
   courses,
   availability,
