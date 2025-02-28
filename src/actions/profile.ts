@@ -123,6 +123,7 @@ export const getTutorFormData = async (email: string) => {
     }
 
     return {
+      tutorId: user.id,
       name: `${user.firstname} ${user.lastname}`,
       courses: user.tutorCourses.map((tc) => ({
         id: tc.course.id,
