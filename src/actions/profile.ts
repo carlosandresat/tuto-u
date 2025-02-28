@@ -132,8 +132,10 @@ export const getTutorFormData = async (email: string) => {
         const existingDay = acc.find((d) => d.day === a.dayOfWeek);
         if (existingDay) {
           existingDay.hours.push(a.timeSlot);
+          existingDay.hours.push(a.timeSlot + 1);
         } else {
           acc.push({ day: a.dayOfWeek, hours: [a.timeSlot] });
+          acc[acc.length - 1].hours.push(a.timeSlot + 1);
         }
         return acc;
       }, [] as { day: number; hours: number[] }[]),
