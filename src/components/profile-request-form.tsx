@@ -91,11 +91,29 @@ export function ProfileRequestForm({
 
   function onSubmit(data: z.infer<typeof ProfileSessionRequestSchema>) {
     startTransition(async () => {
+      const datetime = new Date(data.date);
+      datetime.setHours(parseInt(data.time.split(":")[0]));
+      datetime.setMinutes(parseInt(data.time.split(":")[1]));
+      const formattedData = {
+        studentId,
+        tutorId,
+        courseId: parseInt(data.course),
+        sessionDateTime: datetime.toISOString(),
+        duration: parseInt(data.duration),
+        place: data.isOnline
+          ? "Online"
+          : data.place !== undefined && data.place !== ""
+          ? data.place
+          : "A disposición del tutor",
+        online: data.isOnline,
+        topic: data.topic,
+      };
+
       toast({
         title: "You submitted the following values:",
         description: (
           <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+            <code className="text-white">{JSON.stringify(formattedData, null, 2)}</code>
           </pre>
         ),
       });
