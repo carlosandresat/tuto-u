@@ -116,14 +116,16 @@ export function ProfileRequestForm({
                     <SelectValue placeholder="Selecciona una asignatura" />
                   </SelectTrigger>
                   <SelectContent>
-                    {courses.map((row) => (
-                      <SelectItem
-                        value={row.id.toString()}
-                        key={row.id.toString()}
-                      >
-                        {row.course}
-                      </SelectItem>
-                    ))}
+                    {courses
+                      .sort((a, b) => a.course.localeCompare(b.course))
+                      .map((row) => (
+                        <SelectItem
+                          value={row.id.toString()}
+                          key={row.id.toString()}
+                        >
+                          {row.course}
+                        </SelectItem>
+                      ))}
                   </SelectContent>
                 </Select>
               </FormControl>
