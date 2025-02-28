@@ -176,6 +176,7 @@ export function ProfileRequestForm() {
                       selected={field.value}
                       onSelect={async (e) => {
                         field.onChange(e);
+                        form.setValue("time", "");
                         if (e) {
                           const day = e.getDay();
                           const availableHours =
@@ -208,7 +209,7 @@ export function ProfileRequestForm() {
                     onValueChange={async (e) => {
                       field.onChange(e);
                     }}
-                    defaultValue={field.value}
+                    value={field.value}
                   >
                     <SelectTrigger>
                       <SelectValue
