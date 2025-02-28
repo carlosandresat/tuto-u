@@ -39,7 +39,7 @@ import { useState, useTransition } from "react";
 
 export function ProfileRequestForm() {
   const [isPending, startTransition] = useTransition();
-  const [availableTimes, setAvailableTimes] = useState<number[]>([]);
+  const [availableTimes, setAvailableTimes] = useState<number[] | undefined>();
 
   function formatDuration(duration: number) {
     const hours = Math.floor(duration / 60);
@@ -211,10 +211,16 @@ export function ProfileRequestForm() {
                     defaultValue={field.value}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecciona una hora" />
+                      <SelectValue
+                        placeholder={
+                          availableTimes?.length === 0
+                            ? "No hay horario disponible este día"
+                            : "Selecciona una hora"
+                        }
+                      />
                     </SelectTrigger>
                     <SelectContent>
-                      {availableTimes.map((time) => (
+                      {availableTimes?.map((time) => (
                         <SelectItem
                           value={time.toString().padStart(2, "0") + ":00"}
                           key={time}
