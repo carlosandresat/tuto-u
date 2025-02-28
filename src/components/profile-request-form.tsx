@@ -168,7 +168,6 @@ export function ProfileRequestForm() {
                             [];
                           setAvailableTimes(availableHours);
                         }
-                        form.setValue("duration", "");
                       }}
                       disabled={(date) => {
                         const yesterday = new Date();
@@ -193,7 +192,6 @@ export function ProfileRequestForm() {
                   <Select
                     onValueChange={async (e) => {
                       field.onChange(e);
-                      form.setValue("duration", "");
                     }}
                     defaultValue={field.value}
                   >
