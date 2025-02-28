@@ -80,6 +80,9 @@ export function ProfileRequestForm({
       date.setUTCHours(h);
       return date.getHours();
     }),
+  })).map((a) => ({
+    ...a,
+    hours: a.hours.sort((a, b) => a - b),
   }));
 
   function onSubmit(data: z.infer<typeof ProfileSessionRequestSchema>) {
