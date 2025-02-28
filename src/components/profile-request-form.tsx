@@ -35,10 +35,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ProfileSessionRequestSchema } from "@/schemas";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 
 export function ProfileRequestForm() {
   const [isPending, startTransition] = useTransition();
+  const [availableTimes, setAvailableTimes] = useState<number[]>([])
 
   const form = useForm<z.infer<typeof ProfileSessionRequestSchema>>({
     resolver: zodResolver(ProfileSessionRequestSchema),
@@ -47,6 +48,15 @@ export function ProfileRequestForm() {
       isOnline: false,
     },
   });
+
+  const availability = [
+    {day: 0, hours: [10, 11, 18, 19, 20, 21, 22, 23]},
+    {day: 1, hours: [20, 21, 22, 23]},
+    {day: 2, hours: [18, 19, 20, 21, 22, 23]},
+    {day: 4, hours: [10, 11, 18, 19, 20, 21]},
+    {day: 5, hours: [18, 19, 20, 21]},
+    {day: 6, hours: [10, 11, 18, 19, 20, 21, 22, 23]},
+  ]
 
   const courses = [
     { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
@@ -151,6 +161,11 @@ export function ProfileRequestForm() {
                       selected={field.value}
                       onSelect={async (e) => {
                         field.onChange(e);
+                        if (e) {
+                          const day = e.getDay();
+                          const availableHours = availability.find(a => a.day === day)?.hours || [];
+                          setAvailableTimes(availableHours);
+                        }
                         form.setValue("duration", "");
                       }}
                       disabled={(date) => {
@@ -184,22 +199,11 @@ export function ProfileRequestForm() {
                       <SelectValue placeholder="Selecciona una hora" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="08:00">08:00</SelectItem>
-                      <SelectItem value="09:00">09:00</SelectItem>
-                      <SelectItem value="10:00">10:00</SelectItem>
-                      <SelectItem value="11:00">11:00</SelectItem>
-                      <SelectItem value="12:00">12:00</SelectItem>
-                      <SelectItem value="13:00">13:00</SelectItem>
-                      <SelectItem value="14:00">14:00</SelectItem>
-                      <SelectItem value="15:00">15:00</SelectItem>
-                      <SelectItem value="16:00">16:00</SelectItem>
-                      <SelectItem value="17:00">17:00</SelectItem>
-                      <SelectItem value="18:00">18:00</SelectItem>
-                      <SelectItem value="19:00">19:00</SelectItem>
-                      <SelectItem value="20:00">20:00</SelectItem>
-                      <SelectItem value="21:00">21:00</SelectItem>
-                      <SelectItem value="22:00">22:00</SelectItem>
-                      <SelectItem value="23:00">23:00</SelectItem>
+                      {availableTimes.map((time) => (
+                        <SelectItem value={time.toString().padStart(2, "0") + ":00"} key={time}>
+                          {time.toString().padStart(2, "0") + ":00"}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </FormControl>
