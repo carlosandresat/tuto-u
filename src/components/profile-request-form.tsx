@@ -210,6 +210,7 @@ export function ProfileRequestForm() {
                       field.onChange(e);
                     }}
                     value={field.value}
+                    disabled={!form.watch("date") || availableTimes?.length === 0}
                   >
                     <SelectTrigger>
                       <SelectValue
