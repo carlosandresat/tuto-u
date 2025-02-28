@@ -37,7 +37,17 @@ import {
 import { ProfileSessionRequestSchema } from "@/schemas";
 import { useState, useTransition } from "react";
 
-export function ProfileRequestForm() {
+interface FormData {
+  courses: { id: number; course: string }[];
+  availability: { day: number; hours: number[] }[];
+  durations: number[];
+}
+
+export function ProfileRequestForm({
+  courses,
+  availability,
+  durations,
+}: FormData) {
   const [isPending, startTransition] = useTransition();
   const [availableTimes, setAvailableTimes] = useState<number[] | undefined>();
 
@@ -61,41 +71,6 @@ export function ProfileRequestForm() {
       isOnline: false,
     },
   });
-
-  const availability = [
-    { day: 0, hours: [10, 11, 18, 19, 20, 21, 22, 23] },
-    { day: 1, hours: [20, 21, 22, 23] },
-    { day: 2, hours: [18, 19, 20, 21, 22, 23] },
-    { day: 4, hours: [10, 11, 18, 19, 20, 21] },
-    { day: 5, hours: [18, 19, 20, 21] },
-    { day: 6, hours: [10, 11, 18, 19, 20, 21, 22, 23] },
-  ];
-
-  const durations = [60, 90, 120, 150];
-
-  const courses = [
-    { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
-    { id: 18, course: "Nivelación: Física" },
-    { id: 19, course: "Nivelación: Química" },
-    { id: 20, course: "Nivelación: Redacción" },
-    { id: 1, course: "Cálculo 1" },
-    { id: 2, course: "Cálculo 2" },
-    { id: 3, course: "Cálculo 3" },
-    { id: 4, course: "Algebra Lineal" },
-    { id: 5, course: "Química 1" },
-    { id: 6, course: "Química 2" },
-    { id: 7, course: "Física 1" },
-    { id: 8, course: "Física 2" },
-    { id: 9, course: "Biología 1" },
-    { id: 10, course: "Biología 2" },
-    { id: 11, course: "Ciencias de la Tierra" },
-    { id: 12, course: "Probabilidad y Estadística" },
-    { id: 13, course: "Introducción a la Programación" },
-    { id: 14, course: "Ecuaciones Diferenciales" },
-    { id: 15, course: "Métodos Numéricos" },
-    { id: 16, course: "Inglés" },
-    { id: 21, course: "Aplicaciones Web" },
-  ];
 
   function onSubmit(data: z.infer<typeof ProfileSessionRequestSchema>) {
     startTransition(async () => {
@@ -210,7 +185,9 @@ export function ProfileRequestForm() {
                       field.onChange(e);
                     }}
                     value={field.value}
-                    disabled={!form.watch("date") || availableTimes?.length === 0}
+                    disabled={
+                      !form.watch("date") || availableTimes?.length === 0
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue
