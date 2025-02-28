@@ -102,3 +102,45 @@ export const getUserById = async (id: string) => {
     return "not-found";
   }
 };
+
+export const getTutorFormData = async (email: string) => {
+  try {
+    const user = await db.user.findUnique({
+      where: { email },
+      include: {
+        tutorCourses: {
+          include: {
+            course: true,
+          },
+        },
+        availabilities: true,
+        tutor_pricing: true,
+      },
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return {
+      name: `${user.firstname} ${user.lastname}`,
+      courses: user.tutorCourses.map((tc) => ({
+        id: tc.course.id,
+        course: tc.course.name,
+      })),
+      availability: user.availabilities.reduce((acc, a) => {
+        const existingDay = acc.find((d) => d.day === a.dayOfWeek);
+        if (existingDay) {
+          existingDay.hours.push(a.timeSlot);
+        } else {
+          acc.push({ day: a.dayOfWeek, hours: [a.timeSlot] });
+        }
+        return acc;
+      }, [] as { day: number; hours: number[] }[]),
+      durations: user.tutor_pricing.map((p) => p.duration),
+    };
+  } catch (error) {
+    console.error("Failed to fetch tutor form data:", error);
+    throw new Error("Unable to fetch tutor form data.");
+  }
+};

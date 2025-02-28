@@ -9,9 +9,13 @@ import {
   Card,
 } from "@/components/ui/card";
 import { ProfileRequestForm } from "@/components/profile-request-form";
+import { getTutorFormData } from "@/actions/profile";
 
-export default function Page({ params }: { params: { user: string } }) {
-  const formData = {
+export default async function Page({ params }: { params: { user: string } }) {
+  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  const formData = await getTutorFormData(email);
+
+  /*const formData = {
     name: "Nombre Tutor",
     courses: [
       { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
@@ -29,7 +33,7 @@ export default function Page({ params }: { params: { user: string } }) {
       { day: 6, hours: [10, 11, 18, 19, 20, 21, 22, 23] },
     ],
     durations: [60, 90, 120, 150],
-  };
+  };*/
 
   return (
     <section className="md:min-h-screen w-full p-6 items-center flex flex-col space-y-6">
