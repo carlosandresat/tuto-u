@@ -41,6 +41,19 @@ export function ProfileRequestForm() {
   const [isPending, startTransition] = useTransition();
   const [availableTimes, setAvailableTimes] = useState<number[]>([]);
 
+  function formatDuration(duration: number) {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+    if (minutes === 0) {
+      // Return just the hours if there are no extra minutes
+      return `${hours} hora${hours > 1 ? "s" : ""}`;
+    } else {
+      // Convert the minutes to a decimal fraction
+      const decimal = minutes / 60;
+      return `${hours + decimal} horas`; // Adds the decimal to hours
+    }
+  }
+
   const form = useForm<z.infer<typeof ProfileSessionRequestSchema>>({
     resolver: zodResolver(ProfileSessionRequestSchema),
     defaultValues: {
@@ -57,6 +70,8 @@ export function ProfileRequestForm() {
     { day: 5, hours: [18, 19, 20, 21] },
     { day: 6, hours: [10, 11, 18, 19, 20, 21, 22, 23] },
   ];
+
+  const durations = [60, 90, 120, 150];
 
   const courses = [
     { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
@@ -228,9 +243,11 @@ export function ProfileRequestForm() {
                       <SelectValue placeholder="Selecciona una duración" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="60">1 hora</SelectItem>
-                      <SelectItem value="90">1.5 horas</SelectItem>
-                      <SelectItem value="120">2 horas</SelectItem>
+                      {durations.map((duration) => (
+                        <SelectItem value={duration.toString()} key={duration}>
+                          {formatDuration(duration)}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                 </FormControl>
