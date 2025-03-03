@@ -31,30 +31,36 @@ export const getUserProfile = async (email: string) => {
         name: tc.course.name,
       })),
       pricing: user.tutor_pricing.map((p) => ({
-        duration: `${p.duration/60}h`,
+        duration: `${p.duration / 60}h`,
         price: Number(p.price),
       })),
-      availability: user.availabilities.reduce((acc, a) => {
-        const dayIndexToName = [
-          "Domingo",
-          "Lunes",
-          "Martes",
-          "Miércoles",
-          "Jueves",
-          "Viernes",
-          "Sábado",
-        ];
+      availability: user.availabilities
+        .sort((a, b) => {
+          if (a.dayOfWeek === 0) return 1;
+          if (b.dayOfWeek === 0) return -1;
+          return a.dayOfWeek - b.dayOfWeek;
+        })
+        .reduce((acc, a) => {
+          const dayIndexToName = [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado",
+          ];
 
-        const dayName = dayIndexToName[a.dayOfWeek];
+          const dayName = dayIndexToName[a.dayOfWeek];
 
-        const existingDay = acc.find((d) => d.day === dayName);
-        if (existingDay) {
-          existingDay.hours.push(a.timeSlot);
-        } else {
-          acc.push({ day: dayName, hours: [a.timeSlot] });
-        }
-        return acc;
-      }, [] as { day: string; hours: number[] }[]),
+          const existingDay = acc.find((d) => d.day === dayName);
+          if (existingDay) {
+            existingDay.hours.push(a.timeSlot);
+          } else {
+            acc.push({ day: dayName, hours: [a.timeSlot] });
+          }
+          return acc;
+        }, [] as { day: string; hours: number[] }[]),
     };
   } catch (error) {
     console.error("Failed to fetch user profile:", error);
