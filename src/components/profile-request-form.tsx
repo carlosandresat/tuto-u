@@ -42,7 +42,7 @@ interface FormData {
   tutorId: string;
   courses: { id: number; course: string }[];
   availability: { day: number; hours: number[] }[];
-  durations: number[];
+  pricing: { duration: number; price: number }[];
 }
 
 export function ProfileRequestForm({
@@ -50,7 +50,7 @@ export function ProfileRequestForm({
   tutorId,
   courses,
   availability,
-  durations,
+  pricing,
 }: FormData) {
   const [isPending, startTransition] = useTransition();
   const [availableTimes, setAvailableTimes] = useState<number[] | undefined>();
@@ -91,6 +91,15 @@ export function ProfileRequestForm({
 
   function onSubmit(data: z.infer<typeof ProfileSessionRequestSchema>) {
     startTransition(async () => {
+      const price = pricing.find((p) => p.duration === Number(data.duration))?.price;
+      if (!price) {
+        toast({
+          title: "Error",
+          description: "No se pudo encontrar el precio para la duración seleccionada",
+          variant: "destructive",
+        });
+        return;
+      }
       const datetime = new Date(data.date);
       datetime.setHours(parseInt(data.time.split(":")[0]));
       datetime.setMinutes(parseInt(data.time.split(":")[1]));
@@ -100,6 +109,7 @@ export function ProfileRequestForm({
         courseId: parseInt(data.course),
         sessionDateTime: datetime.toISOString(),
         duration: parseInt(data.duration),
+        price,
         place: data.isOnline
           ? "Online"
           : data.place !== undefined && data.place !== ""
@@ -265,9 +275,9 @@ export function ProfileRequestForm({
                       <SelectValue placeholder="Selecciona una duración" />
                     </SelectTrigger>
                     <SelectContent>
-                      {durations.map((duration) => (
-                        <SelectItem value={duration.toString()} key={duration}>
-                          {formatDuration(duration)}
+                      {pricing.map((row) => (
+                        <SelectItem value={row.duration.toString()} key={row.duration}>
+                          {formatDuration(row.duration)}
                         </SelectItem>
                       ))}
                     </SelectContent>

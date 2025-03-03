@@ -146,7 +146,10 @@ export const getTutorFormData = async (email: string) => {
         }
         return acc;
       }, [] as { day: number; hours: number[] }[]),
-      durations: user.tutor_pricing.map((p) => p.duration),
+      pricing: user.tutor_pricing.map((p) => ({
+        duration: p.duration,
+        price: Number(p.price),
+      })),
     };
   } catch (error) {
     console.error("Failed to fetch tutor form data:", error);
