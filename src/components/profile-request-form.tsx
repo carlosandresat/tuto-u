@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/popover";
 import { ProfileSessionRequestSchema } from "@/schemas";
 import { useState, useTransition } from "react";
+import { addNarcissismAchievement, requestIndividualSession } from "@/actions/session-request";
 
 interface FormData {
   studentId: string;
@@ -119,14 +120,23 @@ export function ProfileRequestForm({
         topic: data.topic,
       };
 
-      toast({
-        title: "You submitted the following values:",
-        description: (
-          <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-            <code className="text-white">{JSON.stringify(formattedData, null, 2)}</code>
-          </pre>
-        ),
-      });
+      if (tutorId === studentId) {
+        const res = await addNarcissismAchievement(studentId);
+        if (res.message !== undefined) {
+          toast({
+            title: "WTF",
+            description: res.message,
+          });
+        }
+      } else {
+        const res = await requestIndividualSession(formattedData);
+        if (res.error_message) {
+          toast({
+            title: "Error",
+            description: res.error_message,
+          });
+        }
+      }
     });
   }
 
