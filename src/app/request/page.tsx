@@ -11,7 +11,6 @@ export default async function Component() {
   return (
     <>
       <section className="md:min-h-screen w-full p-6 items-center justify-center flex flex-col space-y-6">
-        {/* Button Back */}
         <Button variant="link" className="px-0 self-start" asChild>
           <Link href="/home" >
           <ArrowLeft className="mr-2" /> Regresar

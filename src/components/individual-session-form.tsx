@@ -134,10 +134,6 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
         online: data.isOnline,
         topic: data.topic,
       };
-      /*toast({
-      title: "¡Felicidades!",
-      description: "Pronto estará disponible esta funcionalidad"
-    })*/
       if (data.tutor === userId) {
         const res = await addNarcissismAchievement(userId);
         if (res.message !== undefined) {
@@ -549,16 +545,6 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                 : null}
             </p>
 
-            {/*
-            <div className="flex justify-center items-center mt-2 gap-x-2 flex-wrap gap-y-2">
-              <Badge className="">Rating: 4.7</Badge>
-            </div>
-            <p className="mt-2 text-sm text-gray-500">
-              Aquí viene la descripción del tutor. Esta es una breve descripción
-              del tutor.
-            </p>
-            */}
-
             <h2 className="text-xl font-semibold mt-4">
               {availableTutors.length != 0 &&
               form.watch("duration") !== undefined &&
@@ -578,10 +564,6 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
           {form.watch("tutor") !== undefined && form.watch("tutor") !== "" ? (
             <AchievementsDialog userId={form.watch("tutor")} />
           ) : null}
-
-          {/*
-            <AchievementsDialog></AchievementsDialog>
-           */}
         </CardContent>
       </Card>
     </>

@@ -38,13 +38,6 @@ export function ReportSessionForm({
     startTransition(async () => {
       await reportSession(sessionId, data.description, role);
       window.location.reload();
-      /*const response = await login(data);
-      if (response && response.error) {
-        toast({
-          title: "¡Error!",
-          description: response.error,
-        });
-      }*/
     });
   }
 

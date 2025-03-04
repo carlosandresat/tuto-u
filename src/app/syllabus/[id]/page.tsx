@@ -20,7 +20,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   if (!syllabus) {
     return (
       <section className="min-h-screen w-full p-6 md:p-12 items-center justify-center flex flex-col">
-        {/* Button Back */}
         <Link
           href={session?.user ? "/home" : "/"}
           className="absolute top-0 left-0 m-6"
@@ -39,7 +38,6 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <section className="min-h-screen w-full p-6 md:p-12 items-center justify-start flex flex-col">
-        {/* Button Back */}
         <Link href={session?.user ? "/home" : "/"} className="self-start">
           <Button variant="link">
             <ArrowLeft className="mr-2" /> Regresar

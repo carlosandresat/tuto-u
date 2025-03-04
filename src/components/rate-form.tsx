@@ -44,13 +44,6 @@ export function RateForm({
     startTransition(async () => {
       await rateSession(sessionId, role, data.rate, data.comment);
       window.location.reload();
-      /*const response = await login(data);
-      if (response && response.error) {
-        toast({
-          title: "¡Error!",
-          description: response.error,
-        });
-      }*/
     });
   }
 

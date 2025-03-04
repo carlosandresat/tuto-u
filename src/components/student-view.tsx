@@ -107,56 +107,6 @@ export async function StudentView() {
           {studentSessions.map((row, index) => (
             <StudentSessionCard {...row} key={index}></StudentSessionCard>
           ))}
-          {/*Esta card es para tutor-view
-      <Card>
-        <CardHeader>
-          <Badge className=" bg-yellow-500 w-fit mb-2">Pendiente</Badge>
-
-          <div className="flex items-center space-x-2">
-            <Avatar>
-              <AvatarImage
-                src="/photos/samantha.quintanchala.jpg"
-                className=" object-cover"
-              />
-              <AvatarFallback>SQ</AvatarFallback>
-            </Avatar>
-            <CardTitle>Samantha Quintanchala</CardTitle>
-          </div>
-          <CardDescription className="w-fit text-foreground rounded-md bg-background/40 text-base px-2">
-            Cálculo 1
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2 rounded-md bg-background/40 py-2 mb-2 w-fit">
-          <div className="flex space-x-2">
-            <Calendar />
-            <p>20 Abr, 2024</p>
-          </div>
-          <div className="flex space-x-2">
-            <Clock1 />
-            <p> 4:00 - 6:00 PM</p>
-          </div>
-          <div className="flex space-x-2">
-            <MapPin />
-            <p>Sala de estudio biblioteca (planta baja)</p>
-          </div>
-          <div className="flex space-x-2">
-            <LibraryBig />
-            <p>Teorema fundamental del Cálculo</p>
-          </div>
-          <div className="flex space-x-2">
-            <Hourglass />
-            <p>2 horas</p>
-          </div>
-          <div className="flex space-x-2">
-            <Banknote /> <p>$5.00</p>
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="secondary">Rechazar</Button>
-          <Button>Aceptar</Button>
-        </CardFooter>
-      </Card>
-            */}
         </div>
       ) : (
         <p className="text-lg mt-6 border-b pb-2">
