@@ -51,8 +51,8 @@ export default async function Page({ params }: Props) {
 
   return (
     <section className="w-full p-8 flex items-center justify-center flex-col space-y-6">
-      <Button variant="link" asChild>
-        <Link href={session?.user ? "/home" : "/"} className="self-start px-0">
+      <Button variant="link" className="self-start px-0" asChild>
+        <Link href={session?.user ? "/home" : "/"}>
           <ArrowLeft className="mr-2" /> Regresar
         </Link>
       </Button>
