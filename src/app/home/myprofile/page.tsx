@@ -35,6 +35,7 @@ import { getUserAchievements } from "@/actions/achievements-data";
 
 export default async function MyProfile() {
   const session = await auth();
+  const username = session?.user?.email?.split("@")[0].replace(".", "-");
   const pricingConfig = await getUserPricing(session?.user?.id || "");
   const preCoursesConfig = await getUserCourses(session?.user?.id || "");
   const coursesConfig = preCoursesConfig.map((course) => course.courseId);
@@ -124,6 +125,10 @@ export default async function MyProfile() {
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-4 xl:mt-0">
           Mi Perfil
         </h2>
+
+        <Button className="mt-8" asChild>
+          <Link href={`/${username}/profile`}>Ver perfil público</Link>
+        </Button>
 
         <div className="flex max-w-screen-xl w-full p-8 flex-col">
           <Card className="w-full">
