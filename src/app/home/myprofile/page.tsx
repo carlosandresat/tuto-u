@@ -116,13 +116,7 @@ export default async function MyProfile() {
   return (
     <>
       <section className="w-full py-8 flex items-center justify-center flex-col">
-        <Link href="/home" className="mt-20 md:mt-28 p-6 self-start">
-          <Button variant="link">
-            <ArrowLeft className="mr-2" /> Regresar
-          </Button>
-        </Link>
-
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-4 xl:mt-0">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-32">
           Mi Perfil
         </h2>
 
