@@ -10,6 +10,22 @@ export default function PatchNotes() {
         </h2>
 
         <div className="flex flex-col w-full max-w-screen-xl p-8">
+          <div className="w-full flex  justify-start items-center">
+            <div className="bg-foreground text-background rounded-full h-20 w-20 text-center items-center justify-center flex text-2xl flex-none">
+              <Lightbulb />
+            </div>
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight ml-4">
+              400 usuarios registrados - 20 de marzo de 2025
+            </h3>
+          </div>
+          <div className="w-full flex">
+            <div className="flex justify-center relative w-20">
+              <div className="flex justify-center h-full w-20">
+                <div className="w-1 bg-foreground"></div>
+              </div>
+            </div>
+            <div className="flex flex-col pl-4 w-auto space-y-2 h-8"></div>
+          </div>
           {/* Versión 1.4 */}
           <div className="w-full flex items-center">
             <div className="bg-foreground text-background rounded-full h-20 w-20 text-center items-center justify-center flex text-2xl flex-none">
