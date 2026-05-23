@@ -15,14 +15,14 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 import { UserPricingSchema } from "@/schemas";
 import { updateUserPricing } from "@/actions/user-configuration";
-import { Decimal } from "@prisma/client/runtime/library";
+import { Prisma } from "@/generated/prisma/client";
 
 export function ProfilePricingForm({
   userId,
   pricingConfig,
 }: {
   userId: string;
-  pricingConfig: { duration: number; price: Decimal }[];
+  pricingConfig: { duration: number; price: Prisma.Decimal }[];
 }) {
   const [isPending, startTransition] = useTransition();
   const durations = pricingConfig.map((row) => {
