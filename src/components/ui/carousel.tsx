@@ -1,10 +1,12 @@
 "use client"
 import * as React from "react"
 import useEmblaCarousel, {
-  type EmblaCarouselType as CarouselApi,
-  type EmblaOptionsType as CarouselOptions,
-  type EmblaPluginType as CarouselPlugin,
+  type UseEmblaCarouselType,
 } from "embla-carousel-react"
+
+type CarouselApi = NonNullable<UseEmblaCarouselType[1]>
+type CarouselOptions = NonNullable<Parameters<typeof useEmblaCarousel>[0]>
+type CarouselPlugin = NonNullable<Parameters<typeof useEmblaCarousel>[1]>[number]
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
