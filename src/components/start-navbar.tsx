@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, LogIn } from "lucide-react";
@@ -8,45 +11,55 @@ import { RegisterDialog } from "@/components/register-dialog";
 import { StartDropdownMenu } from "@/components/start-dropdown-menu";
 
 export function StartNavbar() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
     <header className="flex items-center justify-between p-6 md:p-4 fixed top-0 w-full  bg-background z-10 border-b border-border">
       <div className="lg:hidden">
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline">
-              <Menu />
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-auto">
-            <div className="flex flex-col items-center justify-center py-4 gap-8 mt-6 px-6">
-              <Link
-                href="/"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Inicio
-              </Link>
-              <Link
-                href="/ourteam"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Nuestro Equipo
-              </Link>
+        {mounted ? (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">
+                <Menu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-auto">
+              <div className="flex flex-col items-center justify-center py-4 gap-8 mt-6 px-6">
+                <Link
+                  href="/"
+                  className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+                >
+                  Inicio
+                </Link>
+                <Link
+                  href="/ourteam"
+                  className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+                >
+                  Nuestro Equipo
+                </Link>
 
-              <Link
-                href="/faq"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Preguntas frecuentes
-              </Link>
-              <Link
-                href="/patch-notes"
-                className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
-              >
-                Notas de Versión
-              </Link>
-            </div>
-          </SheetContent>
-        </Sheet>
+                <Link
+                  href="/faq"
+                  className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+                >
+                  Preguntas frecuentes
+                </Link>
+                <Link
+                  href="/patch-notes"
+                  className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+                >
+                  Notas de Versión
+                </Link>
+              </div>
+            </SheetContent>
+          </Sheet>
+        ) : (
+          <Button variant="outline" disabled>
+            <Menu />
+          </Button>
+        )}
       </div>
       <Link href="/" className="flex items-center gap-6">
         <Image
@@ -98,7 +111,13 @@ export function StartNavbar() {
         </Link>
       </div>
       <div className="block xl:hidden">
-        <StartDropdownMenu></StartDropdownMenu>
+        {mounted ? (
+          <StartDropdownMenu></StartDropdownMenu>
+        ) : (
+          <Button disabled>
+            <LogIn />
+          </Button>
+        )}
       </div>
     </header>
   );
