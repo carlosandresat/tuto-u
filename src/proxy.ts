@@ -9,7 +9,7 @@ import {
 
 const { auth } = NextAuth(authConfig)
 
-export default auth((req) => {
+export const proxy = auth((req) => {
     const { nextUrl } = req;
     const isLoggedIn = !!req.auth;
 
@@ -37,4 +37,4 @@ export default auth((req) => {
 
 export const config = {
     matcher: ['/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
-  };
+};
