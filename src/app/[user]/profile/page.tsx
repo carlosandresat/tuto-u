@@ -10,12 +10,13 @@ import { getUserNameByEmail, getUserProfile } from "@/actions/profile";
 import { ClientTimeBadges } from "@/components/client-time-badges";
 
 type Props = {
-  params: { user: string };
+  params: Promise<{ user: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
-  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  const resolvedParams = await params;
+  const email = resolvedParams.user.replace("-", ".").concat("@yachaytech.edu.ec");
   const user = await getUserNameByEmail(email);
   const title = `${user} | Tuto-U`;
   const description = `Visita el perfil de ${user}. Conoce su progreso en Tuto-U.`;
@@ -28,8 +29,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
+  const resolvedParams = await params;
   const session = await auth();
-  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  const email = resolvedParams.user.replace("-", ".").concat("@yachaytech.edu.ec");
   const tutorData = await getUserProfile(email);
   if (tutorData.error !== undefined) {
     return (
@@ -174,7 +176,7 @@ export default async function Page({ params }: Props) {
             tutorData.pricing.length !== 0 &&
             tutorData.availability.length !== 0 && (
               <Button size="lg" asChild>
-                <Link href={`/${params.user}/request`}>
+                <Link href={`/${resolvedParams.user}/request`}>
                   <Calendar className="mr-2 h-4 w-4" /> ¡Solicita una tutoría!
                 </Link>
               </Button>

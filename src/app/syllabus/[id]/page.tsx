@@ -12,10 +12,11 @@ import { auth } from "@/auth";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Megaphone } from "lucide-react";
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
 
-  const syllabus = syllabusData.find((s) => s.id === parseInt(params.id));
+  const resolvedParams = await params;
+  const syllabus = syllabusData.find((s) => s.id === parseInt(resolvedParams.id));
 
   if (!syllabus) {
     return (

@@ -12,19 +12,20 @@ import { ProfileRequestForm } from "@/components/profile-request-form";
 import { getTutorFormData } from "@/actions/profile";
 import { auth } from "@/auth";
 
-export default async function Page({ params }: { params: { user: string } }) {
+export default async function Page({ params }: { params: Promise<{ user: string }> }) {
   const session = await auth();
   if (!session?.user?.id) {
     return null;
   }
 
-  const email = params.user.replace("-", ".").concat("@yachaytech.edu.ec");
+  const resolvedParams = await params;
+  const email = resolvedParams.user.replace("-", ".").concat("@yachaytech.edu.ec");
   const formData = await getTutorFormData(email);
 
   return (
     <section className="md:min-h-screen w-full p-6 items-center flex flex-col space-y-6">
       <Button variant="link" className="px-0 self-start" asChild>
-        <Link href={`/${params.user}/profile`}>
+        <Link href={`/${resolvedParams.user}/profile`}>
           <ArrowLeft className="mr-2" /> Regresar
         </Link>
       </Button>

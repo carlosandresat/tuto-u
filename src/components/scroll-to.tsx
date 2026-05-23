@@ -1,10 +1,12 @@
 "use client";
 
+import React from "react";
+
 export default function ScrollElement({
   children,
   id,
 }: {
-  children: JSX.Element;
+  children: React.ReactNode;
   id: string;
 }) {
   const handleScroll = () => {
