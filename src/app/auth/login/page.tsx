@@ -9,14 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -52,29 +44,9 @@ export default function Login() {
           </Link>
           <Separator orientation="vertical" className="hidden md:block h-8" />
 
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="link">¿Olvidaste la contraseña?</Button>
-            </DialogTrigger>
-
-            <DialogContent className="sm:max-w-2xl">
-              <DialogHeader>
-                <DialogTitle>Reestablece tu contraseña</DialogTitle>
-                <DialogDescription>
-                  Aún no terminamos de implementar esta funcionalidad, por favor
-                  sigue estos pasos y actualizaremos manualmente tu contraseña
-                </DialogDescription>
-              </DialogHeader>
-              <div className="flex justify-center">
-                <Image
-                  src={`/instructions/restart-password.png`}
-                  alt="Restart password instructions"
-                  width={900}
-                  height={900}
-                />
-              </div>
-            </DialogContent>
-          </Dialog>
+          <Link href="/auth/reset">
+            <Button variant="link">¿Olvidaste la contraseña?</Button>
+          </Link>
         </CardFooter>
       </Card>
     </section>

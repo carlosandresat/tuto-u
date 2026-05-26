@@ -5,6 +5,7 @@ import { capitalizeFirstLetter } from "@/lib/utils"
 import SessionRequestEmail from "@/components/email-templates/session-request";
 import SessionResponseEmail from "@/components/email-templates/session-response-email";
 import SessionCancelEmail from "@/components/email-templates/session-cancel-email";
+import PasswordResetEmail from "@/components/email-templates/password-reset-email";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -84,5 +85,21 @@ export const sessionCancelNotificationEmail = async (email: string, userName: st
     to: email,
     subject: `Tutoría cancelada`,
     react: SessionCancelEmail({ userName, sessionDate: capitalizeFirstLetter(formattedDate), sessionTime: formattedTime}),
+  });
+};
+
+export const sendPasswordResetEmail = async (
+  email: string,
+  token: string,
+  userName: string,
+  domain: string
+) => {
+  const resetLink = `${domain}/auth/new-password?token=${token}`;
+
+  await resend.emails.send({
+    from: "Notificaciones Tuto-U <notifications@tutou.app>",
+    to: email,
+    subject: "Restablece tu contraseña",
+    react: PasswordResetEmail({ resetLink, userName }),
   });
 };
