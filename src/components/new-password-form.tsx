@@ -21,9 +21,13 @@ import {
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 
+import { useToast } from "@/components/ui/use-toast";
+
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+
+  const { toast } = useToast();
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -44,9 +48,18 @@ export const NewPasswordForm = () => {
       const response = await newPassword(values, token);
       if (response.error) {
         setError(response.error);
+        toast({
+          title: "Error",
+          description: response.error,
+          variant: "destructive",
+        });
       }
       if (response.success) {
         setSuccess(response.success);
+        toast({
+          title: "Éxito",
+          description: response.success,
+        });
       }
     });
   };
