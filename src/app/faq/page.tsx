@@ -1,3 +1,4 @@
+import React from "react";
 import { StartNavbar } from "@/components/start-navbar";
 import {
   Accordion,
@@ -17,10 +18,9 @@ export default function FAQ() {
         </h2>
         {faq.map((section, index) => {
           return (
-            <>
+            <React.Fragment key={`Section${index}`}>
               <h3
                 className="scroll-m-20 text-2xl font-semibold tracking-tight mt-12"
-                key={`Section${index}`}
               >
                 Sección {index + 1}: {section.section}
               </h3>
@@ -44,7 +44,7 @@ export default function FAQ() {
                   );
                 })}
               </Accordion>
-            </>
+            </React.Fragment>
           );
         })}
       </section>
