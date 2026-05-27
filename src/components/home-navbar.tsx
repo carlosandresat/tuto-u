@@ -10,6 +10,9 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
 } from "@/components/ui/sheet";
 
 import { logout } from "@/actions/logout";
@@ -30,6 +33,12 @@ export function HomeNavbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-auto">
+              <SheetHeader className="sr-only">
+                <SheetTitle>Menú de Navegación</SheetTitle>
+                <SheetDescription>
+                  Accede a las distintas secciones de Tuto-U
+                </SheetDescription>
+              </SheetHeader>
               <div className="flex flex-col items-center justify-center py-4 gap-8 mt-6 px-6">
                 <Link
                   href="/home"
@@ -42,6 +51,12 @@ export function HomeNavbar() {
                   className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
                 >
                   <SheetClose>Mi Perfil</SheetClose>
+                </Link>
+                <Link
+                  href="/home/achievements"
+                  className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+                >
+                  <SheetClose>Logros</SheetClose>
                 </Link>
 
                 <Link
@@ -99,6 +114,12 @@ export function HomeNavbar() {
           className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
         >
           Mi Perfil
+        </Link>
+        <Link
+          href="/home/achievements"
+          className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+        >
+          Logros
         </Link>
 
         <Link
