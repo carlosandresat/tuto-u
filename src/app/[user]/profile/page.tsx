@@ -25,6 +25,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: title,
     description: description,
+    openGraph: {
+      title: title,
+      description: description,
+      images: [
+        {
+          url: "/images/profile-og.png",
+          width: 1200,
+          height: 630,
+          alt: `Perfil de ${user}`,
+        },
+      ],
+    },
   };
 }
 
