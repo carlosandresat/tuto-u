@@ -80,6 +80,8 @@ module.exports = {
         'chevron': "linear-gradient(45deg, hsl(var(--primary)) 20%, transparent 20%, transparent 40%, hsl(var(--primary)) 40%, hsl(var(--primary)) 60%, transparent 60%, transparent 80%, hsl(var(--primary)) 80%, hsl(var(--primary)), linear-gradient(135deg, hsl(var(--primary)) 25%, transparent 25%, transparent 50%, hsl(var(--primary)) 50%, hsl(var(--primary)) 75%, transparent 75%, transparent)",
         'hexagons': "linear-gradient(to right, #e5e7eb 1px, transparent 1px), linear-gradient(to bottom, #e5e7eb 1px, transparent 1px), linear-gradient(30deg, #e5e7eb 1px, transparent 1px), linear-gradient(-30deg, #e5e7eb 1px, transparent 1px)",
         'grid': "linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)) 1px, hsl(var(--background)) 1px)",
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 
 
 
