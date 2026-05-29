@@ -64,3 +64,20 @@ pnpm lint
 - **Environment Safety**: Never commit real secret keys. Make sure `.env` is listed in `.gitignore`.
 - **Database Pool Safety**: Do not instantiate `new PrismaClient()` in actions/routes. Always import the singleton `db` instance from `@/lib/db`.
 - **Auth Routes**: Any new routes must be defined in `src/routes.ts` under either `publicRoutes` or `authRoutes` to ensure the middleware proxy blocks or allows traffic correctly.
+
+## 7. UI & Layout Guidelines
+- **Responsive Page Sizing**:
+  - Always wrap content pages with the `PageContainer` component (`import { PageContainer } from "@/components/page-container"`).
+  - Use `size="default"` (max-w-7xl) for standard text/accordion content pages (e.g. FAQ).
+  - Use `size="xl"` (max-w-screen-xl) for profile and settings pages.
+  - Use `size="2xl"` (max-w-screen-2xl) for listings grids, carousels, and main dashboards.
+  - Use `size="full"` for landing pages containing full-bleed background sections.
+- **Fixed Navbar Clearance**:
+  - Do not use manual or page-specific padding offsets (`pt-32`, `pt-40`, etc.) to clear navbars. Let `PageContainer` clear the navbar automatically (`clearNavbar={true}`).
+- **Footer Placement & Alignment**:
+  - Do not duplicate footer HTML code. Import the reusable `Footer` component (`import { Footer } from "@/components/footer"`).
+  - Match the parent layout size (`size`) to maintain correct horizontal grid gutter alignment.
+- **Component Styling & Composition**:
+  - Use Shadcn's `<Card>` components instead of raw `div`s with custom borders/padding for container elements.
+  - Ensure links nested in interactive actions use `<Button asChild><Link href="...">...</Link></Button>` to comply with standard accessibility and hydration patterns.
+
