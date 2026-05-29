@@ -6,15 +6,17 @@ import Image from "next/image";
 import { SoonButton } from "@/components/soon-button";
 import { AchievementsDialog } from "@/components/achievements-dialog";
 
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
+
 function DrawStar({ raiting }: { raiting: number }) {
   const numStar = raiting | 0;
   const isOdd = raiting % 1 >= 0.5 ? true : false;
   return (
     <>
       {[...Array(numStar | 0)].map((_, i) => {
-        return <Star key={i} className="h-6 w-6 fill-yellow-200"></Star>;
+        return <Star key={i} className="size-6 fill-yellow-200"></Star>;
       })}
-      {isOdd && <StarHalf className="h-6 w-6 fill-yellow-200"></StarHalf>}
+      {isOdd && <StarHalf className="size-6 fill-yellow-200"></StarHalf>}
     </>
   );
 }
@@ -33,34 +35,34 @@ export function TutorCard({
   nreviews: number;
 }) {
   return (
-    <div
-      className="p-8 text-center border flex flex-col items-center rounded-lg justify-between h-full"
-      key={tutor}
-    >
-      <div className="flex flex-col items-center pb-6 h-full">
+    <Card className="flex flex-col items-center text-center h-full justify-between transition-all duration-300 hover:shadow-lg" key={tutor}>
+      <CardHeader className="flex flex-col items-center pb-2 pt-6">
         <Image
           src={pic_url}
           alt={`${tutor} pic`}
           width={200}
           height={200}
-          className="rounded-full object-cover"
+          className="rounded-full object-cover size-48"
         />
-        <h3 className="my-4 scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
+      </CardHeader>
+      <CardContent className="flex-1 flex flex-col items-center py-4 w-full">
+        <CardTitle className="scroll-m-20 text-xl font-semibold tracking-tight my-2">
           {tutor}
-        </h3>
-        <div className="flex w-full justify-center">
+        </CardTitle>
+        <div className="flex w-full justify-center gap-1 my-2">
           <DrawStar raiting={rating} />
         </div>
-
-        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
+        <p className="scroll-m-20 text-lg font-semibold tracking-tight text-foreground flex items-center justify-center my-2">
           {rating % 1 === 0 ? rating : rating.toFixed(1)}{" "}
-          <span className=" text-sm pl-1">/ 5</span>{" "}
-          <span className="text-muted-foreground pl-2">
+          <span className="text-xs pl-1">/ 5</span>{" "}
+          <span className="text-xs text-muted-foreground pl-2">
             ({nreviews} reviews)
           </span>
-        </h3>
-      </div>
-      <AchievementsDialog userId={id} />
-    </div>
+        </p>
+      </CardContent>
+      <CardFooter className="w-full p-6 pt-0 flex justify-center">
+        <AchievementsDialog userId={id} />
+      </CardFooter>
+    </Card>
   );
 }

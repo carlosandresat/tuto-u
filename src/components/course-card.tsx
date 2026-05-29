@@ -1,8 +1,8 @@
 import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 
 export function CourseCard({
   id,
@@ -14,31 +14,33 @@ export function CourseCard({
   school: string;
 }) {
   return (
-    <div
-      className="p-8 text-center border flex flex-col items-center rounded-lg justify-between"
-      key={course}
-    >
-      <div className="flex flex-col items-center pb-6 h-full">
+    <Card className="flex flex-col items-center text-center h-full justify-between transition-all duration-300 hover:shadow-lg" key={course}>
+      <CardHeader className="flex flex-col items-center pb-2 pt-6">
         <Image
           src={`/images/${school}.png`}
           alt={`${school} logo`}
           width={100}
           height={100}
+          className="object-contain"
         />
-        <h3 className="my-4 scroll-m-20 text-2xl font-semibold tracking-tight h-full flex items-center">
+      </CardHeader>
+      <CardContent className="flex-1 flex items-center justify-center py-4">
+        <CardTitle className="scroll-m-20 text-xl font-semibold tracking-tight">
           {course}
-        </h3>
-      </div>
-      <div className="flex flex-col space-y-2 w-full">
-        <Link href={`/syllabus/${id}`} className="w-full md:w-auto">
-          <Button className="w-full md:w-auto" variant="secondary">
+        </CardTitle>
+      </CardContent>
+      <CardFooter className="flex flex-col gap-2 w-full p-6 pt-0">
+        <Button asChild className="w-full" variant="secondary">
+          <Link href={`/syllabus/${id}`}>
             Ver Syllabus
-          </Button>
-        </Link>
-        <Link href="/request" className="w-full md:w-auto">
-          <Button className="w-full md:w-auto">Solicitar tutoría</Button>
-        </Link>
-      </div>
-    </div>
+          </Link>
+        </Button>
+        <Button asChild className="w-full">
+          <Link href="/request">
+            Solicitar tutoría
+          </Link>
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
