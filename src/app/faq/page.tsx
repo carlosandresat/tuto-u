@@ -7,20 +7,22 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { faq } from "@/data/faq";
+import { PageContainer } from "@/components/page-container";
+import { Footer } from "@/components/footer";
 
 export default function FAQ() {
   return (
     <>
       <StartNavbar />
-      <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col pt-40">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
+      <PageContainer size="default" className="min-h-screen">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
           Preguntas Frecuentes
         </h2>
         {faq.map((section, index) => {
           return (
             <React.Fragment key={`Section${index}`}>
               <h3
-                className="scroll-m-20 text-2xl font-semibold tracking-tight mt-12"
+                className="scroll-m-20 text-2xl font-semibold tracking-tight mt-12 w-full text-center"
               >
                 Sección {index + 1}: {section.section}
               </h3>
@@ -47,7 +49,8 @@ export default function FAQ() {
             </React.Fragment>
           );
         })}
-      </section>
+      </PageContainer>
+      <Footer size="default" />
     </>
   );
 }

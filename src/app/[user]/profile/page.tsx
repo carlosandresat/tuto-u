@@ -8,6 +8,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { getUserNameByEmail, getUserProfile } from "@/actions/profile";
 import { ClientTimeBadges } from "@/components/client-time-badges";
+import { PageContainer } from "@/components/page-container";
 
 type Props = {
   params: Promise<{ user: string }>;
@@ -47,7 +48,7 @@ export default async function Page({ params }: Props) {
   const tutorData = await getUserProfile(email);
   if (tutorData.error !== undefined) {
     return (
-      <section className="w-full p-8 flex items-center justify-center flex-col space-y-6 min-h-screen">
+      <PageContainer size="xl" clearNavbar={false} className="space-y-6 min-h-screen">
         <Button variant="link" asChild>
           <Link
             href={session?.user ? "/home" : "/"}
@@ -59,12 +60,12 @@ export default async function Page({ params }: Props) {
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16">
           User Not Found
         </h1>
-      </section>
+      </PageContainer>
     );
   }
 
   return (
-    <section className="w-full p-8 flex items-center justify-center flex-col space-y-6">
+    <PageContainer size="xl" clearNavbar={false} className="space-y-6">
       <Button variant="link" className="self-start px-0" asChild>
         <Link href={session?.user ? "/home" : "/"}>
           <ArrowLeft className="mr-2" /> Regresar
@@ -195,6 +196,6 @@ export default async function Page({ params }: Props) {
             )}
         </>
       )}
-    </section>
+    </PageContainer>
   );
 }

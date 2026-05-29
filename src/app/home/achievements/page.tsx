@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { getAllAchievementsWithProgress } from "@/actions/achievements-data";
 import { AchievementsList } from "@/components/achievements-list";
+import { PageContainer } from "@/components/page-container";
 
 export default async function AchievementsPage() {
   const session = await auth();
@@ -13,8 +14,8 @@ export default async function AchievementsPage() {
   const { achievements, stats } = await getAllAchievementsWithProgress(session.user.id);
 
   return (
-    <section className="min-h-screen w-full py-12 px-6 md:px-12 flex items-center justify-start flex-col">
-      <div className="max-w-screen-2xl w-full mt-24">
+    <PageContainer size="2xl" className="min-h-screen">
+      <div className="w-full">
         <div className="flex flex-col gap-2 border-b pb-4 mb-8">
           <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
             Mis Logros
@@ -26,6 +27,6 @@ export default async function AchievementsPage() {
         
         <AchievementsList achievements={achievements} stats={stats} />
       </div>
-    </section>
+    </PageContainer>
   );
 }

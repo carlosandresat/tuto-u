@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { AchievementCard } from "@/components/achievement-card";
 import { ProfileBasicsForm } from "@/components/profile-basics-form";
+import { PageContainer } from "@/components/page-container";
 
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ProfilePricingForm } from "@/components/profile-pricing-form";
@@ -115,8 +116,8 @@ export default async function MyProfile() {
 
   return (
     <>
-      <section className="w-full py-8 flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-32">
+      <PageContainer size="xl">
+        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
           Mi Perfil
         </h2>
 
@@ -124,7 +125,7 @@ export default async function MyProfile() {
           <Link href={`/${username}/profile`}>Ver perfil público</Link>
         </Button>
 
-        <div className="flex max-w-screen-xl w-full p-8 flex-col">
+        <div className="flex w-full mt-8 flex-col gap-6">
           <Card className="w-full">
             <CardHeader>
               <Avatar className="w-24 h-24">
@@ -134,7 +135,7 @@ export default async function MyProfile() {
                 <AvatarFallback>{initials}</AvatarFallback>
               </Avatar>
             </CardHeader>
-            <CardContent>
+            <CardContent className="flex flex-col gap-2">
               <CardTitle>{`${userBasicData?.firstname} ${userBasicData?.lastname}`}</CardTitle>
               <p>
                 <span className="font-bold">Correo: </span>
@@ -152,7 +153,7 @@ export default async function MyProfile() {
               ></ProfileBasicsForm>
             </CardContent>
           </Card>
-          <Card className="w-full mt-6">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Precios</CardTitle>
               <CardDescription>
@@ -168,7 +169,7 @@ export default async function MyProfile() {
               ></ProfilePricingForm>
             </CardContent>
           </Card>
-          <Card className="w-full mt-6">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Asignaturas como tutor</CardTitle>
               <CardDescription>
@@ -184,7 +185,7 @@ export default async function MyProfile() {
               ></ProfileCoursesForm>
             </CardContent>
           </Card>
-          <Card className="w-full mt-6">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Horarios disponibles</CardTitle>
               <CardDescription>
@@ -207,7 +208,7 @@ export default async function MyProfile() {
             </CardContent>
           </Card>
 
-          <Card className="w-full mt-6">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Tus Logros</CardTitle>
               <CardDescription>
@@ -226,7 +227,7 @@ export default async function MyProfile() {
               </div>
             </CardContent>
           </Card>
-          <Card className="w-full mt-6">
+          <Card className="w-full">
             <CardHeader>
               <CardTitle>Temas</CardTitle>
               <CardDescription>
@@ -238,7 +239,7 @@ export default async function MyProfile() {
             </CardContent>
           </Card>
         </div>
-      </section>
+      </PageContainer>
     </>
   );
 }

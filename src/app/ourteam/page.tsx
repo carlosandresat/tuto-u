@@ -13,374 +13,360 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { ModeToggle } from "@/components/mode-toggle";
-
-import Link from "next/link";
-import { Github } from "lucide-react";
+import { PageContainer } from "@/components/page-container";
+import { Footer } from "@/components/footer";
 
 export default function OurTeam() {
   return (
     <>
       <StartNavbar />
 
-      <section className="pt-40 pb-12 w-full flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
-          Nuestro Equipo
-        </h2>
-        <p className="scroll-m-20 text-muted-foreground max-w-screen-2xl text-left md:text-center p-8">
-          Conoce a las increíbles personas que han contribuido al desarrollo y
-          al éxito de Tuto-U. Cada colaborador ha desempeñado un papel único,
-          desde el desarrollo técnico hasta la orientación estratégica,
-          ayudándonos a crecer y a llegar a más estudiantes.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 max-w-screen-xl p-8 w-full">
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex flex-col items-center gap-4 p-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="relative group hover:cursor-pointer">
-                    <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
-                      <AvatarImage
-                        alt="Team member 1"
-                        src="/photos/carlos.arevalo.jpg"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>CA</AvatarFallback>
-                    </Avatar>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                      <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
-                        Ver más...
-                      </span>
+      <PageContainer size="full" clearNavbar={false} className="px-0 pt-0 pb-0 min-h-screen">
+        <section className="pt-32 pb-12 w-full flex items-center justify-center flex-col px-4 sm:px-6 lg:px-8">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
+            Nuestro Equipo
+          </h2>
+          <p className="scroll-m-20 text-muted-foreground max-w-3xl text-center mt-6">
+            Conoce a las increíbles personas que han contribuido al desarrollo y
+            al éxito de Tuto-U. Cada colaborador ha desempeñado un papel único,
+            desde el desarrollo técnico hasta la orientación estratégica,
+            ayudándonos a crecer y a llegar a más estudiantes.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 max-w-screen-xl mt-8 w-full">
+            <Card className="transition-all duration-300 hover:shadow-lg">
+              <CardContent className="flex flex-col items-center gap-4 p-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative group hover:cursor-pointer">
+                      <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
+                        <AvatarImage
+                          alt="Team member 1"
+                          src="/photos/carlos.arevalo.jpg"
+                          className="object-cover"
+                        />
+                        <AvatarFallback>CA</AvatarFallback>
+                      </Avatar>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                        <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
+                          Ver más...
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Próximamente</DialogTitle>
-                    <DialogDescription></DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-              <div className="space-y-2 p-2">
-                <h3 className="text-xl font-bold text-center">
-                  Carlos Arévalo
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex flex-col items-center gap-4 p-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="relative group hover:cursor-pointer">
-                    <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
-                      <AvatarImage
-                        alt="Team member 2"
-                        src="/photos/samantha.quintanchala.jpg"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>SQ</AvatarFallback>
-                    </Avatar>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                      <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
-                        Ver más...
-                      </span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Próximamente</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                <div className="space-y-2 p-2">
+                  <h3 className="text-xl font-bold text-center">
+                    Carlos Arévalo
+                  </h3>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="transition-all duration-300 hover:shadow-lg">
+              <CardContent className="flex flex-col items-center gap-4 p-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative group hover:cursor-pointer">
+                      <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
+                        <AvatarImage
+                          alt="Team member 2"
+                          src="/photos/samantha.quintanchala.jpg"
+                          className="object-cover"
+                        />
+                        <AvatarFallback>SQ</AvatarFallback>
+                      </Avatar>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                        <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
+                          Ver más...
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Próximamente</DialogTitle>
-                    <DialogDescription></DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-              <div className="space-y-2 p-2">
-                <h3 className="text-xl font-bold text-center">
-                  Samantha Quintanchala
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex flex-col items-center gap-4 p-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="relative group hover:cursor-pointer">
-                    <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
-                      <AvatarImage
-                        alt="Team member 3"
-                        src="/photos/angie.remache.jpg"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>AR</AvatarFallback>
-                    </Avatar>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                      <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
-                        Ver más...
-                      </span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Próximamente</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                <div className="space-y-2 p-2">
+                  <h3 className="text-xl font-bold text-center">
+                    Samantha Quintanchala
+                  </h3>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="transition-all duration-300 hover:shadow-lg">
+              <CardContent className="flex flex-col items-center gap-4 p-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative group hover:cursor-pointer">
+                      <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
+                        <AvatarImage
+                          alt="Team member 3"
+                          src="/photos/angie.remache.jpg"
+                          className="object-cover"
+                        />
+                        <AvatarFallback>AR</AvatarFallback>
+                      </Avatar>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                        <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
+                          Ver más...
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Próximamente</DialogTitle>
-                    <DialogDescription></DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-              <div className="space-y-2 p-2">
-                <h3 className="text-xl font-bold text-center">Angie Remache</h3>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex flex-col items-center gap-4 p-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="relative group hover:cursor-pointer">
-                    <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
-                      <AvatarImage
-                        alt="Team member 4"
-                        src="/photos/ariel.pincay.jpg"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>AP</AvatarFallback>
-                    </Avatar>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                      <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
-                        Ver más...
-                      </span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Próximamente</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                <div className="space-y-2 p-2">
+                  <h3 className="text-xl font-bold text-center">Angie Remache</h3>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="transition-all duration-300 hover:shadow-lg">
+              <CardContent className="flex flex-col items-center gap-4 p-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative group hover:cursor-pointer">
+                      <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
+                        <AvatarImage
+                          alt="Team member 4"
+                          src="/photos/ariel.pincay.jpg"
+                          className="object-cover"
+                        />
+                        <AvatarFallback>AP</AvatarFallback>
+                      </Avatar>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                        <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
+                          Ver más...
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Próximamente</DialogTitle>
-                    <DialogDescription></DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-              <div className="space-y-2 p-2">
-                <h3 className="text-xl font-bold text-center">Ariel Pincay</h3>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-      <section className="py-12 w-full flex items-center justify-center flex-col bg-secondary">
-        <h2 className="scroll-m-20 border-b border-muted-foreground pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
-          Nuestros Partners
-        </h2>
-        <p className="scroll-m-20 text-muted-foreground max-w-screen-2xl text-center p-8">
-          Estamos orgullosos de colaborar con diversas organizaciones que
-          comparten nuestra visión de una educación colaborativa. Desde
-          instituciones académicas hasta grupos o asociaciones que mejoran
-          nuestras capacidades y amplían nuestro alcance
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 max-w-screen-xl p-8 w-full">
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex flex-col items-center gap-4 p-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="relative group hover:cursor-pointer">
-                    <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
-                      <AvatarImage
-                        alt="Team member 1"
-                        src="/images/yt.png"
-                        className="object-cover p-6"
-                      />
-                      <AvatarFallback>UIEYT</AvatarFallback>
-                    </Avatar>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                      <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
-                        Ver más...
-                      </span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Próximamente</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                <div className="space-y-2 p-2">
+                  <h3 className="text-xl font-bold text-center">Ariel Pincay</h3>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+        <section className="py-12 w-full flex items-center justify-center flex-col bg-secondary px-4 sm:px-6 lg:px-8">
+          <h2 className="scroll-m-20 border-b border-muted-foreground pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
+            Nuestros Partners
+          </h2>
+          <p className="scroll-m-20 text-muted-foreground max-w-3xl text-center mt-6">
+            Estamos orgullosos de colaborar con diversas organizaciones que
+            comparten nuestra visión de una educación colaborativa. Desde
+            instituciones académicas hasta grupos o asociaciones que mejoran
+            nuestras capacidades y amplían nuestro alcance
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-8 max-w-screen-xl mt-8 w-full">
+            <Card className="transition-all duration-300 hover:shadow-lg">
+              <CardContent className="flex flex-col items-center gap-4 p-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative group hover:cursor-pointer">
+                      <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
+                        <AvatarImage
+                          alt="Team member 1"
+                          src="/images/yt.png"
+                          className="object-cover p-6"
+                        />
+                        <AvatarFallback>UIEYT</AvatarFallback>
+                      </Avatar>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                        <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
+                          Ver más...
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Próximamente</DialogTitle>
-                    <DialogDescription></DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-              <div className="space-y-2 p-2">
-                <h3 className="text-xl font-bold text-center">
-                  Universidad Yachay Tech
-                </h3>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="transition-all duration-300 hover:shadow-lg">
-            <CardContent className="flex flex-col items-center gap-4 p-4">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <div className="relative group hover:cursor-pointer">
-                    <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
-                      <AvatarImage
-                        alt="Team member 2"
-                        src="/images/mentores.jpg"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>MYT</AvatarFallback>
-                    </Avatar>
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
-                      <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
-                        Ver más...
-                      </span>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Próximamente</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                <div className="space-y-2 p-2">
+                  <h3 className="text-xl font-bold text-center">
+                    Universidad Yachay Tech
+                  </h3>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="transition-all duration-300 hover:shadow-lg">
+              <CardContent className="flex flex-col items-center gap-4 p-4">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="relative group hover:cursor-pointer">
+                      <Avatar className="w-48 h-48 transition duration-300 ease-in-out group-hover:blur-sm ">
+                        <AvatarImage
+                          alt="Team member 2"
+                          src="/images/mentores.jpg"
+                          className="object-cover"
+                        />
+                        <AvatarFallback>MYT</AvatarFallback>
+                      </Avatar>
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 ease-in-out">
+                        <span className="text-xl font-semibold bg-background/20 p-2 rounded-full">
+                          Ver más...
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Próximamente</DialogTitle>
-                    <DialogDescription></DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Próximamente</DialogTitle>
+                      <DialogDescription></DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
+                <div className="space-y-2 p-2">
+                  <h3 className="text-xl font-bold text-center">
+                    Mentores Yachay Tech
+                  </h3>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+        <section className="pt-12 pb-6 w-full flex items-center justify-center flex-col px-4 sm:px-6 lg:px-8">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
+            Nuestros Donantes
+          </h2>
+          <p className="scroll-m-20 text-muted-foreground max-w-3xl text-center mt-6">
+            Un sincero agradecimiento a todas las personas que han apoyado a
+            Tuto-U a través de sus generosas donaciones. Sus contribuciones nos
+            ayudan a continuar nuestra misión y ampliar nuestros servicios a los
+            estudiantes que lo necesiten
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 gap-8 max-w-screen-xl mt-8 w-full items-start">
+            <div className="flex flex-col justify-center items-center">
+              <Avatar className="w-24 h-24 border-8 border-yellow-500">
+                <AvatarImage
+                  alt="Team member 1"
+                  src="/photos/placeholder.jpg"
+                  className="object-cover"
+                />
+                <AvatarFallback>PH</AvatarFallback>
+              </Avatar>
               <div className="space-y-2 p-2">
-                <h3 className="text-xl font-bold text-center">
-                  Mentores Yachay Tech
-                </h3>
+                <h3 className="text-xl font-bold text-center">Donante 1</h3>
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-      <section className="pt-12 pb-6 w-full flex items-center justify-center flex-col">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
-          Nuestros Donantes
-        </h2>
-        <p className="scroll-m-20 text-muted-foreground max-w-screen-2xl text-center p-8">
-          Un sincero agradecimiento a todas las personas que han apoyado a
-          Tuto-U a través de sus generosas donaciones. Sus contribuciones nos
-          ayudan a continuar nuestra misión y ampliar nuestros servicios a los
-          estudiantes que lo necesiten
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 2xl:grid-cols-6 gap-8 max-w-screen-xl p-8 w-full items-start">
-          <div className="flex flex-col justify-center items-center">
-            <Avatar className="w-24 h-24 border-8 border-yellow-500">
-              <AvatarImage
-                alt="Team member 1"
-                src="/photos/placeholder.jpg"
-                className="object-cover"
-              />
-              <AvatarFallback>PH</AvatarFallback>
-            </Avatar>
-            <div className="space-y-2 p-2">
-              <h3 className="text-xl font-bold text-center">Donante 1</h3>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <Avatar className="w-24 h-24 border-8 border-gray-500">
+                <AvatarImage
+                  alt="Team member 1"
+                  src="/photos/placeholder.jpg"
+                  className="object-cover"
+                />
+                <AvatarFallback>PH</AvatarFallback>
+              </Avatar>
+              <div className="space-y-2 p-2">
+                <h3 className="text-xl font-bold text-center">Donante 2</h3>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <Avatar className="w-24 h-24 border-8 border-gray-500">
+                <AvatarImage
+                  alt="Team member 1"
+                  src="/photos/placeholder.jpg"
+                  className="object-cover"
+                />
+                <AvatarFallback>PH</AvatarFallback>
+              </Avatar>
+              <div className="space-y-2 p-2">
+                <h3 className="text-xl font-bold text-center">Donante 3</h3>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <Avatar className="w-24 h-24 border-8 border-yellow-700">
+                <AvatarImage
+                  alt="Edwin Hurtado Image"
+                  src={`${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/edwin.hurtado.jpg`}
+                  className="object-cover"
+                />
+                <AvatarFallback>PH</AvatarFallback>
+              </Avatar>
+              <div className="space-y-2 p-2">
+                <h3 className="text-xl font-bold text-center">Edwin Hurtado</h3>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <Avatar className="w-24 h-24 border-8 border-yellow-700">
+                <AvatarImage
+                  alt="Team member 1"
+                  src="/photos/placeholder.jpg"
+                  className="object-cover"
+                />
+                <AvatarFallback>PH</AvatarFallback>
+              </Avatar>
+              <div className="space-y-2 p-2">
+                <h3 className="text-xl font-bold text-center">Donante 5</h3>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <Avatar className="w-24 h-24 border-8 border-yellow-700">
+                <AvatarImage
+                  alt="Team member 1"
+                  src="/photos/placeholder.jpg"
+                  className="object-cover"
+                />
+                <AvatarFallback>PH</AvatarFallback>
+              </Avatar>
+              <div className="space-y-2 p-2">
+                <h3 className="text-xl font-bold text-center">Donante 6</h3>
+              </div>
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center">
-            <Avatar className="w-24 h-24 border-8 border-gray-500">
-              <AvatarImage
-                alt="Team member 1"
-                src="/photos/placeholder.jpg"
-                className="object-cover"
-              />
-              <AvatarFallback>PH</AvatarFallback>
-            </Avatar>
-            <div className="space-y-2 p-2">
-              <h3 className="text-xl font-bold text-center">Donante 2</h3>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center items-center">
-            <Avatar className="w-24 h-24 border-8 border-gray-500">
-              <AvatarImage
-                alt="Team member 1"
-                src="/photos/placeholder.jpg"
-                className="object-cover"
-              />
-              <AvatarFallback>PH</AvatarFallback>
-            </Avatar>
-            <div className="space-y-2 p-2">
-              <h3 className="text-xl font-bold text-center">Donante 3</h3>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center items-center">
-            <Avatar className="w-24 h-24 border-8 border-yellow-700">
-              <AvatarImage
-                alt="Edwin Hurtado Image"
-                src={`${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/edwin.hurtado.jpg`}
-                className="object-cover"
-              />
-              <AvatarFallback>PH</AvatarFallback>
-            </Avatar>
-            <div className="space-y-2 p-2">
-              <h3 className="text-xl font-bold text-center">Edwin Hurtado</h3>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center items-center">
-            <Avatar className="w-24 h-24 border-8 border-yellow-700">
-              <AvatarImage
-                alt="Team member 1"
-                src="/photos/placeholder.jpg"
-                className="object-cover"
-              />
-              <AvatarFallback>PH</AvatarFallback>
-            </Avatar>
-            <div className="space-y-2 p-2">
-              <h3 className="text-xl font-bold text-center">Donante 5</h3>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center items-center">
-            <Avatar className="w-24 h-24 border-8 border-yellow-700">
-              <AvatarImage
-                alt="Team member 1"
-                src="/photos/placeholder.jpg"
-                className="object-cover"
-              />
-              <AvatarFallback>PH</AvatarFallback>
-            </Avatar>
-            <div className="space-y-2 p-2">
-              <h3 className="text-xl font-bold text-center">Donante 6</h3>
-            </div>
-          </div>
-        </div>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="link" className="text-md">
-              ¿Quieres apoyarnos? Averigua cómo aquí
-            </Button>
-          </DialogTrigger>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="link" className="text-md mt-6">
+                ¿Quieres apoyarnos? Averigua cómo aquí
+              </Button>
+            </DialogTrigger>
 
-          <DialogContent className="sm:max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>Gracias por tu apoyo</DialogTitle>
-              <DialogDescription>
-                Dona desde $1 y contáctanos por nuestras redes para añadirte en
-                esta sección. Tu donación ayuda mucho a los desarrolladores y el
-                mantenimiento de la aplicación.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="flex justify-center">
-              <Image
-                src={`/instructions/howdonate.png`}
-                alt="Restart password instructions"
-                width={900}
-                height={900}
-              />
-            </div>
-          </DialogContent>
-        </Dialog>
-      </section>
-      <footer className="flex flex-col gap-2 md:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-          © Tuto-U. Desarrollado por{" "}
-          <span className="font-bold text-foreground">Tuto-U Team</span>.
-        </p>
-        <nav className="md:ml-auto flex gap-4 md:gap-6 mr-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Términos y condiciones
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Privacidad
-          </Link>
-        </nav>
-        <ModeToggle></ModeToggle>
-      </footer>
+            <DialogContent className="sm:max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Gracias por tu apoyo</DialogTitle>
+                <DialogDescription>
+                  Dona desde $1 y contáctanos por nuestras redes para añadirte en
+                  esta sección. Tu donación ayuda mucho a los desarrolladores y el
+                  mantenimiento de la aplicación.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex justify-center">
+                <Image
+                  src={`/instructions/howdonate.png`}
+                  alt="Restart password instructions"
+                  width={900}
+                  height={900}
+                />
+              </div>
+            </DialogContent>
+          </Dialog>
+        </section>
+      </PageContainer>
+      <Footer size="full" />
     </>
   );
 }
