@@ -31,7 +31,7 @@ export function PageContainer({
           "max-w-none": size === "full",
         },
         // Top padding to clear fixed navbar
-        clearNavbar ? "pt-28 md:pt-32 pb-12" : "py-12",
+        clearNavbar ? "pt-32 md:pt-36 pb-12" : "py-12",
         className
       )}
       {...props}
