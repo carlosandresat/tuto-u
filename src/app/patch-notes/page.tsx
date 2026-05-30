@@ -1,15 +1,17 @@
 import { StartNavbar } from "@/components/start-navbar";
 import { Lightbulb } from "lucide-react";
+import { PageContainer } from "@/components/page-container";
+import { Footer } from "@/components/footer";
 export default function PatchNotes() {
   return (
     <>
       <StartNavbar />
-      <section className="min-h-screen w-full py-12 flex items-center justify-center flex-col pt-40">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl">
+      <PageContainer size="default" className="min-h-screen">
+        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
           Notas de la Versión
-        </h2>
+        </h1>
 
-        <div className="flex flex-col w-full max-w-screen-xl p-8">
+        <div className="flex flex-col w-full mt-8">
           <div className="w-full flex  justify-start items-center">
             <div className="bg-foreground text-background rounded-full h-20 w-20 text-center items-center justify-center flex text-2xl flex-none">
               <Lightbulb />
@@ -499,7 +501,8 @@ export default function PatchNotes() {
             <div className="flex flex-col pl-4 w-auto space-y-2 h-16"></div>
           </div>
         </div>
-      </section>
+      </PageContainer>
+      <Footer size="default" />
     </>
   );
 }

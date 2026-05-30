@@ -11,6 +11,7 @@ import {
 import { ProfileRequestForm } from "@/components/profile-request-form";
 import { getTutorFormData } from "@/actions/profile";
 import { auth } from "@/auth";
+import { PageContainer } from "@/components/page-container";
 
 export default async function Page({ params }: { params: Promise<{ user: string }> }) {
   const session = await auth();
@@ -23,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ user: string 
   const formData = await getTutorFormData(email);
 
   return (
-    <section className="md:min-h-screen w-full p-6 items-center flex flex-col space-y-6">
+    <PageContainer size="xl" clearNavbar={false} className="space-y-6 md:min-h-screen">
       <Button variant="link" className="px-0 self-start" asChild>
         <Link href={`/${resolvedParams.user}/profile`}>
           <ArrowLeft className="mr-2" /> Regresar
@@ -40,6 +41,6 @@ export default async function Page({ params }: { params: Promise<{ user: string 
           <ProfileRequestForm {...formData} studentId={session.user.id}/>
         </CardContent>
       </Card>
-    </section>
+    </PageContainer>
   );
 }

@@ -11,6 +11,7 @@ import { syllabusData } from "@/data/syllabus";
 import { auth } from "@/auth";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Megaphone } from "lucide-react";
+import { PageContainer } from "@/components/page-container";
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
@@ -20,7 +21,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
   if (!syllabus) {
     return (
-      <section className="min-h-screen w-full p-6 md:p-12 items-center justify-center flex flex-col">
+      <PageContainer size="xl" clearNavbar={false} className="min-h-screen justify-center">
         <Link
           href={session?.user ? "/home" : "/"}
           className="absolute top-0 left-0 m-6"
@@ -29,23 +30,23 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             <ArrowLeft className="mr-2" /> Regresar
           </Button>
         </Link>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           Syllabus not found
         </h1>
-      </section>
+      </PageContainer>
     );
   }
 
   return (
     <>
-      <section className="min-h-screen w-full p-6 md:p-12 items-center justify-start flex flex-col">
+      <PageContainer size="xl" clearNavbar={false} className="min-h-screen">
         <Link href={session?.user ? "/home" : "/"} className="self-start">
-          <Button variant="link">
+          <Button variant="link" className="px-0">
             <ArrowLeft className="mr-2" /> Regresar
           </Button>
         </Link>
-        <div className="flex mt-6 max-w-4xl w-full">
-          <Alert className="max-w-3xl justify-self-start">
+        <div className="flex mt-6 w-full">
+          <Alert className="max-w-3xl">
             <Megaphone className="h-4 w-4" />
             <AlertTitle>Importante</AlertTitle>
             <AlertDescription>
@@ -56,18 +57,18 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           </Alert>
         </div>
 
-        <div className="flex flex-col justify-center items-center justify-self-stretch py-8">
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <div className="flex flex-col w-full py-8">
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl w-full text-left">
             {syllabus.classname}
           </h1>
-          <p className="text-md text-muted-foreground max-w-4xl mt-8">
+          <p className="text-md text-muted-foreground w-full text-left mt-8">
             {syllabus.description}
           </p>
 
           <Accordion
             type="single"
             collapsible
-            className="w-full max-w-4xl mt-8"
+            className="w-full mt-8"
           >
             {syllabus.units.map((unit, index) => (
               <AccordionItem key={index} value={`item-${index + 1}`}>
@@ -97,7 +98,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             ))}
           </Accordion>
         </div>
-      </section>
+      </PageContainer>
     </>
   );
 }
