@@ -233,55 +233,12 @@ export const getUserAvailability = async (userId: string) => {
 };
 
 export const updateUserAvailability = async (
-  data: z.infer<typeof UserAvailabilitySchema>,
+  entries: { dayOfWeek: number; timeSlot: number }[],
   userId: string
 ) => {
-  const validatedFields = UserAvailabilitySchema.safeParse(data);
-
-  if (!validatedFields.success) {
-    return { error: "Campos inválidos" };
-  }
-
-  const {
-    mondayAvailability,
-    tuesdayAvailability,
-    wednesdayAvailability,
-    thursdayAvailability,
-    fridayAvailability,
-    saturdayAvailability,
-    sundayAvailability,
-  } = validatedFields.data;
-
-  const newMondayEntries = mondayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 1, timeSlot: Number(hour) };
+  const newTutorCourses = entries.map((entry) => {
+    return { tutorId: userId, dayOfWeek: entry.dayOfWeek, timeSlot: entry.timeSlot };
   });
-  const newTuesdayEntries = tuesdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 2, timeSlot: Number(hour) };
-  });
-  const newWednesdayEntries = wednesdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 3, timeSlot: Number(hour) };
-  });
-  const newThursdayEntries = thursdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 4, timeSlot: Number(hour) };
-  });
-  const newFridayEntries = fridayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 5, timeSlot: Number(hour) };
-  });
-  const newSaturdayEntries = saturdayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 6, timeSlot: Number(hour) };
-  });
-  const newSundayEntries = sundayAvailability.map((hour) => {
-    return { tutorId: userId, dayOfWeek: 0, timeSlot: Number(hour) };
-  });
-
-  const newTutorCourses = newMondayEntries.concat(
-    newTuesdayEntries,
-    newWednesdayEntries,
-    newThursdayEntries,
-    newFridayEntries,
-    newSaturdayEntries,
-    newSundayEntries
-  );
 
   try {
     await db.tutorAvailability.deleteMany({

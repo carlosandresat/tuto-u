@@ -13,6 +13,7 @@ export const getAvailableTutors = async (
 ) => {
   try {
     const previousTimeSlot = timeSlot === 0 ? 23 : timeSlot - 1;
+    const previousDayOfWeek = timeSlot === 0 ? (dayOfWeek - 1 + 7) % 7 : dayOfWeek;
 
     const tutors = await db.tutorCourse.findMany({
       where: {
@@ -22,7 +23,7 @@ export const getAvailableTutors = async (
             some: {
               OR: [
                 { dayOfWeek: dayOfWeek, timeSlot: timeSlot },
-                { dayOfWeek: dayOfWeek, timeSlot: previousTimeSlot },
+                { dayOfWeek: previousDayOfWeek, timeSlot: previousTimeSlot },
               ],
             },
           },
