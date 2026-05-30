@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, LogIn } from "lucide-react";
 import Image from "next/image";
@@ -26,6 +33,12 @@ export function StartNavbar() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-auto">
+              <SheetHeader className="sr-only">
+                <SheetTitle>Menú de Navegación</SheetTitle>
+                <SheetDescription>
+                  Accede a las distintas secciones de Tuto-U
+                </SheetDescription>
+              </SheetHeader>
               <div className="flex flex-col items-center justify-center py-4 gap-8 mt-6 px-6">
                 <Link
                   href="/"
