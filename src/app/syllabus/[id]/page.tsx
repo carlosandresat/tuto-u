@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             <ArrowLeft className="mr-2" /> Regresar
           </Button>
         </Link>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl w-full text-left">
           Syllabus not found
         </h1>
       </PageContainer>

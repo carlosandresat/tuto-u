@@ -57,7 +57,7 @@ export default async function Page({ params }: Props) {
             <ArrowLeft className="mr-2" /> Regresar
           </Link>
         </Button>
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mt-16 w-full text-left">
           User Not Found
         </h1>
       </PageContainer>

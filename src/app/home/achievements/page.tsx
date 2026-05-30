@@ -16,7 +16,7 @@ export default async function AchievementsPage() {
   return (
     <PageContainer size="2xl" className="min-h-screen">
       <div className="w-full">
-        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight w-full text-left">
           Mis Logros
         </h1>
         <p className="text-muted-foreground text-sm mt-2 mb-8">
