@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "@/auth";
 import { getUserNameByEmail, getUserProfile } from "@/actions/profile";
-import { ClientTimeBadges } from "@/components/client-time-badges";
+import { ClientAvailabilitySchedule } from "@/components/client-time-badges";
 import { PageContainer } from "@/components/page-container";
 
 const durationTranslationMap: Record<string, string> = {
@@ -179,20 +179,15 @@ export default async function Page({ params }: Props) {
             <CardHeader>
               <CardTitle>Horario</CardTitle>
             </CardHeader>
-            {tutorData.availability.length === 0 && (
-              <p className="text-center">No hay horario disponible</p>
+            {tutorData.availability.length === 0 ? (
+              <CardContent>
+                <p className="text-center text-muted-foreground">No hay horario disponible</p>
+              </CardContent>
+            ) : (
+              <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <ClientAvailabilitySchedule availability={tutorData.availability} />
+              </CardContent>
             )}
-            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {tutorData.availability.map((data, index) => (
-                <div key={index} className="space-y-2">
-                  <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-                    {data.day}
-                  </h4>
-
-                  <ClientTimeBadges hours={data.hours} />
-                </div>
-              ))}
-            </CardContent>
           </Card>
           {tutorData.courses.length !== 0 &&
             tutorData.pricing.length !== 0 &&

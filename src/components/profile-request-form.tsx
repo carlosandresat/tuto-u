@@ -42,7 +42,7 @@ interface FormData {
   studentId: string;
   tutorId: string;
   courses: { id: number; course: string }[];
-  availability: { day: number; hours: number[] }[];
+  availability: { dayOfWeek: number; timeSlot: number }[];
   pricing: { duration: number; price: number }[];
 }
 
@@ -80,18 +80,38 @@ export function ProfileRequestForm({
     },
   });
 
-  //Pending: Order the hours in ascending order
-  const availabilityLocalTimes = availability.map((a) => ({
-    ...a,
-    hours: a.hours.map((h) => {
-      const date = new Date();
-      date.setUTCHours(h);
-      return date.getHours();
-    }),
-  })).map((a) => ({
-    ...a,
-    hours: a.hours.sort((a, b) => a - b),
-  }));
+  const localAvailabilities = (() => {
+    const grouped: Record<number, number[]> = {};
+
+    availability.forEach((slot) => {
+      // First hour
+      const base1 = new Date(Date.UTC(2026, 4, 31, 0, 0, 0));
+      base1.setUTCDate(base1.getUTCDate() + slot.dayOfWeek);
+      base1.setUTCHours(slot.timeSlot, 0, 0, 0);
+
+      const localDay1 = base1.getDay();
+      const localHour1 = base1.getHours();
+
+      if (!grouped[localDay1]) grouped[localDay1] = [];
+      if (!grouped[localDay1].includes(localHour1)) grouped[localDay1].push(localHour1);
+
+      // Second hour (tutor sets 2-hour blocks)
+      const base2 = new Date(Date.UTC(2026, 4, 31, 0, 0, 0));
+      base2.setUTCDate(base2.getUTCDate() + slot.dayOfWeek);
+      base2.setUTCHours(slot.timeSlot + 1, 0, 0, 0);
+
+      const localDay2 = base2.getDay();
+      const localHour2 = base2.getHours();
+
+      if (!grouped[localDay2]) grouped[localDay2] = [];
+      if (!grouped[localDay2].includes(localHour2)) grouped[localDay2].push(localHour2);
+    });
+
+    return Object.entries(grouped).map(([dayOfWeekStr, hours]) => ({
+      day: Number(dayOfWeekStr),
+      hours: hours.sort((a, b) => a - b),
+    }));
+  })();
 
   function onSubmit(data: z.infer<typeof ProfileSessionRequestSchema>) {
     startTransition(async () => {
@@ -145,7 +165,7 @@ export function ProfileRequestForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
         <FormField
           control={form.control}
           name="course"
@@ -215,7 +235,7 @@ export function ProfileRequestForm({
                         if (e) {
                           const day = e.getDay();
                           const availableHours =
-                          availabilityLocalTimes.find((a) => a.day === day)?.hours ||
+                          localAvailabilities.find((a) => a.day === day)?.hours ||
                             [];
                           setAvailableTimes(availableHours);
                         }
@@ -304,7 +324,7 @@ export function ProfileRequestForm({
             control={form.control}
             name="isOnline"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 w-full">
+              <FormItem className="flex flex-row items-start gap-3 rounded-md border p-4 w-full">
                 <FormControl>
                   <Checkbox
                     checked={field.value}

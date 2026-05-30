@@ -43,41 +43,7 @@ export default async function MyProfile() {
   const userBasicData = await getUserData(session?.user?.id || "");
   const userAvailability = await getUserAvailability(session?.user?.id || "");
 
-  const mondayAvailability = userAvailability
-    .filter(
-      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 1
-    )
-    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const tuesdayAvailability = userAvailability
-    .filter(
-      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 2
-    )
-    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const wednesdayAvailability = userAvailability
-    .filter(
-      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 3
-    )
-    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const thursdayAvailability = userAvailability
-    .filter(
-      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 4
-    )
-    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const fridayAvailability = userAvailability
-    .filter(
-      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 5
-    )
-    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const saturdayAvailability = userAvailability
-    .filter(
-      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 6
-    )
-    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
-  const sundayAvailability = userAvailability
-    .filter(
-      (row: { dayOfWeek: number; timeSlot: number }) => row.dayOfWeek == 0
-    )
-    .map((row: { dayOfWeek: number; timeSlot: number }) => row.timeSlot);
+
 
   let initials;
   if (userBasicData && userBasicData.firstname && userBasicData.lastname) {
@@ -197,13 +163,7 @@ export default async function MyProfile() {
               <ProfileAvailabilityForm
                 userId={session?.user?.id || ""}
                 timeOptions={timeOptions}
-                mondayAvailability={mondayAvailability}
-                tuesdayAvailability={tuesdayAvailability}
-                wednesdayAvailability={wednesdayAvailability}
-                thursdayAvailability={thursdayAvailability}
-                fridayAvailability={fridayAvailability}
-                saturdayAvailability={saturdayAvailability}
-                sundayAvailability={sundayAvailability}
+                initialAvailability={userAvailability}
               ></ProfileAvailabilityForm>
             </CardContent>
           </Card>

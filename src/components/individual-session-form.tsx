@@ -19,9 +19,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-
 import { Checkbox } from "@/components/ui/checkbox";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -49,10 +47,17 @@ import {
   requestIndividualSession,
   addNarcissismAchievement,
 } from "@/actions/session-request";
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 
-export function IndividualSessionForm({ userId }: { userId: string }) {
+export function IndividualSessionForm({
+  userId,
+  courses,
+}: {
+  userId: string;
+  courses: { id: number; name: string }[];
+}) {
   const [isPending, startTransition] = useTransition();
+  const [isFetchingTutors, setIsFetchingTutors] = useState(false);
 
   const [availableTutors, setAvailableTutors] = useState<
     {
@@ -65,6 +70,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       description: string | null;
     }[]
   >([]);
+
   const form = useForm<z.infer<typeof IndividualSessionRequestSchema>>({
     resolver: zodResolver(IndividualSessionRequestSchema),
     defaultValues: {
@@ -73,29 +79,47 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     },
   });
 
-  const courses = [
-    { id: 17, course: "Nivelación: Fundamentos de Matemáticas" },
-    { id: 18, course: "Nivelación: Física" },
-    { id: 19, course: "Nivelación: Química" },
-    { id: 20, course: "Nivelación: Redacción" },
-    { id: 1, course: "Cálculo 1" },
-    { id: 2, course: "Cálculo 2" },
-    { id: 3, course: "Cálculo 3" },
-    { id: 4, course: "Algebra Lineal" },
-    { id: 5, course: "Química 1" },
-    { id: 6, course: "Química 2" },
-    { id: 7, course: "Física 1" },
-    { id: 8, course: "Física 2" },
-    { id: 9, course: "Biología 1" },
-    { id: 10, course: "Biología 2" },
-    { id: 11, course: "Ciencias de la Tierra" },
-    { id: 12, course: "Probabilidad y Estadística" },
-    { id: 13, course: "Introducción a la Programación" },
-    { id: 14, course: "Ecuaciones Diferenciales" },
-    { id: 15, course: "Métodos Numéricos" },
-    { id: 16, course: "Inglés" },
-    { id: 21, course: "Aplicaciones Web" },
-  ];
+  const selectedCourse = form.watch("course");
+  const selectedDate = form.watch("date");
+  const selectedTime = form.watch("time");
+
+  // Fetch available tutors in a consolidated, race-condition protected hook
+  useEffect(() => {
+    if (!selectedCourse || !selectedDate || !selectedTime) {
+      setAvailableTutors([]);
+      return;
+    }
+
+    const fetchTutors = async () => {
+      setIsFetchingTutors(true);
+      try {
+        const sessionDate = new Date(selectedDate);
+        const [hours, minutes] = selectedTime.split(":").map(Number);
+        sessionDate.setHours(hours, minutes, 0, 0);
+
+        const utcDayOfWeek = sessionDate.getUTCDay();
+        const utcHour = sessionDate.getUTCHours();
+
+        const tutors = await getAvailableTutors(
+          parseInt(selectedCourse),
+          utcDayOfWeek,
+          utcHour
+        );
+        setAvailableTutors(tutors);
+      } catch (error) {
+        console.error(error);
+        toast({
+          title: "Error",
+          description: "No se pudieron cargar los tutores disponibles.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsFetchingTutors(false);
+      }
+    };
+
+    fetchTutors();
+  }, [selectedCourse, selectedDate, selectedTime]);
 
   function formatDuration(duration: number) {
     const hours = Math.floor(duration / 60);
@@ -104,24 +128,32 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
       return `${minutes} minutos`;
     }
     if (minutes === 0) {
-      // Return just the hours if there are no extra minutes
       return `${hours} hora${hours > 1 ? "s" : ""}`;
     } else {
-      // Convert the minutes to a decimal fraction
       const decimal = minutes / 60;
-      return `${hours + decimal} horas`; // Adds the decimal to hours
+      return `${hours + decimal} horas`;
     }
   }
+
   function onSubmit(data: z.infer<typeof IndividualSessionRequestSchema>) {
     startTransition(async () => {
       const datetime = new Date(data.date);
-      const selectedPrice = availableTutors
-        .filter((row) => row.id === data.tutor)[0]
-        .pricing.filter(
-          (row) => row.duration.toString() === data.duration
-        )[0].price;
+      const selectedTutorPricing = availableTutors.find((row) => row.id === data.tutor)?.pricing;
+      const pricingConfig = selectedTutorPricing?.find((row) => row.duration.toString() === data.duration);
+      
+      if (!pricingConfig) {
+        toast({
+          title: "Error",
+          description: "No se pudo encontrar la configuración de precio para este tutor.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const selectedPrice = pricingConfig.price;
       datetime.setHours(parseInt(data.time.split(":")[0]));
       datetime.setMinutes(parseInt(data.time.split(":")[1]));
+
       const formattedData = {
         studentId: userId,
         tutorId: data.tutor,
@@ -130,18 +162,19 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
         duration: parseInt(data.duration),
         price: Number(selectedPrice),
         place: data.isOnline
-          ? "Online"
+          ? "Virtual"
           : data.place !== undefined && data.place !== ""
           ? data.place
           : "A disposición del tutor",
         online: data.isOnline,
         topic: data.topic,
       };
+
       if (data.tutor === userId) {
         const res = await addNarcissismAchievement(userId);
         if (res.message !== undefined) {
           toast({
-            title: "WTF",
+            title: "Logro obtenido",
             description: res.message,
           });
         }
@@ -157,6 +190,11 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     });
   }
 
+  const selectedTutorId = form.watch("tutor");
+  const selectedTutor = availableTutors.find((t) => t.id === selectedTutorId);
+  const selectedDuration = form.watch("duration");
+  const selectedPriceInfo = selectedTutor?.pricing.find((p) => p.duration.toString() === selectedDuration);
+
   return (
     <>
       <Card className="w-full md:w-2/3">
@@ -166,37 +204,21 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
             Llena los siguientes campos para solicitar una tutoría.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="flex flex-col gap-4">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
               <FormField
                 control={form.control}
                 name="course"
-                render={({ field, formState }) => (
+                render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Curso</FormLabel>
                     <FormControl>
                       <Select
-                        onValueChange={async (e) => {
+                        onValueChange={(e) => {
                           field.onChange(e);
                           form.setValue("duration", "");
                           form.setValue("tutor", "");
-                          if (
-                            form.getValues("date") !== undefined &&
-                            form.getValues("time") !== undefined
-                          ) {
-                            const localHour = new Date();
-                            localHour.setHours(
-                              parseInt(form.getValues("time").split(":")[0], 10)
-                            );
-                            setAvailableTutors(
-                              await getAvailableTutors(
-                                parseInt(form.getValues("course")),
-                                form.getValues("date").getDay(),
-                                localHour.getUTCHours()
-                              )
-                            );
-                          }
                         }}
                         defaultValue={field.value}
                       >
@@ -209,7 +231,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                               value={row.id.toString()}
                               key={row.id.toString()}
                             >
-                              {row.course}
+                              {row.name}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -242,7 +264,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                               ) : (
                                 <span>Escoge una fecha</span>
                               )}
-                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              <CalendarIcon data-icon="inline-end" className="ml-auto opacity-50" />
                             </Button>
                           </FormControl>
                         </PopoverTrigger>
@@ -250,35 +272,15 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                           <Calendar
                             mode="single"
                             selected={field.value}
-                            onSelect={async (e) => {
+                            onSelect={(e) => {
                               field.onChange(e);
                               form.setValue("duration", "");
                               form.setValue("tutor", "");
-                              if (
-                                form.getValues("course") !== undefined &&
-                                form.getValues("time") !== undefined &&
-                                form.getValues("date") !== undefined
-                              ) {
-                                const localHour = new Date();
-                                localHour.setHours(
-                                  parseInt(
-                                    form.getValues("time").split(":")[0],
-                                    10
-                                  )
-                                );
-                                setAvailableTutors(
-                                  await getAvailableTutors(
-                                    parseInt(form.getValues("course")),
-                                    form.getValues("date").getDay(),
-                                    localHour.getUTCHours()
-                                  )
-                                );
-                              }
                             }}
                             disabled={(date) => {
-                              const yesterday = new Date();
-                              yesterday.setDate(yesterday.getDate() - 1);
-                              return date < yesterday;
+                              const now = new Date();
+                              now.setHours(0, 0, 0, 0);
+                              return date < now;
                             }}
                             initialFocus
                           />
@@ -296,29 +298,10 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                       <FormLabel>Hora</FormLabel>
                       <FormControl>
                         <Select
-                          onValueChange={async (e) => {
+                          onValueChange={(e) => {
                             field.onChange(e);
                             form.setValue("duration", "");
                             form.setValue("tutor", "");
-                            if (
-                              form.getValues("date") !== undefined &&
-                              form.getValues("course") !== undefined
-                            ) {
-                              const localHour = new Date();
-                              localHour.setHours(
-                                parseInt(
-                                  form.getValues("time").split(":")[0],
-                                  10
-                                )
-                              );
-                              setAvailableTutors(
-                                await getAvailableTutors(
-                                  parseInt(form.getValues("course")),
-                                  form.getValues("date").getDay(),
-                                  localHour.getUTCHours()
-                                )
-                              );
-                            }
                           }}
                           defaultValue={field.value}
                         >
@@ -364,14 +347,20 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                         }}
                         value={field.value}
                         disabled={
+                          isFetchingTutors ||
                           !form.watch("course") ||
                           !form.watch("date") ||
-                          !form.watch("time") ||
-                          form.watch("time") === "0"
+                          !form.watch("time")
                         }
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="Selecciona un tutor" />
+                          <SelectValue
+                            placeholder={
+                              isFetchingTutors
+                                ? "Cargando tutores disponibles..."
+                                : "Selecciona un tutor"
+                            }
+                          />
                         </SelectTrigger>
                         <SelectContent>
                           {availableTutors.map((row, index) => (
@@ -403,20 +392,15 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                             <SelectValue placeholder="Selecciona una duración" />
                           </SelectTrigger>
                           <SelectContent>
-                            {form.getValues("tutor") !== undefined &&
-                            form.getValues("tutor") !== ""
-                              ? availableTutors
-                                  .filter(
-                                    (row) => row.id === form.getValues("tutor")
-                                  )[0]
-                                  .pricing.map((row, index) => (
-                                    <SelectItem
-                                      value={row.duration.toString()}
-                                      key={index}
-                                    >
-                                      {formatDuration(row.duration)}
-                                    </SelectItem>
-                                  ))
+                            {selectedTutor
+                              ? selectedTutor.pricing.map((row, index) => (
+                                  <SelectItem
+                                    value={row.duration.toString()}
+                                    key={index}
+                                  >
+                                    {formatDuration(row.duration)}
+                                  </SelectItem>
+                                ))
                               : null}
                           </SelectContent>
                         </Select>
@@ -429,12 +413,12 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
                   control={form.control}
                   name="isOnline"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 w-full">
+                    <FormItem className="flex flex-row items-start gap-3 rounded-md border p-4 w-full">
                       <FormControl>
                         <Checkbox
                           checked={field.value}
                           onCheckedChange={field.onChange}
-                        ></Checkbox>
+                        />
                       </FormControl>
                       <div className="space-y-1 leading-none">
                         <FormLabel>Online</FormLabel>
@@ -509,64 +493,44 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
             Información acerca del tutor seleccionado.
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col items-center space-y-4">
-          <Avatar className="w-32 h-32">
-            <AvatarImage
-              src={`${
-                process.env.NEXT_PUBLIC_BLOB_STORAGE_URL
-              }/profile-pictures/${
-                form.watch("tutor") !== undefined && form.watch("tutor") !== ""
-                  ? availableTutors.filter(
-                      (row) => row.id === form.watch("tutor")
-                    )[0].image
-                  : null
-              }`}
-              alt="Tutor Pic"
-              className="object-cover"
-            ></AvatarImage>
-            <AvatarFallback className="text-3xl">
-              {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
-                ? availableTutors.filter(
-                    (row) => row.id === form.watch("tutor")
-                  )[0].nameInitials
-                : null}
-            </AvatarFallback>
-          </Avatar>
-          <div className="text-center">
-            <h2 className="text-xl font-semibold">
-              {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
-                ? availableTutors.filter(
-                    (row) => row.id === form.watch("tutor")
-                  )[0].name
-                : null}
-            </h2>
-            <p>
-              {form.watch("tutor") !== undefined && form.watch("tutor") !== ""
-                ? availableTutors.filter(
-                    (row) => row.id === form.watch("tutor")
-                  )[0].description
-                : null}
-            </p>
+        <CardContent className="flex flex-col items-center gap-4">
+          {selectedTutor ? (
+            <>
+              <Avatar className="size-32">
+                <AvatarImage
+                  src={
+                    selectedTutor.image
+                      ? `${process.env.NEXT_PUBLIC_BLOB_STORAGE_URL}/profile-pictures/${selectedTutor.image}`
+                      : undefined
+                  }
+                  alt="Tutor Pic"
+                  className="object-cover"
+                />
+                <AvatarFallback className="text-3xl">
+                  {selectedTutor.nameInitials}
+                </AvatarFallback>
+              </Avatar>
+              <div className="text-center">
+                <h2 className="text-xl font-semibold">
+                  {selectedTutor.name}
+                </h2>
+                <p className="text-muted-foreground mt-2 text-sm">
+                  {selectedTutor.description || "Sin descripción disponible."}
+                </p>
 
-            <h2 className="text-xl font-semibold mt-4">
-              {availableTutors.length != 0 &&
-              form.watch("duration") !== undefined &&
-              form.watch("duration") !== "" &&
-              form.watch("tutor") !== ""
-                ? `$ ${
-                    availableTutors
-                      .filter((row) => row.id === form.watch("tutor"))[0]
-                      .pricing.filter(
-                        (row) =>
-                          row.duration.toString() === form.watch("duration")
-                      )[0].price
-                  }`
-                : null}
-            </h2>
-          </div>
-          {form.watch("tutor") !== undefined && form.watch("tutor") !== "" ? (
-            <AchievementsDialog userId={form.watch("tutor")} />
-          ) : null}
+                {selectedPriceInfo && (
+                  <h2 className="text-xl font-semibold mt-4">
+                    {`$ ${Number(selectedPriceInfo.price).toFixed(2)}`}
+                  </h2>
+                )}
+              </div>
+              <AchievementsDialog userId={selectedTutor.id} />
+            </>
+          ) : (
+            <div className="text-center py-8 text-muted-foreground text-sm flex flex-col gap-2">
+              <p>Selecciona un tutor para ver sus detalles de perfil y tarifas.</p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </>
