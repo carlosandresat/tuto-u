@@ -5,7 +5,7 @@ import { CountdownTimer } from "@/components/countdown-timer";
 import { StartNavbar } from "@/components/start-navbar";
 import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CourseCard } from "@/components/course-card";
+import { CourseListWithFilter } from "@/components/course-list-with-filter";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Megaphone } from "lucide-react";
 import { PageContainer } from "@/components/page-container";
@@ -78,15 +78,8 @@ export default function Home() {
             Nuestras asignaturas
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl w-full px-8 mt-8">
-            {asignaturas.map((asignatura) => (
-              <CourseCard
-                id={asignatura.id}
-                course={asignatura.name}
-                school={asignatura.school}
-                key={asignatura.id}
-              />
-            ))}
+          <div className="max-w-screen-2xl w-full px-8 mt-8">
+            <CourseListWithFilter asignaturas={asignaturas} />
           </div>
         </section>
         <section className="w-full bg-secondary py-12 md:py-24 lg:py-32 mt-2">

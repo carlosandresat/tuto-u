@@ -1,6 +1,6 @@
 import { StudentView } from "@/components/student-view";
 import { TutorView } from "@/components/tutor-view";
-import { CourseCard } from "@/components/course-card";
+import { CourseListWithFilter } from "@/components/course-list-with-filter";
 import { TutorsCarousel } from "@/components/tutors-carousel";
 import { PageContainer } from "@/components/page-container";
 import { Footer } from "@/components/footer";
@@ -48,15 +48,8 @@ export default function Home() {
           Asignaturas
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-w-screen-2xl mt-6 w-full">
-          {asignaturas.map((asignatura) => (
-            <CourseCard
-              id={asignatura.id}
-              course={asignatura.name}
-              school={asignatura.school}
-              key={asignatura.id}
-            />
-          ))}
+        <div className="mt-6 w-full">
+          <CourseListWithFilter asignaturas={asignaturas} />
         </div>
         <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-24 w-full text-left">
           Top Tutores
