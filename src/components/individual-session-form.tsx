@@ -158,7 +158,7 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
     <>
       <Card className="w-full md:w-2/3">
         <CardHeader>
-          <CardTitle>Solicitar Tutoría</CardTitle>
+          <CardTitle>Formulario de Solicitud</CardTitle>
           <CardDescription>
             Llena los siguientes campos para solicitar una tutoría.
           </CardDescription>

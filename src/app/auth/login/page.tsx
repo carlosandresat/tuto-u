@@ -14,10 +14,11 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { LoginForm } from "@/components/login-form";
+import { PageContainer } from "@/components/page-container";
 
 export default function Login() {
   return (
-    <section className="flex min-h-screen flex-col items-center  p-8 justify-center">
+    <PageContainer size="default" clearNavbar={false} className="flex min-h-screen flex-col items-center justify-center p-8">
       <Link href="/" className="absolute top-0 left-0 p-6">
         <Button variant="link">
           <ArrowLeft className="mr-2" /> Regresar
@@ -49,6 +50,6 @@ export default function Login() {
           </Link>
         </CardFooter>
       </Card>
-    </section>
+    </PageContainer>
   );
 }

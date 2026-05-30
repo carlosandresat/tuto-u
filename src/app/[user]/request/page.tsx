@@ -30,6 +30,9 @@ export default async function Page({ params }: { params: Promise<{ user: string 
           <ArrowLeft className="mr-2" /> Regresar
         </Link>
       </Button>
+      <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight w-full text-left">
+        Solicitar Tutoría
+      </h1>
       <Card className="w-full max-w-screen-lg">
         <CardHeader>
           <CardTitle>Solicita una tutoría con {formData.name}</CardTitle>

@@ -6,10 +6,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
+import { PageContainer } from "@/components/page-container";
 
 export default function Preregister() {
   return (
-    <section className="flex min-h-screen flex-col items-center  p-8 justify-center">
+    <PageContainer size="default" clearNavbar={false} className="flex min-h-screen flex-col items-center justify-center p-8">
       <Link href="/" className=" self-start fixed top-6 left-0 p-6">
         <Button variant="link">
           <ArrowLeft className="mr-2" /> Regresar
@@ -26,7 +27,7 @@ export default function Preregister() {
               height={60}
               className="w-16 mt-12"
             />
-            <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-12">
+            <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-12 w-full text-center">
               El Pre-Registro ha terminado
             </h1>
             <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mt-8 mb-12 text-center">
@@ -36,6 +37,6 @@ export default function Preregister() {
           </div>
         </CardContent>
       </Card>
-    </section>
+    </PageContainer>
   );
 }

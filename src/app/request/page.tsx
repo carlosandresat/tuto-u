@@ -16,6 +16,9 @@ export default async function Component() {
             <ArrowLeft className="mr-2" /> Regresar
           </Link>
         </Button>
+        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight w-full text-left">
+          Solicitar Tutoría
+        </h1>
         <div className="flex flex-col md:flex-row gap-6 w-full">
           <IndividualSessionForm userId={session?.user?.id || ""}></IndividualSessionForm>
         </div>

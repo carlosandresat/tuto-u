@@ -12,10 +12,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { NewPasswordForm } from "@/components/new-password-form";
 import { Suspense } from "react";
+import { PageContainer } from "@/components/page-container";
 
 export default function NewPasswordPage() {
   return (
-    <section className="flex min-h-screen flex-col items-center p-8 justify-center">
+    <PageContainer size="default" clearNavbar={false} className="flex min-h-screen flex-col items-center justify-center p-8">
       <Link href="/auth/login" className="absolute top-0 left-0 p-6">
         <Button variant="link">
           <ArrowLeft className="mr-2" /> Regresar al Login
@@ -46,6 +47,6 @@ export default function NewPasswordPage() {
           </Link>
         </CardFooter>
       </Card>
-    </section>
+    </PageContainer>
   );
 }
