@@ -54,6 +54,7 @@ export const updateUserPricing = async (
 
   const {
     durations,
+    priceHalfHour,
     priceOneHour,
     priceOneHalfHour,
     priceTwoHours,
@@ -69,6 +70,21 @@ export const updateUserPricing = async (
 
   const newPricing = [];
 
+  if (durations.includes("0.5h")) {
+    if (!priceHalfHour) {
+      newPricing.push({
+        userId: userId,
+        duration: 30,
+        price: 0,
+      });
+    } else {
+      newPricing.push({
+        userId: userId,
+        duration: 30,
+        price: priceHalfHour,
+      });
+    }
+  }
   if (durations.includes("1h")) {
     if (!priceOneHour) {
       newPricing.push({

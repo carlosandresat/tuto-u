@@ -132,7 +132,7 @@ export function TutorSessionCard({
         </div>
         <div className="flex space-x-2">
           <Hourglass />
-          <p>{`${duration / 60}h`.replace(".0", "")}</p>
+          <p>{duration === 30 ? "30 min" : `${duration / 60}h`.replace(".0", "")}</p>
         </div>
         <div className="flex space-x-2">
           <Banknote /> <p>{price != 0 ? `$${price.toFixed(2)}` : "Gratuita"}</p>

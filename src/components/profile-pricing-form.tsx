@@ -29,6 +29,7 @@ export function ProfilePricingForm({
     return `${row.duration / 60}h`.replace(".0", "");
   });
 
+  let priceHalfHour: number | undefined;
   let priceOneHour: number | undefined;
   let priceOneHalfHour: number | undefined;
   let priceTwoHours: number | undefined;
@@ -37,6 +38,9 @@ export function ProfilePricingForm({
 
   pricingConfig.forEach((row) => {
     switch (row.duration) {
+      case 30:
+        priceHalfHour = Number(row.price);
+        break;
       case 60:
         priceOneHour = Number(row.price);
         break;
@@ -62,6 +66,7 @@ export function ProfilePricingForm({
     resolver: zodResolver(UserPricingSchema),
     defaultValues: {
       durations,
+      priceHalfHour,
       priceOneHour,
       priceOneHalfHour,
       priceTwoHalfHours,
@@ -96,6 +101,9 @@ export function ProfilePricingForm({
                     value={field.value}
                     onValueChange={field.onChange}
                   >
+                    <ToggleGroupItem value="0.5h" aria-label="Toggle 0.5h">
+                      30 minutos
+                    </ToggleGroupItem>
                     <ToggleGroupItem value="1h" aria-label="Toggle 1h">
                       1 hora
                     </ToggleGroupItem>
@@ -117,6 +125,34 @@ export function ProfilePricingForm({
             )}
           />
           <div className="flex items-center justify-center flex-col space-y-2">
+            <FormField
+              control={form.control}
+              name="priceHalfHour"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <div
+                      className={`flex items-center justify-center ${
+                        !form.watch("durations").includes("0.5h")
+                          ? "invisible"
+                          : null
+                      }`}
+                    >
+                      <DollarSign />
+
+                      <Input
+                        type="number"
+                        className="input"
+                        placeholder="Precio"
+                        step="0.5"
+                        {...field}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="priceOneHour"

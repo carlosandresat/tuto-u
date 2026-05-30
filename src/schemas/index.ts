@@ -46,6 +46,7 @@ export const RegisterSchema = z.object({
 
 export const UserPricingSchema = z.object({
   durations: z.array(z.string()),
+  priceHalfHour: z.coerce.number().multipleOf(0.01).optional(),
   priceOneHour: z.coerce.number().multipleOf(0.01).optional(),
   priceOneHalfHour: z.coerce.number().multipleOf(0.01).optional(),
   priceTwoHours: z.coerce.number().multipleOf(0.01).optional(),

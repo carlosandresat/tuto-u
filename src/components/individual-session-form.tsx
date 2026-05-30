@@ -100,6 +100,9 @@ export function IndividualSessionForm({ userId }: { userId: string }) {
   function formatDuration(duration: number) {
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
+    if (hours === 0) {
+      return `${minutes} minutos`;
+    }
     if (minutes === 0) {
       // Return just the hours if there are no extra minutes
       return `${hours} hora${hours > 1 ? "s" : ""}`;

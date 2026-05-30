@@ -10,6 +10,15 @@ import { getUserNameByEmail, getUserProfile } from "@/actions/profile";
 import { ClientTimeBadges } from "@/components/client-time-badges";
 import { PageContainer } from "@/components/page-container";
 
+const durationTranslationMap: Record<string, string> = {
+  "0.5h": "30 minutos",
+  "1h": "1 hora",
+  "1.5h": "1 hora 30 minutos",
+  "2h": "2 horas",
+  "2.5h": "2 horas 30 minutos",
+  "3h": "3 horas",
+};
+
 type Props = {
   params: Promise<{ user: string }>;
 };
@@ -158,7 +167,7 @@ export default async function Page({ params }: Props) {
                       key={index}
                       className="flex justify-between items-center"
                     >
-                      <span>{slot.duration}</span>
+                      <span>{durationTranslationMap[slot.duration] || slot.duration}</span>
                       <Badge variant="outline">${slot.price.toFixed(2)}</Badge>
                     </li>
                   ))}
