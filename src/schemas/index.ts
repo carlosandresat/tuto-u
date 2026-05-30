@@ -93,25 +93,21 @@ export const IndividualSessionRequestSchema = z
       .string({
         required_error: "Tienes que ingresar un tema.",
       })
-      .min(5, "Minimo 5 caracteres")
-      .max(100, "Maximo 100 caracteres"),
+      .min(5, "Mínimo 5 caracteres")
+      .max(100, "Máximo 100 caracteres"),
     place: z.string().optional(),
     isOnline: z.boolean(),
   })
   .refine(
     (schema) => {
-      if (format(new Date(), "dd/MM/y") !== format(schema.date, "dd/MM/y")) {
-        return true;
-      } else {
-        if (
-          parseInt(schema.time.split(":")[0], 10) <=
-          new Date().getHours() + 8
-        ) {
-          return false;
-        } else {
-          return true;
-        }
-      }
+      const now = new Date();
+      const minAdvanceTime = now.getTime() + 8 * 60 * 60 * 1000; // 8 hours in ms
+      
+      const sessionDateTime = new Date(schema.date);
+      const [hours, minutes] = schema.time.split(":").map(Number);
+      sessionDateTime.setHours(hours, minutes, 0, 0);
+
+      return sessionDateTime.getTime() >= minAdvanceTime;
     },
     {
       message: "Debes solicitar la tutoría con 8 horas de anticipación",
@@ -170,25 +166,21 @@ export const ProfileSessionRequestSchema = z
       .string({
         required_error: "Tienes que ingresar un tema.",
       })
-      .min(5, "Minimo 5 caracteres")
-      .max(200, "Maximo 200 caracteres"),
+      .min(5, "Mínimo 5 caracteres")
+      .max(200, "Máximo 200 caracteres"),
     place: z.string().optional(),
     isOnline: z.boolean(),
   })
   .refine(
     (schema) => {
-      if (format(new Date(), "dd/MM/y") !== format(schema.date, "dd/MM/y")) {
-        return true;
-      } else {
-        if (
-          parseInt(schema.time.split(":")[0], 10) <=
-          new Date().getHours() + 8
-        ) {
-          return false;
-        } else {
-          return true;
-        }
-      }
+      const now = new Date();
+      const minAdvanceTime = now.getTime() + 8 * 60 * 60 * 1000; // 8 hours in ms
+      
+      const sessionDateTime = new Date(schema.date);
+      const [hours, minutes] = schema.time.split(":").map(Number);
+      sessionDateTime.setHours(hours, minutes, 0, 0);
+
+      return sessionDateTime.getTime() >= minAdvanceTime;
     },
     {
       message: "Debes solicitar la tutoría con 8 horas de anticipación",
