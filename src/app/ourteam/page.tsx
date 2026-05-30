@@ -23,9 +23,9 @@ export default function OurTeam() {
 
       <PageContainer size="full" clearNavbar={false} className="px-0 pt-0 pb-0 min-h-screen">
         <section className="pt-32 pb-12 w-full flex items-center justify-center flex-col px-4 sm:px-6 lg:px-8">
-          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
+          <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
             Nuestro Equipo
-          </h2>
+          </h1>
           <p className="scroll-m-20 text-muted-foreground max-w-3xl text-center mt-6">
             Conoce a las increíbles personas que han contribuido al desarrollo y
             al éxito de Tuto-U. Cada colaborador ha desempeñado un papel único,
@@ -168,7 +168,7 @@ export default function OurTeam() {
           </div>
         </section>
         <section className="py-12 w-full flex items-center justify-center flex-col bg-secondary px-4 sm:px-6 lg:px-8">
-          <h2 className="scroll-m-20 border-b border-muted-foreground pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
+          <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
             Nuestros Partners
           </h2>
           <p className="scroll-m-20 text-muted-foreground max-w-3xl text-center mt-6">

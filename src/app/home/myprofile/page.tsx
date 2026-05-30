@@ -117,11 +117,11 @@ export default async function MyProfile() {
   return (
     <>
       <PageContainer size="xl">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight w-full text-left">
           Mi Perfil
-        </h2>
+        </h1>
 
-        <Button className="mt-8" asChild>
+        <Button className="mt-8 self-start" asChild>
           <Link href={`/${username}/profile`}>Ver perfil público</Link>
         </Button>
 

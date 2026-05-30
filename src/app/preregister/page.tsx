@@ -26,9 +26,9 @@ export default function Preregister() {
               height={60}
               className="w-16 mt-12"
             />
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-12">
+            <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 mt-12">
               El Pre-Registro ha terminado
-            </h2>
+            </h1>
             <h4 className="scroll-m-20 text-xl font-semibold tracking-tight mt-8 mb-12 text-center">
               ¡Gracias por seguir explorando esta página! Ahora puedes
               registrarte en Inicio

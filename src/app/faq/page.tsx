@@ -15,9 +15,9 @@ export default function FAQ() {
     <>
       <StartNavbar />
       <PageContainer size="default" className="min-h-screen">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
+        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
           Preguntas Frecuentes
-        </h2>
+        </h1>
         {faq.map((section, index) => {
           return (
             <React.Fragment key={`Section${index}`}>

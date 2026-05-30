@@ -33,9 +33,9 @@ export default function Home() {
   return (
     <>
       <PageContainer size="2xl" className="justify-between min-h-screen">
-        <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 w-full text-left">
+        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0 w-full text-left">
           Tus Tutorías
-        </h2>
+        </h1>
         <p className="text-lg text-muted-foreground mt-2 w-full text-left">
           Estas son las tutorías que has solicitado
         </p>

@@ -16,14 +16,12 @@ export default async function AchievementsPage() {
   return (
     <PageContainer size="2xl" className="min-h-screen">
       <div className="w-full">
-        <div className="flex flex-col gap-2 border-b pb-4 mb-8">
-          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
-            Mis Logros
-          </h2>
-          <p className="text-muted-foreground text-sm">
-            Visualiza los logros que has obtenido en Tuto-U y tu progreso para desbloquear los siguientes.
-          </p>
-        </div>
+        <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight">
+          Mis Logros
+        </h1>
+        <p className="text-muted-foreground text-sm mt-2 mb-8">
+          Visualiza los logros que has obtenido en Tuto-U y tu progreso para desbloquear los siguientes.
+        </p>
         
         <AchievementsList achievements={achievements} stats={stats} />
       </div>

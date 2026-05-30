@@ -4,9 +4,9 @@ import { PageContainer } from "@/components/page-container";
 export default function Students() {
   return (
     <PageContainer size="2xl" className="min-h-screen">
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight w-full text-left">
+      <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight w-full text-left">
         Estudiantes
-      </h2>
+      </h1>
       <AllStudents />
     </PageContainer>
   );
