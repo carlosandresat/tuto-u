@@ -10,9 +10,144 @@ export default function PatchNotes() {
         <h1 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight max-w-screen-xl w-full text-center">
           Notas de la Versión
         </h1>
-
         <div className="flex flex-col w-full mt-8">
-          <div className="w-full flex  justify-start items-center">
+          {/* Versión 1.6 */}
+          <div className="w-full flex justify-start items-center">
+            <div className="bg-foreground text-background rounded-full h-20 w-20 text-center items-center justify-center flex text-2xl flex-none font-semibold">
+              1.6
+            </div>
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight ml-4">
+              Versión 1.6 – 31 de mayo de 2026
+            </h3>
+          </div>
+          <div className="w-full flex">
+            <div className="flex justify-center relative w-20">
+              <div className="flex justify-center h-full w-20">
+                <div className="w-1 bg-foreground"></div>
+              </div>
+            </div>
+            <div className="flex flex-col pl-4 w-auto space-y-2 h-max">
+              <p className="text-md text-muted-foreground">
+                Esta actualización de Tuto-U introduce nuevas herramientas interactivas,
+                flujos de seguridad esenciales y una optimización completa de velocidad y consistencia:
+              </p>
+              <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+                <li>
+                  <span className="font-semibold">Página de Logros con Progreso:</span>{" "}
+                  Nueva sección en el panel de inicio para consultar tus logros obtenidos,
+                  los que están pendientes y el avance porcentual de cada meta.
+                </li>
+                <li>
+                  <span className="font-semibold">Buscador y Filtro de Asignaturas:</span>{" "}
+                  Barra de búsqueda en tiempo real y filtros rápidos por área/escuela en la página principal
+                  para encontrar tutores y materias con un solo clic.
+                </li>
+                <li>
+                  <span className="font-semibold">Colaboración de Syllabus:</span>{" "}
+                  Nueva guía paso a paso y botón para subir programas académicos en PDF de forma sencilla,
+                  permitiéndote ganar un logro al colaborar. Además, ahora se muestra la fecha de su última actualización.
+                </li>
+                <li>
+                  <span className="font-semibold">Soporte para Tutorías Cortas (30 minutos):</span>{" "}
+                  Los tutores ahora pueden configurar opciones de duración de 30 minutos, y los estudiantes
+                  solicitar tutorías rápidas adaptadas a dudas puntuales.
+                </li>
+                <li>
+                  <span className="font-semibold">Recuperación de Contraseñas por Correo:</span>{" "}
+                  Flujo seguro para restablecer credenciales en caso de olvido mediante el correo institucional.
+                </li>
+                <li>
+                  <span className="font-semibold">Corrección de Zonas Horarias y Regla de 8 Horas:</span>{" "}
+                  Ajustes internos para sincronizar de manera óptima las zonas horarias locales con el servidor (UTC),
+                  garantizando que las reservas se realicen correctamente con las 8 horas de antelación requeridas.
+                </li>
+                <li>
+                  <span className="font-semibold">Nueva Estructura Visual Unificada:</span>{" "}
+                  Migración de las páginas principales al nuevo sistema de contenedores y pie de página común,
+                  mejorando la presentación y legibilidad en dispositivos móviles.
+                </li>
+                <li>
+                  <span className="font-semibold">Actualización Mayor de Velocidad (React 19 & Next.js 16):</span>{" "}
+                  Actualización técnica profunda que reduce los tiempos de respuesta del sitio y optimiza la estabilidad general.
+                </li>
+              </ul>
+              <p className="leading-7">
+                Esta versión prepara a Tuto-U para el inicio del nuevo semestre académico,
+                brindando una plataforma mucho más ágil, rápida y accesible para toda la comunidad de Yachay Tech.
+              </p>
+            </div>
+          </div>
+          <div className="w-full flex">
+            <div className="flex justify-center relative w-20">
+              <div className="flex justify-center h-full w-20">
+                <div className="w-1 bg-foreground"></div>
+              </div>
+            </div>
+            <div className="flex flex-col pl-4 w-auto space-y-2 h-8"></div>
+          </div>
+
+          {/* Versión 1.5 */}
+          <div className="w-full flex justify-start items-center">
+            <div className="bg-foreground text-background rounded-full h-20 w-20 text-center items-center justify-center flex text-2xl flex-none font-semibold">
+              1.5
+            </div>
+            <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight ml-4">
+              Versión 1.5 – 20 de marzo de 2025
+            </h3>
+          </div>
+          <div className="w-full flex">
+            <div className="flex justify-center relative w-20">
+              <div className="flex justify-center h-full w-20">
+                <div className="w-1 bg-foreground"></div>
+              </div>
+            </div>
+            <div className="flex flex-col pl-4 w-auto space-y-2 h-max">
+              <p className="text-md text-muted-foreground">
+                Un lanzamiento centrado en la conexión directa entre la comunidad y la personalización
+                de perfiles para facilitar el agendamiento:
+              </p>
+              <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+                <li>
+                  <span className="font-semibold">Perfiles Públicos y Compartibles:</span>{" "}
+                  Los usuarios pueden ahora compartir sus perfiles mediante un enlace directo público.
+                  Se añadieron portadas sociales dinámicas (OpenGraph) para Facebook y WhatsApp.
+                </li>
+                <li>
+                  <span className="font-semibold">Botón de Chat de WhatsApp:</span>{" "}
+                  Integración de enlaces de contacto directo por WhatsApp en las tarjetas de tutoría aceptada,
+                  permitiendo coordinar detalles al instante sin depender de correos electrónicos.
+                </li>
+                <li>
+                  <span className="font-semibold">Agendamiento desde Perfiles con Horarios Dinámicos:</span>{" "}
+                  Un nuevo formulario que permite agendar tutorías directamente desde el perfil del tutor,
+                  mostrando sus tarifas y actualizando automáticamente los horarios hábiles según el día elegido.
+                </li>
+                <li>
+                  <span className="font-semibold">Syllabus de Química I y Biología I:</span>{" "}
+                  Ampliación del contenido académico disponible con las guías de estudio de estas materias básicas.
+                </li>
+                <li>
+                  <span className="font-semibold">Hito de 400 Usuarios Registrados:</span>{" "}
+                  Tuto-U superó la marca de 400 estudiantes de Yachay Tech registrados de forma activa en la plataforma.
+                </li>
+              </ul>
+              <p className="leading-7">
+                Con la versión 1.5, Tuto-U da un paso gigante hacia la comunicación directa y
+                descentralizada entre tutores y estudiantes, agilizando el flujo completo de enseñanza.
+              </p>
+            </div>
+          </div>
+          <div className="w-full flex">
+            <div className="flex justify-center relative w-20">
+              <div className="flex justify-center h-full w-20">
+                <div className="w-1 bg-foreground"></div>
+              </div>
+            </div>
+            <div className="flex flex-col pl-4 w-auto space-y-2 h-8"></div>
+          </div>
+
+          {/* Hito 400 Usuarios */}
+          <div className="w-full flex justify-start items-center">
             <div className="bg-foreground text-background rounded-full h-20 w-20 text-center items-center justify-center flex text-2xl flex-none">
               <Lightbulb />
             </div>
@@ -28,6 +163,7 @@ export default function PatchNotes() {
             </div>
             <div className="flex flex-col pl-4 w-auto space-y-2 h-8"></div>
           </div>
+
           {/* Versión 1.4 */}
           <div className="w-full flex items-center">
             <div className="bg-foreground text-background rounded-full h-20 w-20 text-center items-center justify-center flex text-2xl flex-none">

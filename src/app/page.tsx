@@ -90,11 +90,11 @@ export default function Home() {
                   Cuenta Regresiva
                 </h2>
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400">
-                  Próxima Actualización
+                  Inicio del Próximo Semestre
                 </p>
                 <CountdownTimer />
                 <p className="mx-auto max-w-xl text-gray-500 md:text-xl dark:text-gray-400 pt-2">
-                  22 de Julio de 2024 - 12:00 PM
+                  11 de Agosto de 2026 - 7:00 AM
                 </p>
               </div>
             </div>

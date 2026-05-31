@@ -18,7 +18,7 @@ export const CountdownTimer = () => {
 
   function calculateTimeRemaining(): TimeRemaining {
     const now = new Date().getTime();
-    const difference = 1721667600000 - now;
+    const difference = 1786449600000 - now;
 
     if (difference <= 0) {
       // Timer has reached or passed the target time
