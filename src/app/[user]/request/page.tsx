@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: Promise<{ user: string 
   const formData = await getTutorFormData(email);
 
   return (
-    <PageContainer size="xl" clearNavbar={true} className="flex flex-col gap-6 md:min-h-screen">
+    <PageContainer size="xl" clearNavbar={false} className="flex flex-col gap-6 md:min-h-screen">
       <Button variant="link" className="px-0 self-start" asChild>
         <Link href={`/${resolvedParams.user}/profile`}>
           <ArrowLeft data-icon="inline-start" /> Regresar

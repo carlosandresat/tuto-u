@@ -19,7 +19,7 @@ export default async function Component() {
   });
 
   return (
-    <PageContainer size="2xl" clearNavbar={true} className="flex flex-col gap-6 md:min-h-screen">
+    <PageContainer size="2xl" clearNavbar={false} className="flex flex-col gap-6 md:min-h-screen">
       <Button variant="link" className="px-0 self-start" asChild>
         <Link href="/home" >
           <ArrowLeft data-icon="inline-start" /> Regresar
