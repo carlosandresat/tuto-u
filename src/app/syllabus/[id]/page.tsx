@@ -12,6 +12,16 @@ import { auth } from "@/auth";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Megaphone } from "lucide-react";
 import { PageContainer } from "@/components/page-container";
+import { SyllabusContributeButton } from "@/components/syllabus-contribute-button";
+
+function getSyllabusLastUpdate(id: number): string {
+  // Cálculo I (1), Álgebra Lineal (4), Química I (5), Biología I (9) se agregaron en Julio 2024
+  if ([1, 4, 5, 9].includes(id)) {
+    return "Julio 2024";
+  }
+  // El resto de materias se agregaron en Febrero 2025
+  return "Febrero 2025";
+}
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
@@ -31,7 +41,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
           </Button>
         </Link>
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl w-full text-left">
-          Syllabus not found
+          Syllabus no encontrado
         </h1>
       </PageContainer>
     );
@@ -45,23 +55,19 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
             <ArrowLeft className="mr-2" /> Regresar
           </Button>
         </Link>
-        <div className="flex mt-6 w-full">
-          <Alert className="max-w-3xl">
-            <Megaphone className="h-4 w-4" />
-            <AlertTitle>Importante</AlertTitle>
-            <AlertDescription>
-              Los syllabus fueron recopilados de semestres anteriores y su
-              información fue extraída mediante IA. Próximamente se actualizarán
-              manualmente con la información más reciente.
-            </AlertDescription>
-          </Alert>
-        </div>
-
         <div className="flex flex-col w-full py-8">
-          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl w-full text-left">
-            {syllabus.classname}
-          </h1>
-          <p className="text-md text-muted-foreground w-full text-left mt-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 w-full border-b pb-6 mb-8">
+            <div className="space-y-2">
+              <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-left">
+                {syllabus.classname}
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Última actualización: {getSyllabusLastUpdate(syllabus.id)}
+              </p>
+            </div>
+            <SyllabusContributeButton className="shrink-0" />
+          </div>
+          <p className="text-md text-muted-foreground w-full text-left">
             {syllabus.description}
           </p>
 
