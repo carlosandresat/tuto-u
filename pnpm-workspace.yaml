@@ -1,6 +1,13 @@
 packages:
   - '.'
 
+allowBuilds:
+  '@prisma/engines': true
+  bcrypt: true
+  prisma: true
+  sharp: true
+  unrs-resolver: true
+
 onlyBuiltDependencies:
   - '@prisma/engines'
   - bcrypt
