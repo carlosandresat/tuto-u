@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { auth } from "@/auth";
 
 import {
   UserPricingSchema,
@@ -46,6 +47,12 @@ export const updateUserPricing = async (
   data: z.infer<typeof UserPricingSchema>,
   userId: string
 ) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    return {error: "Usuario NO AUTORIZADO"};
+  }
+  const currentUserId = session.user.id;
   const validatedFields = UserPricingSchema.safeParse(data);
 
   if (!validatedFields.success) {
@@ -64,7 +71,7 @@ export const updateUserPricing = async (
 
   await db.userPricingConfiguration.deleteMany({
     where: {
-      userId: userId,
+      userId: currentUserId,
     },
   });
 
@@ -73,13 +80,13 @@ export const updateUserPricing = async (
   if (durations.includes("0.5h")) {
     if (!priceHalfHour) {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 30,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 30,
         price: priceHalfHour,
       });
@@ -88,13 +95,13 @@ export const updateUserPricing = async (
   if (durations.includes("1h")) {
     if (!priceOneHour) {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 60,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 60,
         price: priceOneHour,
       });
@@ -103,13 +110,13 @@ export const updateUserPricing = async (
   if (durations.includes("1.5h")) {
     if (!priceOneHalfHour) {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 90,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 90,
         price: priceOneHalfHour,
       });
@@ -118,13 +125,13 @@ export const updateUserPricing = async (
   if (durations.includes("2h")) {
     if (!priceTwoHours) {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 120,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 120,
         price: priceTwoHours,
       });
@@ -133,13 +140,13 @@ export const updateUserPricing = async (
   if (durations.includes("2.5h")) {
     if (!priceTwoHalfHours) {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 150,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 150,
         price: priceTwoHalfHours,
       });
@@ -148,13 +155,13 @@ export const updateUserPricing = async (
   if (durations.includes("3h")) {
     if (!priceThreeHours) {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 180,
         price: 0,
       });
     } else {
       newPricing.push({
-        userId: userId,
+        userId: currentUserId,
         duration: 180,
         price: priceThreeHours,
       });
@@ -186,6 +193,13 @@ export const updateUserCourses = async (
   data: z.infer<typeof UserCoursesSchema>,
   userId: string
 ) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+      return { error: "Usuario NO AUTORIZADO"};
+  }
+
+  const currentUserId = session.user.id;
   const validatedFields = UserCoursesSchema.safeParse(data);
 
   if (!validatedFields.success) {
@@ -195,13 +209,13 @@ export const updateUserCourses = async (
   const { courses } = validatedFields.data;
 
   const newTutorCourses = courses.map((courseId) => {
-    return { tutorId: userId, courseId: courseId };
+    return { tutorId: currentUserId, courseId: courseId };
   });
 
   try {
     await db.tutorCourse.deleteMany({
       where: {
-        tutorId: userId,
+        tutorId: currentUserId,
       },
     });
     await db.tutorCourse.createMany({
@@ -236,14 +250,21 @@ export const updateUserAvailability = async (
   entries: { dayOfWeek: number; timeSlot: number }[],
   userId: string
 ) => {
+  const session = await auth();
+  
+  if (!session?.user?.id) {
+    return{ error: "Usuario NO AUTORIZADO"};
+  }
+  
+  const currentUserId = session.user.id;
   const newTutorCourses = entries.map((entry) => {
-    return { tutorId: userId, dayOfWeek: entry.dayOfWeek, timeSlot: entry.timeSlot };
+    return { tutorId: currentUserId, dayOfWeek: entry.dayOfWeek, timeSlot: entry.timeSlot };
   });
 
   try {
     await db.tutorAvailability.deleteMany({
       where: {
-        tutorId: userId,
+        tutorId: currentUserId,
       },
     });
     await db.tutorAvailability.createMany({
