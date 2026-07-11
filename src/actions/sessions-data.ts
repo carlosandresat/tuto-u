@@ -237,9 +237,24 @@ export const rateSession = async (
   if (!session?.user?.id) {
     throw new Error("You must be signed in to perform this action");
   }
+  const currentUserId = session.user.id;
+  const existingSession = await db.individualSession.findUnique({
+    where: {
+      id: sessionId},
+  });
 
+  if (!existingSession) {
+    throw new Error ("Sesión no encontrada");
+  }
+
+  if (
+    existingSession.studentId !== currentUserId &&
+    existingSession.tutorId !== currentUserId
+  ){
+    throw new Error ("No tienes permiso para calificar esta sesión")
+  }
   try {
-    if (role === "student") {
+    if (existingSession.studentId === currentUserId) {
       await db.individualSession.update({
         where: {
           id: sessionId,
@@ -250,7 +265,7 @@ export const rateSession = async (
         },
       });
     }
-    if (role === "tutor") {
+    if (existingSession.tutorId === currentUserId) {
       await db.individualSession.update({
         where: {
           id: sessionId,
@@ -295,11 +310,26 @@ export const reportSession = async (
   if (!session?.user?.id) {
     throw new Error("You must be signed in to perform this action");
   }
+  const currentUserId = session.user.id;
+  const existingSession = await db.individualSession.findUnique({
+    where: {
+      id: sessionId    },
+  });
 
+  if (!existingSession) {
+    throw new Error ("Sesión no encontrada")
+  }
+
+  if (
+    existingSession.studentId !== currentUserId &&
+    existingSession.tutorId !== currentUserId
+  ){
+    throw new Error ("No tienes permiso para reportar esta sesión")
+  }
   try {
     // Update the session with a zero rating and a REPORTED SESSION comment based on the user's role
     const updatedSessionData =
-      role === "student"
+      currentUserId === existingSession.studentId
         ? {
             studentRating: 0,
             studentComment: "REPORTED SESSION",
