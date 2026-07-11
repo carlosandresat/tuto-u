@@ -65,6 +65,26 @@ export const cancelSession = async (
   userName: string
 ): Promise<string> => {
   try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      throw new Error ("Usuario NO AUTORIZADO");
+    }
+    const currentUserId = session.user.id;
+    const existingSession = await db.individualSession.findUnique({
+      where: { id: sessionId},
+    });
+
+    if (!existingSession){
+      throw new Error("Sesión no encontrada");
+    }
+
+    if (
+      existingSession.tutorId !== currentUserId &&
+      existingSession.studentId !== currentUserId
+    ){
+      throw new Error ("No tienes permiso de cancelar esta sesión")
+    }
     const updatedSession = await db.individualSession.update({
       where: {
         id: sessionId,
@@ -91,6 +111,25 @@ export const acceptSession = async (
   studentName: string
 ): Promise<string> => {
   try {
+    const session = await auth();
+
+    if(!session?.user?.id) {
+      throw new Error ("Usuario NO AUTORIZADO")
+    };
+    const currentUserId = session.user.id;
+    const existingSession = await db.individualSession.findUnique({
+      where:{ id: sessionId},
+    });
+
+    if (!existingSession) {
+      throw new Error ("Sesión no encontrada");
+    }
+
+    if (
+      existingSession.tutorId !== currentUserId
+    ){
+      throw new Error ("No tienes permiso de aceptar esta sesión")
+    }
     const updatedSession = await db.individualSession.update({
       where: {
         id: sessionId,
@@ -133,6 +172,25 @@ export const rejectSession = async (
   studentName: string
 ): Promise<string> => {
   try {
+    const session = await auth();
+
+    if (!session?.user?.id) {
+      throw new Error ("Usuario NO AUTORIZADO")
+    };
+    const currentUserId = session.user.id;
+    const existingSession = await db.individualSession.findUnique({
+      where: {id: sessionId},
+    });
+
+    if(!existingSession) {
+      throw new Error ("Sesión no encontrada")
+    };
+
+    if (
+      existingSession.tutorId !== currentUserId
+    ){
+      throw new Error ("No tienes permiso para rechazar esta sesión")
+    }
     const updatedSession = await db.individualSession.update({
       where: {
         id: sessionId,
