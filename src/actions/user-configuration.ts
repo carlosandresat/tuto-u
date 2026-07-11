@@ -281,6 +281,12 @@ export const updateUserDescription = async (
   data: z.infer<typeof UserBasicsSchema>,
   userId: string
 ) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    return { error: "Usuario NO AUTORIZADO"};
+  }
+  const currentUserId = session.user.id;
   const validatedFields = UserBasicsSchema.safeParse(data);
 
   if (!validatedFields.success) {
@@ -292,7 +298,7 @@ export const updateUserDescription = async (
   try {
     await db.user.update({
       where: {
-        id: userId,
+        id: currentUserId,
       },
       data: {
         description: description,
