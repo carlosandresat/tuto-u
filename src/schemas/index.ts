@@ -120,6 +120,30 @@ export const RateSessionSchema = z.object({
   comment: z.string().max(80, "El comentario no debe contener más de 80 caracteres").optional()
 });
 
+export const IndividualSessionActionSchema = z
+  .object({
+    tutorId: z.string().min(1, "Tutor inválido"),
+    courseId: z.number().int().positive(),
+    sessionDateTime: z.string().datetime({ message: "Fecha/hora inválida" }),
+    duration: z.number().int().positive(),
+    place: z.string().optional(),
+    online: z.boolean(),
+    topic: z
+      .string()
+      .min(5, "Mínimo 5 caracteres")
+      .max(100, "Máximo 100 caracteres"),
+  })
+  .refine(
+    (schema) => {
+      const minAdvanceTime = Date.now() + 8 * 60 * 60 * 1000; // 8h en ms
+      return new Date(schema.sessionDateTime).getTime() >= minAdvanceTime;
+    },
+    {
+      message: "Debes solicitar la tutoría con 8 horas de anticipación",
+      path: ["sessionDateTime"],
+    }
+  );
+
 export const UserBasicsSchema = z.object({
   description: z
     .string()
