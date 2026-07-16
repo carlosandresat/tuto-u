@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "@/auth";
-import { getUserNameByEmail, getUserProfile } from "@/actions/profile";
+import { getUserNameByEmail, getUserProfile } from "@/data/profile";
 import { ClientAvailabilitySchedule } from "@/components/client-time-badges";
 import { PageContainer } from "@/components/page-container";
 

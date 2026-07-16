@@ -9,7 +9,7 @@ import {
   Card,
 } from "@/components/ui/card";
 import { ProfileRequestForm } from "@/components/profile-request-form";
-import { getTutorFormData } from "@/actions/profile";
+import { getTutorFormData } from "@/data/profile";
 import { auth } from "@/auth";
 import { PageContainer } from "@/components/page-container";
 
