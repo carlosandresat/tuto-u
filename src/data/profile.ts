@@ -1,9 +1,9 @@
 import { db } from "@/lib/db";
 
-export const getUserProfile = async (email: string) => {
+export const getUserProfile = async (username: string) => {
     try{
-        const user = await db.user.findUnique ({
-            where: {email},
+        const user = await db.user.findFirst ({
+            where: {username},
             include: {
                 tutorCourses: {
                     include: {
@@ -41,10 +41,10 @@ export const getUserProfile = async (email: string) => {
     }
 };
 
-export const getUserNameByEmail = async (email: string) => {
+export const getUserNameByUsername = async (username: string) => {
   try {
-    const user = await db.user.findUnique({
-      where: { email },
+    const user = await db.user.findFirst({
+      where: { username },
       select: {
         firstname: true,
         lastname: true,
@@ -62,10 +62,10 @@ export const getUserNameByEmail = async (email: string) => {
   }
 };
 
-export const getTutorFormData = async (email: string) => {
+export const getTutorFormData = async (username: string) => {
   try {
-    const user = await db.user.findUnique({
-      where: { email },
+    const user = await db.user.findFirst({
+      where: { username },
       include: {
         tutorCourses: {
           include: {

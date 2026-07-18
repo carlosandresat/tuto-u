@@ -4,6 +4,7 @@ import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
+import { resolveUserIdentity } from "@/lib/user-identity";
 
 const FormSchema = z.object({
   firstname: z
@@ -68,12 +69,20 @@ export const preregister = async (data: z.infer<typeof FormSchema>) => {
     return { error: "Email ya registrado" };
   }
 
+  const identity = await resolveUserIdentity(email);
+
+  if (!identity) {
+    return { error: "Dominio de correo no permitido" };
+  }
+
   const result = await db.user.create({
     data: {
       firstname,
       lastname,
       email,
       password: hashedPassword,
+      username: identity.username,
+      universityId: identity.universityId,
     },
   });
 

@@ -7,6 +7,7 @@ import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { AuthError } from "next-auth";
 import { db } from "@/lib/db";
+import { resolveUserIdentity } from "@/lib/user-identity";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
@@ -58,12 +59,20 @@ export const register = async (data: z.infer<typeof RegisterSchema>) => {
       throw new Error("Email ya registrado");
     }
 
+    const identity = await resolveUserIdentity(email);
+
+    if (!identity) {
+      return { error: "Dominio de correo no permitido" };
+    }
+
     await db.user.create({
       data: {
         firstname,
         lastname,
         email,
         password: hashedPassword,
+        username: identity.username,
+        universityId: identity.universityId,
       },
     });
 

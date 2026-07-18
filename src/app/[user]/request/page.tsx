@@ -20,8 +20,7 @@ export default async function Page({ params }: { params: Promise<{ user: string 
   }
 
   const resolvedParams = await params;
-  const email = resolvedParams.user.replace("-", ".").concat("@yachaytech.edu.ec");
-  const formData = await getTutorFormData(email);
+  const formData = await getTutorFormData(resolvedParams.user);
 
   return (
     <PageContainer size="xl" clearNavbar={false} className="flex flex-col gap-6 md:min-h-screen">

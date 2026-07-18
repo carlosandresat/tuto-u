@@ -7,15 +7,15 @@ export const getUserById = async (id: string) => {
     const user = await db.user.findUnique({
       where: { id },
       select: {
-        email: true,
+        username: true,
       },
     });
 
-    if (!user || !user.email) {
+    if (!user || !user.username) {
       return "not-found";
     }
 
-    return user.email.split("@")[0].replace(".", "-")
+    return user.username;
   } catch (error) {
     console.error("Failed to fetch user profile:", error);
     return "not-found";
