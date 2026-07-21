@@ -1,0 +1,5 @@
+# Los archivos de migracion se guardan y entregan SIEMPRE en LF.
+# Prisma valida cada migration.sql por checksum (SHA256 del contenido crudo);
+# si git los convierte a CRLF en checkout, el checksum deja de coincidir
+# y migrate dev se bloquea. Ver ADR-008.
+*.sql text eol=lf
