@@ -47,6 +47,9 @@ model User {
   id              String                     @id @default(cuid())
   firstname       String?
   lastname        String?
+  username        String
+  universityId    String                    @map("university_id")
+  university      University                @relation(fields: [universityId], references: [id])   
   email           String?                    @unique
   emailVerified   DateTime?                  @map("email_verified")
   image           String?
@@ -65,7 +68,8 @@ model User {
 
   createdAt DateTime @default(now())
 
-  @@map("users")
+  @@unique([universityId, username])
+   @@map("users")
 }
 
 model VerificationToken {
@@ -124,6 +128,15 @@ model Course {
   individualSessions IndividualSession[]
 
   @@map("courses")
+}
+
+model University {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  name          String
+  emailDomain   String        @map("email_domain")@unique
+  users          User[]        
+  @@map("universities")
 }
 
 model School {

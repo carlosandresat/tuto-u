@@ -44,3 +44,6 @@ next-env.d.ts
 /.agents/
 /skills-lock.json
 
+#claude files
+AUDITORIA.md
+CLAUDE.md

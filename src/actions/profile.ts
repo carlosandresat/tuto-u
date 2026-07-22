@@ -2,127 +2,22 @@
 
 import { db } from "@/lib/db";
 
-export const getUserProfile = async (email: string) => {
-  try {
-    const user = await db.user.findUnique({
-      where: { email },
-      include: {
-        tutorCourses: {
-          include: {
-            course: true,
-          },
-        },
-        tutor_pricing: true,
-        availabilities: true,
-      },
-    });
-
-    if (!user) {
-      return {error: "Unable to fetch user profile"};
-    }
-
-    return {
-      name: `${user.firstname} ${user.lastname}`,
-      email: user.email,
-      description: user.description,
-      whatsapp: user.whatsapp,
-      profilePic: user.image || "/photos/placeholder.jpg",
-      courses: user.tutorCourses.map((tc) => ({
-        name: tc.course.name,
-      })),
-      pricing: user.tutor_pricing.map((p) => ({
-        duration: `${p.duration / 60}h`,
-        price: Number(p.price),
-      })),
-      availability: user.availabilities.map((a) => ({
-        dayOfWeek: a.dayOfWeek,
-        timeSlot: a.timeSlot,
-      })),
-    };
-  } catch (error) {
-    console.error("Failed to fetch user profile:", error);
-    throw new Error("Unable to fetch user profile.");
-  }
-};
-
-export const getUserNameByEmail = async (email: string) => {
-  try {
-    const user = await db.user.findUnique({
-      where: { email },
-      select: {
-        firstname: true,
-        lastname: true,
-      },
-    });
-
-    if (!user) {
-      return "Not Found User";
-    }
-
-    return `${user.firstname} ${user.lastname}`;
-  } catch (error) {
-    console.error("Failed to fetch user profile:", error);
-    return "Not Found User";
-  }
-};
-
 export const getUserById = async (id: string) => {
   try {
     const user = await db.user.findUnique({
       where: { id },
       select: {
-        email: true,
+        username: true,
       },
     });
 
-    if (!user || !user.email) {
+    if (!user || !user.username) {
       return "not-found";
     }
 
-    return user.email.split("@")[0].replace(".", "-")
+    return user.username;
   } catch (error) {
     console.error("Failed to fetch user profile:", error);
     return "not-found";
-  }
-};
-
-export const getTutorFormData = async (email: string) => {
-  try {
-    const user = await db.user.findUnique({
-      where: { email },
-      include: {
-        tutorCourses: {
-          include: {
-            course: true,
-          },
-        },
-        availabilities: true,
-        tutor_pricing: true,
-      },
-    });
-
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    return {
-      tutorId: user.id,
-      name: `${user.firstname} ${user.lastname}`,
-      courses: user.tutorCourses.map((tc) => ({
-        id: tc.course.id,
-        course: tc.course.name,
-      })),
-      availability: user.availabilities.map((a) => ({
-        dayOfWeek: a.dayOfWeek,
-        timeSlot: a.timeSlot,
-      })),
-      pricing: user.tutor_pricing.map((p) => ({
-        duration: p.duration,
-        price: Number(p.price),
-      })),
-    };
-  } catch (error) {
-    console.error("Failed to fetch tutor form data:", error);
-    throw new Error("Unable to fetch tutor form data.");
   }
 };

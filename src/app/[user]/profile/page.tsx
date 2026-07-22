@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { auth } from "@/auth";
-import { getUserNameByEmail, getUserProfile } from "@/actions/profile";
+import { getUserNameByUsername, getUserProfile } from "@/data/profile";
 import { ClientAvailabilitySchedule } from "@/components/client-time-badges";
 import { PageContainer } from "@/components/page-container";
 
@@ -26,8 +26,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const resolvedParams = await params;
-  const email = resolvedParams.user.replace("-", ".").concat("@yachaytech.edu.ec");
-  const user = await getUserNameByEmail(email);
+  const user = await getUserNameByUsername(resolvedParams.user);
   const title = `${user} | Tuto-U`;
   const description = `Visita el perfil de ${user}. Conoce su progreso en Tuto-U.`;
   // fetch data
@@ -53,8 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const resolvedParams = await params;
   const session = await auth();
-  const email = resolvedParams.user.replace("-", ".").concat("@yachaytech.edu.ec");
-  const tutorData = await getUserProfile(email);
+  const tutorData = await getUserProfile(resolvedParams.user);
   if (tutorData.error !== undefined) {
     return (
       <PageContainer size="xl" clearNavbar={false} className="space-y-6 min-h-screen">

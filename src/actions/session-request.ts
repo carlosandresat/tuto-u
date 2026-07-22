@@ -5,6 +5,8 @@ import { addHours } from "date-fns";
 import { newSessionTutorNotificationEmail } from "@/lib/mail";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
+import { IndividualSessionActionSchema } from "@/schemas";
 
 export const getAvailableTutors = async (
   courseId: number,
@@ -80,13 +82,45 @@ export const requestIndividualSession = async (data: {
   online: boolean;
   topic: string;
 }) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    return {error: "Usuario NO AUTORIZADO"}
+  }
+
+  const currentUserId = session.user.id;
+  const validatedFields = IndividualSessionActionSchema.safeParse(data);
+
+  if (!validatedFields.success) {
+    return { error_message: "Campos Inválidos"};
+  }
+
+  const { tutorId, courseId, sessionDateTime, duration, place, online,
+    topic  } = validatedFields.data;
   try {
+    const pricingConfig = await db.userPricingConfiguration.findFirst({
+      where: {userId: tutorId, duration: duration},
+    });
+
+    if (!pricingConfig) {
+      return { error_message: "No se encontró configuración de precio para este tutor."};
+    }
+
     await db.individualSession.create({
-      data: { ...data, status: "requested" },
+      data: { studentId: currentUserId,
+        tutorId,
+        courseId,
+        sessionDateTime,
+        duration,
+        place,
+        online,
+        topic,
+        price:pricingConfig.price,
+         status: "requested" },
     });
     const res = await db.user.findUnique({
       where: {
-        id: data.tutorId,
+        id: tutorId,
       },
       select: {
         email: true,
@@ -97,8 +131,8 @@ export const requestIndividualSession = async (data: {
       await newSessionTutorNotificationEmail(
         res.email,
         res.firstname,
-        data.topic,
-        data.sessionDateTime
+        topic,
+        sessionDateTime
       );
     }
   } catch (error) {
