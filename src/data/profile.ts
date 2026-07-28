@@ -19,9 +19,7 @@ export const getUserProfile = async (username: string) => {
         }
         return {
             name: `${user.firstname} ${user.lastname}`,
-            email: user.email,
             description: user.description,
-            whatsapp: user.whatsapp,
             profilePic: user.image || "photos/placeholder.jpg",
             courses: user.tutorCourses.map((tc) => ({
                 name: tc.course.name,

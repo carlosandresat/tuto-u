@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ArrowLeft, Calendar, Mail, Phone } from "lucide-react";
+import { ArrowLeft, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -101,22 +101,6 @@ export default async function Page({ params }: Props) {
             <CardTitle className="text-2xl font-bold">
               {tutorData.name}
             </CardTitle>
-            <div className="flex flex-col sm:flex-row items-center mt-2 space-y-2 sm:space-y-0 sm:space-x-4">
-              <div className="flex items-center">
-                <Mail className="w-4 h-4 mr-2 shrink-0" />
-                <a href={`mailto:${tutorData.email}`} className="break-all">
-                  {tutorData.email}
-                </a>
-              </div>
-              {tutorData.whatsapp && (
-                <div className="flex items-center">
-                  <Phone className="w-4 h-4 mr-2" />
-                  <a href={`https://wa.me/${tutorData.whatsapp.substring(1)}`}>
-                    {tutorData.whatsapp}
-                  </a>
-                </div>
-              )}
-            </div>
           </div>
         </CardHeader>
         <CardContent>
