@@ -14,7 +14,8 @@ export const proxy = auth((req) => {
     const isLoggedIn = !!req.auth;
 
     const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-    const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith("/syllabus/") || nextUrl.pathname.endsWith("/profile");
+    const isUserProfile = /^\/[^\/]+\/profile$/.test(nextUrl.pathname);
+    const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith("/syllabus/") || isUserProfile;
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
     if (isApiAuthRoute){
