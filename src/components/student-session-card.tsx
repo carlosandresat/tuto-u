@@ -147,7 +147,7 @@ export function StudentSessionCard({
                 </a>
               </p>
             </>
-          ) : (
+          ) : tutorEmail ? (
             <>
               <Mail />
               <p className="break-all">
@@ -159,18 +159,16 @@ export function StudentSessionCard({
                 </a>
               </p>
             </>
-          )}
+          ) :null }
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center space-x-2">
         {statusState === "accepted" && rawDateTime > new Date() ? (
           <>
             <CancelDialog
-              setState={setStatusState}
-              sessionId={sessionId}
-              email={tutorEmail}
-              userName={tutorFullname}
-            />
+            setState={setStatusState}
+            sessionId={sessionId}
+          />
           </>
         ) : statusState === "accepted" &&
           rawDateTime < new Date() &&
@@ -197,8 +195,6 @@ export function StudentSessionCard({
           <CancelDialog
             setState={setStatusState}
             sessionId={sessionId}
-            email={tutorEmail}
-            userName={tutorFullname}
           />
         ) : statusState === "canceled" ? null : null}
       </CardFooter>

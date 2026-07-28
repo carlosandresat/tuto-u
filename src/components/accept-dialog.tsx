@@ -13,13 +13,9 @@ import { acceptSession } from "@/actions/sessions-data";
 export function AcceptDialog({
   sessionId,
   setState,
-  studentEmail,
-  studentName,
 }: {
   sessionId: number;
   setState: any;
-  studentEmail: string;
-  studentName: string;
 }) {
   return (
     <Dialog>
@@ -39,7 +35,7 @@ export function AcceptDialog({
             <Button
               onClick={async () => {
                 setState("accepted");
-                await acceptSession(sessionId, studentEmail, studentName);
+                await acceptSession(sessionId);
                 window.location.reload();
               }}
             >

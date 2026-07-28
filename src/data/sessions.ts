@@ -44,8 +44,12 @@ export const getStudentSessions = async () => {
       tutorInitials: `${tutoringSession.tutor.firstname?.charAt(
         0
       )}${tutoringSession.tutor.lastname?.charAt(0)}`,
-      tutorEmail: tutoringSession.tutor.email || "",
-      tutorWhatsapp: tutoringSession.tutor.whatsapp,
+      tutorEmail:
+        tutoringSession.status === "accepted"
+       ? tutoringSession.tutor.email || ""
+        : "",
+      tutorWhatsapp:  
+      tutoringSession.status === "accepted" ? tutoringSession.tutor.whatsapp : null,
       status: tutoringSession.status,
       sessionCourse: tutoringSession.course.name,
       rawDateTime: tutoringSession.sessionDateTime,
@@ -107,8 +111,12 @@ export const getTutorSessions = async () => {
       tutorInitials: `${tutoringSession.student.firstname?.charAt(
         0
       )}${tutoringSession.student.lastname?.charAt(0)}`,
-      tutorEmail: tutoringSession.student.email || "",
-      studentWhatsapp: tutoringSession.student.whatsapp,
+      tutorEmail:
+        tutoringSession.status === "accepted"
+        ? tutoringSession.student.email || ""
+        : "",
+      studentWhatsapp:
+        tutoringSession.status === "accepted" ? tutoringSession.student.whatsapp : null,
       status: tutoringSession.status,
       sessionCourse: tutoringSession.course.name,
       rawDateTime: tutoringSession.sessionDateTime,

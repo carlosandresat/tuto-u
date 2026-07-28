@@ -13,13 +13,9 @@ import { rejectSession } from "@/actions/sessions-data";
 export function RejectDialog({
   sessionId,
   setState,
-  studentEmail,
-  studentName,
 }: {
   sessionId: number;
   setState: any;
-  studentEmail: string;
-  studentName: string;
 }) {
   return (
     <Dialog>
@@ -40,7 +36,7 @@ export function RejectDialog({
               variant="destructive"
               onClick={async () => {
                 setState("rejected");
-                await rejectSession(sessionId, studentEmail, studentName);
+                await rejectSession(sessionId);
                 window.location.reload();
               }}
             >

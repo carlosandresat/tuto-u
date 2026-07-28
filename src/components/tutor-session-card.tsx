@@ -151,7 +151,7 @@ export function TutorSessionCard({
                 </a>
               </p>
             </>
-          ) : (
+          ) : studentWhatsapp ? (
             <>
               <Mail />
               <p className="break-all">
@@ -163,7 +163,7 @@ export function TutorSessionCard({
                 </a>
               </p>
             </>
-          )}
+          ) : null}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center space-x-2">
@@ -172,8 +172,6 @@ export function TutorSessionCard({
             <CancelDialog
               setState={setStatusState}
               sessionId={sessionId}
-              email={tutorEmail}
-              userName={tutorFullname}
             />
           </>
         ) : statusState === "accepted" &&
@@ -203,14 +201,10 @@ export function TutorSessionCard({
             <RejectDialog
               setState={setStatusState}
               sessionId={sessionId}
-              studentEmail={tutorEmail}
-              studentName={tutorFullname}
             />
             <AcceptDialog
               setState={setStatusState}
               sessionId={sessionId}
-              studentEmail={tutorEmail}
-              studentName={tutorFullname}
             />
           </>
         ) : statusState === "requested" &&

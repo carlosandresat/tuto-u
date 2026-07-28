@@ -13,13 +13,9 @@ import { cancelSession } from "@/actions/sessions-data";
 export function CancelDialog({
   sessionId,
   setState,
-  email,
-  userName,
 }: {
   sessionId: number;
   setState: any;
-  email: string;
-  userName: string;
 }) {
   return (
     <Dialog>
@@ -42,7 +38,7 @@ export function CancelDialog({
               variant="destructive"
               onClick={async () => {
                 setState("canceled");
-                await cancelSession(sessionId, email, userName);
+                await cancelSession(sessionId);
                 window.location.reload();
               }}
             >

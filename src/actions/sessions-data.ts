@@ -9,32 +9,39 @@ import {
 } from "@/lib/mail";
 
 
-export const cancelSession = async (
-  sessionId: number,
-  email: string,
-  userName: string
-): Promise<string> => {
+export const cancelSession = async (sessionId: number): Promise<string> => {
   try {
     const session = await auth();
 
     if (!session?.user?.id) {
-      throw new Error ("Usuario NO AUTORIZADO");
+      throw new Error("Usuario NO AUTORIZADO");
     }
     const currentUserId = session.user.id;
+
     const existingSession = await db.individualSession.findUnique({
-      where: { id: sessionId},
+      where: { id: sessionId },
+      include: {
+        tutor: { select: { firstname: true, lastname: true, email: true } },
+        student: { select: { firstname: true, lastname: true, email: true } },
+      },
     });
 
-    if (!existingSession){
+    if (!existingSession) {
       throw new Error("Sesión no encontrada");
     }
 
     if (
       existingSession.tutorId !== currentUserId &&
       existingSession.studentId !== currentUserId
-    ){
-      throw new Error ("No tienes permiso de cancelar esta sesión")
+    ) {
+      throw new Error("No tienes permiso de cancelar esta sesión");
     }
+
+    const recipient =
+      existingSession.tutorId === currentUserId
+        ? existingSession.student
+        : existingSession.tutor;
+
     const updatedSession = await db.individualSession.update({
       where: {
         id: sessionId,
@@ -44,7 +51,11 @@ export const cancelSession = async (
       },
     });
 
-    await sessionCancelNotificationEmail(email, userName, new Date());
+    await sessionCancelNotificationEmail(
+      recipient.email || "",
+      `${recipient.firstname} ${recipient.lastname}`,
+      new Date()
+    );
 
     return `Session ${updatedSession.id} has been successfully canceled.`;
   } catch (error) {
@@ -55,31 +66,31 @@ export const cancelSession = async (
   }
 };
 
-export const acceptSession = async (
-  sessionId: number,
-  email: string,
-  studentName: string
-): Promise<string> => {
+export const acceptSession = async (sessionId: number): Promise<string> => {
   try {
     const session = await auth();
 
-    if(!session?.user?.id) {
-      throw new Error ("Usuario NO AUTORIZADO")
-    };
+    if (!session?.user?.id) {
+      throw new Error("Usuario NO AUTORIZADO");
+    }
     const currentUserId = session.user.id;
+
     const existingSession = await db.individualSession.findUnique({
-      where:{ id: sessionId},
+      where: { id: sessionId },
+      include: {
+        tutor: { select: { firstname: true } },
+        student: { select: { firstname: true, lastname: true, email: true } },
+      },
     });
 
     if (!existingSession) {
-      throw new Error ("Sesión no encontrada");
+      throw new Error("Sesión no encontrada");
     }
 
-    if (
-      existingSession.tutorId !== currentUserId
-    ){
-      throw new Error ("No tienes permiso de aceptar esta sesión")
+    if (existingSession.tutorId !== currentUserId) {
+      throw new Error("No tienes permiso de aceptar esta sesión");
     }
+
     const updatedSession = await db.individualSession.update({
       where: {
         id: sessionId,
@@ -89,21 +100,12 @@ export const acceptSession = async (
       },
     });
 
-    const res = await db.user.findUnique({
-      where: {
-        id: updatedSession.tutorId,
-      },
-      select: {
-        firstname: true,
-      },
-    });
-
     await sessionResponseNotificationEmail(
-      email,
-      res?.firstname || "",
+      existingSession.student.email || "",
+      existingSession.tutor.firstname || "",
       updatedSession.topic,
       updatedSession.sessionDateTime,
-      studentName,
+      `${existingSession.student.firstname} ${existingSession.student.lastname}`,
       "accepted"
     );
 
@@ -116,31 +118,31 @@ export const acceptSession = async (
   }
 };
 
-export const rejectSession = async (
-  sessionId: number,
-  email: string,
-  studentName: string
-): Promise<string> => {
+export const rejectSession = async (sessionId: number): Promise<string> => {
   try {
     const session = await auth();
 
     if (!session?.user?.id) {
-      throw new Error ("Usuario NO AUTORIZADO")
-    };
+      throw new Error("Usuario NO AUTORIZADO");
+    }
     const currentUserId = session.user.id;
+
     const existingSession = await db.individualSession.findUnique({
-      where: {id: sessionId},
+      where: { id: sessionId },
+      include: {
+        tutor: { select: { firstname: true } },
+        student: { select: { firstname: true, lastname: true, email: true } },
+      },
     });
 
-    if(!existingSession) {
-      throw new Error ("Sesión no encontrada")
-    };
-
-    if (
-      existingSession.tutorId !== currentUserId
-    ){
-      throw new Error ("No tienes permiso para rechazar esta sesión")
+    if (!existingSession) {
+      throw new Error("Sesión no encontrada");
     }
+
+    if (existingSession.tutorId !== currentUserId) {
+      throw new Error("No tienes permiso para rechazar esta sesión");
+    }
+
     const updatedSession = await db.individualSession.update({
       where: {
         id: sessionId,
@@ -150,21 +152,12 @@ export const rejectSession = async (
       },
     });
 
-    const res = await db.user.findUnique({
-      where: {
-        id: updatedSession.tutorId,
-      },
-      select: {
-        firstname: true,
-      },
-    });
-
     await sessionResponseNotificationEmail(
-      email,
-      res?.firstname || "",
+      existingSession.student.email || "",
+      existingSession.tutor.firstname || "",
       updatedSession.topic,
       updatedSession.sessionDateTime,
-      studentName,
+      `${existingSession.student.firstname} ${existingSession.student.lastname}`,
       "rejected"
     );
 
