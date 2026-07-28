@@ -1,7 +1,6 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { addHours } from "date-fns";
 import { newSessionTutorNotificationEmail } from "@/lib/mail";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -144,60 +143,6 @@ export const requestIndividualSession = async (data: {
   }
   revalidatePath("/home");
   redirect("/home");
-};
-
-export const getStudentSessions = async (userId: string) => {
-  const aDayAgo = addHours(new Date(), -60);
-
-  try {
-    const sessions = await db.individualSession.findMany({
-      where: {
-        studentId: userId,
-        sessionDateTime: {
-          gte: aDayAgo,
-        },
-      },
-      include: {
-        tutor: {
-          select: {
-            firstname: true,
-            lastname: true,
-            email: true,
-            whatsapp: true,
-          },
-        },
-        course: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
-
-    return sessions.map((session) => ({
-      sessionId: session.id,
-      tutorFullname: `${session.tutor.firstname} ${session.tutor.lastname}`,
-      tutorInitials: `${session.tutor.firstname?.charAt(
-        0
-      )}${session.tutor.lastname?.charAt(0)}`,
-      tutorEmail: session.tutor.email || "",
-      tutorWhatsapp: session.tutor.whatsapp,
-      status: session.status,
-      sessionCourse: session.course.name,
-      rawDateTime: session.sessionDateTime,
-      //dateString: capitalizeMonth(session.sessionDateTime.toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'})),
-      //timeString: session.sessionDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
-      place: session.place || "",
-      duration: session.duration,
-      price: Number(session.price),
-      topic: session.topic,
-      rate:
-        session.studentRating !== null ? Number(session.studentRating) : null,
-    }));
-  } catch (error) {
-    console.error("Failed to fetch student sessions:", error);
-    throw new Error("Unable to fetch student sessions.");
-  }
 };
 
 export const addNarcissismAchievement = async (id: string) => {

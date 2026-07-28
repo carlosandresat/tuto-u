@@ -8,56 +8,6 @@ import {
   sessionCancelNotificationEmail,
 } from "@/lib/mail";
 
-export const getTutorSessions = async (userId: string) => {
-  const aDayAgo = addHours(new Date(), -60);
-
-  try {
-    const sessions = await db.individualSession.findMany({
-      where: {
-        tutorId: userId,
-        sessionDateTime: {
-          gte: aDayAgo,
-        },
-      },
-      include: {
-        student: {
-          select: {
-            firstname: true,
-            lastname: true,
-            email: true,
-            whatsapp: true,
-          },
-        },
-        course: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
-
-    return sessions.map((session) => ({
-      sessionId: session.id,
-      tutorFullname: `${session.student.firstname} ${session.student.lastname}`,
-      tutorInitials: `${session.student.firstname?.charAt(
-        0
-      )}${session.student.lastname?.charAt(0)}`,
-      tutorEmail: session.student.email || "",
-      studentWhatsapp: session.student.whatsapp,
-      status: session.status,
-      sessionCourse: session.course.name,
-      rawDateTime: session.sessionDateTime,
-      place: session.place || "",
-      duration: session.duration,
-      price: Number(session.price),
-      topic: session.topic,
-      rate: session.tutorRating !== null ? Number(session.tutorRating) : null,
-    }));
-  } catch (error) {
-    console.error("Failed to fetch student sessions:", error);
-    throw new Error("Unable to fetch student sessions.");
-  }
-};
 
 export const cancelSession = async (
   sessionId: number,
