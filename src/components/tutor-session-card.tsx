@@ -151,7 +151,7 @@ export function TutorSessionCard({
                 </a>
               </p>
             </>
-          ) : studentWhatsapp ? (
+          ) : tutorEmail ? (
             <>
               <Mail />
               <p className="break-all">
