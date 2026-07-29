@@ -63,7 +63,6 @@ export function IndividualSessionForm({
     {
       id: string;
       name: string;
-      email: string | null;
       nameInitials: string;
       image: string | null;
       pricing: { duration: number; price: string }[];

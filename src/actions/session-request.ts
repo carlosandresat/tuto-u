@@ -36,7 +36,6 @@ export const getAvailableTutors = async (
           select: {
             firstname: true,
             lastname: true,
-            email: true,
             id: true,
             description: true,
             image: true,
@@ -52,7 +51,6 @@ export const getAvailableTutors = async (
     });
     return tutors.map((tutorCourse) => ({
       id: tutorCourse.tutor.id,
-      email: tutorCourse.tutor.email,
       name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`,
       nameInitials: `${tutorCourse.tutor.firstname?.charAt(
         0
