@@ -18,6 +18,7 @@ export const getUserData = async (userId: string) => {
       id: userId,
     },
     select: {
+      username: true,
       firstname: true,
       lastname: true,
       email: true,

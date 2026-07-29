@@ -36,7 +36,6 @@ import { getUserAchievements } from "@/actions/achievements-data";
 
 export default async function MyProfile() {
   const session = await auth();
-  const username = session?.user?.email?.split("@")[0].replace(".", "-");
   const pricingConfig = await getUserPricing(session?.user?.id || "");
   const preCoursesConfig = await getUserCourses(session?.user?.id || "");
   const coursesConfig = preCoursesConfig.map((course) => course.courseId);
@@ -88,7 +87,7 @@ export default async function MyProfile() {
         </h1>
 
         <Button className="mt-8 self-start" asChild>
-          <Link href={`/${username}/profile`}>Ver perfil público</Link>
+          <Link href={`/${userBasicData?.username}/profile`}>Ver perfil público</Link>
         </Button>
 
         <div className="flex w-full mt-8 flex-col gap-6">
