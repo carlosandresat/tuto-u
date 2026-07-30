@@ -11,7 +11,7 @@ export default async function AchievementsPage() {
     redirect("/auth/login");
   }
 
-  const { achievements, stats } = await getAllAchievementsWithProgress(session.user.id);
+  const { achievements, stats } = await getAllAchievementsWithProgress();
 
   return (
     <PageContainer size="2xl" className="min-h-screen">

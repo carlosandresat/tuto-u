@@ -170,7 +170,7 @@ export function IndividualSessionForm({
       };
 
       if (data.tutor === userId) {
-        const res = await addNarcissismAchievement(userId);
+        const res = await addNarcissismAchievement();
         if (res.message !== undefined) {
           toast({
             title: "Logro obtenido",

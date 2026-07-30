@@ -143,11 +143,17 @@ export const requestIndividualSession = async (data: {
   redirect("/home");
 };
 
-export const addNarcissismAchievement = async (id: string) => {
+export const addNarcissismAchievement = async () => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
+  }
+  const currentUserId = session.user.id;
   try {
     const existingAchievement = await db.userAchievement.findFirst({
       where: {
-        userId: id,
+        userId: currentUserId,
         achievementId: 12,
       },
     });
@@ -157,7 +163,7 @@ export const addNarcissismAchievement = async (id: string) => {
     } else {
       await db.userAchievement.create({
         data: {
-          userId: id,
+          userId: currentUserId,
           achievementId: 12,
         },
       });

@@ -1,8 +1,15 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { auth } from "@/auth";
 
 export const getUserAchievements = async (userId: string) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
+  }
+
   try {
     // Obtiene los logros con detalles y cuenta cuántos usuarios tienen cada logro
     const achievements = await db.userAchievement.findMany({
@@ -36,8 +43,16 @@ export const getUserAchievements = async (userId: string) => {
   }
 };
 
-export const getAllAchievementsWithProgress = async (userId: string) => {
+export const getAllAchievementsWithProgress = async () => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
+  }
+  const userId = session.user.id;
+
   try {
+    // …el cuerpo entero sin tocar…
     // 1. Obtener conteo de sesiones completadas como estudiante
     const completedStudentSessions = await db.individualSession.count({
       where: {
