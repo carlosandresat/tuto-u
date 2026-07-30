@@ -12,38 +12,6 @@ import {
   UserBasicsSchema,
 } from "@/schemas";
 
-export const getUserData = async (userId: string) => {
-  const data = await db.user.findUnique({
-    where: {
-      id: userId,
-    },
-    select: {
-      username: true,
-      firstname: true,
-      lastname: true,
-      email: true,
-      image: true,
-      description: true,
-      whatsapp: true,
-    },
-  });
-
-  return data;
-};
-
-export const getUserPricing = async (userId: string) => {
-  const data = await db.userPricingConfiguration.findMany({
-    where: {
-      userId: userId,
-    },
-    select: {
-      duration: true,
-      price: true,
-    },
-  });
-  return data;
-};
-
 export const updateUserPricing = async (
   data: z.infer<typeof UserPricingSchema>,
   userId: string
@@ -178,18 +146,6 @@ export const updateUserPricing = async (
   return { sucess: "Precios actualizados" };
 };
 
-export const getUserCourses = async (userId: string) => {
-  const data = await db.tutorCourse.findMany({
-    where: {
-      tutorId: userId,
-    },
-    select: {
-      courseId: true,
-    },
-  });
-  return data;
-};
-
 export const updateUserCourses = async (
   data: z.infer<typeof UserCoursesSchema>,
   userId: string
@@ -226,24 +182,6 @@ export const updateUserCourses = async (
   } catch (error) {
     console.log(error);
     return null;
-  }
-};
-
-export const getUserAvailability = async (userId: string) => {
-  try {
-    const data = await db.tutorAvailability.findMany({
-      where: {
-        tutorId: userId,
-      },
-      select: {
-        dayOfWeek: true,
-        timeSlot: true,
-      },
-    });
-    return data;
-  } catch (error) {
-    console.log(error);
-    return [];
   }
 };
 

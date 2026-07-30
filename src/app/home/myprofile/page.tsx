@@ -30,17 +30,17 @@ import {
   getUserData,
   getUserCourses,
   getUserAvailability,
-} from "@/actions/user-configuration";
+} from "@/data/user-configuration";
 import { ProfileAvailabilityForm } from "@/components/profile-availability-form";
 import { getUserAchievements } from "@/actions/achievements-data";
 
 export default async function MyProfile() {
   const session = await auth();
-  const pricingConfig = await getUserPricing(session?.user?.id || "");
-  const preCoursesConfig = await getUserCourses(session?.user?.id || "");
+  const pricingConfig = await getUserPricing();
+  const preCoursesConfig = await getUserCourses();
   const coursesConfig = preCoursesConfig.map((course) => course.courseId);
-  const userBasicData = await getUserData(session?.user?.id || "");
-  const userAvailability = await getUserAvailability(session?.user?.id || "");
+  const userBasicData = await getUserData();
+  const userAvailability = await getUserAvailability();
 
 
 
