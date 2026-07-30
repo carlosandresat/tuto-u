@@ -1,4 +1,3 @@
-"use server";
 
 import { Resend } from "resend";
 import { capitalizeFirstLetter } from "@/lib/utils"
