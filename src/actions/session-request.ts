@@ -12,6 +12,12 @@ export const getAvailableTutors = async (
   dayOfWeek: number,
   timeSlot: number
 ) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
+  }
+
   try {
     const previousTimeSlot = timeSlot === 0 ? 23 : timeSlot - 1;
     const previousDayOfWeek = timeSlot === 0 ? (dayOfWeek - 1 + 7) % 7 : dayOfWeek;
