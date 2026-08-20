@@ -144,7 +144,7 @@ export function ProfileRequestForm({
       };
 
       if (tutorId === studentId) {
-        const res = await addNarcissismAchievement(studentId);
+        const res = await addNarcissismAchievement();
         if (res.message !== undefined) {
           toast({
             title: "WTF",

@@ -63,7 +63,6 @@ export function IndividualSessionForm({
     {
       id: string;
       name: string;
-      email: string | null;
       nameInitials: string;
       image: string | null;
       pricing: { duration: number; price: string }[];
@@ -171,7 +170,7 @@ export function IndividualSessionForm({
       };
 
       if (data.tutor === userId) {
-        const res = await addNarcissismAchievement(userId);
+        const res = await addNarcissismAchievement();
         if (res.message !== undefined) {
           toast({
             title: "Logro obtenido",

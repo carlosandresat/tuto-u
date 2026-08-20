@@ -1,9 +1,7 @@
 import { StudentSessionCard } from "@/components/student-session-card";
-import { getStudentSessions } from "@/actions/session-request";
-import { auth } from "@/auth";
+import { getStudentSessions } from "@/data/sessions";
 
 export async function StudentView() {
-  const session = await auth();
   const studentSessions: {
     sessionId: number;
     tutorInitials: string;
@@ -18,7 +16,7 @@ export async function StudentView() {
     topic: string;
     rawDateTime: Date;
     rate: number | null;
-  }[] = await getStudentSessions(session?.user?.id || "");
+  }[] = await getStudentSessions();
   const someData: {
     sessionId: number;
     tutorInitials: string;

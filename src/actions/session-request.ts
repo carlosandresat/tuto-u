@@ -1,7 +1,6 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { addHours } from "date-fns";
 import { newSessionTutorNotificationEmail } from "@/lib/mail";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -13,6 +12,12 @@ export const getAvailableTutors = async (
   dayOfWeek: number,
   timeSlot: number
 ) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
+  }
+
   try {
     const previousTimeSlot = timeSlot === 0 ? 23 : timeSlot - 1;
     const previousDayOfWeek = timeSlot === 0 ? (dayOfWeek - 1 + 7) % 7 : dayOfWeek;
@@ -37,7 +42,6 @@ export const getAvailableTutors = async (
           select: {
             firstname: true,
             lastname: true,
-            email: true,
             id: true,
             description: true,
             image: true,
@@ -53,7 +57,6 @@ export const getAvailableTutors = async (
     });
     return tutors.map((tutorCourse) => ({
       id: tutorCourse.tutor.id,
-      email: tutorCourse.tutor.email,
       name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`,
       nameInitials: `${tutorCourse.tutor.firstname?.charAt(
         0
@@ -146,65 +149,17 @@ export const requestIndividualSession = async (data: {
   redirect("/home");
 };
 
-export const getStudentSessions = async (userId: string) => {
-  const aDayAgo = addHours(new Date(), -60);
+export const addNarcissismAchievement = async () => {
+  const session = await auth();
 
-  try {
-    const sessions = await db.individualSession.findMany({
-      where: {
-        studentId: userId,
-        sessionDateTime: {
-          gte: aDayAgo,
-        },
-      },
-      include: {
-        tutor: {
-          select: {
-            firstname: true,
-            lastname: true,
-            email: true,
-            whatsapp: true,
-          },
-        },
-        course: {
-          select: {
-            name: true,
-          },
-        },
-      },
-    });
-
-    return sessions.map((session) => ({
-      sessionId: session.id,
-      tutorFullname: `${session.tutor.firstname} ${session.tutor.lastname}`,
-      tutorInitials: `${session.tutor.firstname?.charAt(
-        0
-      )}${session.tutor.lastname?.charAt(0)}`,
-      tutorEmail: session.tutor.email || "",
-      tutorWhatsapp: session.tutor.whatsapp,
-      status: session.status,
-      sessionCourse: session.course.name,
-      rawDateTime: session.sessionDateTime,
-      //dateString: capitalizeMonth(session.sessionDateTime.toLocaleDateString('es-ES', {day: '2-digit', month: 'short', year: 'numeric'})),
-      //timeString: session.sessionDateTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }),
-      place: session.place || "",
-      duration: session.duration,
-      price: Number(session.price),
-      topic: session.topic,
-      rate:
-        session.studentRating !== null ? Number(session.studentRating) : null,
-    }));
-  } catch (error) {
-    console.error("Failed to fetch student sessions:", error);
-    throw new Error("Unable to fetch student sessions.");
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
   }
-};
-
-export const addNarcissismAchievement = async (id: string) => {
+  const currentUserId = session.user.id;
   try {
     const existingAchievement = await db.userAchievement.findFirst({
       where: {
-        userId: id,
+        userId: currentUserId,
         achievementId: 12,
       },
     });
@@ -214,7 +169,7 @@ export const addNarcissismAchievement = async (id: string) => {
     } else {
       await db.userAchievement.create({
         data: {
-          userId: id,
+          userId: currentUserId,
           achievementId: 12,
         },
       });

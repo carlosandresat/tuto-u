@@ -1,6 +1,7 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
 import { addNarcissismAchievement } from "@/actions/session-request";
 import { db } from "@/lib/db";
+import { auth } from "@/auth";
 
 // Mock the global db instance from @/lib/db
 vi.mock("@/lib/db", () => {
@@ -14,9 +15,16 @@ vi.mock("@/lib/db", () => {
   };
 });
 
+vi.mock("@/auth", () => {
+  return {
+    auth: vi.fn(),
+  };
+});
+
 describe("Server Actions - session-request", () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    vi.mocked(auth).mockResolvedValue({ user: { id: "user123" } } as any);
   });
 
   describe("addNarcissismAchievement", () => {
@@ -28,7 +36,7 @@ describe("Server Actions - session-request", () => {
         achievedDate: new Date(),
       } as any);
 
-      const result = await addNarcissismAchievement("user123");
+      const result = await addNarcissismAchievement();
 
       expect(db.userAchievement.findFirst).toHaveBeenCalledWith({
         where: {
@@ -51,7 +59,7 @@ describe("Server Actions - session-request", () => {
         achievedDate: new Date(),
       } as any);
 
-      const result = await addNarcissismAchievement("user123");
+      const result = await addNarcissismAchievement();
 
       expect(db.userAchievement.findFirst).toHaveBeenCalledWith({
         where: {
@@ -72,7 +80,7 @@ describe("Server Actions - session-request", () => {
       const mockError = new Error("Database error");
       vi.mocked(db.userAchievement.findFirst).mockRejectedValue(mockError);
 
-      const result = await addNarcissismAchievement("user123");
+      const result = await addNarcissismAchievement();
 
       expect(result).toEqual({
         error_message: "Hubo un error en el sistema. Contacta con los administradores por favor",

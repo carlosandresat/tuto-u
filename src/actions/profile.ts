@@ -1,8 +1,15 @@
 "use server";
 
 import { db } from "@/lib/db";
+import { auth } from "@/auth";
 
 export const getUserById = async (id: string) => {
+  const session = await auth();
+
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
+  }  
+  
   try {
     const user = await db.user.findUnique({
       where: { id },
