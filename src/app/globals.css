@@ -39,6 +39,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --chart-neutral: 0 0% 55%;
   }
 
   .dark {
@@ -75,6 +76,7 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --chart-neutral: 0 0% 75%;
   }
 }
 
@@ -120,8 +122,12 @@ html::-webkit-scrollbar-thumb{
    *   3. Pisar `fill`/`stroke` de Recharts, que trae `fill="#666"` en los
    *      ticks y `stroke="#ccc"` en la grilla como atributos de presentación.
    *
-   * Deliberadamente NO se tocan `--chart-1..5`: los colores de las series
-   * deben coincidir con los que se ven en pantalla.
+   * Deliberadamente NO se tocan `--chart-1..5` ni `--chart-neutral`: los
+   * colores de las series deben coincidir con los que se ven en pantalla.
+   * `--chart-neutral` existe justamente por esto — la serie "Otras" no puede
+   * usar `--muted-foreground` como color de serie porque ese token SÍ se
+   * redefine aquí abajo, y el sector cambiaría de color entre la pantalla y
+   * el PNG (ver sessions-by-status-chart.tsx).
    */
   .chart-export-text-dark {
     --foreground: 0 0% 3.9%;

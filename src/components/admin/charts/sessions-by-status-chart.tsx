@@ -27,7 +27,7 @@ const STATUS_COLORS: Record<string, string> = {
   completed: "hsl(var(--chart-3))",
   rejected: "hsl(var(--chart-4))",
   canceled: "hsl(var(--chart-5))",
-  other: "hsl(var(--muted-foreground))",
+  other: "hsl(var(--chart-neutral))",
 };
 
 export function SessionsByStatusChart({ data }: { data: SessionsByStatusRow[] }) {
