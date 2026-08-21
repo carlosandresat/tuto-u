@@ -337,12 +337,24 @@ export const getAveragePricePerDuration = async (): Promise<
 // Sesiones por estado
 // ---------------------------------------------------------------------------
 
-export type SessionStatusKey =
-  | "requested"
-  | "accepted"
-  | "completed"
-  | "rejected"
-  | "canceled";
+/** Los cuatro valores que la aplicación realmente escribe. Ver el comentario abajo. */
+const STORED_STATUS_ORDER = ["requested", "accepted", "rejected", "canceled"] as const;
+type StoredStatus = (typeof STORED_STATUS_ORDER)[number];
+
+const STORED_STATUS_LABELS: Record<StoredStatus, string> = {
+  requested: "Solicitadas",
+  accepted: "Aceptadas (por realizarse)",
+  rejected: "Rechazadas",
+  canceled: "Canceladas",
+};
+
+/**
+ * Claves de presentación: los cuatro estados almacenados, más "completed" (derivado,
+ * ver abajo) y "other" — cajón de sastre para cualquier valor que aparezca en la base
+ * y no esté en `STORED_STATUS_ORDER`. Quien consuma esto (Unit 5) debe contemplar
+ * "other" si hace un switch exhaustivo sobre `status`.
+ */
+export type SessionStatusKey = StoredStatus | "completed" | "other";
 
 export type SessionsByStatusRow = {
   status: SessionStatusKey;
@@ -363,6 +375,13 @@ export type SessionsByStatusRow = {
  * aceptadas como completadas infla la cifra con sesiones futuras, y filtrar por
  * `status = "completed"` devuelve siempre cero. Las dos categorías son disjuntas y
  * suman el total de aceptadas.
+ *
+ * `status` no tiene restricción a nivel de base de datos (es un `TEXT` sin `CHECK` ni
+ * enum) y las filas se leen con un `groupBy` sin filtro, así que cualquier valor fuera
+ * de los cuatro conocidos — de una edición manual, una migración futura, o datos
+ * antiguos — se agrega en una fila "Otras" en vez de desaparecer silenciosamente.
+ * Invariante: la suma de `sessions` en todas las filas siempre es igual al total de
+ * sesiones en la base.
  */
 export const getSessionsByStatus = async (): Promise<SessionsByStatusRow[]> => {
   await requireAdmin();
@@ -382,32 +401,35 @@ export const getSessionsByStatus = async (): Promise<SessionsByStatusRow[]> => {
 
     const counts = new Map(grouped.map((row) => [row.status, row._count._all]));
     const accepted = counts.get("accepted") ?? 0;
+    // Las dos consultas no son atómicas; el clamp evita un negativo si una sesión
+    // cruza `now` justo entre ambas.
+    const pendingAccepted = Math.max(0, accepted - completed);
 
-    return [
-      {
-        status: "requested",
-        label: "Solicitadas",
-        sessions: counts.get("requested") ?? 0,
-      },
-      {
-        status: "accepted",
-        label: "Aceptadas (por realizarse)",
-        // Las dos consultas no son atómicas; el clamp evita un negativo si una sesión
-        // cruza `now` justo entre ambas.
-        sessions: Math.max(0, accepted - completed),
-      },
-      { status: "completed", label: "Completadas", sessions: completed },
-      {
-        status: "rejected",
-        label: "Rechazadas",
-        sessions: counts.get("rejected") ?? 0,
-      },
-      {
-        status: "canceled",
-        label: "Canceladas",
-        sessions: counts.get("canceled") ?? 0,
-      },
-    ];
+    const known = new Set<string>(STORED_STATUS_ORDER);
+    const other = grouped
+      .filter((row) => !known.has(row.status))
+      .reduce((acc, row) => acc + row._count._all, 0);
+
+    const rows: SessionsByStatusRow[] = [];
+    for (const status of STORED_STATUS_ORDER) {
+      rows.push({
+        status,
+        label: STORED_STATUS_LABELS[status],
+        sessions: status === "accepted" ? pendingAccepted : (counts.get(status) ?? 0),
+      });
+      // "completed" se intercala justo después de "accepted" para conservar el orden
+      // de presentación previo: Solicitadas, Aceptadas, Completadas, Rechazadas,
+      // Canceladas.
+      if (status === "accepted") {
+        rows.push({ status: "completed", label: "Completadas", sessions: completed });
+      }
+    }
+
+    if (other > 0) {
+      rows.push({ status: "other", label: "Otras", sessions: other });
+    }
+
+    return rows;
   } catch (error) {
     console.error("Failed to fetch sessions by status:", error);
     throw new Error("Unable to fetch sessions by status.");
