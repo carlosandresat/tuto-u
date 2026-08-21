@@ -27,7 +27,17 @@ describe("lib/admin", () => {
   });
 
   afterEach(() => {
-    process.env.ADMIN_EMAILS = originalAdminEmails;
+    // No usar una asignación incondicional: si `originalAdminEmails` es `undefined`
+    // (la variable no estaba definida antes del test), Node convierte la asignación
+    // en la cadena literal "undefined" en vez de dejar la variable sin definir. Eso
+    // le daría a `getAdminEmailSet()` un Set de un elemento y anularía la protección
+    // de "lista vacía = rechazar a todos" para cualquier test o módulo posterior que
+    // lea la variable en el mismo proceso.
+    if (originalAdminEmails === undefined) {
+      delete process.env.ADMIN_EMAILS;
+    } else {
+      process.env.ADMIN_EMAILS = originalAdminEmails;
+    }
   });
 
   describe("requireAdmin", () => {
@@ -67,6 +77,16 @@ describe("lib/admin", () => {
 
     it("debería rechazar a todos cuando ADMIN_EMAILS está vacío o no definido", async () => {
       process.env.ADMIN_EMAILS = "";
+      vi.mocked(auth).mockResolvedValue({ user: { id: "user123" } } as any);
+      vi.mocked(db.user.findUnique).mockResolvedValue({
+        email: "admin@yachaytech.edu.ec",
+      } as any);
+
+      await expect(requireAdmin()).rejects.toThrow();
+    });
+
+    it("debería rechazar cuando ADMIN_EMAILS no está definido en absoluto", async () => {
+      delete process.env.ADMIN_EMAILS;
       vi.mocked(auth).mockResolvedValue({ user: { id: "user123" } } as any);
       vi.mocked(db.user.findUnique).mockResolvedValue({
         email: "admin@yachaytech.edu.ec",
