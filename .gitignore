@@ -45,5 +45,6 @@ next-env.d.ts
 /skills-lock.json
 
 #claude files
+.claude/
 AUDITORIA.md
 CLAUDE.md
