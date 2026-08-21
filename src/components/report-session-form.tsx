@@ -22,10 +22,8 @@ import { reportSession } from "@/actions/sessions-data";
 import { SessionReportSchema } from "@/schemas";
 
 export function ReportSessionForm({
-  role,
   sessionId,
 }: {
-  role: string;
   sessionId: number;
 }) {
   const [isPending, startTransition] = useTransition();

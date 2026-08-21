@@ -181,7 +181,6 @@ export function TutorSessionCard({
             <ReportSessionDialog
               buttonText="Reportar"
               sessionId={sessionId}
-              role="tutor"
             />
             <RateDialog
               buttonText="Calificar"

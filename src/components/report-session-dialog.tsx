@@ -9,11 +9,9 @@ import { Button } from "@/components/ui/button";
 import { ReportSessionForm } from "@/components/report-session-form";
 
 export function ReportSessionDialog({
-  role,
   buttonText,
   sessionId,
 }: {
-  role: string;
   buttonText: string;
   sessionId: number;
 }) {
@@ -26,7 +24,7 @@ export function ReportSessionDialog({
         <DialogHeader>
           <DialogTitle>Reportar tutoría</DialogTitle>
         </DialogHeader>
-        <ReportSessionForm role={role} sessionId={sessionId} />
+        <ReportSessionForm sessionId={sessionId} />
       </DialogContent>
     </Dialog>
   );
