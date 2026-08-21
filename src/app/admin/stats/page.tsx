@@ -1,6 +1,7 @@
 import { PageContainer } from "@/components/page-container";
 import { AdminNav } from "@/components/admin/admin-nav";
 import { StatTile } from "@/components/admin/stat-tile";
+import { TutorActivationCard } from "@/components/admin/tutor-activation-card";
 import { TutorsPerCourseChart } from "@/components/admin/charts/tutors-per-course-chart";
 import { AveragePricePerCourseChart } from "@/components/admin/charts/average-price-per-course-chart";
 import { AveragePricePerDurationChart } from "@/components/admin/charts/average-price-per-duration-chart";
@@ -42,7 +43,7 @@ export default async function AdminStatsPage() {
         Estadísticas
       </h1>
 
-      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3 mb-8">
+      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
         <StatTile label="Usuarios registrados" value={tutorSupply.totalUsers} />
         <StatTile
           label="Tutores activos"
@@ -50,6 +51,15 @@ export default async function AdminStatsPage() {
           description={`${tutorSupply.activeTutorsShare}% del total de usuarios`}
         />
         <StatTile label="Sesiones completadas" value={completedSessions} />
+        <StatTile
+          label="Tutores voluntarios"
+          value={tutorSupply.voluntaryTutors}
+          description="Tutores activos sin ninguna tarifa mayor a 0: voluntarios o con tarifa sin configurar"
+        />
+      </div>
+
+      <div className="w-full mb-8">
+        <TutorActivationCard supply={tutorSupply} />
       </div>
 
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
