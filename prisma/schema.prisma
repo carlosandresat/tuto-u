@@ -91,6 +91,24 @@ model PasswordResetToken {
   @@map("password_reset_tokens")
 }
 
+// Un solo código vivo por correo (email es @unique, no solo indexado): el
+// límite de intentos y el cooldown de reenvío se aplican por identidad, no
+// por código. Con varias filas por correo un atacante ganaría 5 intentos por
+// CADA código reenviado en vez de 5 en total. Ver src/lib/verification-code.ts.
+model EmailVerificationCode {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  codeHash   String   @map("code_hash")
+  expires    DateTime
+  attempts   Int      @default(0)
+  sendCount  Int      @default(0) @map("send_count")
+  lastSentAt DateTime @map("last_sent_at")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@index([expires])
+  @@map("email_verification_codes")
+}
+
 model Preregister {
   id       String  @id @default(cuid())
   gender   String?
