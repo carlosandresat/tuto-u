@@ -1,6 +1,7 @@
 
 import { Resend } from "resend";
 import { capitalizeFirstLetter } from "@/lib/utils"
+import { APP_TIME_ZONE } from "@/lib/app-time"
 import SessionRequestEmail from "@/components/email-templates/session-request";
 import SessionResponseEmail from "@/components/email-templates/session-response-email";
 import SessionCancelEmail from "@/components/email-templates/session-cancel-email";
@@ -45,14 +46,14 @@ export const newSessionTutorNotificationEmail = async (email: string, firstname:
   const date = new Date(dateString)
   // Use Intl.DateTimeFormat to format the date
   const formattedDate = date.toLocaleString('es-US', {
-    timeZone: 'America/Guayaquil', // Specify the desired timezone
+    timeZone: APP_TIME_ZONE, // Specify the desired timezone
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
   const formattedTime = date.toLocaleString('en-US', {
-    timeZone: 'America/Guayaquil', // Specify the desired timezone
+    timeZone: APP_TIME_ZONE, // Specify the desired timezone
     hour: 'numeric',
     minute: 'numeric',
     hour12: true, // Use 12-hour format
@@ -75,14 +76,14 @@ export const newSessionTutorNotificationEmail = async (email: string, firstname:
 export const sessionResponseNotificationEmail = async (email: string, tutorName: string | null, topic: string, date:Date, studentName: string, response:string) => {
   // Use Intl.DateTimeFormat to format the date
   const formattedDate = date.toLocaleString('es-US', {
-    timeZone: 'America/Guayaquil', // Specify the desired timezone
+    timeZone: APP_TIME_ZONE, // Specify the desired timezone
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
   const formattedTime = date.toLocaleString('en-US', {
-    timeZone: 'America/Guayaquil', // Specify the desired timezone
+    timeZone: APP_TIME_ZONE, // Specify the desired timezone
     hour: 'numeric',
     minute: 'numeric',
     hour12: true, // Use 12-hour format
@@ -107,14 +108,14 @@ export const sessionResponseNotificationEmail = async (email: string, tutorName:
 export const sessionCancelNotificationEmail = async (email: string, userName: string, date:Date) => {
   // Use Intl.DateTimeFormat to format the date
   const formattedDate = date.toLocaleString('es-US', {
-    timeZone: 'America/Guayaquil', // Specify the desired timezone
+    timeZone: APP_TIME_ZONE, // Specify the desired timezone
     weekday: 'long',
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
   const formattedTime = date.toLocaleString('en-US', {
-    timeZone: 'America/Guayaquil', // Specify the desired timezone
+    timeZone: APP_TIME_ZONE, // Specify the desired timezone
     hour: 'numeric',
     minute: 'numeric',
     hour12: true, // Use 12-hour format
