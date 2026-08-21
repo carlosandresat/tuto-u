@@ -177,7 +177,6 @@ export function StudentSessionCard({
             <ReportSessionDialog
               buttonText="Reportar"
               sessionId={sessionId}
-              role="student"
             />
             <RateDialog
               buttonText="Calificar"

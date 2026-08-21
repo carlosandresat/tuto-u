@@ -2,6 +2,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Lock, Trophy, Users } from "lucide-react";
+import { formatAppDate } from "@/lib/app-time";
 
 interface AchievementProgressCardProps {
   id: number;
@@ -38,17 +39,6 @@ export function AchievementProgressCard({
   const displayDescription = isSecretAndLocked
     ? "Logro secreto. ¡Desbloquéalo para descubrir cómo obtenerlo!"
     : description;
-
-  // Formatear fecha
-  const formatDate = (dateInput: Date | string | null) => {
-    if (!dateInput) return "";
-    const date = new Date(dateInput);
-    return date.toLocaleDateString("es-ES", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    });
-  };
 
   // Definir colores y estilos basados en el tier
   const tierConfig = {
@@ -169,7 +159,9 @@ export function AchievementProgressCard({
         {isOwned ? (
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Calendar className="h-3.5 w-3.5 text-foreground/60" />
-            <span>Desbloqueado el {formatDate(achievedDate)}</span>
+            <span>
+              {achievedDate ? `Desbloqueado el ${formatAppDate(achievedDate)}` : "Desbloqueado"}
+            </span>
           </div>
         ) : (
           <div className="space-y-2">

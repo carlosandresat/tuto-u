@@ -246,8 +246,7 @@ export const rateSession = async (
 
 export const reportSession = async (
   sessionId: number,
-  description: string,
-  role: string
+  description: string
 ): Promise<string> => {
   const session = await auth();
   if (!session?.user?.id) {

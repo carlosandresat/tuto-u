@@ -22,10 +22,8 @@ import { reportSession } from "@/actions/sessions-data";
 import { SessionReportSchema } from "@/schemas";
 
 export function ReportSessionForm({
-  role,
   sessionId,
 }: {
-  role: string;
   sessionId: number;
 }) {
   const [isPending, startTransition] = useTransition();
@@ -36,7 +34,7 @@ export function ReportSessionForm({
 
   function onSubmit(data: z.infer<typeof SessionReportSchema>) {
     startTransition(async () => {
-      await reportSession(sessionId, data.description, role);
+      await reportSession(sessionId, data.description);
       window.location.reload();
     });
   }
