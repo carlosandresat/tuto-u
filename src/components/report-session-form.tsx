@@ -36,7 +36,7 @@ export function ReportSessionForm({
 
   function onSubmit(data: z.infer<typeof SessionReportSchema>) {
     startTransition(async () => {
-      await reportSession(sessionId, data.description, role);
+      await reportSession(sessionId, data.description);
       window.location.reload();
     });
   }
