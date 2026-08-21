@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { getReports } from "@/data/admin-reports";
+import { formatAppDateTime } from "@/lib/app-time";
 
 type Report = Awaited<ReturnType<typeof getReports>>[number];
 
@@ -19,16 +20,6 @@ const STATUS_LABELS: Record<string, string> = {
   completed: "Completada",
 };
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString("es-ES", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-
 export function ReportCard({ report }: { report: Report }) {
   return (
     <Card>
@@ -38,7 +29,7 @@ export function ReportCard({ report }: { report: Report }) {
             Reporte de {report.reporterFullname}
           </CardTitle>
           <span className="text-sm text-muted-foreground">
-            {formatDate(report.createdAt)}
+            {formatAppDateTime(report.createdAt)}
           </span>
         </div>
         <CardDescription>
@@ -75,7 +66,7 @@ export function ReportCard({ report }: { report: Report }) {
           <Badge variant="outline">
             {STATUS_LABELS[report.sessionStatus] ?? report.sessionStatus}
           </Badge>
-          <span>Sesión programada: {formatDate(report.sessionDateTime)}</span>
+          <span>Sesión programada: {formatAppDateTime(report.sessionDateTime)}</span>
         </div>
       </CardContent>
     </Card>
