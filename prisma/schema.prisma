@@ -169,7 +169,12 @@ model IndividualSession {
   place           String? // Optional: for in-person sessions
   online          Boolean // Whether the session is online
   topic           String // Optional: topic or focus area for the session
-  status          String // Status of the session e.g., "scheduled", "completed", "cancelled"
+  // Valores almacenados: "requested" | "accepted" | "rejected" | "canceled".
+  // Ojo: "canceled" con UNA sola "l". NO existe un estado "completed" almacenado:
+  // completada = status "accepted" con sessionDateTime en el pasado (ver
+  // getSessionsByStatus en src/data/admin-stats.ts y getAllAchievementsWithProgress
+  // en src/actions/achievements-data.ts).
+  status          String
   studentRating   Decimal?   @db.Decimal(2, 1) @map("student_rating") // Rating given by the student, range 0-5
   studentComment  String?  @map("student_comment") // Optional comment provided by the student
   tutorRating     Decimal?  @db.Decimal(2, 1) @map("tutort_rating") // Rating given by the tutor, range 0-5
