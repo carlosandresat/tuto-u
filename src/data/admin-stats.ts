@@ -1,3 +1,4 @@
+import type { Prisma } from "@/generated/prisma/client";
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/lib/admin";
 
@@ -17,6 +18,10 @@ import { requireAdmin } from "@/lib/admin";
  * mezclarlo con números JS en aritmética produce promedios silenciosamente
  * incorrectos. Por eso cada precio se convierte con `Number(...)` aquí mismo, apenas
  * sale de la base, y todo lo que se retorna es primitivo (number | string).
+ *
+ * DEFINICIÓN DE TUTOR ACTIVO — ver `ACTIVE_TUTOR_WHERE` más abajo. Es la ÚNICA fuente
+ * de verdad del término en este archivo; toda función derivada de tutores la reutiliza
+ * en vez de repetir las condiciones inline.
  */
 
 /** Redondeo a 2 decimales sobre un number ya convertido desde Decimal. */
@@ -31,6 +36,43 @@ const average = (values: number[]) =>
 const byName = (a: string, b: string) => a.localeCompare(b, "es");
 
 // ---------------------------------------------------------------------------
+// Definición de TUTOR ACTIVO — fuente única de verdad
+// ---------------------------------------------------------------------------
+
+/**
+ * TUTOR ACTIVO: usuario con las TRES condiciones a la vez — al menos un curso, al
+ * menos una franja de disponibilidad y al menos una fila de precios.
+ *
+ * Es una condición COMPUESTA sobre el MISMO usuario, no tres conteos sueltos: sin
+ * curso no aparece en ningún listado, sin disponibilidad no se puede reservar, y sin
+ * ninguna fila de precios el formulario de reserva no tiene qué ofrecer. Los tres
+ * huecos producen el mismo resultado — un tutor que no es oferta real.
+ *
+ * Una fila de precio en 0 SÍ cuenta para esta prueba. `updateUserPricing`
+ * (src/actions/user-configuration.ts) inserta `price: 0` cuando el tutor marca una
+ * duración y deja el campo vacío, así que un 0 significa casi siempre "sin
+ * configurar", no "gratis": basta para probar que el tutor llegó a ese paso, pero NO
+ * entra en ningún promedio. Ver `POSITIVE_PRICE_WHERE`.
+ *
+ * Este objeto es la ÚNICA definición del término en el archivo. Toda función derivada
+ * de tutores lo reutiliza — directamente en `db.user`, o anidado como `tutor:` desde
+ * `TutorCourse` / `UserPricingConfiguration`. No dupliques las condiciones inline.
+ *
+ * Compartido por referencia: nunca se muta. Para agregar una condición extra, compón
+ * con `AND: [ACTIVE_TUTOR_WHERE, { ... }]`.
+ */
+export const ACTIVE_TUTOR_WHERE: Prisma.UserWhereInput = {
+  tutorCourses: { some: {} },
+  availabilities: { some: {} },
+  tutor_pricing: { some: {} },
+};
+
+/** Filas de precio que cuentan como tarifa configurada de verdad. Ver arriba. */
+export const POSITIVE_PRICE_WHERE: Prisma.UserPricingConfigurationWhereInput = {
+  price: { gt: 0 },
+};
+
+// ---------------------------------------------------------------------------
 // Tutores por curso
 // ---------------------------------------------------------------------------
 
@@ -41,11 +83,11 @@ export type TutorsPerCourseRow = {
 };
 
 /**
- * Cantidad de tutores por curso, descendente.
+ * Cantidad de tutores ACTIVOS por curso, descendente. Ver `ACTIVE_TUTOR_WHERE`.
  *
  * Se parte de `Course` (no de `TutorCourse`) a propósito: un `groupBy` sobre
- * `TutorCourse` nunca puede producir una fila en cero, y los cursos SIN tutores son
- * justamente la señal que interesa — muestran la cobertura que falta.
+ * `TutorCourse` nunca puede producir una fila en cero, y los cursos SIN tutores
+ * activos son justamente la señal que interesa — muestran la cobertura que falta.
  */
 export const getTutorsPerCourse = async (): Promise<TutorsPerCourseRow[]> => {
   await requireAdmin();
@@ -55,7 +97,7 @@ export const getTutorsPerCourse = async (): Promise<TutorsPerCourseRow[]> => {
       select: {
         id: true,
         name: true,
-        _count: { select: { tutorCourses: true } },
+        _count: { select: { tutorCourses: { where: { tutor: ACTIVE_TUTOR_WHERE } } } },
       },
     });
 
@@ -86,19 +128,31 @@ type CoursePriceRow = {
 /**
  * Filas (curso × tutor × duración) con el precio ya convertido a number.
  *
- * Una sola consulta con `select` anidado — sin N+1. Ojo con la ponderación: un tutor
- * que dicta 4 cursos aporta sus precios a los 4. Es lo que pide la métrica ("precios
- * de los tutores que dictan ese curso"), pero implica que estas filas NO se pueden
- * re-agregar para obtener el promedio global por duración.
+ * Una sola consulta con `select` anidado — sin N+1. Dos filtros, dos trabajos
+ * distintos: el `where` externo decide QUÉ TUTORES cuentan (`ACTIVE_TUTOR_WHERE`), el
+ * `where` anidado decide QUÉ PRECIOS de esos tutores cuentan (`POSITIVE_PRICE_WHERE`
+ * — un 0 no es un precio real, ver la nota en `ACTIVE_TUTOR_WHERE`). Un tutor activo
+ * cuyas tarifas son todas 0 pasa el filtro externo y no aporta ninguna fila: correcto
+ * bajo las dos reglas a la vez.
+ *
+ * Ojo con la ponderación: un tutor que dicta 4 cursos aporta sus precios a los 4. Es
+ * lo que pide la métrica ("precios de los tutores que dictan ese curso"), pero implica
+ * que estas filas NO se pueden re-agregar para obtener el promedio global por
+ * duración — para eso está `getAveragePricePerDuration()`, que cuenta cada tutor una
+ * sola vez.
  */
 const fetchCoursePriceRows = async (): Promise<CoursePriceRow[]> => {
   const tutorCourses = await db.tutorCourse.findMany({
+    where: { tutor: ACTIVE_TUTOR_WHERE },
     select: {
       courseId: true,
       course: { select: { name: true } },
       tutor: {
         select: {
-          tutor_pricing: { select: { duration: true, price: true } },
+          tutor_pricing: {
+            where: POSITIVE_PRICE_WHERE,
+            select: { duration: true, price: true },
+          },
         },
       },
     },
@@ -123,15 +177,19 @@ export type AveragePricePerCourseRow = {
 };
 
 /**
- * Precio promedio por curso, sobre las configuraciones de precio de los tutores que
- * dictan ese curso.
+ * Precio promedio por curso, sobre las tarifas configuradas (> 0) de los tutores
+ * ACTIVOS que dictan ese curso. Ver `ACTIVE_TUTOR_WHERE` y `POSITIVE_PRICE_WHERE`.
  *
  * ADVERTENCIA PARA QUIEN ARME EL GRÁFICO (Unit 5): este promedio mezcla duraciones.
  * Un curso cuyos tutores solo configuraron la tarifa de 60 min aparecerá "más barato"
  * que uno cuyos tutores llegaron hasta 180 min, sin que sus tarifas comparables lo
  * sean. Sirve como precio típico de un curso, NO para rankear cursos por precio; para
  * eso está `getAveragePricePerCourseAndDuration()`. `sampleSize` se devuelve para
- * poder rotular el tamaño de muestra en la tarjeta.
+ * poder rotular el tamaño de muestra en la tarjeta, y ya excluye las tarifas en 0.
+ *
+ * El dominio de cursos aquí es MÁS ANGOSTO que el de `getTutorsPerCourse()`: un curso
+ * cuyos tutores activos solo tienen tarifas en 0 no produce ninguna fila (no se
+ * sintetiza `averagePrice: 0` — eso leería como "este curso es gratis").
  */
 export const getAveragePricePerCourse = async (): Promise<
   AveragePricePerCourseRow[]
@@ -175,6 +233,9 @@ export type AveragePricePerCourseAndDurationRow = {
 /**
  * Precio promedio por curso Y duración — el corte comparable entre cursos, porque
  * mantiene fija la duración. Ordenado por curso y luego por duración.
+ *
+ * Mismo dominio que `getAveragePricePerCourse()`: tutores ACTIVOS, tarifas > 0.
+ * `sampleSize` ya excluye las tarifas en 0.
  */
 export const getAveragePricePerCourseAndDuration = async (): Promise<
   AveragePricePerCourseAndDurationRow[]
@@ -228,13 +289,16 @@ export type AveragePricePerDurationRow = {
  *
  * Dos decisiones que cambian el número y por eso quedan explícitas:
  *
- * 1. Solo se consideran tutores con al menos un curso asignado. Un tutor con tarifas
- *    pero sin cursos no es reservable, así que no forma parte de la oferta real;
- *    incluirlo infla el promedio. (Sobre los datos actuales: 50 tutores están en esa
- *    situación y arrastran el promedio de 60 min de $2.53 a $3.06.)
+ * 1. Solo se consideran tutores ACTIVOS (`ACTIVE_TUTOR_WHERE`) y tarifas > 0
+ *    (`POSITIVE_PRICE_WHERE`). Un tutor sin curso o sin disponibilidad no es
+ *    reservable y no forma parte de la oferta real; una tarifa en 0 casi siempre
+ *    significa "sin configurar", no "gratis" (ver la nota en `ACTIVE_TUTOR_WHERE`).
+ *    Incluir cualquiera de los dos infla o distorsiona el promedio.
  * 2. A diferencia de `getAveragePricePerCourseAndDuration()`, aquí un tutor que dicta
  *    varios cursos NO se cuenta varias veces. Por eso los dos conjuntos de promedios
- *    no reconcilian entre sí: usan ponderaciones distintas a propósito.
+ *    no reconcilian entre sí: usan ponderaciones distintas a propósito, y encima el
+ *    de aquí filtra sobre una población de tutores potencialmente distinta a la que
+ *    aparece curso por curso en el otro.
  */
 export const getAveragePricePerDuration = async (): Promise<
   AveragePricePerDurationRow[]
@@ -243,7 +307,7 @@ export const getAveragePricePerDuration = async (): Promise<
 
   try {
     const pricings = await db.userPricingConfiguration.findMany({
-      where: { tutor: { tutorCourses: { some: {} } } },
+      where: { ...POSITIVE_PRICE_WHERE, tutor: ACTIVE_TUTOR_WHERE },
       select: { duration: true, price: true },
     });
 
@@ -429,10 +493,13 @@ export const getSignupsPerWeek = async (): Promise<SignupsPerWeekRow[]> => {
 // ---------------------------------------------------------------------------
 
 export type TutorSupply = {
-  /** Tutores con AL MENOS una disponibilidad Y al menos un curso. */
+  /** Tutores activos. Ver `ACTIVE_TUTOR_WHERE` — la definición vive ahí, no aquí. */
   activeTutors: number;
+  /** Tutores activos SIN ninguna tarifa > 0: todas sus filas de precio están en 0. */
+  voluntaryTutors: number;
   tutorsWithCourses: number;
   tutorsWithAvailability: number;
+  tutorsWithPricing: number;
   totalUsers: number;
   /** Porcentaje de usuarios que son tutores activos, con 1 decimal. */
   activeTutorsShare: number;
@@ -441,38 +508,53 @@ export type TutorSupply = {
 /**
  * La cifra real de oferta: tutores activos frente al total de usuarios registrados.
  *
- * La condición es COMPUESTA sobre el MISMO usuario — ≥1 disponibilidad Y ≥1 curso —,
- * no dos conteos por separado. Un tutor con horarios pero sin cursos no aparece en
- * ningún listado, y uno con cursos pero sin horarios no se puede reservar: ninguno de
- * los dos es oferta. La diferencia no es cosmética: sobre los datos actuales hay 66
- * usuarios con disponibilidad y 19 con cursos, pero solo 19 cumplen ambas
- * condiciones. Reportar el conteo de disponibilidad como "tutores activos"
- * multiplicaría la cifra por 3.5.
+ * `activeTutors` usa `ACTIVE_TUTOR_WHERE` — una condición COMPUESTA sobre el MISMO
+ * usuario (curso Y disponibilidad Y precio), no conteos sueltos. Un tutor que solo
+ * cumple una o dos de las tres condiciones no es oferta real: no aparece en ningún
+ * listado, o no se puede reservar, o no tiene qué ofrecer en el formulario. Reportar
+ * cualquiera de los conteos individuales como "tutores activos" sobreestima la cifra.
  *
- * `tutorsWithCourses` y `tutorsWithAvailability` se devuelven aparte precisamente para
- * que esa brecha sea visible y no se confundan con el número activo.
+ * `tutorsWithCourses`, `tutorsWithAvailability` y `tutorsWithPricing` se devuelven por
+ * separado precisamente para que esa brecha sea visible y no se confunda con el
+ * número activo — no hay una cifra fija que citar aquí; compárense en el momento
+ * contra `activeTutors` para ver cuánto aporta cada condición.
+ *
+ * `voluntaryTutors` es un sub-conjunto de `activeTutors`: cumple las tres condiciones
+ * pero ninguna de sus tarifas es > 0. Ver la nota sobre precios en 0 en
+ * `ACTIVE_TUTOR_WHERE` — casi siempre significa "sin configurar", no "gratis", así que
+ * en el gráfico (Unit 5) esta cifra debe rotularse como tal, nunca como "gratis" a
+ * secas.
  */
 export const getTutorSupply = async (): Promise<TutorSupply> => {
   await requireAdmin();
 
   try {
-    const [activeTutors, tutorsWithCourses, tutorsWithAvailability, totalUsers] =
-      await Promise.all([
-        db.user.count({
-          where: {
-            availabilities: { some: {} },
-            tutorCourses: { some: {} },
-          },
-        }),
-        db.user.count({ where: { tutorCourses: { some: {} } } }),
-        db.user.count({ where: { availabilities: { some: {} } } }),
-        db.user.count(),
-      ]);
+    const [
+      activeTutors,
+      voluntaryTutors,
+      tutorsWithCourses,
+      tutorsWithAvailability,
+      tutorsWithPricing,
+      totalUsers,
+    ] = await Promise.all([
+      db.user.count({ where: ACTIVE_TUTOR_WHERE }),
+      db.user.count({
+        where: {
+          AND: [ACTIVE_TUTOR_WHERE, { tutor_pricing: { none: POSITIVE_PRICE_WHERE } }],
+        },
+      }),
+      db.user.count({ where: { tutorCourses: { some: {} } } }),
+      db.user.count({ where: { availabilities: { some: {} } } }),
+      db.user.count({ where: { tutor_pricing: { some: {} } } }),
+      db.user.count(),
+    ]);
 
     return {
       activeTutors,
+      voluntaryTutors,
       tutorsWithCourses,
       tutorsWithAvailability,
+      tutorsWithPricing,
       totalUsers,
       // Sin usuarios no hay porcentaje que calcular: 0, nunca NaN.
       activeTutorsShare:
