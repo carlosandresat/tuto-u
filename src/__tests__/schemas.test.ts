@@ -4,6 +4,7 @@ import {
   RegisterSchema,
   IndividualSessionRequestSchema,
   ProfileSessionRequestSchema,
+  VerificationCodeSchema,
 } from "@/schemas/index";
 
 describe("Schemas de Validación", () => {
@@ -153,6 +154,46 @@ describe("Schemas de Validación", () => {
       });
 
       expect(result.success).toBe(true);
+    });
+  });
+
+  describe("VerificationCodeSchema", () => {
+    it("debería aceptar un código de 6 dígitos", () => {
+      const result = VerificationCodeSchema.safeParse({ code: "123456" });
+      expect(result.success).toBe(true);
+    });
+
+    it("debería aceptar un código con ceros a la izquierda", () => {
+      const result = VerificationCodeSchema.safeParse({ code: "012345" });
+      expect(result.success).toBe(true);
+    });
+
+    it("debería recortar espacios en blanco antes de validar", () => {
+      const result = VerificationCodeSchema.safeParse({ code: " 123456 " });
+      expect(result.success).toBe(true);
+      if (result.success) {
+        expect(result.data.code).toBe("123456");
+      }
+    });
+
+    it("debería rechazar un código con menos de 6 dígitos", () => {
+      const result = VerificationCodeSchema.safeParse({ code: "12345" });
+      expect(result.success).toBe(false);
+    });
+
+    it("debería rechazar un código con más de 6 dígitos", () => {
+      const result = VerificationCodeSchema.safeParse({ code: "1234567" });
+      expect(result.success).toBe(false);
+    });
+
+    it("debería rechazar caracteres no numéricos", () => {
+      const result = VerificationCodeSchema.safeParse({ code: "abcdef" });
+      expect(result.success).toBe(false);
+    });
+
+    it("debería rechazar dígitos separados por espacios internos", () => {
+      const result = VerificationCodeSchema.safeParse({ code: "12 34 56" });
+      expect(result.success).toBe(false);
     });
   });
 });
