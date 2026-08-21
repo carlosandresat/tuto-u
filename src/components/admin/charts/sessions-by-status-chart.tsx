@@ -19,6 +19,7 @@ import {
 import type { SessionsByStatusRow } from "@/data/admin-stats";
 import { chartTooltipContent } from "./chart-tooltip-content";
 import { ChartEmptyState } from "./chart-empty-state";
+import { ChartExportButton } from "@/components/admin/chart-export-button";
 
 const STATUS_COLORS: Record<string, string> = {
   requested: "hsl(var(--chart-1))",
@@ -47,6 +48,8 @@ export function SessionsByStatusChart({ data }: { data: SessionsByStatusRow[] })
     [data]
   );
 
+  const exportRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <Card>
       <CardHeader>
@@ -57,7 +60,7 @@ export function SessionsByStatusChart({ data }: { data: SessionsByStatusRow[] })
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div>
+        <div ref={exportRef}>
           <p className="mb-3 text-sm font-medium text-foreground">
             Sesiones por estado
           </p>
@@ -89,6 +92,7 @@ export function SessionsByStatusChart({ data }: { data: SessionsByStatusRow[] })
             </ChartContainer>
           )}
         </div>
+        <ChartExportButton targetRef={exportRef} filename="sesiones-por-estado" />
       </CardContent>
     </Card>
   );

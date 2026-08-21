@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
 import type { SignupsPerWeekRow } from "@/data/admin-stats";
 import { chartTooltipContent } from "./chart-tooltip-content";
 import { ChartEmptyState } from "./chart-empty-state";
+import { ChartExportButton } from "@/components/admin/chart-export-button";
 
 const chartConfig = {
   signups: {
@@ -33,6 +35,8 @@ const formatWeekLabel = (weekStart: string) =>
   });
 
 export function SignupsPerWeekChart({ data }: { data: SignupsPerWeekRow[] }) {
+  const exportRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <Card>
       <CardHeader>
@@ -43,7 +47,7 @@ export function SignupsPerWeekChart({ data }: { data: SignupsPerWeekRow[] }) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div>
+        <div ref={exportRef}>
           <p className="mb-3 text-sm font-medium text-foreground">
             Registros por semana
           </p>
@@ -84,6 +88,7 @@ export function SignupsPerWeekChart({ data }: { data: SignupsPerWeekRow[] }) {
             </ChartContainer>
           )}
         </div>
+        <ChartExportButton targetRef={exportRef} filename="registros-por-semana" />
       </CardContent>
     </Card>
   );

@@ -102,3 +102,58 @@ html::-webkit-scrollbar-thumb{
     @apply bg-background text-foreground;
   }
 }
+
+@layer base {
+  /*
+   * Exportación de gráficos (<ChartExportButton>).
+   *
+   * El PNG exportado es transparente, así que no sabemos sobre qué fondo va a
+   * caer: un flyer blanco o una historia de Instagram oscura. Estas clases se
+   * aplican al nodo capturado sólo durante la captura.
+   *
+   * Hacen falta las tres capas:
+   *   1. Redefinir los tokens, para las clases tipo `text-foreground` que los
+   *      resuelven en el propio elemento.
+   *   2. Fijar `color` en la raíz: la leyenda no declara color propio y hereda
+   *      un valor YA calculado desde fuera del nodo capturado, así que
+   *      redefinir el token no la alcanza.
+   *   3. Pisar `fill`/`stroke` de Recharts, que trae `fill="#666"` en los
+   *      ticks y `stroke="#ccc"` en la grilla como atributos de presentación.
+   *
+   * Deliberadamente NO se tocan `--chart-1..5`: los colores de las series
+   * deben coincidir con los que se ven en pantalla.
+   */
+  .chart-export-text-dark {
+    --foreground: 0 0% 3.9%;
+    --card-foreground: 0 0% 3.9%;
+    --muted-foreground: 0 0% 32%;
+    --border: 0 0% 55%;
+  }
+
+  .chart-export-text-light {
+    --foreground: 0 0% 100%;
+    --card-foreground: 0 0% 100%;
+    --muted-foreground: 0 0% 88%;
+    --border: 0 0% 100%;
+  }
+
+  .chart-export-text-dark,
+  .chart-export-text-light {
+    color: hsl(var(--foreground));
+  }
+
+  /* Sólo texto SVG: las barras y sectores son <path>, no se tocan. */
+  .chart-export-text-dark text,
+  .chart-export-text-light text {
+    fill: hsl(var(--muted-foreground));
+  }
+
+  .chart-export-text-dark .recharts-cartesian-grid line,
+  .chart-export-text-light .recharts-cartesian-grid line,
+  .chart-export-text-dark .recharts-cartesian-axis-line,
+  .chart-export-text-light .recharts-cartesian-axis-line,
+  .chart-export-text-dark .recharts-cartesian-axis-tick-line,
+  .chart-export-text-light .recharts-cartesian-axis-tick-line {
+    stroke: hsl(var(--border) / 0.6);
+  }
+}

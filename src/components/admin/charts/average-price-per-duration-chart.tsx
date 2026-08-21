@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
 import type { AveragePricePerDurationRow } from "@/data/admin-stats";
 import { chartTooltipContent } from "./chart-tooltip-content";
 import { ChartEmptyState } from "./chart-empty-state";
+import { ChartExportButton } from "@/components/admin/chart-export-button";
 
 const chartConfig = {
   averagePrice: {
@@ -31,6 +33,8 @@ export function AveragePricePerDurationChart({
 }: {
   data: AveragePricePerDurationRow[];
 }) {
+  const exportRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <Card>
       <CardHeader>
@@ -41,7 +45,7 @@ export function AveragePricePerDurationChart({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div>
+        <div ref={exportRef}>
           <p className="mb-3 text-sm font-medium text-foreground">
             Precio promedio por duración
           </p>
@@ -89,6 +93,7 @@ export function AveragePricePerDurationChart({
             </ChartContainer>
           )}
         </div>
+        <ChartExportButton targetRef={exportRef} filename="precio-promedio-por-duracion" />
       </CardContent>
     </Card>
   );

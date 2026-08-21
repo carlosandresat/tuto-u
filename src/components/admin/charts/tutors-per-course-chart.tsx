@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { Bar, BarChart, XAxis, YAxis } from "recharts";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
 import type { TutorsPerCourseRow } from "@/data/admin-stats";
 import { chartTooltipContent } from "./chart-tooltip-content";
 import { ChartEmptyState } from "./chart-empty-state";
+import { ChartExportButton } from "@/components/admin/chart-export-button";
 
 const chartConfig = {
   tutors: {
@@ -25,6 +27,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function TutorsPerCourseChart({ data }: { data: TutorsPerCourseRow[] }) {
+  const exportRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <Card>
       <CardHeader>
@@ -35,7 +39,7 @@ export function TutorsPerCourseChart({ data }: { data: TutorsPerCourseRow[] }) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div>
+        <div ref={exportRef}>
           <p className="mb-3 text-sm font-medium text-foreground">
             Tutores por curso
           </p>
@@ -76,6 +80,7 @@ export function TutorsPerCourseChart({ data }: { data: TutorsPerCourseRow[] }) {
             </ChartContainer>
           )}
         </div>
+        <ChartExportButton targetRef={exportRef} filename="tutores-por-curso" />
       </CardContent>
     </Card>
   );
