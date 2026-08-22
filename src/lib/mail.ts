@@ -6,6 +6,7 @@ import SessionRequestEmail from "@/components/email-templates/session-request";
 import SessionResponseEmail from "@/components/email-templates/session-response-email";
 import SessionCancelEmail from "@/components/email-templates/session-cancel-email";
 import PasswordResetEmail from "@/components/email-templates/password-reset-email";
+import VerificationCodeEmail from "@/components/email-templates/verification-code-email";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -149,6 +150,25 @@ export const sendPasswordResetEmail = async (
     devLogContext: {
       userName,
       resetLink,
+    },
+  });
+};
+
+export const sendVerificationCodeEmail = async (
+  email: string,
+  code: string,
+  userName: string
+) => {
+  await sendEmail({
+    to: email,
+    subject: "Verifica tu correo de Tuto-U",
+    react: VerificationCodeEmail({ code, userName }),
+    // El código en texto plano acá es intencional: es lo único que hace
+    // usable el flujo de verificación en desarrollo sin enviar correos reales.
+    devLogContext: {
+      userName,
+      code,
+      expiraEnMinutos: 15,
     },
   });
 };
