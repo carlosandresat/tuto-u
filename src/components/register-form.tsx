@@ -17,6 +17,7 @@ import { register } from "@/actions/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
@@ -25,6 +26,7 @@ import Link from "next/link";
 import { RegisterSchema } from "@/schemas";
 
 export function RegisterForm() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -33,40 +35,36 @@ export function RegisterForm() {
 
   function onSubmit(data: z.infer<typeof RegisterSchema>) {
     startTransition(async () => {
-      try {
-        const response = await register(data);
+      const response = await register(data);
 
-        if (response && response.error) {
-          toast({
-            title: "¡Error!",
-            description: response.error,
-          });
-        } else {
-          toast({
-            title: "¡Felicidades!",
-            description: response.message,
-            action: (
-              <ToastAction altText="Login">
-                <Link href="/auth/login">Login</Link>
-              </ToastAction>
-            ),
-          });
-        }
-        form.reset({ firstname: "", lastname: "", email: "", password: "" });
-      } catch (e) {
-        if (typeof e === "string") {
-          toast({
-            title: "¡Error!",
-            description: e,
-          });
-        } else if (e instanceof Error) {
-          const message = e.message;
-          toast({
-            title: "¡Error!",
-            description: message,
-          });
+      if (response && response.error) {
+        toast({
+          title: "¡Error!",
+          description: response.error,
+        });
+      } else {
+        // El destino del CTA depende de si la cuenta todavía necesita
+        // verificarse: antes siempre apuntaba a /auth/login, que ahora sería
+        // un callejón sin salida para una cuenta recién creada.
+        const verifyDestination = response?.verificationRequired
+          ? "/auth/verify-email"
+          : "/auth/login";
+        toast({
+          title: "¡Felicidades!",
+          description: response?.message,
+          action: (
+            <ToastAction altText="Verificar">
+              <Link href={verifyDestination}>
+                {response?.verificationRequired ? "Verificar" : "Login"}
+              </Link>
+            </ToastAction>
+          ),
+        });
+        if (response?.verificationRequired) {
+          router.push("/auth/verify-email");
         }
       }
+      form.reset({ firstname: "", lastname: "", email: "", password: "" });
     });
   }
 

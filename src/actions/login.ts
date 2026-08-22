@@ -91,64 +91,73 @@ export const register = async (data: z.infer<typeof RegisterSchema>) => {
 
   const { firstname, lastname, password, email } = validatedFields.data;
 
-  const existingUser = await db.user.findUnique({ where: { email } });
-
-  if (existingUser) {
-    return { error: "Email ya registrado" };
-  }
-
-  const identity = await resolveUserIdentity(email);
-
-  if (!identity) {
-    return { error: "Dominio de correo no permitido" };
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
+  // Envuelve TODO el resto del flujo, no solo la escritura -- por convención
+  // (ver CLAUDE.md) las acciones nunca deben lanzar hacia el cliente. Pero,
+  // a diferencia de la versión original, este catch exterior es un respaldo
+  // genérico: el ÚNICO caso que se reporta como "Email ya registrado" es un
+  // P2002 real en db.user.create, capturado en el catch interior de abajo. Un
+  // fallo en resolveUserIdentity, en la consulta de duplicado, o en el envío
+  // del correo ya no se disfraza de "correo duplicado".
   try {
-    await db.user.create({
-      data: {
-        firstname,
-        lastname,
-        email,
-        password: hashedPassword,
-        username: identity.username,
-        universityId: identity.universityId,
-      },
-    });
-  } catch (error) {
-    // El try/catch cubre SOLO la escritura, no todo el flujo: así un fallo de
-    // envío de correo (más abajo) no se reporta como "Email ya registrado".
-    if (
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2002"
-    ) {
-      return { error: "Email ya registrado" }; // carrera real con otro registro
+    const existingUser = await db.user.findUnique({ where: { email } });
+
+    if (existingUser) {
+      return { error: "Email ya registrado" };
     }
+
+    const identity = await resolveUserIdentity(email);
+
+    if (!identity) {
+      return { error: "Dominio de correo no permitido" };
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    try {
+      await db.user.create({
+        data: {
+          firstname,
+          lastname,
+          email,
+          password: hashedPassword,
+          username: identity.username,
+          universityId: identity.universityId,
+        },
+      });
+    } catch (error) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === "P2002"
+      ) {
+        return { error: "Email ya registrado" }; // carrera real con otro registro
+      }
+      throw error; // cualquier otra falla la maneja el catch exterior
+    }
+
+    if (!verificationEnforced()) {
+      return { message: "Registro realizado con éxito" };
+    }
+
+    await setPendingVerificationEmail(email);
+
+    const issued = await issueVerificationCode(email);
+    if (issued.ok) {
+      try {
+        await sendVerificationCodeEmail(email, issued.code, firstname);
+      } catch {
+        return {
+          verificationRequired: true,
+          message:
+            'Cuenta creada, pero no pudimos enviar el código. Usa "Reenviar código".',
+        };
+      }
+    }
+
+    return {
+      verificationRequired: true,
+      message: "Registro realizado con éxito. Te enviamos un código de 6 dígitos.",
+    };
+  } catch (error) {
     return { error: "No se pudo completar el registro. Inténtalo de nuevo." };
   }
-
-  if (!verificationEnforced()) {
-    return { message: "Registro realizado con éxito" };
-  }
-
-  await setPendingVerificationEmail(email);
-
-  const issued = await issueVerificationCode(email);
-  if (issued.ok) {
-    try {
-      await sendVerificationCodeEmail(email, issued.code, firstname);
-    } catch {
-      return {
-        verificationRequired: true,
-        message:
-          'Cuenta creada, pero no pudimos enviar el código. Usa "Reenviar código".',
-      };
-    }
-  }
-
-  return {
-    verificationRequired: true,
-    message: "Registro realizado con éxito. Te enviamos un código de 6 dígitos.",
-  };
 };
