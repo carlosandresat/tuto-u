@@ -9,6 +9,7 @@ import { sendVerificationCodeEmail } from "@/lib/mail";
 import {
   clearPendingVerificationEmail,
   getPendingVerificationEmail,
+  setPendingVerificationEmail,
 } from "@/lib/verification-cookie";
 
 const NO_PENDING_EMAIL_ERROR = "Tu sesión de verificación expiró. Vuelve a iniciar sesión.";
@@ -70,6 +71,13 @@ export const resendVerificationCode = async () => {
     }
     return { error: "Has solicitado demasiados códigos. Inténtalo más tarde." };
   }
+
+  // Refrescar la cookie junto con el código. Su maxAge (15 min) corre desde que
+  // se fijó en login()/register(), NO desde el último reenvío: sin esto, un
+  // usuario que reenvía en el minuto 14 recibe un código válido por 15 minutos
+  // más, pero la cookie muere en el minuto 15 y al ingresarlo obtiene "sesión
+  // expirada" con un código perfectamente vigente en la mano.
+  await setPendingVerificationEmail(email);
 
   try {
     await sendVerificationCodeEmail(email, issued.code, user.firstname || "Estudiante");

@@ -56,8 +56,12 @@ import { signIn } from "@/auth";
 import { resolveUserIdentity } from "@/lib/user-identity";
 import { issueVerificationCode } from "@/lib/verification-code";
 import { sendVerificationCodeEmail } from "@/lib/mail";
-import { setPendingVerificationEmail } from "@/lib/verification-cookie";
+import {
+  getPendingVerificationEmail,
+  setPendingVerificationEmail,
+} from "@/lib/verification-cookie";
 import { login, register } from "@/actions/login";
+import { resendVerificationCode } from "@/actions/verification";
 
 const YACHAY_EMAIL = "juan.perez@yachaytech.edu.ec";
 
@@ -224,6 +228,72 @@ describe("actions/login - verificación de correo", () => {
 
       expect(result).toEqual({ error: "Email ya registrado" });
       expect(db.user.create).not.toHaveBeenCalled();
+      expect(sendVerificationCodeEmail).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("resendVerificationCode", () => {
+    it("debería refrescar la cookie al reenviar, no solo el código", async () => {
+      // Regresión: la cookie tiene un maxAge de 15 min que corre desde
+      // login()/register(). Si el reenvío no la vuelve a fijar, quien reenvía
+      // en el minuto 14 recibe un código válido 15 min más pero pierde la
+      // cookie en el minuto 15, y al ingresarlo obtiene "sesión expirada".
+      vi.mocked(getPendingVerificationEmail).mockResolvedValue(YACHAY_EMAIL);
+      vi.mocked(db.user.findUnique).mockResolvedValue({
+        id: "u1",
+        email: YACHAY_EMAIL,
+        firstname: "Juan",
+        emailVerified: null,
+      } as any);
+      vi.mocked(issueVerificationCode).mockResolvedValue({
+        ok: true,
+        code: "654321",
+        expires: new Date(),
+      });
+
+      const result = await resendVerificationCode();
+
+      expect(result).toEqual({ success: "Te enviamos un nuevo código." });
+      expect(setPendingVerificationEmail).toHaveBeenCalledWith(YACHAY_EMAIL);
+      expect(sendVerificationCodeEmail).toHaveBeenCalledWith(YACHAY_EMAIL, "654321", "Juan");
+    });
+
+    it("NO debería reenviar ni refrescar la cookie cuando la cuenta ya está verificada", async () => {
+      vi.mocked(getPendingVerificationEmail).mockResolvedValue(YACHAY_EMAIL);
+      vi.mocked(db.user.findUnique).mockResolvedValue({
+        id: "u1",
+        email: YACHAY_EMAIL,
+        firstname: "Juan",
+        emailVerified: new Date(),
+      } as any);
+
+      const result = await resendVerificationCode();
+
+      expect(result).toEqual({ error: "Vuelve a iniciar sesión." });
+      expect(issueVerificationCode).not.toHaveBeenCalled();
+      expect(sendVerificationCodeEmail).not.toHaveBeenCalled();
+      expect(setPendingVerificationEmail).not.toHaveBeenCalled();
+    });
+
+    it("debería informar el cooldown sin enviar correo cuando aún no pasa el tiempo mínimo", async () => {
+      vi.mocked(getPendingVerificationEmail).mockResolvedValue(YACHAY_EMAIL);
+      vi.mocked(db.user.findUnique).mockResolvedValue({
+        id: "u1",
+        email: YACHAY_EMAIL,
+        firstname: "Juan",
+        emailVerified: null,
+      } as any);
+      vi.mocked(issueVerificationCode).mockResolvedValue({
+        ok: false,
+        reason: "cooldown",
+        retryAfterSeconds: 42,
+      });
+
+      const result = await resendVerificationCode();
+
+      expect(result).toEqual({
+        error: "Espera 42 segundos antes de solicitar otro código.",
+      });
       expect(sendVerificationCodeEmail).not.toHaveBeenCalled();
     });
   });

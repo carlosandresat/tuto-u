@@ -47,6 +47,7 @@ import {
   issueVerificationCode,
   verifyVerificationCode,
   VERIFICATION_MAX_ATTEMPTS,
+  VERIFICATION_MAX_SENDS_PER_WINDOW,
   VERIFICATION_RESEND_COOLDOWN_MS,
 } from "@/lib/verification-code";
 
@@ -171,13 +172,56 @@ describe("lib/verification-code", () => {
   });
 
   describe("issueVerificationCode", () => {
-    it("debería devolver ok cuando el updateMany condicional afecta una fila", async () => {
-      vi.mocked(db.emailVerificationCode.updateMany).mockResolvedValue({ count: 1 });
+    it("debería reiniciar el contador a 1 y mover la ventana cuando la ventana ya venció", async () => {
+      // El primer updateMany (caso "ventana vencida") encuentra la fila.
+      vi.mocked(db.emailVerificationCode.updateMany).mockResolvedValueOnce({ count: 1 });
 
       const result = await issueVerificationCode("a@yachaytech.edu.ec");
 
       expect(result.ok).toBe(true);
-      expect(db.emailVerificationCode.create).not.toHaveBeenCalled();
+      expect(db.emailVerificationCode.updateMany).toHaveBeenCalledTimes(1);
+      const [call] = vi.mocked(db.emailVerificationCode.updateMany).mock.calls[0];
+      // Reinicio, no incremento: si esto fuera { increment: 1 } el cupo por
+      // ventana nunca volvería a empezar de cero.
+      expect(call.data.sendCount).toBe(1);
+      expect(call.data.windowStartedAt).toBeInstanceOf(Date);
+      expect(call.where?.windowStartedAt).toHaveProperty("lt");
+    });
+
+    it("debería incrementar el contador sin mover la ventana cuando sigue abierta y queda cupo", async () => {
+      // El primer updateMany no encuentra fila (la ventana sigue abierta),
+      // el segundo sí.
+      vi.mocked(db.emailVerificationCode.updateMany)
+        .mockResolvedValueOnce({ count: 0 })
+        .mockResolvedValueOnce({ count: 1 });
+
+      const result = await issueVerificationCode("a@yachaytech.edu.ec");
+
+      expect(result.ok).toBe(true);
+      expect(db.emailVerificationCode.updateMany).toHaveBeenCalledTimes(2);
+      const [secondCall] = vi.mocked(db.emailVerificationCode.updateMany).mock.calls[1];
+      expect(secondCall.data.sendCount).toEqual({ increment: 1 });
+      // La ventana NO se toca en este camino.
+      expect(secondCall.data.windowStartedAt).toBeUndefined();
+      // Y el cupo sí se exige aquí.
+      expect(secondCall.where?.sendCount).toEqual({
+        lt: VERIFICATION_MAX_SENDS_PER_WINDOW,
+      });
+    });
+
+    it("no debería depender de createdAt para decidir la ventana", async () => {
+      // Regresión: la versión anterior usaba `createdAt` (fijo desde la
+      // creación de la fila) para saber si la ventana había vencido, así que
+      // toda fila con más de una hora de vida saltaba el tope para siempre.
+      vi.mocked(db.emailVerificationCode.updateMany)
+        .mockResolvedValueOnce({ count: 0 })
+        .mockResolvedValueOnce({ count: 1 });
+
+      await issueVerificationCode("a@yachaytech.edu.ec");
+
+      for (const [call] of vi.mocked(db.emailVerificationCode.updateMany).mock.calls) {
+        expect(JSON.stringify(call.where)).not.toContain("createdAt");
+      }
     });
 
     it("debería crear la fila cuando no existía ninguna previa", async () => {
@@ -187,6 +231,9 @@ describe("lib/verification-code", () => {
       const result = await issueVerificationCode("a@yachaytech.edu.ec");
 
       expect(result.ok).toBe(true);
+      const [createCall] = vi.mocked(db.emailVerificationCode.create).mock.calls[0];
+      expect(createCall.data.sendCount).toBe(1);
+      expect(createCall.data.windowStartedAt).toBeInstanceOf(Date);
     });
 
     it("debería devolver cooldown con un retryAfterSeconds plausible cuando el create choca con P2002 y la fila sigue en cooldown", async () => {

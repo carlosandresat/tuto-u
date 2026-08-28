@@ -30,12 +30,21 @@ export type IssueResult =
 /**
  * Emite (o reemplaza) el código vivo de un correo.
  *
- * Usa un `updateMany` condicional en vez de "borrar y crear" (el patrón de
+ * Usa `updateMany` condicional en vez de "borrar y crear" (el patrón de
  * `generatePasswordResetToken` en src/lib/tokens.ts): ese patrón es una
  * lectura-modificación-escritura con ventana de carrera que aquí reiniciaría
  * el cooldown en silencio. `updateMany` con un `where` que incluye la
  * condición de cooldown es atómico en Postgres — o actualiza una fila que
  * cumple la condición, o no actualiza nada.
+ *
+ * Son DOS updates y no uno porque los dos casos necesitan `data` distintos:
+ * cuando la ventana venció hay que REINICIAR el contador a 1 y mover
+ * `windowStartedAt`; cuando sigue abierta hay que INCREMENTARLO dejando la
+ * ventana quieta. Un solo `updateMany` no puede expresar ambos. Las
+ * condiciones son mutuamente excluyentes (`windowStartedAt` menor vs. mayor o
+ * igual que `windowStart`), y si otra petición gana la carrera entre ambas, su
+ * escritura de `lastSentAt` hace que el segundo update no encuentre fila: el
+ * cooldown impide el doble envío.
  */
 export const issueVerificationCode = async (email: string): Promise<IssueResult> => {
   const now = new Date();
@@ -45,14 +54,34 @@ export const issueVerificationCode = async (email: string): Promise<IssueResult>
   const windowStart = new Date(now.getTime() - VERIFICATION_SEND_WINDOW_MS);
   const cooldownCutoff = new Date(now.getTime() - VERIFICATION_RESEND_COOLDOWN_MS);
 
-  const updated = await db.emailVerificationCode.updateMany({
+  // Caso 1: la ventana venció -> se abre una nueva y el contador vuelve a 1.
+  const rolledOver = await db.emailVerificationCode.updateMany({
     where: {
       email,
       lastSentAt: { lte: cooldownCutoff },
-      OR: [
-        { createdAt: { lt: windowStart } },
-        { sendCount: { lt: VERIFICATION_MAX_SENDS_PER_WINDOW } },
-      ],
+      windowStartedAt: { lt: windowStart },
+    },
+    data: {
+      codeHash,
+      expires,
+      attempts: 0,
+      lastSentAt: now,
+      sendCount: 1,
+      windowStartedAt: now,
+    },
+  });
+
+  if (rolledOver.count === 1) {
+    return { ok: true, code, expires };
+  }
+
+  // Caso 2: la ventana sigue abierta y aún queda cupo.
+  const withinWindow = await db.emailVerificationCode.updateMany({
+    where: {
+      email,
+      lastSentAt: { lte: cooldownCutoff },
+      windowStartedAt: { gte: windowStart },
+      sendCount: { lt: VERIFICATION_MAX_SENDS_PER_WINDOW },
     },
     data: {
       codeHash,
@@ -63,13 +92,21 @@ export const issueVerificationCode = async (email: string): Promise<IssueResult>
     },
   });
 
-  if (updated.count === 1) {
+  if (withinWindow.count === 1) {
     return { ok: true, code, expires };
   }
 
   try {
     await db.emailVerificationCode.create({
-      data: { email, codeHash, expires, attempts: 0, sendCount: 1, lastSentAt: now },
+      data: {
+        email,
+        codeHash,
+        expires,
+        attempts: 0,
+        sendCount: 1,
+        windowStartedAt: now,
+        lastSentAt: now,
+      },
     });
     return { ok: true, code, expires };
   } catch (error) {
@@ -77,9 +114,10 @@ export const issueVerificationCode = async (email: string): Promise<IssueResult>
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === "P2002"
     ) {
-      // Ya existe una fila para este correo: el updateMany de arriba no la
-      // tocó, así que está en cooldown o agotó el cupo de envíos. Releerla
-      // para distinguir cuál y devolver un mensaje útil.
+      // Ya existe una fila para este correo y ninguno de los dos updates la
+      // tocó, así que está en cooldown o agotó el cupo de la ventana vigente
+      // (si la ventana hubiera vencido sin estar en cooldown, el caso 1 la
+      // habría actualizado). Releerla para distinguir cuál y dar un mensaje útil.
       const existing = await db.emailVerificationCode.findUnique({ where: { email } });
       if (!existing) {
         // Carrera improbable: alguien la borró entre el create fallido y esta
