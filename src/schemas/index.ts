@@ -231,3 +231,12 @@ export const NewPasswordSchema = z.object({
     .min(8, "La contraseña debe contener mínimo 8 caracteres")
     .max(16, "La contraseña debe contener máximo 16 caracteres"),
 });
+
+export const VerificationCodeSchema = z.object({
+  code: z
+    .string({
+      required_error: "Ingresa el código de verificación.",
+    })
+    .trim()
+    .regex(/^\d{6}$/, "El código debe tener 6 dígitos numéricos"),
+});

@@ -26,7 +26,21 @@ export default {
                         user.password
                     )
 
-                    if (passwordsMatch) return user;
+                    if (passwordsMatch) {
+                        // Respaldo de seguridad: cierra un POST directo a
+                        // /api/auth/callback/credentials que evite la acción
+                        // login() por completo. No puede llevar un mensaje útil
+                        // -- devolver null aquí colapsa siempre a
+                        // "CredentialsSignin", así que el mensaje amable para un
+                        // usuario sin verificar vive en login() (src/actions/login.ts),
+                        // que corre el mismo chequeo ANTES de llegar aquí.
+                        const enforcementDisabled =
+                            process.env.EMAIL_VERIFICATION_ENFORCED === "false";
+                        if (!enforcementDisabled && !user.emailVerified) {
+                            return null;
+                        }
+                        return user;
+                    }
 
                 }
                 return null;

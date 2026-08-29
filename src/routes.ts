@@ -13,6 +13,7 @@ export const authRoutes = [
     "/auth/register",
     "/auth/reset",
     "/auth/new-password",
+    "/auth/verify-email",
 ];
 
 export const apiAuthPrefix = "/api/auth";

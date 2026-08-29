@@ -17,12 +17,14 @@ import { login } from "@/actions/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { toast } from "@/components/ui/use-toast";
 
 import { LoginSchema } from "@/schemas";
 
 export function LoginForm() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -32,6 +34,18 @@ export function LoginForm() {
   function onSubmit(data: z.infer<typeof LoginSchema>) {
     startTransition(async () => {
       const response = await login(data);
+      // Chequear esta clave PRIMERO: antes ninguna función revisaba nada más
+      // que response.error, así que un login() que devolviera
+      // { verificationRequired: true } se veía como un login exitoso que no
+      // llevaba a ninguna parte.
+      if (response && response.verificationRequired) {
+        toast({
+          title: "Verifica tu correo",
+          description: response.success,
+        });
+        router.push("/auth/verify-email");
+        return;
+      }
       if (response && response.error) {
         toast({
           title: "¡Error!",
