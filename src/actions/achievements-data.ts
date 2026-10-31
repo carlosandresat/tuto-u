@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
+import { syncMentorAchievements } from "@/lib/mentors";
 
 export const getUserAchievements = async (userId: string) => {
   const session = await auth();
@@ -75,6 +76,16 @@ export const getAllAchievementsWithProgress = async () => {
       },
     });
 
+    // 2b. Otorgar los logros "Mentor <periodo>" de los periodos ya iniciados
+    // (sincronización perezosa, ver src/lib/mentors.ts)
+    const currentUser = await db.user.findUnique({
+      where: { id: userId },
+      select: { email: true },
+    });
+    if (currentUser?.email) {
+      await syncMentorAchievements(userId, currentUser.email);
+    }
+
     // 3. Obtener logros actualmente desbloqueados por el usuario
     const userAchievements = await db.userAchievement.findMany({
       where: { userId },
@@ -112,11 +123,16 @@ export const getAllAchievementsWithProgress = async () => {
     });
 
     // 6. Obtener todos los logros disponibles con sus contadores de usuarios totales
-    const allAchievements = await db.achievement.findMany({
-      include: {
-        users: true,
-      },
-    });
+    // Los logros de periodo solo se muestran a quien los tiene: para el resto
+    // serían una lista creciente de logros bloqueados imposibles de ganar.
+    const allAchievements = (
+      await db.achievement.findMany({
+        include: {
+          users: true,
+          period: { select: { id: true } },
+        },
+      })
+    ).filter((ach) => ach.period === null || ownedIds.has(ach.id));
 
     // 7. Mapear cada logro con su respectivo progreso e información de desbloqueo
     const results = allAchievements.map((ach) => {

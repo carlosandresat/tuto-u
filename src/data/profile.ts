@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import { isActiveMentor } from "@/lib/mentors";
 
 export const getUserProfile = async (username: string) => {
     try{
@@ -17,8 +18,11 @@ export const getUserProfile = async (username: string) => {
         if (!user) {
             return {error: "Unable to fetch user profile"}
         }
+        // Ruta pública: solo se expone el booleano, nunca el correo.
+        const isMentor = await isActiveMentor(user.id);
         return {
             name: `${user.firstname} ${user.lastname}`,
+            isMentor,
             description: user.description,
             profilePic: user.image || "photos/placeholder.jpg",
             courses: user.tutorCourses.map((tc) => ({
@@ -82,9 +86,11 @@ export const getTutorFormData = async (username: string) => {
     return {
       tutorId: user.id,
       name: `${user.firstname} ${user.lastname}`,
+      isMentor: await isActiveMentor(user.id),
       courses: user.tutorCourses.map((tc) => ({
         id: tc.course.id,
         course: tc.course.name,
+        isLeveling: tc.course.isLeveling,
       })),
       availability: user.availabilities.map((a) => ({
         dayOfWeek: a.dayOfWeek,

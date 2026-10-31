@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
 import { AchievementsDialog } from "@/components/achievements-dialog";
+import { MentorBadge, formatSessionPrice } from "@/components/mentor-badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -67,6 +68,7 @@ export function IndividualSessionForm({
       image: string | null;
       pricing: { duration: number; price: string }[];
       description: string | null;
+      isMentor: boolean;
     }[]
   >([]);
 
@@ -364,7 +366,10 @@ export function IndividualSessionForm({
                         <SelectContent>
                           {availableTutors.map((row, index) => (
                             <SelectItem value={row.id} key={index}>
-                              {row.name}
+                              <span className="flex items-center gap-2">
+                                {row.name}
+                                {row.isMentor && <MentorBadge />}
+                              </span>
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -513,13 +518,14 @@ export function IndividualSessionForm({
                 <h2 className="text-xl font-semibold">
                   {selectedTutor.name}
                 </h2>
+                {selectedTutor.isMentor && <MentorBadge className="mt-2" />}
                 <p className="text-muted-foreground mt-2 text-sm">
                   {selectedTutor.description || "Sin descripción disponible."}
                 </p>
 
                 {selectedPriceInfo && (
                   <h2 className="text-xl font-semibold mt-4">
-                    {`$ ${Number(selectedPriceInfo.price).toFixed(2)}`}
+                    {formatSessionPrice(selectedPriceInfo.price)}
                   </h2>
                 )}
               </div>

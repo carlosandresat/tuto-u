@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { IndividualSessionActionSchema } from "@/schemas";
+import { getActiveMentorIds, resolveSessionPrice } from "@/lib/mentors";
 
 export const getAvailableTutors = async (
   courseId: number,
@@ -55,19 +56,32 @@ export const getAvailableTutors = async (
         },
       },
     });
-    return tutors.map((tutorCourse) => ({
-      id: tutorCourse.tutor.id,
-      name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`,
-      nameInitials: `${tutorCourse.tutor.firstname?.charAt(
-        0
-      )}${tutorCourse.tutor.lastname?.charAt(0)}`,
-      image: tutorCourse.tutor.image,
-      pricing: tutorCourse.tutor.tutor_pricing.map((config) => ({
-        duration: config.duration,
-        price: config.price.toNumber().toFixed(2), // Ensure the price is returned as a number, if necessary
-      })),
-      description: tutorCourse.tutor.description,
-    }));
+    const course = await db.course.findUnique({
+      where: { id: courseId },
+      select: { isLeveling: true },
+    });
+    const mentorIds = await getActiveMentorIds(tutors.map((t) => t.tutor.id));
+
+    return tutors.map((tutorCourse) => {
+      const isMentor = mentorIds.has(tutorCourse.tutor.id);
+      // Solo informativo: el precio real lo vuelve a decidir resolveSessionPrice
+      // al crear la sesión.
+      const isFree = isMentor && !!course?.isLeveling;
+      return {
+        id: tutorCourse.tutor.id,
+        name: `${tutorCourse.tutor.firstname} ${tutorCourse.tutor.lastname}`,
+        nameInitials: `${tutorCourse.tutor.firstname?.charAt(
+          0
+        )}${tutorCourse.tutor.lastname?.charAt(0)}`,
+        image: tutorCourse.tutor.image,
+        pricing: tutorCourse.tutor.tutor_pricing.map((config) => ({
+          duration: config.duration,
+          price: isFree ? "0.00" : config.price.toNumber().toFixed(2), // Ensure the price is returned as a number, if necessary
+        })),
+        description: tutorCourse.tutor.description,
+        isMentor,
+      };
+    });
   } catch (error) {
     console.error("Failed to fetch available tutors:", error);
     throw new Error("Unable to fetch available tutors.");
@@ -101,12 +115,12 @@ export const requestIndividualSession = async (data: {
   const { tutorId, courseId, sessionDateTime, duration, place, online,
     topic  } = validatedFields.data;
   try {
-    const pricingConfig = await db.userPricingConfiguration.findFirst({
-      where: {userId: tutorId, duration: duration},
-    });
+    // El precio lo decide el servidor (regla de mentores incluida); el `price`
+    // que manda el cliente se ignora a propósito.
+    const pricing = await resolveSessionPrice({ tutorId, courseId, duration });
 
-    if (!pricingConfig) {
-      return { error_message: "No se encontró configuración de precio para este tutor."};
+    if ("error" in pricing) {
+      return { error_message: pricing.error };
     }
 
     await db.individualSession.create({
@@ -118,7 +132,7 @@ export const requestIndividualSession = async (data: {
         place,
         online,
         topic,
-        price:pricingConfig.price,
+        price: pricing.price,
          status: "requested" },
     });
     const res = await db.user.findUnique({

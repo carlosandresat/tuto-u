@@ -73,6 +73,7 @@ export async function TutorsCarousel() {
                   : "/photos/placeholder.jpg"
               }
               nreviews={tutor.nreviews}
+              isMentor={tutor.isMentor}
             />
           </CarouselItem>
         ))}

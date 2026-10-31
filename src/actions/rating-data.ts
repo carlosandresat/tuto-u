@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { auth } from "@/auth";
+import { getActiveMentorIds } from "@/lib/mentors";
 
 const filterDate = new Date("2024-08-15");
 
@@ -46,11 +47,14 @@ export const getRatedTutors = async () => {
       },
     });
 
+    const mentorIds = await getActiveMentorIds(ratedTutors.map((tutor) => tutor.id));
+
     // Map through the tutors to calculate the average rating and count reviews
     const tutorsWithRatings = ratedTutors
       .map((tutor) => ({
         id: tutor.id,
         tutor: `${tutor.firstname} ${tutor.lastname}`,
+        isMentor: mentorIds.has(tutor.id),
         pic_url: tutor.image,
         rating: calculateAverage(
           tutor.tutorSessions.map((session) => Number(session.studentRating))

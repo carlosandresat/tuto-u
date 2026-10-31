@@ -1,14 +1,15 @@
 import { HomeNavbar } from "@/components/home-navbar";
+import { isCurrentUserMentorAdmin } from "@/lib/admin";
 
 
-export default function HomeLayout({
+export default async function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
           <>
-            <HomeNavbar />
+            <HomeNavbar showMentorsLink={await isCurrentUserMentorAdmin()} />
             <div>{children}</div>
           </>
   );

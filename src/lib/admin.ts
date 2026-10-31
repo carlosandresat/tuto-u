@@ -44,3 +44,36 @@ export async function isCurrentUserAdmin(): Promise<boolean> {
     return false;
   }
 }
+
+/**
+ * Gestión de mentores. A diferencia de `requireAdmin()`, el permiso vive en la
+ * BD (`User.role`), y se lee de ahí en cada llamada —no del JWT— para que
+ * quitar el rol desde /admin/roles tenga efecto inmediato.
+ */
+export async function requireMentorAdmin(): Promise<{ userId: string }> {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized: no active session.");
+  }
+
+  const currentUserId = session.user.id;
+  const user = await db.user.findUnique({
+    where: { id: currentUserId },
+    select: { role: true },
+  });
+
+  if (user?.role !== "MENTOR_ADMIN") {
+    throw new Error("Unauthorized: not a mentor admin.");
+  }
+
+  return { userId: currentUserId };
+}
+
+export async function isCurrentUserMentorAdmin(): Promise<boolean> {
+  try {
+    await requireMentorAdmin();
+    return true;
+  } catch {
+    return false;
+  }
+}

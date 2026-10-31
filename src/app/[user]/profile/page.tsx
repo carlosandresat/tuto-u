@@ -9,6 +9,7 @@ import { auth } from "@/auth";
 import { getUserNameByUsername, getUserProfile } from "@/data/profile";
 import { ClientAvailabilitySchedule } from "@/components/client-time-badges";
 import { PageContainer } from "@/components/page-container";
+import { MentorBadge } from "@/components/mentor-badge";
 
 const durationTranslationMap: Record<string, string> = {
   "0.5h": "30 minutos",
@@ -101,6 +102,7 @@ export default async function Page({ params }: Props) {
             <CardTitle className="text-2xl font-bold">
               {tutorData.name}
             </CardTitle>
+            {tutorData.isMentor && <MentorBadge className="mt-2" />}
           </div>
         </CardHeader>
         <CardContent>
@@ -154,6 +156,11 @@ export default async function Page({ params }: Props) {
                     </li>
                   ))}
                 </ul>
+                {tutorData.isMentor && tutorData.pricing.length > 0 && (
+                  <p className="mt-4 text-sm text-muted-foreground">
+                    Gratis en cursos de nivelación.
+                  </p>
+                )}
               </CardContent>
             </Card>
           </div>

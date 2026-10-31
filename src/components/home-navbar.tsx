@@ -17,7 +17,10 @@ import {
 
 import { logout } from "@/actions/logout";
 
-export function HomeNavbar() {
+// `showMentorsLink` lo decide el layout (servidor) con isCurrentUserMentorAdmin();
+// este componente es cliente y no puede consultar el rol. Mostrar el enlace no
+// da acceso: /mentors vuelve a comprobar el rol.
+export function HomeNavbar({ showMentorsLink = false }: { showMentorsLink?: boolean }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -79,6 +82,15 @@ export function HomeNavbar() {
                 >
                   <SheetClose>Estudiantes</SheetClose>
                 </Link>
+
+                {showMentorsLink && (
+                  <Link
+                    href="/mentors"
+                    className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+                  >
+                    <SheetClose>Mentores</SheetClose>
+                  </Link>
+                )}
               </div>
             </SheetContent>
           </Sheet>
@@ -142,6 +154,15 @@ export function HomeNavbar() {
         >
           Estudiantes
         </Link>
+
+        {showMentorsLink && (
+          <Link
+            href="/mentors"
+            className="mx-4 hover:border-b hover:border-solid hover:border-black dark:hover:border-white hover:pb-2"
+          >
+            Mentores
+          </Link>
+        )}
       </nav>
       <form action={logout}>
         <Button type="submit" aria-label="Logout Button">

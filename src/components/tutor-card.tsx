@@ -5,6 +5,7 @@ import { AchievementsDialogFull } from "@/components/achievements-dialog-full";
 import Image from "next/image";
 import { SoonButton } from "@/components/soon-button";
 import { AchievementsDialog } from "@/components/achievements-dialog";
+import { MentorBadge } from "@/components/mentor-badge";
 
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
 
@@ -27,12 +28,14 @@ export function TutorCard({
   rating,
   pic_url,
   nreviews,
+  isMentor = false,
 }: {
   id: string;
   tutor: string;
   rating: number;
   pic_url: string;
   nreviews: number;
+  isMentor?: boolean;
 }) {
   return (
     <Card className="flex flex-col items-center text-center h-full justify-between transition-all duration-300 hover:shadow-lg" key={tutor}>
@@ -49,6 +52,7 @@ export function TutorCard({
         <CardTitle className="scroll-m-20 text-xl font-semibold tracking-tight my-2">
           {tutor}
         </CardTitle>
+        {isMentor && <MentorBadge />}
         <div className="flex w-full justify-center gap-1 my-2">
           <DrawStar raiting={rating} />
         </div>

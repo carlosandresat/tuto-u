@@ -37,11 +37,13 @@ import {
 import { ProfileSessionRequestSchema } from "@/schemas";
 import { useState, useTransition } from "react";
 import { addNarcissismAchievement, requestIndividualSession } from "@/actions/session-request";
+import { MentorBadge, formatSessionPrice } from "@/components/mentor-badge";
 
 interface FormData {
   studentId: string;
   tutorId: string;
-  courses: { id: number; course: string }[];
+  isMentor: boolean;
+  courses: { id: number; course: string; isLeveling: boolean }[];
   availability: { dayOfWeek: number; timeSlot: number }[];
   pricing: { duration: number; price: number }[];
 }
@@ -49,6 +51,7 @@ interface FormData {
 export function ProfileRequestForm({
   studentId,
   tutorId,
+  isMentor,
   courses,
   availability,
   pricing,
@@ -79,6 +82,11 @@ export function ProfileRequestForm({
       isOnline: false,
     },
   });
+
+  // Solo para mostrar: el servidor vuelve a decidir el precio (resolveSessionPrice).
+  const selectedCourse = courses.find((c) => c.id.toString() === form.watch("course"));
+  const isFree = isMentor && !!selectedCourse?.isLeveling;
+  const displayPrice = (price: number) => formatSessionPrice(isFree ? 0 : price);
 
   const localAvailabilities = (() => {
     const grouped: Record<number, number[]> = {};
@@ -116,7 +124,8 @@ export function ProfileRequestForm({
   function onSubmit(data: z.infer<typeof ProfileSessionRequestSchema>) {
     startTransition(async () => {
       const price = pricing.find((p) => p.duration === Number(data.duration))?.price;
-      if (!price) {
+      // `=== undefined`, no `!price`: 0 es un precio válido (sesión gratuita).
+      if (price === undefined) {
         toast({
           title: "Error",
           description: "No se pudo encontrar el precio para la duración seleccionada",
@@ -166,6 +175,12 @@ export function ProfileRequestForm({
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
+        {isMentor && (
+          <div className="flex flex-wrap items-center gap-2 rounded-md border p-4 text-sm text-muted-foreground">
+            <MentorBadge />
+            Este tutor es mentor: sus tutorías de nivelación son gratuitas.
+          </div>
+        )}
         <FormField
           control={form.control}
           name="course"
@@ -310,7 +325,7 @@ export function ProfileRequestForm({
                     <SelectContent>
                       {pricing.map((row) => (
                         <SelectItem value={row.duration.toString()} key={row.duration}>
-                          {formatDuration(row.duration)}
+                          {formatDuration(row.duration)} · {displayPrice(row.price)}
                         </SelectItem>
                       ))}
                     </SelectContent>

@@ -240,3 +240,45 @@ export const VerificationCodeSchema = z.object({
     .trim()
     .regex(/^\d{6}$/, "El código debe tener 6 dígitos numéricos"),
 });
+
+const CalendarDaySchema = (message: string) =>
+  z.string({ required_error: message }).regex(/^\d{4}-\d{2}-\d{2}$/, message);
+
+export const AcademicPeriodSchema = z
+  .object({
+    year: z.coerce
+      .number({ invalid_type_error: "Ingresa un año válido" })
+      .int("Ingresa un año válido")
+      .min(2024, "Ingresa un año válido")
+      .max(2100, "Ingresa un año válido"),
+    term: z.enum(["1", "2"], {
+      required_error: "Escoge el periodo (I o II)",
+      invalid_type_error: "Escoge el periodo (I o II)",
+    }),
+    startsOn: CalendarDaySchema("Escoge la fecha de inicio"),
+    endsOn: CalendarDaySchema("Escoge la fecha de fin"),
+  })
+  .refine((schema) => schema.startsOn < schema.endsOn, {
+    message: "La fecha de fin debe ser posterior a la de inicio",
+    path: ["endsOn"],
+  });
+
+export const MentorEmailsSchema = z.object({
+  periodId: z.coerce.number().int().positive("Escoge un periodo"),
+  emails: z
+    .string({ required_error: "Ingresa al menos un correo" })
+    .trim()
+    .min(1, "Ingresa al menos un correo"),
+});
+
+export const MentorAdminEmailSchema = z.object({
+  email: z
+    .string({
+      required_error: "Por favor ingresa un correo institucional.",
+    })
+    .trim()
+    .email("Correo inválido, revisa la sintaxis.")
+    .endsWith("@yachaytech.edu.ec", {
+      message: "El correo debe terminar con @yachaytech.edu.ec",
+    }),
+});

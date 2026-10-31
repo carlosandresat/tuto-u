@@ -65,11 +65,22 @@ model User {
   tutorSessions   IndividualSession[]        @relation("TutorSession")
   userAchievements UserAchievement[]
   reports         SessionReport[]
+  // Rol de gestión. Los admins generales NO viven aquí (siguen en ADMIN_EMAILS,
+  // ver src/lib/admin.ts); este campo solo distingue a quien gestiona mentores.
+  role            UserRole                   @default(USER)
+  mentorAssignmentsAdded MentorAssignment[]  @relation("MentorAssignmentAddedBy")
 
   createdAt DateTime @default(now())
 
   @@unique([universityId, username])
    @@map("users")
+}
+
+enum UserRole {
+  USER
+  MENTOR_ADMIN
+
+  @@map("user_role")
 }
 
 model VerificationToken {
@@ -146,6 +157,8 @@ model Course {
   id                 Int                 @id @default(autoincrement())
   name               String
   schoolId           Int                 @map("school_id")
+  // Cursos de nivelación: un mentor activo los dicta siempre a $0 (ver src/lib/mentors.ts).
+  isLeveling         Boolean             @default(false) @map("is_leveling")
   school             School              @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   tutorCourses       TutorCourse[]
   individualSessions IndividualSession[]
@@ -222,6 +235,8 @@ model Achievement {
   isInverted  Boolean  @map("is_inverted")
 
   users       UserAchievement[]
+  // Solo presente en los logros "Mentor <periodo>", creados junto con su periodo.
+  period      AcademicPeriod?
 
   @@map("achievements")
 }
@@ -249,4 +264,40 @@ model SessionReport {
   reporter     User              @relation(fields: [reporterId], references: [id])
 
   @@map("session_reports")
+}
+
+// Periodo académico (dos por año). Las fechas son UTC: `startsAt` inclusivo,
+// `endsAt` exclusivo, ambos a medianoche de Ecuador (ver src/lib/academic-period.ts).
+// `@@unique([year, term])` es lo que garantiza el máximo de dos periodos por año.
+model AcademicPeriod {
+  id            Int         @id @default(autoincrement())
+  year          Int         @db.SmallInt
+  term          Int         @db.SmallInt // 1 = "I", 2 = "II"
+  startsAt      DateTime    @map("starts_at")
+  endsAt        DateTime    @map("ends_at")
+  achievementId Int         @unique @map("achievement_id")
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+  mentors       MentorAssignment[]
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  @@unique([year, term])
+  @@map("academic_periods")
+}
+
+// Designación de un mentor en un periodo. Va por CORREO, no por userId, para
+// poder designar a alguien que todavía no se registra; el cruce con
+// `User.email` se hace sin distinguir mayúsculas. `email` se guarda en minúsculas.
+model MentorAssignment {
+  id        Int            @id @default(autoincrement())
+  email     String
+  periodId  Int            @map("period_id")
+  period    AcademicPeriod @relation(fields: [periodId], references: [id], onDelete: Restrict)
+  // Opcional para que borrar la cuenta del admin no bloquee ni arrastre el historial.
+  addedById String?        @map("added_by_id")
+  addedBy   User?          @relation("MentorAssignmentAddedBy", fields: [addedById], references: [id], onDelete: SetNull)
+  createdAt DateTime       @default(now()) @map("created_at")
+
+  @@unique([email, periodId])
+  @@index([periodId])
+  @@map("mentor_assignments")
 }

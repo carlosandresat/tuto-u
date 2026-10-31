@@ -80,6 +80,7 @@ export async function AllTutors() {
               : "/photos/placeholder.jpg"
           }
           nreviews={tutor.nreviews}
+          isMentor={tutor.isMentor}
           key={index}
         />
       ))}
